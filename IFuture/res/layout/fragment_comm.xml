@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context="com.meten.ifuture.fragment.CommFragment">
+
+    <include layout="@layout/item_listview_latest" />
+    <include layout="@layout/item_listview_latest" />
+    <include layout="@layout/item_listview_latest" />
+
+</LinearLayout>

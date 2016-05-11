@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.hzwl.plantbox.fragments.HomeFragment">
+
+    <!--头部搜索-->
+    <include layout="@layout/titlebar_fragment_home" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--轮播图-->
+            <include layout="@layout/auto_viewpager" />
+
+            <!--分类-->
+            <include
+                android:id="@+id/home_radiogroup"
+                layout="@layout/home_rg_classes_layout" />
+
+            <!--viewpager选择-->
+            <include layout="@layout/home_select_view_layout" />
+
+            <com.meten.ifuture.view.MyViewPager
+                android:id="@+id/home_select_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginBottom="@dimen/dp5"
+                android:layout_marginTop="@dimen/dp5"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="加载更多>>"
+                android:textColor="#A3A3A3"
+                android:textSize="@dimen/sp15" />
+
+            <!--附近的基地-->
+            <include
+                layout="@layout/home_nearby_layout"
+                android:layout_width="match_parent"
+                android:layout_height="180dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
