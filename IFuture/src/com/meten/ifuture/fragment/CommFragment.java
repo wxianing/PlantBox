@@ -1,13 +1,36 @@
 package com.meten.ifuture.fragment;
 
 
+import android.content.Context;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.google.gson.Gson;
+import com.lidroid.xutils.http.RequestParams;
+import com.meten.ifuture.AppManager;
 import com.meten.ifuture.R;
+import com.meten.ifuture.bean.produce.DataListBean;
+import com.meten.ifuture.bean.produce.Produce;
+import com.meten.ifuture.bean.produce.ProduceData;
+import com.meten.ifuture.constant.URL;
+import com.meten.ifuture.http.HttpRequestCallBack;
+import com.meten.ifuture.http.HttpRequestUtils;
+import com.meten.ifuture.http.RequestParamsUtils;
+import com.meten.ifuture.model.ResultInfo;
+import com.meten.ifuture.model.User;
+import com.meten.ifuture.utils.JsonParse;
+import com.meten.ifuture.utils.SharedPreferencesUtils;
+
+import java.util.List;
+
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,11 +39,16 @@ import com.meten.ifuture.R;
  */
 public class CommFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "sType";
+    private static final String ARG_PARAM2 = "sType";
 
     private String mParam1;
     private String mParam2;
+
+    private CallBack callback;
+
+    private List<DataListBean> dataLists;
+
 
     public CommFragment() {
     }
@@ -40,6 +68,7 @@ public class CommFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.e("mParam", mParam1);
         }
     }
 
@@ -47,10 +76,52 @@ public class CommFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comm, container, false);
-
-
-
-
+        ButterKnife.bind(this, view);
+        initView();
+        initData();
         return view;
+    }
+
+    private void initData() {
+        String code = SharedPreferencesUtils.getStringData(getActivity(), "code", null);
+        RequestParams params = RequestParamsUtils.getProductList(mParam1, "1", "3", code);
+        HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
+    }
+
+    private void initView() {
+        callback = new CallBack();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
+
+    class CallBack extends HttpRequestCallBack<ResultInfo> {
+
+        @Override
+        public void onSuccess(String result, int requestCode) {
+//            Produce produce = JSONObject.parseObject(result,new TypeReference<Produce>(){});
+//            if (produce!=null){
+//                Log.e("produce",produce.getMsg());
+//            }
+        }
+
+        @Override
+        public void onSuccess(ResultInfo info, int requestCode) {
+
+            Produce produce = JsonParse.parseToObject(info, Produce.class);
+            if (produce != null) {
+                Log.e("produce", "解析成功");
+                String msg = produce.getMsg();
+            }
+        }
+
+        @Override
+        public void onFailure(Context context, ResultInfo info, int requestCode) {
+            super.onFailure(context, info, requestCode);
+
+        }
     }
 }
