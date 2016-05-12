@@ -198,7 +198,7 @@ public class UserInfoActivity extends BaseHeadActivity implements
 	}
 	
 	HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
-		
+
 		@Override
 		public void onSuccess(ResultInfo info, int requestCode) {
 			

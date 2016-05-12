@@ -70,6 +70,7 @@ public class ComplainActivity extends BaseHeadActivity implements PullToRefreshB
     }
 
     HttpRequestCallBack<ResultInfo> callBack = new HttpRequestCallBack<ResultInfo>() {
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
 

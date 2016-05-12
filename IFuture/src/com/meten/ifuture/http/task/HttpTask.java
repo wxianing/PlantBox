@@ -37,6 +37,7 @@ public class HttpTask {
     public static void detectionNewAppVersion(final Context context,final boolean isUpdate, final boolean showLoading) {
         RequestParams params = RequestParamsUtils.getNewAppVersion();
         HttpRequestUtils.create(context).isShowLoadingDilag(showLoading).send(URL.GET_NEW_VERSION, params, new HttpRequestCallBack<ResultInfo>() {
+
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
                 final Version v = JsonParse.parseToObject(resultInfo, Version.class);

@@ -98,6 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         mMapView.onCreate(savedInstanceState);
         init();
         initEvent();
+
         return view;
     }
 
@@ -150,9 +151,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
         setSelect(0);
         mFragments = new ArrayList<Fragment>();
-        mFragments.add(new CommFragment());
-        mFragments.add(new CommFragment());
-        mFragments.add(new CommFragment());
+
+        mFragments.add(CommFragment.newInstance("sType", "1"));
+        mFragments.add(CommFragment.newInstance("sType", "2"));
+        mFragments.add(CommFragment.newInstance("sType", "3"));
 
         mAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override

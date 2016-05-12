@@ -2,7 +2,6 @@ package com.meten.ifuture.fragment;
 
 
 import android.content.Context;
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,24 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
-import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
-import com.meten.ifuture.AppManager;
 import com.meten.ifuture.R;
 import com.meten.ifuture.bean.produce.DataListBean;
 import com.meten.ifuture.bean.produce.Produce;
-import com.meten.ifuture.bean.produce.ProduceData;
 import com.meten.ifuture.constant.URL;
 import com.meten.ifuture.http.HttpRequestCallBack;
 import com.meten.ifuture.http.HttpRequestUtils;
 import com.meten.ifuture.http.RequestParamsUtils;
 import com.meten.ifuture.model.ResultInfo;
-import com.meten.ifuture.model.User;
 import com.meten.ifuture.utils.JsonParse;
 import com.meten.ifuture.utils.SharedPreferencesUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -46,9 +40,7 @@ public class CommFragment extends Fragment {
     private String mParam2;
 
     private CallBack callback;
-
-    private List<DataListBean> dataLists;
-
+    List<DataListBean> dataLists;
 
     public CommFragment() {
     }
@@ -90,6 +82,7 @@ public class CommFragment extends Fragment {
 
     private void initView() {
         callback = new CallBack();
+        dataLists = new ArrayList<>();
     }
 
     @Override
@@ -101,20 +94,12 @@ public class CommFragment extends Fragment {
     class CallBack extends HttpRequestCallBack<ResultInfo> {
 
         @Override
-        public void onSuccess(String result, int requestCode) {
-//            Produce produce = JSONObject.parseObject(result,new TypeReference<Produce>(){});
-//            if (produce!=null){
-//                Log.e("produce",produce.getMsg());
-//            }
-        }
-
-        @Override
         public void onSuccess(ResultInfo info, int requestCode) {
 
             Produce produce = JsonParse.parseToObject(info, Produce.class);
             if (produce != null) {
-                Log.e("produce", "解析成功");
-                String msg = produce.getMsg();
+                dataLists.addAll(produce.getDataList());
+
             }
         }
 

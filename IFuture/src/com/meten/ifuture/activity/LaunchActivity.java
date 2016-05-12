@@ -50,6 +50,7 @@ public class LaunchActivity extends BaseActivity implements Animation.AnimationL
             RequestParams params = RequestParamsUtils
                     .login(username, pwd);
             HttpRequestUtils.create(this).send(URL.LOGIN, params, new HttpRequestCallBack<ResultInfo>() {
+
                 @Override
                 public void onSuccess(ResultInfo info, int requestCode) {
                     AppManager.launchMainActivity(LaunchActivity.this, info);

@@ -108,6 +108,7 @@ public class FilterView extends LinearLayout implements View.OnClickListener, Ad
 
 
     HttpRequestCallBack<ResultInfo> callBack = new HttpRequestCallBack<ResultInfo>() {
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
             if (requestCode == GET_AREA) {

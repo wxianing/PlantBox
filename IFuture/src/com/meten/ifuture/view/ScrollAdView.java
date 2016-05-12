@@ -83,7 +83,8 @@ public class ScrollAdView extends LinearLayout implements OnPageChangeListener {
 	}
 
     HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
-        @Override
+
+		@Override
         public void onSuccess(ResultInfo info, int requestCode) {
             List<AD> data = JsonParse.parseToObject(info,new TypeToken<List<AD>>(){}.getType());
             setData(data);

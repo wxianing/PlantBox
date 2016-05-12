@@ -83,6 +83,8 @@ public class TeacherComplainActivity extends BaseListActivity implements PullToR
     }
 
     HttpRequestCallBack<ResultInfo> callBack = new HttpRequestCallBack<ResultInfo>() {
+
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
             List<Complain> data = JsonParse.parseDataOfPageToData(info, new TypeToken<List<Complain>>() {

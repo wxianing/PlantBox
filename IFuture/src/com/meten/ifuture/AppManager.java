@@ -322,12 +322,18 @@ public class AppManager {
      * @param info
      */
     public static void launchMainActivity(Context context, ResultInfo info) {
-        Log.e("Login",info.toString());
-        info.getData().getAsJsonObject();
+        User user = JsonParse.parseToObject(info, User.class);
+        if (user != null) {
+            SharedPreferencesUtils.getInstance(context)
+                    .saveUser(user);
+        }
+        SharedPreferencesUtils.saveStringData(context, "code", user.getCode());
+
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         SharedPreferencesUtils.setLoginTag(context, true);
         getAppManager().finishActivity();
+
     }
 
     public static void setJpushAliasAndTags(Context context, User user) {

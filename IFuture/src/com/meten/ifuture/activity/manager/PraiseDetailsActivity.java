@@ -56,6 +56,7 @@ public class PraiseDetailsActivity extends BaseListActivity implements PullToRef
     }
 
     HttpRequestCallBack<ResultInfo> callBack = new HttpRequestCallBack<ResultInfo>() {
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
             List<Complain> data = JsonParse.parseDataOfPageToData(info,new TypeToken<List<Complain>>(){}.getType());

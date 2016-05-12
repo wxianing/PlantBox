@@ -6,8 +6,16 @@
     android:orientation="vertical"
     tools:context="com.meten.ifuture.fragment.CommFragment">
 
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <include layout="@layout/item_listview_latest" />
+
     <include layout="@layout/item_listview_latest" />
+
     <include layout="@layout/item_listview_latest" />
+
 
 </LinearLayout>

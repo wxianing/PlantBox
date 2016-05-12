@@ -71,6 +71,7 @@ public class PraiseActivity extends BaseHeadActivity implements PullToRefreshBas
     }
 
     HttpRequestCallBack<ResultInfo> callBack = new HttpRequestCallBack<ResultInfo>() {
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
 

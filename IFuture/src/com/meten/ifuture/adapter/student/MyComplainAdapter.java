@@ -156,6 +156,7 @@ public class MyComplainAdapter extends CustomBaseAdapter<Complain> {
                     final Complain complain = listData.get(p);
                     RequestParams params = RequestParamsUtils.handComplain(complain.getId());
                     HttpRequestUtils.create(context).send(URL.HAND_COMPLAIN,params,p,new HttpRequestCallBack<ResultInfo>() {
+
                         @Override
                         public void onSuccess(ResultInfo info, int requestCode) {
                             complain.setStatus(Constant.HANDLED);

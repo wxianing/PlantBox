@@ -97,8 +97,10 @@ public class SystemMessageActivity extends BaseListActivity implements OnItemCli
 
 
     private HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
+
         @Override
         public void onSuccess(ResultInfo o, int requestCode) {
+
             List<PushMessage> data = JsonParse.parseDataOfPageToData(o,new TypeToken<List<PushMessage>>(){}.getType());
             if (data != null) {
                 if (requestCode == Constant.REFRESH) {

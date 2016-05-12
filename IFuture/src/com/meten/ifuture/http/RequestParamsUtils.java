@@ -8,6 +8,7 @@ import com.lidroid.xutils.http.RequestParams;
 import com.meten.ifuture.constant.Constant;
 import com.meten.ifuture.utils.ImageUtils;
 import com.meten.ifuture.utils.LogUtils;
+import com.meten.ifuture.utils.SharedPreferencesUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class RequestParamsUtils {
     public static RequestParams createRequestParams() {
         RequestParams params = new RequestParams();
         params.addHeader("_appId", Constant.APPID);
+//        params.addHeader("_code", Constant.getRequestCode());
         params.addHeader("_code", Constant.getRequestCode());
         return params;
     }
@@ -74,6 +76,23 @@ public class RequestParamsUtils {
         return params;
     }
 
+    /**
+     * 获取首页产品列表
+     *
+     * @param sType
+     * @param PageIndex
+     * @param PageSize
+     * @return
+     */
+    public static RequestParams getProductList(String sType, String PageIndex, String PageSize, String code) {
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
+        params.addBodyParameter("sType", sType);
+        params.addBodyParameter("PageIndex", sType);
+        params.addBodyParameter("PageSize", PageSize);
+        return params;
+    }
 
     /**
      * 登录
@@ -87,7 +106,7 @@ public class RequestParamsUtils {
         RequestParams params = createRequestParams();
         params.addBodyParameter("UserName", username);
         params.addBodyParameter("Password", password);
-        params.addBodyParameter("content-type","application/json");
+        params.addBodyParameter("content-type", "application/json");
         return params;
     }
 

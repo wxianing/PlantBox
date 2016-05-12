@@ -77,6 +77,8 @@ public class ComplainDetailsActivity extends BaseListActivity {
     }
 
     HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
+
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
             Complain complain = JsonParse.parseToObject(info, Complain.class);

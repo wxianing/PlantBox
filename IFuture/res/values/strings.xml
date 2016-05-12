@@ -91,5 +91,6 @@
     <string name="title_activity_plant_center">PlantCenterActivity</string>
     <string name="title_activity_grow_tree">GrowTreeActivity</string>
     <string name="title_activity_active">ActiveActivity</string>
+    <string name="title_activity_my_growup">MyGrowupActivity</string>
 
 </resources>

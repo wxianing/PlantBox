@@ -73,8 +73,8 @@ public class MyTeacherActivity extends BaseListActivity implements View.OnTouchL
 	
 	
 	HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
-		
-		@Override
+
+        @Override
 		public void onSuccess(ResultInfo info, int requestCode) {
             if(requestCode == GET_MYTEACHER){
                 List<MyTeacher> data = JsonParse.parseToObject(info, new TypeToken<List<MyTeacher>>(){}.getType());

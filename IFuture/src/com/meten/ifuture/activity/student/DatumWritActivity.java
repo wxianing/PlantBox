@@ -126,7 +126,7 @@ public class DatumWritActivity extends BaseHeadActivity implements View.OnClickL
 
 	HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
 
-		@Override
+        @Override
 		public void onSuccess(ResultInfo info, int requestCode) {
 			switch (requestCode) {
                 case GET_RESOURCE_CODE:

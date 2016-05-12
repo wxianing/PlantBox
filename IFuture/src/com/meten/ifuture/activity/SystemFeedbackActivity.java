@@ -57,6 +57,7 @@ public class SystemFeedbackActivity extends BaseHeadActivity implements View.OnC
     }
 
     HttpRequestCallBack<ResultInfo> callBack = new HttpRequestCallBack<ResultInfo>() {
+
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
             ToastUtils.show(SystemFeedbackActivity.this,getString(R.string.feedback_success));

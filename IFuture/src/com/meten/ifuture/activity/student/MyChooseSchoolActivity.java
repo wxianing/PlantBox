@@ -33,7 +33,7 @@ public class MyChooseSchoolActivity extends BaseListActivity {
 	}
 	
 	HttpRequestCallBack<ResultInfo> callback = new HttpRequestCallBack<ResultInfo>() {
-		
+
 		@Override
 		public void onSuccess(ResultInfo info, int requestCode) {
 			List<School> data = JsonParse.parseToObject(info, new TypeToken<List<School>>(){}.getType());
