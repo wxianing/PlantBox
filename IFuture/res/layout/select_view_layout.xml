@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp5"
+    android:background="@color/white"
+    android:paddingBottom="@dimen/dp5"
+    android:paddingLeft="@dimen/dp30"
+    android:paddingRight="@dimen/dp30"
+    android:paddingTop="@dimen/dp5">
+
+    <LinearLayout
+        android:id="@+id/home_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/home_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="主页"
+            android:textSize="@dimen/sp16" />
+
+        <View
+            android:id="@+id/home_view"
+            android:layout_width="40dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/dp3"
+            android:background="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/basearea_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/basearea_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="基地"
+            android:textSize="@dimen/sp16" />
+
+        <View
+            android:id="@+id/basearea_view"
+            android:layout_width="40dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/dp3"
+            android:background="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/achievement_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/achievement_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="成果"
+            android:textSize="@dimen/sp16" />
+
+        <View
+            android:id="@+id/achievement_view"
+            android:layout_width="40dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/dp3"
+            android:background="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

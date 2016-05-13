@@ -1,15 +1,18 @@
 package com.meten.ifuture.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.meten.ifuture.PersonCenterAdapter;
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.MyBaseAreaActivity;
 import com.meten.ifuture.bean.PersonCenter;
 
 import java.util.ArrayList;
@@ -22,7 +25,7 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 
-public class MyFragment extends Fragment {
+public class MyFragment extends Fragment implements AdapterView.OnItemClickListener {
     @Bind(R.id.gridView)
     protected GridView mGridView;
     private List<PersonCenter> mDatas;
@@ -43,6 +46,7 @@ public class MyFragment extends Fragment {
     private void initView(View view) {
         mAdapter = new PersonCenterAdapter(mDatas, getActivity());
         mGridView.setAdapter(mAdapter);
+        mGridView.setOnItemClickListener(this);
     }
 
     private void initData() {
@@ -63,5 +67,15 @@ public class MyFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                Intent intent = new Intent(getActivity(), MyBaseAreaActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

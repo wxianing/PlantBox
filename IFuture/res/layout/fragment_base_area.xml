@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meten.ifuture.fragment.BaseAreaFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@color/white"
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/dp15"
+        android:paddingTop="@dimen/dp5"
+        android:text="基地植物"
+        android:textSize="@dimen/sp16" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@color/white"
+        android:paddingBottom="5dp"
+        android:paddingLeft="@dimen/dp15"
+        android:paddingTop="@dimen/dp5"
+        android:text="基地人物星人图"
+        android:textSize="@dimen/sp16" />
+
+</LinearLayout>

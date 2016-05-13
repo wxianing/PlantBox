@@ -269,7 +269,10 @@
             android:label="@string/title_activity_active" />
         <activity
             android:name=".activity.MyGrowupActivity"
-            android:label="@string/title_activity_my_growup"/>
+            android:label="@string/title_activity_my_growup" />
+        <activity
+            android:name=".activity.MyBaseAreaActivity"
+            android:label="@string/title_activity_my_base_area"></activity>
     </application>
 
 </manifest>

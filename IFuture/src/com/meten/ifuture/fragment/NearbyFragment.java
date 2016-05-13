@@ -20,8 +20,10 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class NearbyFragment extends Fragment implements View.OnClickListener {
-    private MapView mapView;
+    //地图
+    private MapView mMapView = null;
     private AMap aMap;
+
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
@@ -34,16 +36,16 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
-        //Demo中为了其他界面可以使用下载的离线地图，使用默认位置存储，屏蔽了自定义设置
-        //  MapsInitializer.sdcardDir =OffLineMapUtils.getSdCacheDir(this);
-        mapView = (MapView) view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);// 此方法必须重写
+
+        mMapView = (MapView) view.findViewById(R.id.map);
+        mMapView.onCreate(savedInstanceState);
 
         init();
         initView();
         initEvent();
         return view;
     }
+
 
     private void initEvent() {
         backImg.setOnClickListener(this);
@@ -60,10 +62,9 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
      */
     private void init() {
         if (aMap == null) {
-            aMap = mapView.getMap();
+            aMap = mMapView.getMap();
         }
     }
-
 
     /**
      * 方法必须重写
@@ -71,7 +72,7 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
+        mMapView.onResume();
     }
 
     /**
@@ -80,7 +81,7 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+        mMapView.onPause();
     }
 
     /**
@@ -89,12 +90,16 @@ public class NearbyFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
+        mMapView.onSaveInstanceState(outState);
     }
 
+    /**
+     * 方法必须重写
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mMapView.onDestroy();
         ButterKnife.unbind(this);
     }
 

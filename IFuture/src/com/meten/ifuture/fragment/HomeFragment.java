@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         mViewPager.setAdapter(pagerAdapter);
         mViewPager.setOnPageChangeListener(pagerAdapter);
         pagerAdapter.refreshData(true);
-
+//        setSelect(0);
         viewPager = (ViewPager) view.findViewById(R.id.home_select_viewpager);
         lastestLinear = (LinearLayout) view.findViewById(R.id.latest_linear);
         hotLinear = (LinearLayout) view.findViewById(R.id.hot_linear);
@@ -149,7 +149,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         hotView = view.findViewById(R.id.hot_view);
         comprehensiveView = view.findViewById(R.id.comprehensive_view);
 
-        setSelect(0);
         mFragments = new ArrayList<Fragment>();
 
         mFragments.add(CommFragment.newInstance("sType", "1"));
