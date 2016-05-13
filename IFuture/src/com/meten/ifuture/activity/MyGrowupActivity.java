@@ -7,11 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MyGrowupActivity extends Activity implements View.OnClickListener {
+public class MyGrowupActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.title_tv)
     protected TextView title;

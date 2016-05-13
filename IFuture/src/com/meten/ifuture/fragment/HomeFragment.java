@@ -23,13 +23,25 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.google.gson.Gson;
+import com.lidroid.xutils.http.RequestParams;
 import com.meten.ifuture.R;
 import com.meten.ifuture.activity.ActiveActivity;
 import com.meten.ifuture.activity.GrowTreeActivity;
 import com.meten.ifuture.activity.PlantCenterActivity;
 import com.meten.ifuture.activity.PlantShopActivity;
 import com.meten.ifuture.adapter.ImagePagerAdapter;
+import com.meten.ifuture.bean.banner.Banner;
+import com.meten.ifuture.bean.banner.BannerBean;
+import com.meten.ifuture.constant.URL;
+import com.meten.ifuture.http.HttpRequestCallBack;
+import com.meten.ifuture.http.HttpRequestUtils;
+import com.meten.ifuture.http.RequestParamsUtils;
+import com.meten.ifuture.model.ResultInfo;
+import com.meten.ifuture.view.MyViewPager;
 import com.meten.ifuture.widget.AutoScrollViewPager;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,22 +58,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     /**
      * 头部广告
      */
-    private AutoScrollViewPager mViewPager;
+    @Bind(R.id.home_banner_viewpager)
+    protected AutoScrollViewPager mViewPager;
     private ImagePagerAdapter pagerAdapter;
-    private LinearLayout dotLL;
-    private int[] imageUrls = {R.drawable.home_banner_icon01, R.drawable.home_banner_icon02, R.drawable.home_banner_icon03};
+    @Bind(R.id.home_dot_ll)
+    protected LinearLayout dotLL;
+    private List<BannerBean> imageUrls;
 
     /**
      * 中间ViewPager
      */
-    private ViewPager viewPager;
+    @Bind(R.id.home_select_viewpager)
+    protected MyViewPager viewPager;
     private FragmentPagerAdapter mAdapter;
-    private LinearLayout lastestLinear;
-    private LinearLayout hotLinear;
-    private LinearLayout comprehensiveLinear;
-    private View lastestView;
-    private View hotView;
-    private View comprehensiveView;
+    @Bind(R.id.latest_linear)
+    protected LinearLayout lastestLinear;
+    @Bind(R.id.hot_linear)
+    protected LinearLayout hotLinear;
+    @Bind(R.id.comprehensive_linear)
+    protected LinearLayout comprehensiveLinear;
+    @Bind(R.id.latest_view)
+    protected View lastestView;
+    @Bind(R.id.hot_view)
+    protected View hotView;
+    @Bind(R.id.comprehensive_view)
+    protected View comprehensiveView;
+
     private List<Fragment> mFragments;
 
 
@@ -81,7 +103,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     protected TextView growTree;
     @Bind(R.id.active_prefecture)
     protected TextView activePrefecture;
-
+    private CallBack callBack;
 
     public HomeFragment() {
     }
@@ -98,56 +120,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         mMapView.onCreate(savedInstanceState);
         init();
         initEvent();
-
+        initData();
         return view;
     }
 
-    /**
-     * 初始化AMap对象
-     */
-    private void init() {
-        if (aMap == null) {
-            aMap = mMapView.getMap();
-            setUpMap();
+    private void initData() {
+        RequestParams params = RequestParamsUtils.getBannerImage(getActivity());
+        HttpRequestUtils.create(getActivity()).send(URL.HOME_BANNER_URL, params, callBack);
+    }
+
+    class CallBack extends HttpRequestCallBack<ResultInfo> {
+
+        @Override
+        public void onSuccess(ResultInfo resultInfo, int requestCode) {
+            Gson gson = new Gson();
+            Banner banner = gson.fromJson(Object2Json(resultInfo), Banner.class);
+            if (banner != null) {
+                imageUrls.addAll(banner.getData());
+                pagerAdapter = new ImagePagerAdapter(getActivity(), imageUrls, dotLL);
+                mViewPager.setAdapter(pagerAdapter);
+                mViewPager.setOnPageChangeListener(pagerAdapter);
+                pagerAdapter.refreshData(true);
+            }
         }
     }
 
-    /**
-     * 设置一些amap的属性
-     */
-    private void setUpMap() {
-        // 自定义系统定位小蓝点
-        MyLocationStyle myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationIcon(BitmapDescriptorFactory
-                .fromResource(R.drawable.location_marker));// 设置小蓝点的图标
-        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
-        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
-        // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
-        myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
-        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        // aMap.setMyLocationType()
+    public String Object2Json(Object obj) {
+        Gson gson = new Gson();
+        String str = gson.toJson(obj);
+        return str;
     }
 
     private void initView(View view) {
-
-        mViewPager = (AutoScrollViewPager) view.findViewById(R.id.home_banner_viewpager);
-        dotLL = (LinearLayout) view.findViewById(R.id.home_dot_ll);
-        pagerAdapter = new ImagePagerAdapter(getActivity(), imageUrls, dotLL);
-        mViewPager.setAdapter(pagerAdapter);
-        mViewPager.setOnPageChangeListener(pagerAdapter);
-        pagerAdapter.refreshData(true);
-//        setSelect(0);
-        viewPager = (ViewPager) view.findViewById(R.id.home_select_viewpager);
-        lastestLinear = (LinearLayout) view.findViewById(R.id.latest_linear);
-        hotLinear = (LinearLayout) view.findViewById(R.id.hot_linear);
-        comprehensiveLinear = (LinearLayout) view.findViewById(R.id.comprehensive_linear);
-
-        lastestView = view.findViewById(R.id.latest_view);
-        hotView = view.findViewById(R.id.hot_view);
-        comprehensiveView = view.findViewById(R.id.comprehensive_view);
+        callBack = new CallBack();
+        imageUrls = new ArrayList<>();
+        setSelect(0);
 
         mFragments = new ArrayList<Fragment>();
 
@@ -187,10 +194,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
     }
 
+    /**
+     * 初始化AMap对象
+     */
+    private void init() {
+        if (aMap == null) {
+            aMap = mMapView.getMap();
+            setUpMap();
+        }
+    }
+
+    /**
+     * 设置一些amap的属性
+     */
+    private void setUpMap() {
+        // 自定义系统定位小蓝点
+        MyLocationStyle myLocationStyle = new MyLocationStyle();
+        myLocationStyle.myLocationIcon(BitmapDescriptorFactory
+                .fromResource(R.drawable.location_marker));// 设置小蓝点的图标
+        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
+        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
+        // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
+        myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
+        aMap.setMyLocationStyle(myLocationStyle);
+        aMap.setLocationSource(this);// 设置定位监听
+        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
+        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+        // aMap.setMyLocationType()
+    }
+
+
     private void initEvent() {
-        lastestLinear.setOnClickListener(this);
-        hotLinear.setOnClickListener(this);
-        comprehensiveLinear.setOnClickListener(this);
+//        lastestLinear.setOnClickListener(this);
+//        hotLinear.setOnClickListener(this);
+//        comprehensiveLinear.setOnClickListener(this);
         plantShops.setOnClickListener(this);
         plantCenter.setOnClickListener(this);
         growTree.setOnClickListener(this);
@@ -232,7 +269,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
     private void setSelect(int i) {
         setTab(i);
-        mViewPager.setCurrentItem(i);
+        viewPager.setCurrentItem(i);
     }
 
     //设置背景颜色
@@ -306,18 +343,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
     @Override
     public void onClick(View v) {
-        resetViewBackground();
+
         Intent intent;
         switch (v.getId()) {
             case R.id.latest_linear:
+                resetViewBackground();
                 mViewPager.setCurrentItem(0);
                 lastestView.setBackgroundResource(R.color.select_bottom_blue);
                 break;
             case R.id.hot_linear:
+                resetViewBackground();
                 mViewPager.setCurrentItem(1);
                 hotView.setBackgroundResource(R.color.select_bottom_blue);
                 break;
             case R.id.comprehensive_linear:
+                resetViewBackground();
                 comprehensiveView.setBackgroundResource(R.color.select_bottom_blue);
                 mViewPager.setCurrentItem(2);
                 break;

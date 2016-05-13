@@ -1,20 +1,25 @@
 package com.meten.ifuture.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.base.BaseFragmentActivity;
 import com.meten.ifuture.fragment.HomeFragment;
 import com.meten.ifuture.fragment.MessageFragment;
 import com.meten.ifuture.fragment.MyFragment;
 import com.meten.ifuture.fragment.NearbyFragment;
+import com.meten.ifuture.view.SystemBarTintManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +27,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/5/9 0009.
  */
-public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener {
 
     private RadioGroup mRadioGroup;
     private List<Fragment> mFragments;
@@ -33,9 +38,25 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
+
         init();
     }
+
+//    private void setTranslucentStatus(boolean on) {
+//        Window win = getWindow();
+//        WindowManager.LayoutParams winParams = win.getAttributes();
+//        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+//        if (on) {
+//            winParams.flags |= bits;
+//        } else {
+//            winParams.flags &= ~bits;
+//        }
+//        win.setAttributes(winParams);
+//    }
+
 
     private void init() {
         mRadioGroup = (RadioGroup) findViewById(R.id.main_bottom_rg);
@@ -89,6 +110,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
 
 
     private long exitTime = 0;
+
     private void exitApplicatiopn() {
 
         if ((System.currentTimeMillis() - exitTime) > 2000) {

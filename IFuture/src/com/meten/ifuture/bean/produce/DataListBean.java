@@ -1,7 +1,6 @@
 package com.meten.ifuture.bean.produce;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/12 0012.
@@ -31,7 +30,6 @@ import java.util.List;
  */
 public class DataListBean implements Serializable {
 
-    private List<String> Pictures;
     private int MinAdvancePrice;
     private int MinSalePrice;
     private int Id;
@@ -48,18 +46,24 @@ public class DataListBean implements Serializable {
     private int TotalCollect;
     private String ReleaseTime;
     private int NeedBatchs;
-    private int TotalRead;
-    private String AdvertImg;
-    private String BuyMode;
-    private String Mobile;
-    private String Notice;
 
-    public List<String> getPictures() {
-        return Pictures;
+    private UserBean user;
+    private ProductBean Product;
+
+    public ProductBean getProduct() {
+        return Product;
     }
 
-    public void setPictures(List<String> pictures) {
-        Pictures = pictures;
+    public void setProduct(ProductBean product) {
+        Product = product;
+    }
+
+    public UserBean getUser() {
+        return user;
+    }
+
+    public void setUser(UserBean user) {
+        this.user = user;
     }
 
     public int getMinAdvancePrice() {
@@ -190,43 +194,4 @@ public class DataListBean implements Serializable {
         NeedBatchs = needBatchs;
     }
 
-    public int getTotalRead() {
-        return TotalRead;
-    }
-
-    public void setTotalRead(int totalRead) {
-        TotalRead = totalRead;
-    }
-
-    public String getAdvertImg() {
-        return AdvertImg;
-    }
-
-    public void setAdvertImg(String advertImg) {
-        AdvertImg = advertImg;
-    }
-
-    public String getBuyMode() {
-        return BuyMode;
-    }
-
-    public void setBuyMode(String buyMode) {
-        BuyMode = buyMode;
-    }
-
-    public String getMobile() {
-        return Mobile;
-    }
-
-    public void setMobile(String mobile) {
-        Mobile = mobile;
-    }
-
-    public String getNotice() {
-        return Notice;
-    }
-
-    public void setNotice(String notice) {
-        Notice = notice;
-    }
 }

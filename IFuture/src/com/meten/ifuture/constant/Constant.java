@@ -1,5 +1,6 @@
 package com.meten.ifuture.constant;
 
+import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -99,6 +100,10 @@ public class Constant {
             }
         }
         return REQUEST_CODE;
+    }
+
+    public static String getRequestCode(Context context) {
+        return SharedPreferencesUtils.getStringData(context, "code", null);
     }
 
     // action

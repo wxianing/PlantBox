@@ -1,14 +1,20 @@
 package com.meten.ifuture.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.meten.ifuture.MainApplication;
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.BannerDetailActivity;
+import com.meten.ifuture.bean.banner.BannerBean;
 import com.meten.ifuture.widget.RecyclingPagerAdapter;
+
+import java.util.List;
 
 /**
  * ImagePagerAdapter
@@ -16,12 +22,13 @@ import com.meten.ifuture.widget.RecyclingPagerAdapter;
 public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPager.OnPageChangeListener {
 
     private Context context;
-    private int[] imageUrls;
+    private List<BannerBean> imageUrls;
     private boolean isInfiniteLoop;
     //圆点的父布局
     private LinearLayout dotLL;
+    private int count;
 
-    public ImagePagerAdapter(Context context, int[] imageUrls, LinearLayout dotLL) {
+    public ImagePagerAdapter(Context context, List<BannerBean> imageUrls, LinearLayout dotLL) {
         this.context = context;
         this.imageUrls = imageUrls;
         isInfiniteLoop = false;
@@ -31,7 +38,7 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
 
     @Override
     public int getCount() {
-        return isInfiniteLoop ? Integer.MAX_VALUE : imageUrls.length;
+        return isInfiniteLoop ? Integer.MAX_VALUE : imageUrls.size();
     }
 
     /**
@@ -41,11 +48,12 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
      * @return
      */
     private int getPosition(int position) {
-        return isInfiniteLoop ? position % imageUrls.length : position;
+
+        return isInfiniteLoop ? position % imageUrls.size() : position;
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup container) {
+    public View getView(int position, View view, final ViewGroup container) {
         ViewHolder holder;
         if (view == null) {
             holder = new ViewHolder();
@@ -55,9 +63,15 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
         } else {
             holder = (ViewHolder) view.getTag();
         }
-
-        holder.imageView.setImageResource(imageUrls[getPosition(position)]);
-//        x.image().bind(holder.imageView, UrlUitls.BASE_IMAGE_URL + iamgeUrls.get(getPosition(position)).getImages());
+        MainApplication.imageLoader.displayImage(imageUrls.get(getPosition(position)).getPhoto(), holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, BannerDetailActivity.class);
+                intent.putExtra("link", imageUrls.get(getPosition(count)).getPhoto());
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -68,7 +82,8 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
 
     @Override
     public void onPageSelected(int position) {
-        for (int i = 0; i < imageUrls.length; i++) {
+        count = position;
+        for (int i = 0; i < imageUrls.size(); i++) {
             if (getPosition(position) == i) {
                 ((ImageView) dotLL.getChildAt(i)).setImageResource(R.drawable.dot_press);
             } else {
@@ -111,7 +126,7 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
      * 动态添加小圆点
      */
     private void addDotView() {
-        for (int i = 0; i < imageUrls.length; i++) {
+        for (int i = 0; i < imageUrls.size(); i++) {
             ImageView dotView = new ImageView(context);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             param.rightMargin = 10;

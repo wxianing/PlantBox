@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
@@ -17,7 +18,7 @@
             android:src="@drawable/home_header_icon" />
 
         <TextView
-            android:id="@+id/username"
+            android:id="@+id/cnname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -28,7 +29,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/username"
+            android:layout_below="@+id/cnname"
             android:layout_toRightOf="@+id/home_header_img">
 
             <TextView
@@ -67,6 +68,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/notice_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp10"
@@ -97,6 +99,12 @@
             android:src="@drawable/p3" />
     </LinearLayout>
 
+    <com.meten.ifuture.widget.HListView
+        android:id="@+id/hlistView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -105,13 +113,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/transmit_icon" />
 
             <TextView
+                android:id="@+id/transpond_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/transmit_icon"
+                android:layout_marginLeft="@dimen/dp10"
                 android:gravity="center"
                 android:text="32" />
         </LinearLayout>
@@ -119,13 +134,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/comment_icon" />
 
             <TextView
+                android:id="@+id/commot_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/comment_icon"
+                android:layout_marginLeft="@dimen/dp10"
                 android:gravity="center"
                 android:text="评论" />
         </LinearLayout>
@@ -133,13 +155,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/like_icon" />
 
             <TextView
+                android:id="@+id/like_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:drawableLeft="@drawable/like_icon"
+                android:layout_marginLeft="@dimen/dp10"
                 android:gravity="center"
                 android:text="点赞" />
         </LinearLayout>

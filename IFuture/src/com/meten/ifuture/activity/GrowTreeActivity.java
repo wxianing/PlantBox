@@ -8,11 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class GrowTreeActivity extends Activity implements View.OnClickListener {
+public class GrowTreeActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.mygrow_tv)
     protected TextView myGrowUp;

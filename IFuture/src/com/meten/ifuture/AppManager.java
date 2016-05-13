@@ -328,7 +328,7 @@ public class AppManager {
                     .saveUser(user);
         }
         SharedPreferencesUtils.saveStringData(context, "code", user.getCode());
-
+        SharedPreferencesUtils.saveIntData(context,"UserId",user.getUserId());
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
         SharedPreferencesUtils.setLoginTag(context, true);

@@ -3,6 +3,7 @@ package com.meten.ifuture.view;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -14,6 +15,7 @@ public class MyViewPager extends ViewPager {
     public MyViewPager(Context context) {
         super(context);
     }
+
     public MyViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -33,4 +35,5 @@ public class MyViewPager extends ViewPager {
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
+
 }

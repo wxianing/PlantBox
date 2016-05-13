@@ -1,5 +1,6 @@
 package com.meten.ifuture.http;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
@@ -23,8 +24,26 @@ public class RequestParamsUtils {
     public static RequestParams createRequestParams() {
         RequestParams params = new RequestParams();
         params.addHeader("_appId", Constant.APPID);
-//        params.addHeader("_code", Constant.getRequestCode());
         params.addHeader("_code", Constant.getRequestCode());
+        params.addHeader("_code", Constant.getRequestCode());
+        return params;
+    }
+
+    //植物盒子获取code
+    public static RequestParams createRequestParams(Context context) {
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", Constant.getRequestCode(context));
+        return params;
+    }
+
+    /**
+     * 首页头部广告
+     */
+
+    public static RequestParams getBannerImage(Context context) {
+        RequestParams params = createRequestParams(context);
+        params.addBodyParameter("content-type", "application/json");
         return params;
     }
 

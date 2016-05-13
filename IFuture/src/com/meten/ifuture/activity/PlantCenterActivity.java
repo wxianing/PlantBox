@@ -1,22 +1,33 @@
 package com.meten.ifuture.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PlantCenterActivity extends Activity implements View.OnClickListener {
+public class PlantCenterActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
+
+    //植物百科
+    @Bind(R.id.baike_layout)
+    protected RelativeLayout baikeLayout;
+    @Bind(R.id.monitoring_layout)
+    protected RelativeLayout minitoringLayout;
+    @Bind(R.id.hardware_layout)
+    protected RelativeLayout hardwareLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +40,7 @@ public class PlantCenterActivity extends Activity implements View.OnClickListene
 
     private void initEvent() {
         backImg.setOnClickListener(this);
+        baikeLayout.setOnClickListener(this);
     }
 
     private void initView() {
@@ -46,6 +58,11 @@ public class PlantCenterActivity extends Activity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.back_arrows:
                 finish();
+                break;
+            case R.id.baike_layout:
+                startActivity(new Intent(this, PlantBaikeActivity.class));
+                break;
+            default:
                 break;
         }
     }

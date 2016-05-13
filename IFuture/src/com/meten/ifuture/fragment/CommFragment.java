@@ -2,15 +2,19 @@ package com.meten.ifuture.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.ifuture.R;
+import com.meten.ifuture.ShopDetailActivity;
+import com.meten.ifuture.adapter.ProduceAdapter;
 import com.meten.ifuture.bean.produce.DataListBean;
 import com.meten.ifuture.bean.produce.Produce;
 import com.meten.ifuture.constant.URL;
@@ -20,10 +24,12 @@ import com.meten.ifuture.http.RequestParamsUtils;
 import com.meten.ifuture.model.ResultInfo;
 import com.meten.ifuture.utils.JsonParse;
 import com.meten.ifuture.utils.SharedPreferencesUtils;
+import com.meten.ifuture.view.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -41,6 +47,10 @@ public class CommFragment extends Fragment {
 
     private CallBack callback;
     List<DataListBean> dataLists;
+
+    private ProduceAdapter mAdapter;
+    @Bind(R.id.listview)
+    protected MyListView mListView;
 
     public CommFragment() {
     }
@@ -83,6 +93,9 @@ public class CommFragment extends Fragment {
     private void initView() {
         callback = new CallBack();
         dataLists = new ArrayList<>();
+        mAdapter = new ProduceAdapter(dataLists, getActivity());
+        mListView.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -90,6 +103,7 @@ public class CommFragment extends Fragment {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {
 
@@ -99,7 +113,7 @@ public class CommFragment extends Fragment {
             Produce produce = JsonParse.parseToObject(info, Produce.class);
             if (produce != null) {
                 dataLists.addAll(produce.getDataList());
-
+                mAdapter.notifyDataSetChanged();
             }
         }
 

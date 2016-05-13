@@ -5,7 +5,11 @@ public class URL {
     public static final String BASE_URL = "http://plantboxapi.meidp.com/";
     public static final String LOGIN_URL = BASE_URL + "common/user/login";
 
-    public static final String HOME_PRODUCTLIST_URL = BASE_URL + "product/home/getproductlist";
+    public static final String HOME_PRODUCTLIST_URL = BASE_URL + "order/getlist";
+
+    public static final String PLANT_BAIKE_URL = "http://plantbox.meidp.com/Mobi/Home/NoticeList?ChannelId=1001";
+
+    public static final String HOME_BANNER_URL = BASE_URL + "common/advertise/getlist";
 
 
     public static final int DEV = 0x00;

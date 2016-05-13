@@ -93,5 +93,8 @@
     <string name="title_activity_active">ActiveActivity</string>
     <string name="title_activity_my_growup">MyGrowupActivity</string>
     <string name="title_activity_my_base_area">MyBaseAreaActivity</string>
+    <string name="title_activity_shop_detail">ShopDetailActivity</string>
+    <string name="title_activity_plant_baike">PlantBaikeActivity</string>
+    <string name="title_activity_banner_detail">BannerDetailActivity</string>
 
 </resources>

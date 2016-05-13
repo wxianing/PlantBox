@@ -5,8 +5,8 @@
     android:versionName="0.1.0">
 
     <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="19"
+        android:targetSdkVersion="23" />
 
     <supports-screens
         android:anyDensity="true"
@@ -272,7 +272,16 @@
             android:label="@string/title_activity_my_growup" />
         <activity
             android:name=".activity.MyBaseAreaActivity"
-            android:label="@string/title_activity_my_base_area"></activity>
+            android:label="@string/title_activity_my_base_area" />
+        <activity
+            android:name=".ShopDetailActivity"
+            android:label="@string/title_activity_shop_detail" />
+        <activity
+            android:name=".activity.PlantBaikeActivity"
+            android:label="@string/title_activity_plant_baike" />
+        <activity
+            android:name=".activity.BannerDetailActivity"
+            android:label="@string/title_activity_banner_detail"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,6 @@
     android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-    <include layout="@layout/titlebar_layout" />
+    <include layout="@layout/titlebar" />
 
 </FrameLayout>

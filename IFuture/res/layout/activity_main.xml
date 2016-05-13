@@ -6,11 +6,6 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="27dp"
-        android:background="@color/head_bg_color" />
-
     <FrameLayout
         android:id="@+id/main_fragments_contents"
         android:layout_width="match_parent"
@@ -20,9 +15,9 @@
         android:layout_weight="1" />
 
     <View
-        android:background="#C8C8C8"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#C8C8C8" />
 
     <include
         android:id="@+id/main_bottom_rg"

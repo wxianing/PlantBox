@@ -3,14 +3,15 @@ package com.meten.ifuture.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meten.ifuture.R;
+import com.meten.ifuture.activity.base.BaseFragmentActivity;
 import com.meten.ifuture.fragment.AchievementFragment;
 import com.meten.ifuture.fragment.BaseAreaFragment;
 import com.meten.ifuture.fragment.BaseHomeFragment;
@@ -25,10 +26,7 @@ import butterknife.ButterKnife;
 /**
  * 我的基地
  */
-public class MyBaseAreaActivity extends FragmentActivity implements View.OnClickListener {
-
-/*    @Bind(R.id.title_tv)
-    protected TextView title;*/
+public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     @Bind(R.id.home_linear)
     protected LinearLayout homeLinear;
@@ -54,10 +52,13 @@ public class MyBaseAreaActivity extends FragmentActivity implements View.OnClick
     protected MyViewPager mViewPager;
     private FragmentPagerAdapter mAdapter;
     private List<Fragment> mFragments;
+    @Bind(R.id.back_arrows)
+    protected ImageView backImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_my_base_area);
         ButterKnife.bind(this);
 
@@ -70,10 +71,10 @@ public class MyBaseAreaActivity extends FragmentActivity implements View.OnClick
         homeLinear.setOnClickListener(this);
         baseareaLinear.setOnClickListener(this);
         achievementLinear.setOnClickListener(this);
+        backImg.setOnClickListener(this);
     }
 
     private void initView() {
-//        title.setVisibility(View.GONE);
         setSelect(0);
         mFragments = new ArrayList<>();
         mFragments.add(new BaseHomeFragment());
@@ -129,6 +130,9 @@ public class MyBaseAreaActivity extends FragmentActivity implements View.OnClick
                 break;
             case R.id.achievement_linear:
                 setSelect(2);
+                break;
+            case R.id.back_arrows:
+                finish();
                 break;
         }
     }

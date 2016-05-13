@@ -54,9 +54,17 @@
         android:text="我的成果展示"
         android:textColor="@color/gray_textcolor" />
 
+    <ListView
+        android:id="@+id/show_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <include layout="@layout/item_listview_latest" />
+
     <include layout="@layout/item_listview_latest" />
+
     <include layout="@layout/item_listview_latest" />
+
     <include layout="@layout/item_listview_latest" />
 
 
