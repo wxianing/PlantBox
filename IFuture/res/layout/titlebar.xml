@@ -14,8 +14,9 @@
             android:id="@+id/back_arrows"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp10"
             android:layout_weight="2"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingRight="@dimen/dp10"
             android:src="@drawable/back_arrows" />
 
         <TextView

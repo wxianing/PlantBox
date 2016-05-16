@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.meten.ifuture.fragment.CommFragment">
+    tools:context="com.meten.plantbox.fragment.CommFragment">
 
-    <com.meten.ifuture.view.MyListView
+    <com.meten.plantbox.view.MyListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

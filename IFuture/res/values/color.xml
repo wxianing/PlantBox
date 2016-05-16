@@ -62,4 +62,6 @@
     <color name="select_bottom_blue">#376EBE</color>
     <color name="white_drak">#F1F1F1</color>
     <color name="login_btn_bg">#008FCE</color>
+    <color name="orange">#FF8000</color>
+    <color name="ashen_while">#F7F7F7</color>
 </resources>

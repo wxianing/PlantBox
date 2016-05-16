@@ -99,7 +99,7 @@
             android:src="@drawable/p3" />
     </LinearLayout>
 
-    <com.meten.ifuture.widget.HListView
+    <com.meten.plantbox.widget.HListView
         android:id="@+id/hlistView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

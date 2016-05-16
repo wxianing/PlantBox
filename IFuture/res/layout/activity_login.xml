@@ -110,6 +110,7 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/weixin_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
@@ -117,6 +118,7 @@
             android:src="@drawable/login_weixin_icon" />
 
         <ImageView
+            android:id="@+id/sina_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
@@ -124,6 +126,7 @@
             android:src="@drawable/login_sina_icon" />
 
         <ImageView
+            android:id="@+id/qq_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"

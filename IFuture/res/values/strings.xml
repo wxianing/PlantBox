@@ -96,5 +96,7 @@
     <string name="title_activity_shop_detail">ShopDetailActivity</string>
     <string name="title_activity_plant_baike">PlantBaikeActivity</string>
     <string name="title_activity_banner_detail">BannerDetailActivity</string>
+    <string name="title_activity_publish">PublishActivity</string>
+    <string name="title_activity_my_share">MyShareActivity</string>
 
 </resources>

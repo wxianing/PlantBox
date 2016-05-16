@@ -27,6 +27,11 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <!-- 自定义仿IOS的ActionSheet底部Dialog的样式 ，有模糊效果 -->
+    <style name="DActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:background" >@color/ashen_while</item>
+    </style>
+
     <style name="loading">
         <item name="android:indeterminateDuration">1000</item>
         <item name="android:indeterminateDrawable">@drawable/loading</item>

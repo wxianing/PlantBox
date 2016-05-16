@@ -160,7 +160,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.meten.ifuture.view.CircularImage
+    <com.meten.plantbox.view.CircularImage
         android:id="@+id/head_img"
         android:layout_width="@dimen/headImgSize"
         android:layout_height="@dimen/headImgSize"

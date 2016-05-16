@@ -3,36 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.meten.ifuture.fragment.BaseHomeFragment">
+    tools:context="com.meten.plantbox.fragment.BaseHomeFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp5"
-        android:background="@color/white"
-        android:paddingBottom="@dimen/dp5"
-        android:paddingTop="@dimen/dp5">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp15"
-            android:text="所在地:    "
-            android:textColor="@color/gray_textcolor"
-            android:textSize="@dimen/sp16" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="深圳宝安"
-            android:textSize="@dimen/sp16" />
-
-
-    </LinearLayout>
-
-    <include layout="@layout/horizontal_line" />
+    <include layout="@layout/personal_message_layout" />
 
     <TextView
+        android:id="@+id/more_information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -40,7 +16,8 @@
         android:paddingBottom="@dimen/dp5"
         android:paddingTop="@dimen/dp5"
         android:text="更多资料>>"
-        android:textColor="@color/gray_textcolor" />
+        android:textColor="@color/gray_textcolor"
+        android:textSize="@dimen/sp16" />
 
     <TextView
         android:layout_width="match_parent"
@@ -58,14 +35,5 @@
         android:id="@+id/show_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <include layout="@layout/item_listview_latest" />
-
-    <include layout="@layout/item_listview_latest" />
-
-    <include layout="@layout/item_listview_latest" />
-
-    <include layout="@layout/item_listview_latest" />
-
 
 </LinearLayout>

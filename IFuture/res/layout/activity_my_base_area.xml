@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.meten.ifuture.activity.MyBaseAreaActivity">
+    tools:context="com.meten.plantbox.activity.MyBaseAreaActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -83,7 +83,7 @@
 
             <include layout="@layout/select_view_layout" />
 
-            <com.meten.ifuture.view.MyViewPager
+            <com.meten.plantbox.view.MyViewPager
                 android:id="@+id/my_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

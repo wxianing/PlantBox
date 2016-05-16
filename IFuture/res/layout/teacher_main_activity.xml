@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.meten.ifuture.view.ScrollAdView
+    <com.meten.plantbox.view.ScrollAdView
         android:id="@+id/adview"
         android:layout_width="match_parent"
         android:layout_height="140dp" />
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/_dp25"
         android:orientation="horizontal" >
 
-        <com.meten.ifuture.view.CircularImage
+        <com.meten.plantbox.view.CircularImage
             android:id="@+id/head_img"
             android:layout_width="@dimen/headImgSize"
             android:layout_height="@dimen/headImgSize"
