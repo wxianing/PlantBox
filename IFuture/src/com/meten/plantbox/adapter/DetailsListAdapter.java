@@ -33,12 +33,12 @@ public class DetailsListAdapter extends BasicAdapter<String> {
             vh = (ViewHolder) convertView.getTag();
         }
         MainApplication.imageLoader.displayImage(data.get(position), vh.imageView);
-        vh.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.show(context,"点击图片");
-            }
-        });
+//        vh.imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ToastUtils.show(context,"点击图片");
+//            }
+//        });
         return convertView;
     }
 

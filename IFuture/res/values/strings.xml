@@ -101,5 +101,10 @@
     <string name="title_activity_product_details">ProductDetailsActivity</string>
     <string name="title_activity_add_goods">AddGoodsActivity</string>
     <string name="title_activity_order">OrderActivity</string>
+    <string name="title_activity_add_new_address">AddNewAddressActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_reset_pwd">ResetPwdActivity</string>
+    <string name="title_activity_my_collect">MyCollectActivity</string>
+    <string name="title_activity_my_order">MyOrderActivity</string>
 
 </resources>

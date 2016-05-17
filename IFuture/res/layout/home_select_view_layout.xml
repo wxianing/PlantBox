@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp5"
-    android:paddingTop="@dimen/dp5"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:paddingTop="@dimen/dp5">
 
     <LinearLayout
         android:id="@+id/latest_linear"
@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/latest_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -37,6 +38,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/hot_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -59,6 +61,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/comprehensive_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

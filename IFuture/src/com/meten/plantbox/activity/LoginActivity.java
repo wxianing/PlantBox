@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
@@ -61,6 +62,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected ImageView sinaImg;
     @Bind(R.id.qq_img)
     protected ImageView qqImg;
+    @Bind(R.id.register_tv)
+    protected TextView registerTv;//注册
+    @Bind(R.id.forget_pwd_tv)
+    protected TextView forgetPwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +87,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         weixinImg.setOnClickListener(this);
         sinaImg.setOnClickListener(this);
         qqImg.setOnClickListener(this);
+        registerTv.setOnClickListener(this);
+        forgetPwd.setOnClickListener(this);
     }
 
     private void initView() {
@@ -97,7 +104,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
+            case R.id.forget_pwd_tv:
+                intent = new Intent(this, ResetPwdActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.register_tv:
+                intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+                break;
             case R.id.weixin_img://微信登录
                 Platform wechart = ShareSDK.getPlatform(Wechat.NAME);
                 thirdType = Constant.WECHAT;

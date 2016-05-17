@@ -296,7 +296,22 @@
             android:label="@string/title_activity_add_goods" />
         <activity
             android:name=".activity.OrderActivity"
-            android:label="@string/title_activity_order"></activity>
+            android:label="@string/title_activity_order" />
+        <activity
+            android:name=".activity.AddNewAddressActivity"
+            android:label="@string/title_activity_add_new_address" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:label="@string/title_activity_register" />
+        <activity
+            android:name=".activity.ResetPwdActivity"
+            android:label="@string/title_activity_reset_pwd" />
+        <activity
+            android:name=".activity.MyCollectActivity"
+            android:label="@string/title_activity_my_collect" />
+        <activity
+            android:name=".activity.MyOrderActivity"
+            android:label="@string/title_activity_my_order"></activity>
     </application>
 
 </manifest>

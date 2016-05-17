@@ -8,11 +8,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.meten.plantbox.R;
+import com.meten.plantbox.activity.base.BackHandledFragment;
+import com.meten.plantbox.activity.base.BackHandledInterface;
 import com.meten.plantbox.activity.base.BaseFragmentActivity;
 import com.meten.plantbox.fragment.HomeFragment;
 import com.meten.plantbox.fragment.MessageFragment;
@@ -25,11 +28,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/5/9 0009.
  */
-public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener {
+public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener, BackHandledInterface {
 
     private RadioGroup mRadioGroup;
     private List<Fragment> mFragments;
-
+    private BackHandledFragment mBackHandedFragment;
     private FragmentManager manager;
 
 
@@ -52,8 +55,8 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.main_fragments_contents, mFragments.get(0));
-//        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//        transaction.addToBackStack(null);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.addToBackStack("tag");
         transaction.commit();
         mRadioGroup.setOnCheckedChangeListener(this);
     }
@@ -72,13 +75,12 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         }
     }
 
-
     private void addFragment(Fragment fragment) {
         FragmentTransaction t = manager.beginTransaction();
         if (!fragment.isAdded()) {
             t.add(R.id.main_fragments_contents, fragment);
 //            t.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//            t.addToBackStack(null);
+//            t.addToBackStack("tag");
         }
         t.show(fragment);
         t.commit();
@@ -106,5 +108,10 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
             finish();
             System.exit(0);
         }
+    }
+
+    @Override
+    public void setSelectedFragment(BackHandledFragment selectedFragment) {
+        this.mBackHandedFragment = selectedFragment;
     }
 }

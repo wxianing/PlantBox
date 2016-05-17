@@ -7,6 +7,6 @@
     <ImageView
         android:id="@+id/pro_gv_img"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
         android:scaleType="fitXY" />
 </LinearLayout>

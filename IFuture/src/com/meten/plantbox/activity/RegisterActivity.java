@@ -1,39 +1,29 @@
 package com.meten.plantbox.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.app.Activity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.base.BaseActivity;
-import com.meten.plantbox.dao.ConsigneeDao;
-import com.meten.plantbox.dao.model.Consignee;
-
-import java.util.List;
+import com.meten.plantbox.utils.ViewUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AddAddressActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
-    @Bind(R.id.right_tv)
-    protected TextView rightTv;
-
-    @Bind(R.id.add_new_address)
-    protected Button addNewAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_address_goods);
+        setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         initView();
         initEvent();
@@ -41,18 +31,18 @@ public class AddAddressActivity extends BaseActivity implements View.OnClickList
 
     private void initEvent() {
         backImg.setOnClickListener(this);
-        addNewAddress.setOnClickListener(this);
     }
 
-    private void initView() {
-        title.setText("选择地址");
-        rightTv.setText("完成");
 
+    private void initView() {
+        title.setText("注册");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ButterKnife.unbind(this);
+        initView();
     }
 
     @Override
@@ -60,10 +50,6 @@ public class AddAddressActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.back_arrows:
                 finish();
-                break;
-            case R.id.add_new_address:
-                Intent intent = new Intent(this, AddNewAddressActivity.class);
-                startActivity(intent);
                 break;
         }
     }

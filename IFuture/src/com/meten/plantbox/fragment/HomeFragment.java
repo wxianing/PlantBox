@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -83,6 +82,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     protected View hotView;
     @Bind(R.id.comprehensive_view)
     protected View comprehensiveView;
+    @Bind(R.id.latest_tv)
+    protected TextView lastestTv;
+    @Bind(R.id.hot_tv)
+    protected TextView hotTv;
+    @Bind(R.id.comprehensive_tv)
+    protected TextView comprehensiveTv;
 
     private List<Fragment> mFragments;
 
@@ -108,6 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     private CallBack callBack;
     private UiSettings mUiSettings;
 
+
     public HomeFragment() {
     }
 
@@ -116,7 +122,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         //初始化控件
-        initView(view);
+        initView();
         //获取地图控件引用
         mMapView = (MapView) view.findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，实现地图生命周期管理
@@ -154,7 +160,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         return str;
     }
 
-    private void initView(View view) {
+    private void initView() {
         callBack = new CallBack();
         imageUrls = new ArrayList<>();
         setSelect(0);
@@ -176,6 +182,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
                 return mFragments.size();
             }
         };
+
         viewPager.setAdapter(mAdapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -230,9 +237,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
 
     private void initEvent() {
-//        lastestLinear.setOnClickListener(this);
-//        hotLinear.setOnClickListener(this);
-//        comprehensiveLinear.setOnClickListener(this);
+        lastestLinear.setOnClickListener(this);
+        hotLinear.setOnClickListener(this);
+        comprehensiveLinear.setOnClickListener(this);
         plantShops.setOnClickListener(this);
         plantCenter.setOnClickListener(this);
         growTree.setOnClickListener(this);
@@ -283,12 +290,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         switch (i) {
             case 0:
                 lastestView.setBackgroundResource(R.color.select_bottom_blue);
+                lastestTv.setTextColor(Color.parseColor("#376EBE"));
                 break;
             case 1:
                 hotView.setBackgroundResource(R.color.select_bottom_blue);
+                hotTv.setTextColor(Color.parseColor("#376EBE"));
                 break;
             case 2:
                 comprehensiveView.setBackgroundResource(R.color.select_bottom_blue);
+                comprehensiveTv.setTextColor(Color.parseColor("#376EBE"));
                 break;
             default:
                 break;
@@ -298,8 +308,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     //重置背景颜色
     private void resetViewBackground() {
         lastestView.setBackgroundResource(R.color.white);
+        lastestTv.setTextColor(Color.BLACK);
         hotView.setBackgroundResource(R.color.white);
+        hotTv.setTextColor(Color.BLACK);
         comprehensiveView.setBackgroundResource(R.color.white);
+        comprehensiveTv.setTextColor(Color.BLACK);
     }
 
     @Override
@@ -356,19 +369,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         Intent intent;
         switch (v.getId()) {
             case R.id.latest_linear:
-                resetViewBackground();
-                mViewPager.setCurrentItem(0);
-                lastestView.setBackgroundResource(R.color.select_bottom_blue);
+                setSelect(0);
                 break;
             case R.id.hot_linear:
-                resetViewBackground();
-                mViewPager.setCurrentItem(1);
-                hotView.setBackgroundResource(R.color.select_bottom_blue);
+                setSelect(1);
                 break;
             case R.id.comprehensive_linear:
-                resetViewBackground();
-                comprehensiveView.setBackgroundResource(R.color.select_bottom_blue);
-                mViewPager.setCurrentItem(2);
+                setSelect(2);
                 break;
             case R.id.plant_shop:
                 intent = new Intent(getActivity(), PlantShopActivity.class);

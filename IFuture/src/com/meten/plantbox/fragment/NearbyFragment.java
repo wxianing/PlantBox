@@ -189,4 +189,5 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         }
         mlocationClient = null;
     }
+
 }

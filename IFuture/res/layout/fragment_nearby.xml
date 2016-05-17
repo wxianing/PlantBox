@@ -41,19 +41,6 @@
 
             <include layout="@layout/item_nearby_list" />
 
-            <include layout="@layout/item_nearby_list" />
-
-            <include layout="@layout/item_nearby_list" />
-
-            <include layout="@layout/item_nearby_list" />
-
-            <include layout="@layout/item_nearby_list" />
-
-            <include layout="@layout/item_nearby_list" />
-
-            <include layout="@layout/item_nearby_list" />
-
-            <include layout="@layout/item_nearby_list" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

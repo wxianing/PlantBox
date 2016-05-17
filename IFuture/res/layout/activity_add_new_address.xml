@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meten.plantbox.activity.AddNewAddressActivity">
+
+    <include layout="@layout/titlebar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:text="收货人:"
+            android:textSize="@dimen/sp16" />
+
+        <EditText
+            android:id="@+id/consignee_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/edittext_lucency_shape" />
+    </LinearLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:text="联系电话:"
+            android:textSize="@dimen/sp16" />
+
+        <EditText
+            android:id="@+id/consignee_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/edittext_lucency_shape" />
+    </LinearLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:text="所在地区:"
+            android:textSize="@dimen/sp16" />
+
+        <EditText
+            android:id="@+id/consignee_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/edittext_lucency_shape" />
+    </LinearLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:text="街道:"
+            android:textSize="@dimen/sp16" />
+
+        <EditText
+            android:id="@+id/consignee_street"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@drawable/edittext_lucency_shape" />
+    </LinearLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <EditText
+        android:id="@+id/details_address"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@drawable/edittext_shape"
+        android:gravity="top"
+        android:hint="请填写详细地址"
+        android:textColorHint="@color/gray_textcolor" />
+
+    <Button
+        android:id="@+id/add_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp15"
+        android:background="@drawable/button_bg_blue"
+        android:padding="@dimen/dp5"
+        android:text="添加"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp18" />
+
+</LinearLayout>
