@@ -15,6 +15,8 @@ public class URL {
     public static final String LOGIN_BY_THIRD = BASE_URL + "common/user/loginbythird";
     //植物商城列表
     public static final String PLANT_SHOPS_LIST_URL = BASE_URL + "product/home/getproductlist";
+    //商品详情
+    public static final String PRODUCE_DETAILS_URL = BASE_URL + "product/home/getproduct";
 
 
     public static final int DEV = 0x00;
@@ -24,7 +26,7 @@ public class URL {
 
 
     public static final String API_TEST = "http://172.21.4.87:8089/";
-    public static final String API_DEV = "http://172.19.3.51:82/";
+    public static final String API_DEV = BASE_URL;
     public static final String API_ONLINE = "http://ifutureapi.meteni.com/";
 
 

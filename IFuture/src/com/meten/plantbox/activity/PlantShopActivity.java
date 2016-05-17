@@ -1,5 +1,6 @@
 package com.meten.plantbox.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -32,10 +33,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PlantShopActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-//    @Bind(R.id.title_tv)
-//    protected TextView title;
-//    @Bind(R.id.back_arrows)
-//    protected ImageView backImg;
+
+    @Bind(R.id.back_arrows)
+    protected ImageView backImg;
     @Bind(R.id.webView)
     protected WebView webview;
     @Bind(R.id.shop_listview)
@@ -73,45 +73,35 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initEvent() {
-//        backImg.setOnClickListener(this);
+        backImg.setOnClickListener(this);
     }
 
     private void initView() {
-//        mListView = (ListView) this.findViewById(R.id.shop_listview);
         int userId = SharedPreferencesUtils.getIntData(this, "UserId", 0);
-//        title.setText("植物商城");
-        WebSettings webSettings = webview.getSettings();
-        //设置WebView属性，能够执行Javascript脚本
-        webSettings.setJavaScriptEnabled(true);
-        //设置可以访问文件
-        webSettings.setAllowFileAccess(true);
-        //设置支持缩放
-        webSettings.setBuiltInZoomControls(true);
-        //加载需要显示的网页
-        webview.loadUrl("http://plantbox.meidp.com/Mobi/Product?UserId=" + userId);
-        //设置Web视图
-        webview.setWebViewClient(new webViewClient());
+//        WebSettings webSettings = webview.getSettings();
+//        //设置WebView属性，能够执行Javascript脚本
+//        webSettings.setJavaScriptEnabled(true);
+//        //设置可以访问文件
+//        webSettings.setAllowFileAccess(true);
+//        //设置支持缩放
+//        webSettings.setBuiltInZoomControls(true);
+//        //加载需要显示的网页
+//        webview.loadUrl("http://plantbox.meidp.com/Mobi/Product?UserId=" + userId);
+//        //设置Web视图
+//        webview.setWebViewClient(new webViewClient());
         mDatas = new ArrayList<>();
         mAdapter = new ShopListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
     }
 
-    @Override
-    //设置回退
-    //覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
-            webview.goBack(); //goBack()表示返回WebView的上一页面
-            return true;
-        }
-        finish();//结束退出程序
-        return false;
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        int oid = mDatas.get(position).getId();
+        Intent intent = new Intent(this, ProductDetailsActivity.class);
+        intent.putExtra("oid", oid);
+        startActivity(intent);
     }
 
     //Web视图

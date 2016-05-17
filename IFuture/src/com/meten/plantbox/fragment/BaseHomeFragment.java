@@ -79,8 +79,7 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         callBack = new CallBack();
-        String code = SharedPreferencesUtils.getStringData(getActivity(), "code", null);
-        RequestParams params = RequestParamsUtils.getProductList("3", "1", "3", code);
+        RequestParams params = RequestParamsUtils.getProductList("3", "1", "3");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
     }
 

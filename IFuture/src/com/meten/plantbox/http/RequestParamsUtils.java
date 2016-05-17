@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.constant.Constant;
@@ -24,24 +25,23 @@ public class RequestParamsUtils {
         RequestParams params = new RequestParams();
         params.addHeader("_appId", Constant.APPID);
         params.addHeader("_code", Constant.getRequestCode());
-        params.addHeader("_code", Constant.getRequestCode());
+        params.addBodyParameter("content-type", "application/json");
         return params;
     }
 
-    //植物盒子获取code
-    public static RequestParams createRequestParams(Context context) {
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", Constant.getRequestCode(context));
+    public static RequestParams getProduceDetails(int oid) {
+        RequestParams params = createRequestParams();
+        params.addBodyParameter("Id", oid + "");
         return params;
     }
+
 
     /**
      * 首页头部广告
      */
 
-    public static RequestParams getBannerImage(Context context) {
-        RequestParams params = createRequestParams(context);
+    public static RequestParams getBannerImage() {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("content-type", "application/json");
         return params;
     }
@@ -102,20 +102,18 @@ public class RequestParamsUtils {
      * @param PageSize
      * @return
      */
-    public static RequestParams getProductList(String sType, String PageIndex, String PageSize, String code) {
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", code);
+    public static RequestParams getProductList(String sType, String PageIndex, String PageSize) {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("sType", sType);
-        params.addBodyParameter("PageIndex", sType);
+        params.addBodyParameter("PageIndex", PageIndex);
         params.addBodyParameter("PageSize", PageSize);
         return params;
     }
 
-    public static RequestParams getShopListData(String sType, String PageIndex, String PageSize,Context context){
-        RequestParams params = RequestParamsUtils.createRequestParams(context);
-        params.addBodyParameter("PageIndex",PageIndex);
-        params.addBodyParameter("PageSize",PageSize);
+    public static RequestParams getShopListData(String sType, String PageIndex, String PageSize, Context context) {
+        RequestParams params = RequestParamsUtils.createRequestParams();
+        params.addBodyParameter("PageIndex", PageIndex);
+        params.addBodyParameter("PageSize", PageSize);
         return params;
     }
 
@@ -311,8 +309,8 @@ public class RequestParamsUtils {
      * @param accountType 第三方账号类型
      * @return
      */
-    public static RequestParams loginByThird(String accountId, int accountType, Context context) {
-        RequestParams params = createRequestParams(context);
+    public static RequestParams loginByThird(String accountId, int accountType) {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("AccountId", accountId);
         params.addBodyParameter("AccountType", accountType + "");
         return params;

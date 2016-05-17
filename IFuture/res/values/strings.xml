@@ -98,5 +98,8 @@
     <string name="title_activity_banner_detail">BannerDetailActivity</string>
     <string name="title_activity_publish">PublishActivity</string>
     <string name="title_activity_my_share">MyShareActivity</string>
+    <string name="title_activity_product_details">ProductDetailsActivity</string>
+    <string name="title_activity_add_goods">AddGoodsActivity</string>
+    <string name="title_activity_order">OrderActivity</string>
 
 </resources>

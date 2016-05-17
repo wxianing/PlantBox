@@ -32,4 +32,5 @@ public class MyListView extends ListView {
     public boolean onInterceptHoverEvent(MotionEvent event) {
         return false;
     }
+
 }

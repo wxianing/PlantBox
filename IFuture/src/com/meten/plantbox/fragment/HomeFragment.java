@@ -128,7 +128,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     }
 
     private void initData() {
-        RequestParams params = RequestParamsUtils.getBannerImage(getActivity());
+        RequestParams params = RequestParamsUtils.getBannerImage();
         HttpRequestUtils.create(getActivity()).send(URL.HOME_BANNER_URL, params, callBack);
     }
 

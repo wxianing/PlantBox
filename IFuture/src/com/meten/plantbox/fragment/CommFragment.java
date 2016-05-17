@@ -82,8 +82,7 @@ public class CommFragment extends Fragment {
     }
 
     private void initData() {
-        String code = SharedPreferencesUtils.getStringData(getActivity(), "code", null);
-        RequestParams params = RequestParamsUtils.getProductList(mParam1, "1", "3", code);
+        RequestParams params = RequestParamsUtils.getProductList(mParam1, "1", "3");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
     }
 

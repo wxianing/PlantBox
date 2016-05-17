@@ -167,7 +167,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             public void run() {
 //                ToastUtils.show(LoginActivity.this, "授权成功");
                 LogUtils.e("userId:" + pla.getDb().getUserId());
-                RequestParams params = RequestParamsUtils.loginByThird(SharedPreferencesUtils.getStringData(LoginActivity.this, "UserId", null), thirdType, LoginActivity.this);
+                RequestParams params = RequestParamsUtils.loginByThird(SharedPreferencesUtils.getStringData(LoginActivity.this, "UserId", null), thirdType);
                 HttpRequestUtils.create(LoginActivity.this).send(URL.LOGIN_BY_THIRD, params, thirdType, callback);
                 dismissLoadingDialog();
             }
