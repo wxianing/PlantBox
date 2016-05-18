@@ -27,6 +27,8 @@ public class PlantCenterActivity extends BaseActivity implements View.OnClickLis
     protected RelativeLayout minitoringLayout;
     @Bind(R.id.hardware_layout)
     protected RelativeLayout hardwareLayout;
+    @Bind(R.id.scanning_equipment_layout)
+    protected RelativeLayout scanningEquipment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class PlantCenterActivity extends BaseActivity implements View.OnClickLis
     private void initEvent() {
         backImg.setOnClickListener(this);
         baikeLayout.setOnClickListener(this);
+        scanningEquipment.setOnClickListener(this);
     }
 
     private void initView() {
@@ -55,6 +58,9 @@ public class PlantCenterActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.scanning_equipment_layout:
+                startActivity(new Intent(this, DimensionCodeActivity.class));
+                break;
             case R.id.back_arrows:
                 finish();
                 break;

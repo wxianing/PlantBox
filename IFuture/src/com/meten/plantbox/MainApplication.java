@@ -3,7 +3,13 @@ package com.meten.plantbox;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.text.TextUtils;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.Volley;
+import com.meten.plantbox.http.OkHttpStack;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -22,9 +28,15 @@ public class MainApplication extends Application {
     public static ImageLoader imageLoader = ImageLoader.getInstance();
     public static DisplayImageOptions options;
 
+    public static final String TAG = "VolleyPatterns";
+    private RequestQueue mRequestQueue;
+
+    private static MainApplication mInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
         JPushInterface.init(this);
         ShareSDK.initSDK(this);
         CrashReport.initCrashReport(this, "900002729", BuildConfig.DEBUG);
@@ -40,19 +52,41 @@ public class MainApplication extends Application {
 
     }
 
+    public static synchronized MainApplication getmInstance() {
+        return mInstance;
+    }
+
     public static void initImageLoader(Context context) {
-        // This configuration tuning is custom. You can tune every option, you
-        // may tune some of them,
-        // or you can create default configuration by
-        // ImageLoaderConfiguration.createDefault(this);
-        // method.
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
                 context).threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO).build();
-        // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config);
         // imageLoader.init(ImageLoaderConfiguration.createDefault(context));
     }
+
+    public RequestQueue getmRequestQueue() {
+        if (mRequestQueue == null) {
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext(), new OkHttpStack());
+        }
+        return mRequestQueue;
+    }
+
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        // set the default tag if tag is empty
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+
+        VolleyLog.d("Adding request to queue: %s", req.getUrl());
+
+        getmRequestQueue().add(req);
+    }
+
+    public <T> void addToRequestQueue(Request<T> req) {
+        // set the default tag if tag is empty
+        req.setTag(TAG);
+
+        getmRequestQueue().add(req);
+    }
+
 }

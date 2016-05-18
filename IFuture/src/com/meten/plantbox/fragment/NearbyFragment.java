@@ -21,7 +21,22 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.google.gson.Gson;
 import com.meten.plantbox.R;
+import com.meten.plantbox.adapter.nearby.NearByListAdapter;
+import com.meten.plantbox.bean.nearby.NearByBean;
+import com.meten.plantbox.bean.nearby.NearByDataList;
+import com.meten.plantbox.constant.URL;
+import com.meten.plantbox.http.HttpRequestListener;
+import com.meten.plantbox.http.HttpRequestUtils;
+import com.meten.plantbox.http.RequestParamsUtils;
+import com.meten.plantbox.view.MyListView;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,7 +57,13 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
     private UiSettings mUiSettings;
-
+    private double latitude;//纬度
+    private double longitude;//经度
+    private Gson gson;
+    @Bind(R.id.listview)
+    protected MyListView mListView;
+    private List<NearByDataList> mDatas;
+    private NearByListAdapter mAdapter;
 
     public NearbyFragment() {
     }
@@ -57,7 +78,22 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         init();
         initView();
         initEvent();
+
         return view;
+    }
+
+    private void initData() {
+        HashMap params = RequestParamsUtils.getNearbyDataParams(longitude, latitude, 1, 10);
+        HttpRequestUtils.getmInstance().send(URL.NEARBY_LIST_URL, params, new HttpRequestListener() {
+            @Override
+            public void onSuccess(JSONObject jsonObject) {
+                Log.e("jsonObject>>NearBy:", jsonObject.toString());
+
+                NearByBean bean = gson.fromJson(jsonObject.toString(), NearByBean.class);
+                mDatas.addAll(bean.getData().getDataList());
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
@@ -68,7 +104,10 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     private void initView() {
 
         title.setText("附近");
-
+        gson = new Gson();
+        mDatas = new ArrayList<>();
+        mAdapter = new NearByListAdapter(mDatas, getActivity());
+        mListView.setAdapter(mAdapter);
     }
 
     /**
@@ -153,6 +192,10 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+                latitude = aMapLocation.getLatitude();
+                longitude = aMapLocation.getLongitude();
+                initData();
+                deactivate();
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);

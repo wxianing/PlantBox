@@ -1,13 +1,21 @@
 package com.meten.plantbox.http;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
+import com.meten.plantbox.MainApplication;
 import com.meten.plantbox.R;
 import com.meten.plantbox.constant.Constant;
 import com.meten.plantbox.dialog.ProgressDialog;
@@ -16,7 +24,11 @@ import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
 import com.meten.plantbox.utils.LogUtils;
 
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HttpRequestUtils {
     private static HttpRequestUtils utils;
@@ -36,6 +48,7 @@ public class HttpRequestUtils {
         }
         return utils;
     }
+
 
     public Context getContext() {
         return context;
@@ -199,4 +212,42 @@ public class HttpRequestUtils {
         send(url, params, requestCode, callback);
     }
 
+    private static HttpRequestUtils mInstance;
+
+    public HttpRequestUtils() {
+    }
+
+    public static HttpRequestUtils getmInstance() {
+        if (mInstance == null) {
+            mInstance = new HttpRequestUtils();
+        }
+        return mInstance;
+    }
+
+    public void send(String url, HashMap params, final HttpRequestListener listener) {
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject jsonObject) {
+                listener.onSuccess(jsonObject);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("_appid", Constant.APPID);
+                headers.put("_code", Constant.getRequestCode());
+//                headers.put("content-type", "application/json");
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(5000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        MainApplication.getmInstance().addToRequestQueue(request);
+    }
 }

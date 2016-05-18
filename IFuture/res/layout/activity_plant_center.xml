@@ -6,7 +6,6 @@
 
     <include layout="@layout/titlebar" />
 
-
     <RelativeLayout
         android:id="@+id/baike_layout"
         android:layout_width="match_parent"
@@ -59,14 +58,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
             android:layout_marginTop="@dimen/dp3"
-            android:src="@drawable/plant_monitoring_icon" />
+            android:src="@drawable/course_icon" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp10"
             android:layout_toRightOf="@+id/plant_monitoring"
-            android:text="植物监控"
+            android:text="官方教程"
             android:textSize="@dimen/sp18" />
 
         <ImageView
@@ -101,7 +100,253 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp10"
             android:layout_toRightOf="@+id/plant_hardware"
-            android:text="硬件对接"
+            android:text="用户分享"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <RelativeLayout
+        android:id="@+id/publish_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/publish_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/course_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/publish_hardware"
+            android:text="我要发布教程"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/grow_state_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/grow_state_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/grow_state_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/grow_state_hardware"
+            android:text="生长状态"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <RelativeLayout
+        android:id="@+id/grow_environment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/grow_environment_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/grow_environment_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/grow_environment_hardware"
+            android:text="生长环境"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <RelativeLayout
+        android:id="@+id/grow_condition_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/grow_condition_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/grow_condition_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/grow_condition_hardware"
+            android:text="生长条件"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <RelativeLayout
+        android:id="@+id/day_of_work_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/day_of_work_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/day_of_work_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/day_of_work_hardware"
+            android:text="当日工作"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <RelativeLayout
+
+        android:id="@+id/scanning_equipment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/scanning_equipment_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/scanning_equipment_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/scanning_equipment_img"
+            android:text="扫描设备"
+            android:textSize="@dimen/sp18" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/right_arrows" />
+    </RelativeLayout>
+
+    <include layout="@layout/horizontal_line" />
+
+    <RelativeLayout
+        android:id="@+id/operating_equipment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingTop="@dimen/dp10">
+
+        <ImageView
+            android:id="@+id/operating_equipment_hardware"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp3"
+            android:src="@drawable/operating_equipment_icon" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/operating_equipment_hardware"
+            android:text="操作设备"
             android:textSize="@dimen/sp18" />
 
         <ImageView

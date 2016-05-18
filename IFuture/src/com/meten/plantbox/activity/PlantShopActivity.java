@@ -2,15 +2,12 @@ package com.meten.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
@@ -78,17 +75,6 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
 
     private void initView() {
         int userId = SharedPreferencesUtils.getIntData(this, "UserId", 0);
-//        WebSettings webSettings = webview.getSettings();
-//        //设置WebView属性，能够执行Javascript脚本
-//        webSettings.setJavaScriptEnabled(true);
-//        //设置可以访问文件
-//        webSettings.setAllowFileAccess(true);
-//        //设置支持缩放
-//        webSettings.setBuiltInZoomControls(true);
-//        //加载需要显示的网页
-//        webview.loadUrl("http://plantbox.meidp.com/Mobi/Product?UserId=" + userId);
-//        //设置Web视图
-//        webview.setWebViewClient(new webViewClient());
         mDatas = new ArrayList<>();
         mAdapter = new ShopListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
@@ -99,6 +85,7 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int oid = mDatas.get(position).getId();
+//        mDatas.get(position).get
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("oid", oid);
         startActivity(intent);

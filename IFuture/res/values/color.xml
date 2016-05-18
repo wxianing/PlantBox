@@ -64,4 +64,8 @@
     <color name="login_btn_bg">#008FCE</color>
     <color name="orange">#FF8000</color>
     <color name="ashen_while">#F7F7F7</color>
+
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
 </resources>

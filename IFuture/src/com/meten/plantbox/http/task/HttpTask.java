@@ -34,7 +34,7 @@ import java.io.File;
  */
 public class HttpTask {
 
-    public static void detectionNewAppVersion(final Context context,final boolean isUpdate, final boolean showLoading) {
+    public static void detectionNewAppVersion(final Context context, final boolean isUpdate, final boolean showLoading) {
         RequestParams params = RequestParamsUtils.getNewAppVersion();
         HttpRequestUtils.create(context).isShowLoadingDilag(showLoading).send(URL.GET_NEW_VERSION, params, new HttpRequestCallBack<ResultInfo>() {
 
@@ -70,9 +70,9 @@ public class HttpTask {
                         context.sendBroadcast(intent);
                     }
 
-                }else{
-                    if(showLoading){
-                        ToastUtils.show(context,"已是最新版本");
+                } else {
+                    if (showLoading) {
+                        ToastUtils.show(context, "已是最新版本");
                     }
                 }
             }
@@ -104,7 +104,7 @@ public class HttpTask {
                 mBuilder = new NotificationCompat.Builder(context);
                 mBuilder.setContentTitle("正在更新" + appName);
                 mBuilder.setContentText("0%");
-                mBuilder.setProgress(100,0,false);
+                mBuilder.setProgress(100, 0, false);
                 mBuilder.setSmallIcon(android.R.drawable.stat_sys_download);
                 updateNotification = mBuilder.build();
                 updateNotification.flags = Notification.FLAG_AUTO_CANCEL;
@@ -114,7 +114,7 @@ public class HttpTask {
             @Override
             public void onLoading(long total, long current, boolean isUploading) {
                 mBuilder.setContentText((int) current * 100 / total + "%");
-                mBuilder.setProgress(100, (int) ( current * 100 / total),false);
+                mBuilder.setProgress(100, (int) (current * 100 / total), false);
                 updateNotification = mBuilder.build();
                 updateNotificationManager.notify(101, updateNotification);
             }
@@ -138,5 +138,4 @@ public class HttpTask {
             }
         });
     }
-
 }

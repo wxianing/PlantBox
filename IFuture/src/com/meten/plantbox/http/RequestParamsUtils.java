@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.meten.plantbox.bean.bean.DetailList;
 import com.meten.plantbox.constant.Constant;
 import com.meten.plantbox.utils.ImageUtils;
 import com.meten.plantbox.utils.LogUtils;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RequestParamsUtils {
@@ -32,6 +34,21 @@ public class RequestParamsUtils {
     public static RequestParams getProduceDetails(int oid) {
         RequestParams params = createRequestParams();
         params.addBodyParameter("Id", oid + "");
+        return params;
+    }
+
+    public static HashMap saveOrderData(List<DetailList> list, String address, String customName) {
+        HashMap params = new HashMap();
+
+        params.put("detaillist", list);
+        params.put("Address", address);
+        params.put("CustomName", customName);
+
+        params.put("UserId", 0);
+        params.put("PayState", 0);
+        params.put("TotalMoney", 0);
+        params.put("OrderNo", "");
+
         return params;
     }
 
@@ -110,10 +127,27 @@ public class RequestParamsUtils {
         return params;
     }
 
+    public static HashMap getProducetParams(int sType, int PageIndex, int PageSize) {
+        HashMap params = new HashMap();
+        params.put("sType", sType);
+        params.put("sType", PageIndex);
+        params.put("sType", PageSize);
+        return params;
+    }
+
     public static RequestParams getShopListData(String sType, String PageIndex, String PageSize, Context context) {
         RequestParams params = RequestParamsUtils.createRequestParams();
         params.addBodyParameter("PageIndex", PageIndex);
         params.addBodyParameter("PageSize", PageSize);
+        return params;
+    }
+
+    public static HashMap getNearbyDataParams(double longitude, double latitude, int PageIndex, int PageSize) {
+        HashMap params = new HashMap();
+        params.put("Lon", longitude);
+        params.put("Lat", latitude);
+        params.put("PageIndex", PageIndex);
+        params.put("PageSize", PageSize);
         return params;
     }
 

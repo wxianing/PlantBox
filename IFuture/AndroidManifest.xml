@@ -43,6 +43,11 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <!-- 获取logcat日志 -->
     <application
@@ -311,7 +316,11 @@
             android:label="@string/title_activity_my_collect" />
         <activity
             android:name=".activity.MyOrderActivity"
-            android:label="@string/title_activity_my_order"></activity>
+            android:label="@string/title_activity_my_order" />
+        <activity
+            android:name=".activity.DimensionCodeActivity"
+            android:label="@string/title_activity_dimension_code" />
+        <activity android:name=".activity.MipcaCaptureActivity" />
     </application>
 
 </manifest>

@@ -32,14 +32,13 @@
                 android:text="不可错过的基地"
                 android:textSize="@dimen/sp16" />
 
-            <ListView
+            <com.meten.plantbox.view.MyListView
                 android:id="@+id/listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:visibility="gone" />
+                android:background="@color/white" />
 
-            <include layout="@layout/item_nearby_list" />
+            <!--      <include layout="@layout/item_nearby_list" />-->
 
         </LinearLayout>
     </ScrollView>

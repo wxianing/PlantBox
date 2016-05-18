@@ -5,8 +5,9 @@
     android:orientation="vertical">
 
     <ImageView
+        android:padding="@dimen/dp5"
         android:id="@+id/pro_gv_img"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:scaleType="fitXY" />
+        android:layout_height="120dp"
+        android:scaleType="fitStart" />
 </LinearLayout>

@@ -1,9 +1,7 @@
 package com.meten.plantbox.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,7 +20,6 @@ import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
 import com.meten.plantbox.view.MyListView;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +51,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     private int count = 0;
     @Bind(R.id.buy_now_buttons)
     protected Button buyNow;//立即购买
+    private int oid;
 
 
     @Override
@@ -74,7 +72,6 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
                 ProduceDetails produce = JsonParse.parseToObject(resultInfo, ProduceDetails.class);
                 if (produce != null) {
-//                    Spanned sp = Html.fromHtml(produce.getIntroduce(), imageGetter, null);
                     introduce.setText(produce.getNotice());
                     produceName.setText(produce.getProductName());
                     mDatas.addAll(produce.getPictures());
@@ -84,25 +81,9 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         });
     }
 
-    Html.ImageGetter imageGetter = new Html.ImageGetter() {
-        @Override
-        public Drawable getDrawable(String source) {
-            InputStream is = null;
-            try {
-                is = (InputStream) new java.net.URL(source).getContent();
-                Drawable drawble = Drawable.createFromStream(is, "src");
-                drawble.setBounds(0, 0, drawble.getIntrinsicWidth(),
-                        drawble.getIntrinsicHeight());
-                is.close();
-                return drawble;
-            } catch (Exception e) {
-                return null;
-            }
-        }
-    };
-
     private void initView() {
         title.setText("商品详情");
+        oid = getIntent().getIntExtra("oid", 0);
         mDatas = new ArrayList<>();
         mAdapter = new DetailsListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
@@ -126,6 +107,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.buy_now_buttons:
                 Intent intent = new Intent(this, OrderActivity.class);
+                intent.putExtra("oid", oid);
                 startActivity(intent);
                 break;
             case R.id.back_arrows://返回箭头

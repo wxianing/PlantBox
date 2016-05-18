@@ -43,6 +43,8 @@
     <string name="praise">赞　</string>
     <string name="praised">已赞</string>
 
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+
     <!-- 我的选校 -->
     <string name="university">大学：</string>
     <string name="project">项目：</string>
@@ -106,5 +108,6 @@
     <string name="title_activity_reset_pwd">ResetPwdActivity</string>
     <string name="title_activity_my_collect">MyCollectActivity</string>
     <string name="title_activity_my_order">MyOrderActivity</string>
+    <string name="title_activity_dimension_code">DimensionCodeActivity</string>
 
 </resources>

@@ -113,7 +113,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     private CallBack callBack;
     private UiSettings mUiSettings;
 
-
     public HomeFragment() {
     }
 
@@ -137,6 +136,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         RequestParams params = RequestParamsUtils.getBannerImage();
         HttpRequestUtils.create(getActivity()).send(URL.HOME_BANNER_URL, params, callBack);
     }
+
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {
 

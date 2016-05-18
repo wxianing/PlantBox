@@ -16,14 +16,17 @@ import com.meten.plantbox.bean.produce.DataListBean;
 import com.meten.plantbox.bean.produce.Produce;
 import com.meten.plantbox.constant.URL;
 import com.meten.plantbox.http.HttpRequestCallBack;
+import com.meten.plantbox.http.HttpRequestListener;
 import com.meten.plantbox.http.HttpRequestUtils;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
-import com.meten.plantbox.utils.SharedPreferencesUtils;
 import com.meten.plantbox.view.MyListView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -82,6 +85,7 @@ public class CommFragment extends Fragment {
     }
 
     private void initData() {
+
         RequestParams params = RequestParamsUtils.getProductList(mParam1, "1", "3");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
     }
@@ -93,13 +97,6 @@ public class CommFragment extends Fragment {
         mListView.setAdapter(mAdapter);
 
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
-    }
-
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {
 

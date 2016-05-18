@@ -22,7 +22,6 @@ import com.meten.plantbox.http.HttpRequestUtils;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
-import com.meten.plantbox.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;

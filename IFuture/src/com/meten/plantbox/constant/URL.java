@@ -17,6 +17,10 @@ public class URL {
     public static final String PLANT_SHOPS_LIST_URL = BASE_URL + "product/home/getproductlist";
     //商品详情
     public static final String PRODUCE_DETAILS_URL = BASE_URL + "product/home/getproduct";
+    //附近
+    public static final String NEARBY_LIST_URL = BASE_URL + "common/user/getusergoodnear";
+    //保存订单
+    public static final String SAVE_ORDER_URL = BASE_URL + "order/saveorder";
 
 
     public static final int DEV = 0x00;
