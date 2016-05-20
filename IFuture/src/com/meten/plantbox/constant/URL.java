@@ -21,6 +21,10 @@ public class URL {
     public static final String NEARBY_LIST_URL = BASE_URL + "common/user/getusergoodnear";
     //保存订单
     public static final String SAVE_ORDER_URL = BASE_URL + "order/saveorder";
+    //我的收藏
+    public static final String MY_COLLECT_URL = BASE_URL + "common/user/getcollectlist";
+    //收藏
+    public static final String COLLENT_URL = BASE_URL + "common/user/collect";
 
 
     public static final int DEV = 0x00;

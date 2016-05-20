@@ -31,6 +31,7 @@ import java.util.HashMap;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -234,5 +235,4 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         super.onDestroy();
         ButterKnife.unbind(this);
     }
-
 }

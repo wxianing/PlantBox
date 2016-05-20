@@ -1,6 +1,7 @@
 package com.meten.plantbox.fragment;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,14 +24,20 @@ import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.google.gson.Gson;
+import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
+import com.meten.plantbox.activity.MyBaseAreaActivity;
 import com.meten.plantbox.adapter.nearby.NearByListAdapter;
 import com.meten.plantbox.bean.nearby.NearByBean;
+import com.meten.plantbox.bean.nearby.NearByData;
 import com.meten.plantbox.bean.nearby.NearByDataList;
 import com.meten.plantbox.constant.URL;
+import com.meten.plantbox.http.HttpRequestCallBack;
 import com.meten.plantbox.http.HttpRequestListener;
 import com.meten.plantbox.http.HttpRequestUtils;
 import com.meten.plantbox.http.RequestParamsUtils;
+import com.meten.plantbox.model.ResultInfo;
+import com.meten.plantbox.utils.JsonParse;
 import com.meten.plantbox.view.MyListView;
 
 import org.json.JSONObject;
@@ -44,7 +52,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NearbyFragment extends Fragment implements LocationSource, AMapLocationListener, View.OnClickListener {
+public class NearbyFragment extends Fragment implements LocationSource, AMapLocationListener, View.OnClickListener, AdapterView.OnItemClickListener {
     //地图
     private MapView mMapView = null;
     private AMap aMap;
@@ -83,31 +91,37 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     }
 
     private void initData() {
-        HashMap params = RequestParamsUtils.getNearbyDataParams(longitude, latitude, 1, 10);
-        HttpRequestUtils.getmInstance().send(URL.NEARBY_LIST_URL, params, new HttpRequestListener() {
+        RequestParams params1 = new RequestParams();
+        params1.addBodyParameter("Lon", "" + longitude);
+        params1.addBodyParameter("Lat", "" + latitude);
+        params1.addBodyParameter("PageIndex", "" + 1);
+        params1.addBodyParameter("PageSize", "" + 10);
+        HttpRequestUtils.create(getActivity()).send(URL.NEARBY_LIST_URL, params1, new HttpRequestCallBack<ResultInfo>() {
             @Override
-            public void onSuccess(JSONObject jsonObject) {
-                Log.e("jsonObject>>NearBy:", jsonObject.toString());
+            public void onSuccess(ResultInfo resultInfo, int requestCode) {
+                Log.e("resultInfo", JsonParse.objectToJson(resultInfo));
+                NearByData bean = JsonParse.parseToObject(resultInfo, NearByData.class);
+                if (bean != null) {
+                    mDatas.addAll(bean.getDataList());
+                    mAdapter.notifyDataSetChanged();
+                }
 
-                NearByBean bean = gson.fromJson(jsonObject.toString(), NearByBean.class);
-                mDatas.addAll(bean.getData().getDataList());
-                mAdapter.notifyDataSetChanged();
             }
         });
     }
 
 
     private void initEvent() {
-        backImg.setOnClickListener(this);
     }
 
     private void initView() {
-
+        backImg.setVisibility(View.GONE);
         title.setText("附近");
         gson = new Gson();
         mDatas = new ArrayList<>();
         mAdapter = new NearByListAdapter(mDatas, getActivity());
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(this);
     }
 
     /**
@@ -181,8 +195,7 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.back_arrows:
-                break;
+
         }
     }
 
@@ -233,4 +246,9 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         mlocationClient = null;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getActivity(), MyBaseAreaActivity.class);
+        startActivity(intent);
+    }
 }

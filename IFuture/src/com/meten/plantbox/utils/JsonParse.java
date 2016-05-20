@@ -93,4 +93,11 @@ public class JsonParse {
         }
         return types;
     }
+
+    public static String objectToJson(Object obj) {
+        Gson gson = new Gson();
+        String str = gson.toJson(obj);
+        return str;
+    }
+
 }

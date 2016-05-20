@@ -11,6 +11,7 @@ import com.meten.plantbox.bean.bean.DetailList;
 import com.meten.plantbox.constant.Constant;
 import com.meten.plantbox.utils.ImageUtils;
 import com.meten.plantbox.utils.LogUtils;
+import com.meten.plantbox.utils.SharedPreferencesUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,11 +29,38 @@ public class RequestParamsUtils {
         params.addHeader("_appId", Constant.APPID);
         params.addHeader("_code", Constant.getRequestCode());
         params.addBodyParameter("content-type", "application/json");
+        Log.e("code", Constant.getRequestCode());
         return params;
     }
 
-    public static RequestParams getProduceDetails(int oid) {
-        RequestParams params = createRequestParams();
+    //IsCollect 1：收藏；0：取消收藏
+    public static RequestParams collectParams(int id, int FKType, int IsCollect, Context context) {
+        String code = SharedPreferencesUtils.getStringData(context, "code", null);
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
+        params.addBodyParameter("FKId", "" + id);
+        params.addBodyParameter("FKType", "" + 1);
+        params.addBodyParameter("IsCollect", "" + IsCollect);
+        return params;
+    }
+
+    //收藏列表
+    public static RequestParams getCollectParams(int sType, int PageIndex, int PageSize) {
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", "101");
+        params.addHeader("_code", Constant.getRequestCode());
+        params.addBodyParameter("sType", "" + sType);
+        params.addBodyParameter("PageIndex", "" + PageIndex);
+        params.addBodyParameter("PageSize", "" + PageSize);
+        return params;
+    }
+
+    public static RequestParams getProduceDetails(int oid,Context context) {
+        String code = SharedPreferencesUtils.getStringData(context, "code", null);
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
         params.addBodyParameter("Id", oid + "");
         return params;
     }

@@ -79,11 +79,9 @@
     <WechatFavorite Id="6" SortId="6" AppId="wx8f02b2498941ec10"
         AppSecret="9048041228b143e361286f31564929a9" Enable="true" />
 
-    <QQ Id="7" SortId="7" AppId="1104439718" AppKey="mpD4DVkSB5nDWqBq" Enable="true" ShareByAppClient="true"/>
-
+   <!-- <QQ Id="7" SortId="7" AppId="1104439718" AppKey="mpD4DVkSB5nDWqBq" Enable="true" ShareByAppClient="true"/>-->
+    <QQ Id="7" SortId="7" AppId="1105338119" AppKey="t1ckMtcpZqj97jmM" Enable="true" ShareByAppClient="true"/>
 
     <Email Id="12" SortId="12" Enable="true" />
-
     <ShortMessage Id="13" SortId="13" Enable="true" />
-
 </DevInfor>

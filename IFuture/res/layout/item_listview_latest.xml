@@ -64,7 +64,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp15"
             android:layout_marginTop="@dimen/dp15"
-            android:src="@drawable/arrows_down" />
+            android:src="@drawable/arrows_down"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <TextView

@@ -77,7 +77,7 @@ public class ManagerMainActivity extends BaseHeadActivity implements View.OnClic
         getRightImageView().setOnClickListener(this);
 
         //检测是否有新版本
-        HttpTask.detectionNewAppVersion(this, true, false);
+//        HttpTask.detectionNewAppVersion(this, true, false);
 
         IntentFilter intentFilter = new IntentFilter(Constant.ACTION_REFRESH_MESSAGE_COUNT);
         registerReceiver(receiver,intentFilter);

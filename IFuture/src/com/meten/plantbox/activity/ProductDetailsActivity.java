@@ -2,15 +2,20 @@ package com.meten.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
+import com.meten.plantbox.MainApplication;
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.base.BaseActivity;
 import com.meten.plantbox.adapter.DetailsListAdapter;
+import com.meten.plantbox.bean.collect.Collect;
 import com.meten.plantbox.bean.produce.ProduceDetails;
 import com.meten.plantbox.constant.URL;
 import com.meten.plantbox.http.HttpRequestCallBack;
@@ -18,6 +23,7 @@ import com.meten.plantbox.http.HttpRequestUtils;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
+import com.meten.plantbox.utils.ShareUtils;
 import com.meten.plantbox.view.MyListView;
 
 import java.util.ArrayList;
@@ -25,6 +31,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import cn.sharesdk.framework.ShareSDK;
 
 public class ProductDetailsActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.title_tv)
@@ -52,6 +59,17 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     @Bind(R.id.buy_now_buttons)
     protected Button buyNow;//立即购买
     private int oid;
+    @Bind(R.id.banner_img)
+    protected ImageView bannerImg;
+    @Bind(R.id.share_img)
+    protected TextView shareImg;
+    @Bind(R.id.collect)
+    protected TextView collectTv;
+    @Bind(R.id.collect_img)
+    protected ImageView collectImg;
+
+    private Gson gson;
+    private int isCollect;
 
 
     @Override
@@ -60,13 +78,15 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_product_details);
         ButterKnife.bind(this);
         initView();
-        initEvent();
         initData();
+        initEvent();
+        ShareSDK.initSDK(this);
     }
 
     private void initData() {
-        int oid = getIntent().getIntExtra("oid", 0);
-        RequestParams params = RequestParamsUtils.getProduceDetails(oid);
+        Log.e("oid", ">>>>" + oid);
+
+        RequestParams params = RequestParamsUtils.getProduceDetails(oid,this);
         HttpRequestUtils.create(this).send(URL.PRODUCE_DETAILS_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -76,12 +96,15 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                     produceName.setText(produce.getProductName());
                     mDatas.addAll(produce.getPictures());
                     mAdapter.notifyDataSetChanged();
+                    if (mDatas != null && !mDatas.isEmpty())
+                        MainApplication.imageLoader.displayImage(mDatas.get(0), bannerImg);
                 }
             }
         });
     }
 
     private void initView() {
+        gson = new Gson();
         title.setText("商品详情");
         oid = getIntent().getIntExtra("oid", 0);
         mDatas = new ArrayList<>();
@@ -94,6 +117,8 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         reduceImg.setOnClickListener(this);
         addImg.setOnClickListener(this);
         buyNow.setOnClickListener(this);
+        shareImg.setOnClickListener(this);
+        collectTv.setOnClickListener(this);
     }
 
     @Override
@@ -105,7 +130,39 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.buy_now_buttons:
+            case R.id.collect:
+                String flag = collectTv.getText().toString().trim();
+                if (flag.equals("收藏")) {
+                    isCollect = 1;
+                } else {
+                    isCollect = 0;
+                }
+                RequestParams params = RequestParamsUtils.collectParams(oid, 1, isCollect, this);
+                HttpRequestUtils.create(this).send(URL.COLLENT_URL, params, new HttpRequestCallBack<ResultInfo>() {
+                    @Override
+                    public void onSuccess(ResultInfo resultInfo, int requestCode) {
+
+                    }
+
+                    @Override
+                    public void onReponse(String result) {
+                        super.onReponse(result);
+                        Collect collect = gson.fromJson(result, Collect.class);
+                        if (!TextUtils.isEmpty(collect.getMsg()) && collect.getMsg().equals("您已经收藏啦！")) {
+                            collectImg.setImageResource(R.drawable.cellect_checked);
+                            collectTv.setText("已收藏");
+                        } else {
+                            collectImg.setImageResource(R.drawable.collect_img);
+                            collectTv.setText("收藏");
+                        }
+                    }
+                });
+
+                break;
+            case R.id.share_img://分享
+                ShareUtils.showShare(this);
+                break;
+            case R.id.buy_now_buttons://立即购买
                 Intent intent = new Intent(this, OrderActivity.class);
                 intent.putExtra("oid", oid);
                 startActivity(intent);

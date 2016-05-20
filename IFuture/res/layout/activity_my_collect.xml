@@ -7,9 +7,9 @@
     tools:context="com.meten.plantbox.activity.MyCollectActivity">
 
     <include layout="@layout/titlebar" />
-    <TextView
-        android:text="正在开发中，敬请期待！"
+    <ListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

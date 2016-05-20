@@ -10,10 +10,12 @@
         layout="@layout/titlebar" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/titlebar"
         android:layout_marginBottom="50dp"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <LinearLayout
@@ -23,115 +25,132 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="@color/yellow" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical"
-                android:padding="@dimen/dp10">
-
-                <TextView
-
-                    android:id="@+id/produce_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="迷你桌面多肉植物" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/produce_name"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:text="优惠价:￥25" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:drawableTop="@drawable/collect_img"
-                    android:text="收藏" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="@dimen/dp10">
-
-                <TextView
-                    android:id="@+id/look_baike"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="查看百科" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp25"
-                    android:layout_toRightOf="@+id/look_baike"
-                    android:text="购买人数：26" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:id="@+id/reduce_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/subtract_produce_icon" />
-
-                    <TextView
-                        android:id="@+id/total_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:layout_marginRight="@dimen/dp10"
-                        android:background="@drawable/textview_shape"
-                        android:text="0" />
-
-                    <ImageView
-                        android:id="@+id/add_img"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/add_produce" />
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp5"
-                android:background="@color/white"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="商品介绍"
-                    android:textSize="@dimen/sp18" />
-
-                <TextView
-                    android:id="@+id/produce_introduce"
+                <ImageView
+                    android:id="@+id/banner_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:text="       看到就发给的复古款付了个客户可李开复的老顾客一块辅导功课" />
+                    android:scaleType="fitXY" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp10">
+
+                    <TextView
+
+                        android:id="@+id/produce_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="迷你桌面多肉植物" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/produce_name"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:text="优惠价:￥25" />
+
+
+                    <ImageView
+                        android:id="@+id/collect_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="@dimen/dp5"
+                        android:src="@drawable/collect_img" />
+
+                    <TextView
+                        android:id="@+id/collect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/collect_img"
+                        android:text="收藏" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp10">
+
+                    <TextView
+                        android:id="@+id/look_baike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看百科" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp25"
+                        android:layout_toRightOf="@+id/look_baike"
+                        android:text="购买人数：26" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/reduce_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/subtract_produce_icon" />
+
+                        <TextView
+                            android:id="@+id/total_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp10"
+                            android:layout_marginRight="@dimen/dp10"
+                            android:background="@drawable/textview_shape"
+                            android:text="0" />
+
+                        <ImageView
+                            android:id="@+id/add_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/add_produce" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp5"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商品介绍"
+                        android:textSize="@dimen/sp18" />
+
+                    <TextView
+                        android:id="@+id/produce_introduce"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp10"
+                        android:text="       看到就发给的复古款付了个客户可李开复的老顾客一块辅导功课" />
+                </LinearLayout>
             </LinearLayout>
 
             <com.meten.plantbox.view.MyListView
                 android:id="@+id/details_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
         </LinearLayout>
     </ScrollView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -157,6 +176,7 @@
                 android:text="客服" />
 
             <TextView
+                android:id="@+id/share_img"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp15"

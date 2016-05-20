@@ -80,9 +80,11 @@ public class HttpRequestUtils {
                         ResultInfo info = JsonParse.parseToResultInfo(context,
                                 result);
                         if (callback != null) {
+                            callback.onReponse(result);
                             if (info != null) {
                                 if (info.getCode() == Constant.SUCCESS) {
                                     callback.onSuccess(info, requestCode);
+
                                 } else {
                                     callback.onFailure(context, info,
                                             requestCode);
@@ -242,7 +244,7 @@ public class HttpRequestUtils {
                 HashMap<String, String> headers = new HashMap<String, String>();
                 headers.put("_appid", Constant.APPID);
                 headers.put("_code", Constant.getRequestCode());
-//                headers.put("content-type", "application/json");
+                headers.put("content-type", "application/json");
                 return headers;
             }
         };

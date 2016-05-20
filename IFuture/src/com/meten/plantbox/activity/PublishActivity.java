@@ -6,7 +6,10 @@ import android.widget.TextView;
 
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.base.BaseActivity;
+import com.meten.plantbox.bean.TestBean;
 import com.meten.plantbox.utils.ToastUtils;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -17,6 +20,8 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
     protected TextView title;
     @Bind(R.id.right_tv)
     protected TextView rightTv;
+
+    private List<TestBean.DataBean.ProductEntitysBean> entitysLists;
 
 
     @Override

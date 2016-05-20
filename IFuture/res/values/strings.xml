@@ -81,9 +81,9 @@
     <string name="complain_student">投诉学员：</string>
 
     <string name="sms_shared_body">iFuture下载地址：http://a.app.qq.com/o/simple.jsp?pkgname=com.meten.ifuture</string>
-    <string name="share_title">美联智能留学平台iFuture</string>
+    <string name="share_title">植物盒子</string>
     <string name="share_url">http://a.app.qq.com/o/simple.jsp?pkgname=com.meten.ifuture</string>
-    <string name="share_content">美联智能留学平台iFuture http://a.app.qq.com/o/simple.jsp?pkgname=com.meten.ifuture</string>
+    <string name="share_content">http://a.app.qq.com/o/simple.jsp?pkgname=com.meten.ifuture</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
 
@@ -109,5 +109,9 @@
     <string name="title_activity_my_collect">MyCollectActivity</string>
     <string name="title_activity_my_order">MyOrderActivity</string>
     <string name="title_activity_dimension_code">DimensionCodeActivity</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_guide">GuideActivity</string>
+    <string name="title_activity_add_friend">AddFriendActivity</string>
+    <string name="title_activity_my_like">MyLikeActivity</string>
 
 </resources>

@@ -13,9 +13,12 @@ public abstract class HttpRequestCallBack<T> {
         ToastUtils.showMsg(context, info);
     }
 
-
     public void onLoading(long total, long current,
                           boolean isUploading, int requestCode) {
+
+    }
+
+    public void onReponse(String result){
 
     }
 }

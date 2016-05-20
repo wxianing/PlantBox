@@ -57,6 +57,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, E
 
     private void initView() {
         title.setText("消息");
+        backImg.setVisibility(View.GONE);
         addImg.setImageResource(R.drawable.add_message_icon);
         addImg.setVisibility(View.VISIBLE);
     }

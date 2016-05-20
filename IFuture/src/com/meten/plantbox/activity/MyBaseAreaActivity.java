@@ -85,6 +85,7 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
         mFragments.add(new BaseHomeFragment());
         mFragments.add(new BaseAreaFragment());
         mFragments.add(new AchievementFragment());
+
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int i) {
@@ -96,6 +97,7 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
                 return mFragments.size();
             }
         };
+
         mViewPager.setAdapter(mAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

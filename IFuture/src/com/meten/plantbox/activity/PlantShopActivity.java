@@ -85,7 +85,6 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int oid = mDatas.get(position).getId();
-//        mDatas.get(position).get
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("oid", oid);
         startActivity(intent);

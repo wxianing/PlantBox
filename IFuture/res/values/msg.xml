@@ -2,13 +2,13 @@
 <resources>
 
     <item name="netWorkError" type="id">网络异常</item>
-    <item name="timeout"  type="id">连接超时</item>
-    <item name="dataError"  type="id">数据异常</item>
-    <item name="connectError"  type="id">连接超时</item>
-    <item name="serviceError"  type="id">服务器异常</item>
-    <item name="downloadError"  type="id">下载失败</item>
-    
-    
+    <item name="timeout" type="id">连接超时</item>
+    <item name="dataError" type="id">数据异常</item>
+    <item name="connectError" type="id">连接超时</item>
+    <item name="serviceError" type="id">服务器异常</item>
+    <item name="downloadError" type="id">下载失败</item>
+
+
     <item name="userinfo_mobile" type="id">Mobile</item>
     <item name="userinfo_parent_mobile" type="id">ParentMobile</item>
     <item name="userinfo_qq" type="id">QQ</item>

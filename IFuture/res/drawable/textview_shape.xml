@@ -5,9 +5,9 @@
         android:color="@color/black" />
 
     <padding
-        android:bottom="@dimen/dp3"
+        android:bottom="@dimen/dp1"
         android:left="@dimen/dp10"
         android:right="@dimen/dp10"
-        android:top="@dimen/dp3" />
+        android:top="@dimen/dp1" />
 
 </shape>

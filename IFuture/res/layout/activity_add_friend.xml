@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meten.plantbox.activity.AddFriendActivity">
+
+    <include layout="@layout/titlebar" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp25"
+        android:layout_marginRight="@dimen/dp25"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@drawable/edittext_grad_shape"
+        android:gravity="center"
+        android:hint="搜索"
+        android:textColorHint="@color/gray_textcolor" />
+
+    <TextView
+        android:id="@+id/sichscan"
+        android:padding="@dimen/dp10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/white"
+        android:text="扫一扫"
+        android:textSize="@dimen/sp16" />
+</LinearLayout>

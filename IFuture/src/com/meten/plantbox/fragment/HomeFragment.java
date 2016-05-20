@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.ActiveActivity;
+import com.meten.plantbox.activity.DimensionCodeActivity;
 import com.meten.plantbox.activity.GrowTreeActivity;
 import com.meten.plantbox.activity.PlantCenterActivity;
 import com.meten.plantbox.activity.PlantShopActivity;
@@ -39,6 +41,7 @@ import com.meten.plantbox.http.HttpRequestCallBack;
 import com.meten.plantbox.http.HttpRequestUtils;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
+import com.meten.plantbox.utils.JsonParse;
 import com.meten.plantbox.view.MyViewPager;
 import com.meten.plantbox.widget.AutoScrollViewPager;
 
@@ -112,6 +115,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     protected TextView activePrefecture;
     private CallBack callBack;
     private UiSettings mUiSettings;
+    @Bind(R.id.home_right_img)
+    protected ImageView rightImg;
 
     public HomeFragment() {
     }
@@ -143,7 +148,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         @Override
         public void onSuccess(ResultInfo resultInfo, int requestCode) {
             Gson gson = new Gson();
-            Banner banner = gson.fromJson(Object2Json(resultInfo), Banner.class);
+            Banner banner = gson.fromJson(JsonParse.objectToJson(resultInfo), Banner.class);
             if (banner != null) {
                 imageUrls.addAll(banner.getData());
                 pagerAdapter = new ImagePagerAdapter(getActivity(), imageUrls, dotLL);
@@ -154,11 +159,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         }
     }
 
-    public String Object2Json(Object obj) {
-        Gson gson = new Gson();
-        String str = gson.toJson(obj);
-        return str;
-    }
 
     private void initView() {
         callBack = new CallBack();
@@ -244,6 +244,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         plantCenter.setOnClickListener(this);
         growTree.setOnClickListener(this);
         activePrefecture.setOnClickListener(this);
+        rightImg.setOnClickListener(this);
     }
 
     @Override
@@ -368,6 +369,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
         Intent intent;
         switch (v.getId()) {
+            case R.id.home_right_img:
+                intent = new Intent(getActivity(), DimensionCodeActivity.class);
+                startActivity(intent);
+                break;
             case R.id.latest_linear:
                 setSelect(0);
                 break;
