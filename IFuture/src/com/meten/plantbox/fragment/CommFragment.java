@@ -4,10 +4,12 @@ package com.meten.plantbox.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
@@ -87,10 +89,14 @@ public class CommFragment extends Fragment implements LikeCallBack {
         return view;
     }
 
+    int pageIndex = 1;
+    int pageSize = 4;
+
     private void initData() {
 
-        RequestParams params = RequestParamsUtils.getProductList(mParam1, "1", "3");
+        RequestParams params = RequestParamsUtils.getProductList(mParam1, "" + pageIndex, "" + pageSize);
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
+
     }
 
     private void initView() {
@@ -98,6 +104,17 @@ public class CommFragment extends Fragment implements LikeCallBack {
         dataLists = new ArrayList<>();
         mAdapter = new ProduceAdapter(dataLists, getActivity(), this);
         mListView.setAdapter(mAdapter);
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.more_layout, null);
+        mListView.addFooterView(view);
+        TextView moretv = (TextView) view.findViewById(R.id.add_nore);
+        moretv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                pageIndex++;
+//                pageSize += 4;
+                initData();
+            }
+        });
 
     }
 

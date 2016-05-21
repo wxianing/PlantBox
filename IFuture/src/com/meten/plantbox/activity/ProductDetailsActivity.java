@@ -1,6 +1,7 @@
 package com.meten.plantbox.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
 import com.meten.plantbox.utils.ShareUtils;
+import com.meten.plantbox.view.DActionSheetDialog;
 import com.meten.plantbox.view.MyListView;
 import com.meten.plantbox.widget.AutoAdjustHeightImageView;
 
@@ -71,7 +73,11 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
 
     private Gson gson;
     private int isCollect;
-
+    @Bind(R.id.customer_service)
+    protected TextView customerService;//客服
+    protected ProduceDetails produce;
+    @Bind(R.id.price_tv)
+    protected TextView price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +93,11 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     private void initData() {
         Log.e("oid", ">>>>" + oid);
 
-        RequestParams params = RequestParamsUtils.getProduceDetails(oid,this);
+        RequestParams params = RequestParamsUtils.getProduceDetails(oid, this);
         HttpRequestUtils.create(this).send(URL.PRODUCE_DETAILS_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
-                ProduceDetails produce = JsonParse.parseToObject(resultInfo, ProduceDetails.class);
+                produce = JsonParse.parseToObject(resultInfo, ProduceDetails.class);
                 if (produce != null) {
                     introduce.setText(produce.getNotice());
                     produceName.setText(produce.getProductName());
@@ -99,9 +105,14 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                     mAdapter.notifyDataSetChanged();
                     if (mDatas != null && !mDatas.isEmpty())
                         MainApplication.imageLoader.displayImage(mDatas.get(0), bannerImg);
+                    setDataToView(produce);
                 }
             }
         });
+    }
+
+    private void setDataToView(ProduceDetails produce) {
+        price.setText("优惠价:￥" + produce.getMinSalePrice());
     }
 
     private void initView() {
@@ -120,6 +131,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         buyNow.setOnClickListener(this);
         shareImg.setOnClickListener(this);
         collectTv.setOnClickListener(this);
+        customerService.setOnClickListener(this);
     }
 
     @Override
@@ -181,6 +193,32 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 count++;
                 total.setText("" + count);
                 break;
+            case R.id.customer_service:
+                selectIcon();
+                break;
         }
+    }
+
+    private void selectIcon() {
+        new DActionSheetDialog(this).builder()
+                .setTitle("联系客服")
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
+                .addSheetItem(produce.getMobile(),
+                        DActionSheetDialog.SheetItemColor.Blue,
+                        new DActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                setCellPhone(produce.getMobile());
+                            }
+                        }).show();
+
+    }
+
+    public void setCellPhone(String phone) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phone));
+        startActivity(intent);
     }
 }

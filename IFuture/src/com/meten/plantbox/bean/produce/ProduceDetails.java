@@ -15,6 +15,15 @@ public class ProduceDetails implements Serializable {
     private String Introduce;
     private List<String> Pictures;
     protected String Notice;
+    protected String Mobile;
+
+    public String getMobile() {
+        return Mobile;
+    }
+
+    public void setMobile(String mobile) {
+        Mobile = mobile;
+    }
 
     public String getNotice() {
         return Notice;

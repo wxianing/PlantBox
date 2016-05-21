@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
+<!--            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginBottom="@dimen/dp5"
@@ -43,7 +43,7 @@
                 android:gravity="center"
                 android:text="加载更多>>"
                 android:textColor="#A3A3A3"
-                android:textSize="@dimen/sp15" />
+                android:textSize="@dimen/sp15" />-->
 
             <!--附近的基地-->
             <include
@@ -52,8 +52,5 @@
                 android:layout_height="180dp" />
         </LinearLayout>
     </ScrollView>
-
-
-
 
 </LinearLayout>

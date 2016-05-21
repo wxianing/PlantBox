@@ -17,7 +17,7 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_grad_shape"
+        android:background="@drawable/toast_bg_shape"
         android:textColor="#FFF"
         android:textSize="@dimen/sp18" />
 </LinearLayout>
