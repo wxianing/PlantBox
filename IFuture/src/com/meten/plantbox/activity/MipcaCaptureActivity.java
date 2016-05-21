@@ -15,6 +15,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -46,6 +48,7 @@ public class MipcaCaptureActivity extends BaseActivity implements Callback {
     private boolean playBeep;
     private static final float BEEP_VOLUME = 0.10f;
     private boolean vibrate;
+    private TextView title;
 
     /**
      * Called when the activity is first created.
@@ -53,17 +56,23 @@ public class MipcaCaptureActivity extends BaseActivity implements Callback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_capture);
         //ViewUtil.addTopView(getApplicationContext(), this, R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
-
-        Button mButtonBack = (Button) findViewById(R.id.button_back);
+        title = (TextView) findViewById(R.id.title_tv);
+        title.setText("扫描二维码");
+        ImageView mButtonBack = (ImageView) findViewById(R.id.back_arrows);
         mButtonBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                MipcaCaptureActivity.this.finish();
-
+                if (DimensionCodeActivity.activity != null) {
+                    DimensionCodeActivity.activity.finish();
+                    DimensionCodeActivity.activity = null;
+                    MipcaCaptureActivity.this.finish();
+                }
             }
         });
         hasSurface = false;
@@ -220,4 +229,13 @@ public class MipcaCaptureActivity extends BaseActivity implements Callback {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        if (DimensionCodeActivity.activity != null) {
+            DimensionCodeActivity.activity.finish();
+            DimensionCodeActivity.activity = null;
+            MipcaCaptureActivity.this.finish();
+        }
+        super.onBackPressed();
+    }
 }

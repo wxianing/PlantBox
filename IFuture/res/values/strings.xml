@@ -117,5 +117,9 @@
     <string name="title_activity_my_like">MyLikeActivity</string>
     <string name="title_activity_aquare">AquareActivity</string>
     <string name="title_activity_comment">CommentActivity</string>
+    <string name="title_activity_version_information">VersionInformationActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_privacy">PrivacyActivity</string>
+    <string name="title_activity_notice">NoticeActivity</string>
 
 </resources>

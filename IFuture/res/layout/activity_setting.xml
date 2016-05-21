@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/version_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
@@ -23,6 +24,7 @@
         <include layout="@layout/horizontal_line" />
 
         <TextView
+            android:id="@+id/notice_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
@@ -33,6 +35,7 @@
         <include layout="@layout/horizontal_line" />
 
         <TextView
+            android:id="@+id/privacy_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
@@ -43,6 +46,7 @@
         <include layout="@layout/horizontal_line" />
 
         <TextView
+            android:id="@+id/about_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"

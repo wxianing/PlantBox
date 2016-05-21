@@ -45,12 +45,12 @@
         android:layout_marginRight="@dimen/dp15"
         android:text="粉丝数：35" />
 
-    <View
+<!--    <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp1"
         android:layout_below="@+id/header_img"
         android:layout_marginLeft="@dimen/dp15"
         android:layout_marginRight="15dp"
-        android:background="@color/gray_textcolor" />
+        android:background="@color/gray_textcolor" />-->
 
 </RelativeLayout>

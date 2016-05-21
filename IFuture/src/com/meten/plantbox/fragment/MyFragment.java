@@ -5,16 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.meten.plantbox.PersonCenterAdapter;
+import com.meten.plantbox.activity.PersonCenterAdapter;
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.ActiveActivity;
 import com.meten.plantbox.activity.MyBaseAreaActivity;

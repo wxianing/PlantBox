@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
-import com.meten.plantbox.ShopDetailActivity;
+import com.meten.plantbox.activity.ShopDetailActivity;
 import com.meten.plantbox.activity.CommentActivity;
 import com.meten.plantbox.bean.produce.DataListBean;
 import com.meten.plantbox.constant.URL;

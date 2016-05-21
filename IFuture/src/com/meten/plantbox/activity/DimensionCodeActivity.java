@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 
 public class DimensionCodeActivity extends BaseActivity implements View.OnClickListener {
     private final static int SCANNIN_GREQUEST_CODE = 1;
+    public static DimensionCodeActivity activity;
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
@@ -42,7 +43,7 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dimension_code);
         ButterKnife.bind(this);
-
+        activity = this;
         initView();
 
         Intent intent = new Intent();
@@ -65,7 +66,7 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
                     final Bundle bundle = data.getExtras();
                     //显示扫描到的内容
                     mTextView.setText(bundle.getString("result"));
-                   final String path = bundle.getString("result");
+                    final String path = bundle.getString("result");
                     //显示
                     mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
                     mTextView.setOnClickListener(new View.OnClickListener() {

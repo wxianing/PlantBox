@@ -21,7 +21,16 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     protected ImageView backImg;
 
     @Bind(R.id.logout)
-    protected TextView logout;
+    protected TextView logout;//注销
+
+    @Bind(R.id.version_information)
+    protected TextView versionInformation;//版本信息
+    @Bind(R.id.about_tv)
+    protected TextView aboutUs;//关于我们
+    @Bind(R.id.privacy_tv)
+    protected TextView privacy;//隐私
+    @Bind(R.id.notice_tv)
+    protected TextView notice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,10 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     private void initEvent() {
         backImg.setOnClickListener(this);
         logout.setOnClickListener(this);
+        versionInformation.setOnClickListener(this);
+        aboutUs.setOnClickListener(this);
+        privacy.setOnClickListener(this);
+        notice.setOnClickListener(this);
     }
 
     @Override
@@ -51,12 +64,24 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.logout:
+            case R.id.notice_tv:
+                startActivity(new Intent(this, NoticeActivity.class));
+                break;
+            case R.id.privacy_tv:
+                startActivity(new Intent(this, PrivacyActivity.class));
+                break;
+            case R.id.about_tv://关于我们
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
+            case R.id.version_information://版本信息
+                startActivity(new Intent(this, VersionInformationActivity.class));
+                break;
+            case R.id.logout://推出账户
                 SharedPreferencesUtils.setLoginTag(this, false);
 
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
-            case R.id.back_arrows:
+            case R.id.back_arrows://返回箭头
                 finish();
                 break;
             default:
