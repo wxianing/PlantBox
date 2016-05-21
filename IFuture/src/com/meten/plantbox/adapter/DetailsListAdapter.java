@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.meten.plantbox.MainApplication;
 import com.meten.plantbox.R;
 import com.meten.plantbox.utils.ToastUtils;
+import com.meten.plantbox.widget.AutoAdjustHeightImageView;
 
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class DetailsListAdapter extends BasicAdapter<String> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        MainApplication.imageLoader.displayImage(data.get(position), vh.imageView);
+        if (position != 0)
+            MainApplication.imageLoader.displayImage(data.get(position), vh.imageView, MainApplication.options);
 //        vh.imageView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -44,7 +46,7 @@ public class DetailsListAdapter extends BasicAdapter<String> {
 
     protected class ViewHolder {
         @Bind(R.id.pro_gv_img)
-        protected ImageView imageView;
+        protected AutoAdjustHeightImageView imageView;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

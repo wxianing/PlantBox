@@ -3,11 +3,14 @@ package com.meten.plantbox.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,7 @@ import com.meten.plantbox.R;
 import com.meten.plantbox.adapter.ExpandableAdapter;
 import com.meten.plantbox.bean.message.Child;
 import com.meten.plantbox.bean.message.Group;
+import com.meten.plantbox.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,8 @@ import butterknife.ButterKnife;
  */
 
 public class MessageFragment extends Fragment implements View.OnClickListener, ExpandableListView.OnChildClickListener {
+    // 声明PopupWindow对象的引用
+    private PopupWindow popupWindow;
 
     @Bind(R.id.title_tv)
     protected TextView title;
@@ -92,6 +98,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, E
 
     private void initEvent() {
         backImg.setOnClickListener(this);
+        addImg.setOnClickListener(this);
     }
 
 
@@ -103,11 +110,51 @@ public class MessageFragment extends Fragment implements View.OnClickListener, E
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.back_arrows:
-                Toast.makeText(getActivity(), "dianji", Toast.LENGTH_SHORT).show();
-                getChildFragmentManager().popBackStack();
+            case R.id.title_right_img:
+//                getPopupWindow();
+//                // 这里是位置显示方式,在屏幕的左侧
+//                popupWindow.showAtLocation(v, Gravity.RIGHT, 10, 10);
+
                 break;
         }
+    }
+
+    /***
+     * 获取PopupWindow实例
+     */
+    private void getPopupWindow() {
+        if (null != popupWindow) {
+            popupWindow.dismiss();
+            return;
+        } else {
+            initPopuptWindow();
+        }
+    }
+
+    /**
+     * 创建PopupWindow
+     */
+    protected void initPopuptWindow() {
+        // TODO Auto-generated method stub
+        // 获取自定义布局文件activity_popupwindow_left.xml的视图
+        View popupWindow_view = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow_layout, null,
+                false);
+        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
+        popupWindow = new PopupWindow(popupWindow_view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        // 设置动画效果
+//        popupWindow.setAnimationStyle(R.style.AnimationFade);
+        // 点击其他地方消失
+        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
+                    popupWindow = null;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

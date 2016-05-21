@@ -7,11 +7,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.plantbox.R;
+import com.meten.plantbox.activity.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ResetPwdActivity extends Activity implements View.OnClickListener {
+public class ResetPwdActivity extends BaseActivity implements View.OnClickListener {
 
     @Bind(R.id.title_tv)
     protected TextView title;

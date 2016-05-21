@@ -33,6 +33,42 @@ public class RequestParamsUtils {
         return params;
     }
 
+    public static RequestParams getRegisterParams(String userName, String password, Context context) {
+        String code = SharedPreferencesUtils.getStringData(context, "code", null);
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
+        params.addBodyParameter("UserName", userName);
+        params.addBodyParameter("Pwd", password);
+        params.addBodyParameter("Code", password);
+        return params;
+    }
+
+
+    public static RequestParams getCommentList(String sType, String PageIndex, String PageSize, Context context) {
+        String code = SharedPreferencesUtils.getStringData(context, "code", null);
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
+        params.addBodyParameter("sType", sType);
+        params.addBodyParameter("PageIndex", PageIndex);
+        params.addBodyParameter("PageSize", PageSize);
+        return params;
+    }
+
+
+    //点赞
+    public static RequestParams getLikeParams(int oid, String content, Context context) {
+        String code = SharedPreferencesUtils.getStringData(context, "code", null);
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
+        params.addBodyParameter("FKId", "" + oid);
+        params.addBodyParameter("FKType", "" + 1);
+        params.addBodyParameter("Content", content);
+        return params;
+    }
+
     //IsCollect 1：收藏；0：取消收藏
     public static RequestParams collectParams(int id, int FKType, int IsCollect, Context context) {
         String code = SharedPreferencesUtils.getStringData(context, "code", null);
@@ -56,7 +92,7 @@ public class RequestParamsUtils {
         return params;
     }
 
-    public static RequestParams getProduceDetails(int oid,Context context) {
+    public static RequestParams getProduceDetails(int oid, Context context) {
         String code = SharedPreferencesUtils.getStringData(context, "code", null);
         RequestParams params = new RequestParams();
         params.addHeader("_appId", Constant.APPID);

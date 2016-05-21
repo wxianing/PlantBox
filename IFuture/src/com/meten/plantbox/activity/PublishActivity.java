@@ -2,6 +2,7 @@ package com.meten.plantbox.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.plantbox.R;
@@ -20,6 +21,8 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
     protected TextView title;
     @Bind(R.id.right_tv)
     protected TextView rightTv;
+    @Bind(R.id.back_arrows)
+    protected ImageView backImg;
 
     private List<TestBean.DataBean.ProductEntitysBean> entitysLists;
 
@@ -40,6 +43,7 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
 
     private void initEvent() {
         rightTv.setOnClickListener(this);
+        backImg.setOnClickListener(this);
     }
 
 
@@ -54,6 +58,9 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.right_tv:
                 ToastUtils.show(this, "正在发表");
+                break;
+            case R.id.back_arrows:
+                finish();
                 break;
         }
     }

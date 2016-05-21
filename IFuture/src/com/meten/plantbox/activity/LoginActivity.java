@@ -142,6 +142,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 if (checked == 0) {
                     checkBox.setImageResource(R.drawable.pwd_checked_icon);
                     SharedPreferencesUtils.saveIntData(this, "checked", 1);
+//                    usernameEt.setText(SharedPreferencesUtils.getInstance(this).getUserName());
+//                    passworkEt.setText(SharedPreferencesUtils.getInstance(this).getPassword());
                 } else {
                     checkBox.setImageResource(R.drawable.pwd_unchecked_icon);
                     SharedPreferencesUtils.saveIntData(this, "checked", 0);

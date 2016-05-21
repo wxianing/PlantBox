@@ -19,6 +19,7 @@ import com.meten.plantbox.bean.produce.Produce;
 import com.meten.plantbox.constant.URL;
 import com.meten.plantbox.http.HttpRequestCallBack;
 import com.meten.plantbox.http.HttpRequestUtils;
+import com.meten.plantbox.http.LikeCallBack;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
@@ -33,7 +34,7 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  * 基地主页
  */
-public class BaseHomeFragment extends Fragment implements View.OnClickListener {
+public class BaseHomeFragment extends Fragment implements View.OnClickListener, LikeCallBack {
 
     @Bind(R.id.show_listview)
     protected ListView mListView;
@@ -72,7 +73,7 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener {
 
     private void initView() {
         mDatas = new ArrayList<>();
-        mAdapter = new ProduceAdapter(mDatas, getActivity());
+        mAdapter = new ProduceAdapter(mDatas, getActivity(), this);
         mListView.setAdapter(mAdapter);
     }
 
@@ -111,6 +112,11 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void likeClick(int enumcode) {
+        initData();
     }
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {

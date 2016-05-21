@@ -11,7 +11,7 @@ import com.meten.plantbox.utils.SharedPreferencesUtils;
 import java.io.File;
 
 public class Constant {
-
+    public static final int RESULT_OK = 1;
     public static final String BASE_DIR = Environment
             .getExternalStorageDirectory()
             + File.separator

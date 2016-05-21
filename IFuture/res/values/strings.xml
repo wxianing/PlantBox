@@ -26,6 +26,8 @@
     <string name="my_plan">我的规划</string>
     <string name="my_choose_school">我的选校</string>
     <string name="my_writ">我的文书</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
+
 
     <!-- 个人信息 -->
     <string name="userInfo">个人信息</string>
@@ -113,5 +115,7 @@
     <string name="title_activity_guide">GuideActivity</string>
     <string name="title_activity_add_friend">AddFriendActivity</string>
     <string name="title_activity_my_like">MyLikeActivity</string>
+    <string name="title_activity_aquare">AquareActivity</string>
+    <string name="title_activity_comment">CommentActivity</string>
 
 </resources>

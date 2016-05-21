@@ -47,8 +47,11 @@ public class DataListBean implements Serializable {
     private String ReleaseTime;
     private int NeedBatchs;
 
+
     private UserBean user;
     private ProductBean Product;
+
+
 
     public ProductBean getProduct() {
         return Product;

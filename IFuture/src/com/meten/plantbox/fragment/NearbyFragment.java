@@ -18,14 +18,18 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
+import com.meten.plantbox.activity.AquareActivity;
 import com.meten.plantbox.activity.MyBaseAreaActivity;
 import com.meten.plantbox.adapter.nearby.NearByListAdapter;
 import com.meten.plantbox.bean.nearby.NearByBean;
@@ -38,10 +42,12 @@ import com.meten.plantbox.http.HttpRequestUtils;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
+import com.meten.plantbox.view.DActionSheetDialog;
 import com.meten.plantbox.view.MyListView;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -72,6 +78,10 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     protected MyListView mListView;
     private List<NearByDataList> mDatas;
     private NearByListAdapter mAdapter;
+    @Bind(R.id.title_right_img)
+    protected ImageView rightImg;
+
+    private ArrayList<LatLng> latlngList = new ArrayList();
 
     public NearbyFragment() {
     }
@@ -112,11 +122,14 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
 
 
     private void initEvent() {
+        rightImg.setOnClickListener(this);
     }
 
     private void initView() {
         backImg.setVisibility(View.GONE);
         title.setText("附近");
+        rightImg.setImageResource(R.drawable.nearby_select_img);
+        rightImg.setVisibility(View.VISIBLE);
         gson = new Gson();
         mDatas = new ArrayList<>();
         mAdapter = new NearByListAdapter(mDatas, getActivity());
@@ -133,6 +146,8 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
             mUiSettings = aMap.getUiSettings();
             mUiSettings.setZoomControlsEnabled(false);
             setUpMap();
+            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);
+            aMap.moveCamera(localCameraUpdate);
         }
     }
 
@@ -153,6 +168,7 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // aMap.setMyLocationType()
+
     }
 
     /**
@@ -195,8 +211,45 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            case R.id.title_right_img:
+                selectIcon();
+                break;
         }
+    }
+
+    private ArrayList<String> lats = new ArrayList<>();
+    private ArrayList<String> longs = new ArrayList<>();
+
+    //对话框
+    private void selectIcon() {
+        for (int i = 0; i < mDatas.size(); i++) {
+            lats.add("" + mDatas.get(i).getLat());
+            longs.add("" + mDatas.get(i).getLon());
+        }
+
+
+        new DActionSheetDialog(getActivity()).builder()
+                .setCancelable(false)
+                .setCanceledOnTouchOutside(false)
+                .addSheetItem("身边",
+                        DActionSheetDialog.SheetItemColor.Blue,
+                        new DActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                                Intent intent = new Intent(getActivity(), AquareActivity.class);
+                                intent.putStringArrayListExtra("lats", lats);
+                                intent.putStringArrayListExtra("longs", longs);
+                                startActivity(intent);
+                            }
+                        })
+                .addSheetItem("广场",
+                        DActionSheetDialog.SheetItemColor.Blue,
+                        new DActionSheetDialog.OnSheetItemClickListener() {
+                            @Override
+                            public void onClick(int which) {
+                            }
+                        }).show();
+
     }
 
     @Override

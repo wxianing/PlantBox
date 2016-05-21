@@ -18,11 +18,14 @@ import com.meten.plantbox.constant.URL;
 import com.meten.plantbox.http.HttpRequestCallBack;
 import com.meten.plantbox.http.HttpRequestListener;
 import com.meten.plantbox.http.HttpRequestUtils;
+import com.meten.plantbox.http.LikeCallBack;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
+import com.meten.plantbox.utils.ToastUtils;
 import com.meten.plantbox.view.MyListView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ import butterknife.ButterKnife;
  * Use the {@link CommFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CommFragment extends Fragment {
+public class CommFragment extends Fragment implements LikeCallBack {
 
     private static final String ARG_PARAM1 = "sType";
     private static final String ARG_PARAM2 = "sType";
@@ -93,9 +96,16 @@ public class CommFragment extends Fragment {
     private void initView() {
         callback = new CallBack();
         dataLists = new ArrayList<>();
-        mAdapter = new ProduceAdapter(dataLists, getActivity());
+        mAdapter = new ProduceAdapter(dataLists, getActivity(), this);
         mListView.setAdapter(mAdapter);
 
+    }
+
+    @Override
+    public void likeClick(int enumcode) {
+        if (enumcode == 0) {
+            initData();
+        }
     }
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {
@@ -105,6 +115,7 @@ public class CommFragment extends Fragment {
 
             Produce produce = JsonParse.parseToObject(info, Produce.class);
             if (produce != null) {
+                dataLists.clear();
                 dataLists.addAll(produce.getDataList());
                 mAdapter.notifyDataSetChanged();
             }

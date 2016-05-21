@@ -18,6 +18,13 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="AnimationFade">
+
+        <!-- PopupWindow左右弹出的效果 -->
+        <item name="android:windowEnterAnimation">@anim/in_lefttoright</item>
+        <item name="android:windowExitAnimation">@anim/out_righttoleft</item>
+    </style>
+
     <!-- 去掉dialog标题 -->
     <style name="myDialogTheme" parent="android:Theme.Dialog">
         <item name="android:windowFrame">@null</item>

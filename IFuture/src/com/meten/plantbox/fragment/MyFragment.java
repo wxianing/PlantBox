@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.plantbox.PersonCenterAdapter;
@@ -44,6 +45,7 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
     @Bind(R.id.user_name)
     protected TextView userName;
 
+
     public MyFragment() {
     }
 
@@ -57,6 +59,7 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
     }
 
     private void initView(View view) {
+
         mAdapter = new PersonCenterAdapter(mDatas, getActivity());
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);

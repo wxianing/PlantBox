@@ -332,7 +332,14 @@
             android:label="@string/title_activity_add_friend" />
         <activity
             android:name=".activity.MyLikeActivity"
-            android:label="@string/title_activity_my_like"></activity>
+            android:label="@string/title_activity_my_like" />
+        <activity android:name=".activity.CityListActivity" />
+        <activity
+            android:name=".activity.AquareActivity"
+            android:label="@string/title_activity_aquare" />
+        <activity
+            android:name=".activity.CommentActivity"
+            android:label="@string/title_activity_comment"></activity>
     </application>
 
 </manifest>

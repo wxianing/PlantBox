@@ -17,6 +17,7 @@ import com.meten.plantbox.bean.produce.Produce;
 import com.meten.plantbox.constant.URL;
 import com.meten.plantbox.http.HttpRequestCallBack;
 import com.meten.plantbox.http.HttpRequestUtils;
+import com.meten.plantbox.http.LikeCallBack;
 import com.meten.plantbox.http.RequestParamsUtils;
 import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
@@ -27,7 +28,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MyLikeActivity extends BaseActivity implements View.OnClickListener {
+public class MyLikeActivity extends BaseActivity implements View.OnClickListener, LikeCallBack {
     @Bind(R.id.show_listview)
     protected ListView mListView;
     private ProduceAdapter mAdapter;
@@ -56,8 +57,8 @@ public class MyLikeActivity extends BaseActivity implements View.OnClickListener
 
     private void initView() {
         mDatas = new ArrayList<>();
-        mAdapter = new ProduceAdapter(mDatas, this);
-        mListView.setAdapter(mAdapter);
+        mAdapter = new ProduceAdapter(mDatas, this, this);
+//        mListView.setAdapter(mAdapter);
         int tag = getIntent().getIntExtra("Tag", 0);
         switch (tag) {
             case 1:
@@ -75,8 +76,10 @@ public class MyLikeActivity extends BaseActivity implements View.OnClickListener
 
     private void initData() {
         callBack = new CallBack();
+//        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "3",this);
+//        HttpRequestUtils.create(this).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
         RequestParams params = RequestParamsUtils.getProductList("3", "1", "3");
-        HttpRequestUtils.create(this).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
+        HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, callBack);
     }
 
     @Override
@@ -86,6 +89,11 @@ public class MyLikeActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void likeClick(int enumcode) {
+        initData();
     }
 
 

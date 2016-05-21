@@ -25,6 +25,7 @@ import com.meten.plantbox.model.ResultInfo;
 import com.meten.plantbox.utils.JsonParse;
 import com.meten.plantbox.utils.ShareUtils;
 import com.meten.plantbox.view.MyListView;
+import com.meten.plantbox.widget.AutoAdjustHeightImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     protected Button buyNow;//立即购买
     private int oid;
     @Bind(R.id.banner_img)
-    protected ImageView bannerImg;
+    protected AutoAdjustHeightImageView bannerImg;
     @Bind(R.id.share_img)
     protected TextView shareImg;
     @Bind(R.id.collect)

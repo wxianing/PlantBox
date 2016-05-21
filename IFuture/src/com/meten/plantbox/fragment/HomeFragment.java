@@ -20,6 +20,8 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdate;
+import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
@@ -29,6 +31,7 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.ActiveActivity;
+import com.meten.plantbox.activity.CityListActivity;
 import com.meten.plantbox.activity.DimensionCodeActivity;
 import com.meten.plantbox.activity.GrowTreeActivity;
 import com.meten.plantbox.activity.PlantCenterActivity;
@@ -36,6 +39,7 @@ import com.meten.plantbox.activity.PlantShopActivity;
 import com.meten.plantbox.adapter.ImagePagerAdapter;
 import com.meten.plantbox.bean.banner.Banner;
 import com.meten.plantbox.bean.banner.BannerBean;
+import com.meten.plantbox.constant.Constant;
 import com.meten.plantbox.constant.URL;
 import com.meten.plantbox.http.HttpRequestCallBack;
 import com.meten.plantbox.http.HttpRequestUtils;
@@ -57,6 +61,7 @@ import butterknife.ButterKnife;
  */
 
 public class HomeFragment extends Fragment implements View.OnClickListener, LocationSource, AMapLocationListener {
+
     /**
      * 头部广告
      */
@@ -95,7 +100,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     private List<Fragment> mFragments;
 
     @Bind(R.id.city_name)
-    protected TextView cityName;
+    protected TextView cityName;//当前城市
 
     //地图
     private MapView mMapView = null;
@@ -212,6 +217,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
             aMap = mMapView.getMap();
             mUiSettings = aMap.getUiSettings();
             mUiSettings.setZoomControlsEnabled(false);
+            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);
+            aMap.moveCamera(localCameraUpdate);
             setUpMap();
         }
     }
@@ -245,6 +252,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         growTree.setOnClickListener(this);
         activePrefecture.setOnClickListener(this);
         rightImg.setOnClickListener(this);
+        cityName.setOnClickListener(this);
     }
 
     @Override
@@ -369,6 +377,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
         Intent intent;
         switch (v.getId()) {
+            case R.id.city_name:
+                intent = new Intent(getActivity(), CityListActivity.class);
+                startActivityForResult(intent, Constant.RESULT_OK);
+                break;
             case R.id.home_right_img:
                 intent = new Intent(getActivity(), DimensionCodeActivity.class);
                 startActivity(intent);
@@ -400,6 +412,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Constant.RESULT_OK) {
+            String city = data.getStringExtra("cityName");
+            cityName.setText(city);
         }
     }
 }

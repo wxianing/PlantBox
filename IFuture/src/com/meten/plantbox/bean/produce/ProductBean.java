@@ -48,13 +48,30 @@ public class ProductBean implements Serializable {
 //    private int IsDeleted;
 //    private int TotalRead;
 //    private int TotalCollect;
-//    private int Hits;
-//    private String ReleaseTime;
+    private int Hits;
+    //    private String ReleaseTime;
 //    private int NeedBatchs;
 //    private String AdvertImg;
 //    private int BuyMode;
 //    private int Mobile;
+    private int TotalComment;
     private String Notice;
+
+    public int getTotalComment() {
+        return TotalComment;
+    }
+
+    public void setTotalComment(int totalComment) {
+        TotalComment = totalComment;
+    }
+
+    public int getHits() {
+        return Hits;
+    }
+
+    public void setHits(int hits) {
+        Hits = hits;
+    }
 
     public List<String> getPictures() {
         return Pictures;

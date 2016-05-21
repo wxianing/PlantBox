@@ -6,7 +6,48 @@
     android:orientation="vertical"
     tools:context="com.meten.plantbox.activity.RegisterActivity">
 
-    <include layout="@layout/titlebar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/head_bg_color"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/back_arrows"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:paddingLeft="@dimen/dp10"
+                android:paddingRight="@dimen/dp10"
+                android:src="@drawable/back_arrows" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="注册"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp20" />
+
+            <ImageView
+                android:id="@+id/title_right_img"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:src="@drawable/more_img"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +57,8 @@
         android:paddingBottom="@dimen/dp5"
         android:paddingTop="@dimen/dp8"
         android:text="手机注册"
-        android:textSize="@dimen/sp18" />
+        android:textSize="@dimen/sp18"
+        android:visibility="invisible" />
 
     <LinearLayout
 
@@ -42,23 +84,26 @@
                 android:src="@drawable/phone_icon" />
 
             <EditText
+                android:id="@+id/phone_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="11位手机号码"
+                android:inputType="number"
                 android:textColorHint="@color/gray_textcolor" />
 
             <Button
-                android:layout_marginRight="@dimen/dp10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp10"
                 android:background="@drawable/button_bg_blue"
                 android:padding="@dimen/dp3"
                 android:text="验证码"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp16" />
+                android:textSize="@dimen/sp16"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -68,11 +113,12 @@
             android:background="#CBCBCB" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp5"
             android:layout_marginLeft="@dimen/dp5"
             android:layout_marginTop="@dimen/dp5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -80,11 +126,14 @@
                 android:src="@drawable/auth_code_icon" />
 
             <EditText
+
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="手机验证码"
+
                 android:textColorHint="@color/gray_textcolor" />
 
         </LinearLayout>
@@ -95,11 +144,11 @@
             android:background="#CBCBCB" />
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp5"
             android:layout_marginLeft="@dimen/dp5"
-            android:layout_marginTop="@dimen/dp5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="@dimen/dp5">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -107,11 +156,13 @@
                 android:src="@drawable/password_icon" />
 
             <EditText
+                android:id="@+id/password_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="6~23位密码"
+                android:inputType="textPassword"
                 android:textColorHint="@color/gray_textcolor" />
 
         </LinearLayout>
@@ -123,6 +174,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp30"

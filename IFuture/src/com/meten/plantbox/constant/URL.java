@@ -25,6 +25,15 @@ public class URL {
     public static final String MY_COLLECT_URL = BASE_URL + "common/user/getcollectlist";
     //收藏
     public static final String COLLENT_URL = BASE_URL + "common/user/collect";
+    //点赞
+    public static final String DIAN_ZAN_URL = BASE_URL + "common/user/subscribe";
+
+    //评论
+    public static final String COMMENT_URL = BASE_URL + "common/user/comment";
+    //评论列表
+    public static final String COMMENT_LIST_URL = BASE_URL + "common/user/getcommentlist";
+    //注册
+    public static final String REGISTER_URL = BASE_URL + "common/user/register";
 
 
     public static final int DEV = 0x00;
