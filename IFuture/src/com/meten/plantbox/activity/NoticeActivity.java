@@ -14,7 +14,6 @@ import butterknife.ButterKnife;
 public class NoticeActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.title_tv)
     protected TextView title;
-
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
     @Bind(R.id.me_tv)

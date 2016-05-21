@@ -1,18 +1,17 @@
 package com.meten.plantbox.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.plantbox.R;
+import com.meten.plantbox.activity.base.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-
-public class MyShareActivity extends Activity implements View.OnClickListener {
+public class MyShareActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)

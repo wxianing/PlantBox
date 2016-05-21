@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         Intent intent;
         switch (v.getId()) {
             case R.id.forget_pwd_tv:
-                intent = new Intent(this, ResetPwdActivity.class);
+                intent = new Intent(this, ForgetPwdActivity.class);
                 startActivity(intent);
                 break;
             case R.id.register_tv:

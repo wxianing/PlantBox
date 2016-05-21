@@ -102,8 +102,7 @@
                 android:padding="@dimen/dp3"
                 android:text="验证码"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp16"
-                android:visibility="gone" />
+                android:textSize="@dimen/sp16" />
 
         </LinearLayout>
 
@@ -117,8 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp5"
             android:layout_marginLeft="@dimen/dp5"
-            android:layout_marginTop="@dimen/dp5"
-            android:visibility="gone">
+            android:layout_marginTop="@dimen/dp5">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -127,13 +125,11 @@
 
             <EditText
 
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="手机验证码"
-
                 android:textColorHint="@color/gray_textcolor" />
 
         </LinearLayout>
@@ -162,6 +158,35 @@
                 android:layout_weight="1"
                 android:background="@drawable/edittext_shape"
                 android:hint="6~23位密码"
+                android:inputType="textPassword"
+                android:textColorHint="@color/gray_textcolor" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#CBCBCB" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/password_icon" />
+
+            <EditText
+                android:id="@+id/password_affirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_shape"
+                android:hint="请再次输入您的密码"
                 android:inputType="textPassword"
                 android:textColorHint="@color/gray_textcolor" />
 

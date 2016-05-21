@@ -4,28 +4,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.base.BaseActivity;
+import com.meten.plantbox.adapter.CityAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ResetPwdActivity extends BaseActivity implements View.OnClickListener {
-
+public class ForgetPwdActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
-    @Bind(R.id.back_login)
-    protected TextView backLogin;
+    @Bind(R.id.next_btn)
+    protected Button nextBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_pwd);
+        setContentView(R.layout.activity_forget_pwd);
         ButterKnife.bind(this);
         initView();
         initEvent();
@@ -33,11 +34,11 @@ public class ResetPwdActivity extends BaseActivity implements View.OnClickListen
 
     private void initEvent() {
         backImg.setOnClickListener(this);
-        backLogin.setOnClickListener(this);
+        nextBtn.setOnClickListener(this);
     }
 
     private void initView() {
-        title.setText("重置密码");
+        title.setText("忘记密码");
     }
 
     @Override
@@ -49,11 +50,11 @@ public class ResetPwdActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.next_btn:
+                startActivity(new Intent(this, ResetPwdActivity.class));
+                break;
             case R.id.back_arrows:
                 finish();
-                break;
-            case R.id.back_login:
-                startActivity(new Intent(this,LoginActivity.class));
                 break;
         }
     }

@@ -121,5 +121,6 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="title_activity_privacy">PrivacyActivity</string>
     <string name="title_activity_notice">NoticeActivity</string>
+    <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
 
 </resources>
