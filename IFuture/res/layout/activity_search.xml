@@ -28,7 +28,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="center"
-            android:src="@drawable/search_img" />
+            android:src="@drawable/search_icon" />
     </LinearLayout>
 
     <ListView

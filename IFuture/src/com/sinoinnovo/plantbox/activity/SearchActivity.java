@@ -102,7 +102,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                                       int count) {
                 mSearchAutoAdapter.performFiltering(s);
                 keyWord = mAutoEdit.getText().toString().trim();
-                initData(keyWord);
+//                initData(keyWord);
             }
 
             @Override

@@ -30,8 +30,18 @@ public class RequestParamsUtils {
         return params;
     }
 
+    //植物百科
+    public static RequestParams getPlantBaikeParams(int channelId, int pageIndex, int pageSize) {
+        RequestParams params = createRequestParams();
+        params.addBodyParameter("ChannelId", "" + channelId);
+        params.addBodyParameter("PageIndex", "" + pageIndex);
+        params.addBodyParameter("PageSize", "" + pageSize);
+        return params;
+    }
+
+    //注册
     public static RequestParams getRegisterParams(String userName, String password) {
-        RequestParams params =createRequestParams();
+        RequestParams params = createRequestParams();
         params.addBodyParameter("UserName", userName);
         params.addBodyParameter("Pwd", password);
         params.addBodyParameter("Code", password);
@@ -76,17 +86,16 @@ public class RequestParamsUtils {
     }
 
 
-
     public static RequestParams getProduceDetails(int oid) {
         RequestParams params = createRequestParams();
         params.addBodyParameter("Id", oid + "");
         return params;
     }
 
-    public static HashMap saveOrderData(Object[] array, String address, String customName) {
+    public static HashMap saveOrderData(Object[] detaillist, String address, String customName) {
         HashMap params = new HashMap();
 
-        params.put("detaillist", array);
+        params.put("detaillist", detaillist);
         params.put("Address", address);
         params.put("CustomName", customName);
 

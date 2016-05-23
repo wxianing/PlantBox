@@ -124,5 +124,6 @@
     <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
     <string name="title_activity_serach">SerachActivity</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_article">ArticleActivity</string>
 
 </resources>

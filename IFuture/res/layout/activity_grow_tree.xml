@@ -12,33 +12,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:paddingBottom="@dimen/dp5"
+        android:drawableLeft="@drawable/grow_share_icon"
+        android:paddingBottom="@dimen/dp10"
         android:paddingLeft="@dimen/dp15"
-        android:paddingTop="@dimen/dp5"
-        android:text="分享赢植币"
+        android:paddingTop="@dimen/dp10"
+        android:text=" 分享赢植币"
         android:textSize="@dimen/sp18" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@color/white"
-        android:paddingBottom="@dimen/dp5"
+        android:drawableLeft="@drawable/grow_command_icon"
+        android:paddingBottom="@dimen/dp10"
         android:paddingLeft="@dimen/dp15"
-        android:paddingTop="@dimen/dp5"
-        android:text="口令赢植币"
+        android:paddingTop="@dimen/dp10"
+        android:text=" 口令赢植币"
         android:textSize="@dimen/sp18" />
 
     <TextView
         android:id="@+id/mygrow_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp5"
         android:background="@color/white"
-        android:paddingBottom="@dimen/dp5"
+        android:drawableLeft="@drawable/grow_inserting_coil_icon"
+        android:paddingBottom="@dimen/dp10"
         android:paddingLeft="@dimen/dp15"
-        android:paddingTop="@dimen/dp5"
-        android:text="我的成长"
+        android:paddingTop="@dimen/dp10"
+        android:text=" 我的下线"
+        android:textSize="@dimen/sp18" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/my_income_icon"
+        android:paddingBottom="@dimen/dp10"
+        android:paddingLeft="@dimen/dp15"
+        android:paddingTop="@dimen/dp10"
+        android:text=" 我的收入"
         android:textSize="@dimen/sp18" />
 
 </LinearLayout>

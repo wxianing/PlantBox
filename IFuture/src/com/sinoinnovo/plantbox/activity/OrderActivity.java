@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.bean.bean.DetailList;
@@ -55,6 +57,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     private String totalCount;
     @Bind(R.id.total_count)
     protected TextView count;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void initView() {
+        gson = new Gson();
         title.setText("确认订单");
         oid = getIntent().getIntExtra("oid", 0);
         mDatas = new ArrayList<>();
@@ -101,17 +105,10 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
             case R.id.submit_btn:
                 ToastUtils.show(this, "正在提交");
                 Object[] obj = mDatas.toArray();
-                Log.e("obj", obj.toString());
+                String detaillist = gson.toJson(mDatas);
+                Log.e("str", obj.toString());
                 User user = SharedPreferencesUtils.getInstance(this).getUser();
                 HashMap params = RequestParamsUtils.saveOrderData(obj, address, customName);
-
-                Iterator iterator = params.entrySet().iterator();
-                while (iterator.hasNext()) {
-                    Map.Entry entry = (Map.Entry) iterator.next();
-                    String value = (String) entry.getKey();
-                    Object val = entry.getValue();
-                    Log.e("val", value);
-                }
 
                 HttpRequestUtils.getmInstance().send(URL.SAVE_ORDER_URL, params, new HttpRequestListener() {
                     @Override

@@ -16,6 +16,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/plant_baike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,6 +25,7 @@
             android:src="@drawable/plant_baike_icon" />
 
         <TextView
+            android:id="@+id/plant_baike_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp10"
@@ -32,6 +34,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -53,6 +56,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/plant_monitoring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +73,8 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -88,6 +94,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/plant_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,6 +111,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -123,6 +131,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/publish_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,6 +148,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -157,6 +167,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/grow_state_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -173,6 +184,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -192,6 +204,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/grow_environment_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -208,6 +221,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -227,6 +241,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/grow_condition_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -243,6 +258,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -262,6 +278,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/day_of_work_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -278,6 +295,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -299,6 +317,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/scanning_equipment_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -315,6 +334,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -334,6 +354,7 @@
         android:paddingTop="@dimen/dp10">
 
         <ImageView
+            android:layout_centerVertical="true"
             android:id="@+id/operating_equipment_hardware"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -350,6 +371,7 @@
             android:textSize="@dimen/sp18" />
 
         <ImageView
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

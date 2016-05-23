@@ -8,7 +8,6 @@ public class URL {
     //首页最新、热门、综合
     public static final String HOME_PRODUCTLIST_URL = BASE_URL + "order/getlist";
 
-    public static final String PLANT_BAIKE_URL = "http://plantbox.meidp.com/Mobi/Home/NoticeList?ChannelId=1001";
     //轮播图
     public static final String HOME_BANNER_URL = BASE_URL + "common/advertise/getlist";
     //第三方账号登录
@@ -27,13 +26,16 @@ public class URL {
     public static final String COLLENT_URL = BASE_URL + "common/user/collect";
     //点赞
     public static final String DIAN_ZAN_URL = BASE_URL + "common/user/subscribe";
-
     //评论
     public static final String COMMENT_URL = BASE_URL + "common/user/comment";
     //评论列表
     public static final String COMMENT_LIST_URL = BASE_URL + "common/user/getcommentlist";
     //注册
     public static final String REGISTER_URL = BASE_URL + "common/user/register";
+    //植物百科
+    public static final String PLANT_BAIKE_URL = BASE_URL + "common/article/getarticlelist";
+
+    public static final String ARTCLE_DETAILS_URL = BASE_URL + "common/article/getarticle";
 
 
     public static final int DEV = 0x00;
@@ -74,7 +76,6 @@ public class URL {
                 break;
         }
     }
-
 
     public static final String LOGIN = API_HOST + "common/user/login"; //登录
     public static final String MODIF_USER_INFO = API_HOST + "common/user/update"; //修改用户信息
