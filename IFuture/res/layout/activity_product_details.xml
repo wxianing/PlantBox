@@ -42,19 +42,19 @@
                     android:padding="@dimen/dp10">
 
                     <TextView
-
+                        android:textSize="@dimen/sp18"
                         android:id="@+id/produce_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="迷你桌面多肉植物" />
 
+
                     <TextView
-                        android:id="@+id/price_tv"
+                        android:id="@+id/look_baike"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/produce_name"
-                        android:layout_marginTop="@dimen/dp10"
-                        android:text="优惠价:￥25" />
+                        android:layout_alignParentRight="true"
+                        android:text="查看百科" />
 
 
                 </RelativeLayout>
@@ -66,16 +66,17 @@
                     android:padding="@dimen/dp10">
 
                     <TextView
-                        android:id="@+id/look_baike"
+                        android:gravity="center_vertical"
+                        android:id="@+id/price_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="查看百科" />
+                        android:text="优惠价:￥25" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp25"
-                        android:layout_toRightOf="@+id/look_baike"
+                        android:layout_toRightOf="@+id/price_tv"
                         android:text="购买人数：26" />
 
                     <LinearLayout
@@ -85,15 +86,17 @@
                         android:gravity="center_vertical">
 
                         <ImageView
+                            android:scaleType="fitXY"
                             android:id="@+id/reduce_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
                             android:src="@drawable/subtract_produce_icon" />
 
                         <TextView
                             android:id="@+id/total_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:gravity="center"
                             android:layout_marginLeft="@dimen/dp10"
                             android:layout_marginRight="@dimen/dp10"
                             android:background="@drawable/textview_shape"
@@ -101,8 +104,8 @@
 
                         <ImageView
                             android:id="@+id/add_img"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
                             android:src="@drawable/add_produce" />
                     </LinearLayout>
 
@@ -113,13 +116,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp5"
                     android:background="@color/white"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp10">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="商品介绍"
-                        android:textSize="@dimen/sp18" />
+                        android:textSize="@dimen/sp16" />
 
                     <TextView
                         android:id="@+id/produce_introduce"

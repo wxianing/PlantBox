@@ -1,72 +1,145 @@
 package com.sinoinnovo.plantbox.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import com.lidroid.xutils.http.RequestParams;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
+import com.sinoinnovo.plantbox.adapter.CommentListAdapter;
+import com.sinoinnovo.plantbox.adapter.ProduceAdapter;
+import com.sinoinnovo.plantbox.adapter.ProduceGvAdapter;
+import com.sinoinnovo.plantbox.bean.comment.Comments;
+import com.sinoinnovo.plantbox.bean.produce.DataListBean;
+import com.sinoinnovo.plantbox.constant.URL;
+import com.sinoinnovo.plantbox.http.HttpRequestCallBack;
+import com.sinoinnovo.plantbox.http.HttpRequestUtils;
+import com.sinoinnovo.plantbox.http.RequestParamsUtils;
+import com.sinoinnovo.plantbox.model.ResultInfo;
+import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.ToastUtils;
+import com.sinoinnovo.plantbox.widget.HListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ShopDetailActivity extends BaseActivity {
-    @Bind(R.id.webview)
-    protected WebView webview;
-    private int userId;
-    private int goodId;
+public class ShopDetailActivity extends BaseActivity implements View.OnClickListener {
+
+    private DataListBean data;
+    @Bind(R.id.cnname)
+    protected TextView cnName;
+    @Bind(R.id.hlistView)
+    protected HListView mGridView;
+    @Bind(R.id.notice_tv)
+    protected TextView notice;
+
+    @Bind(R.id.like_tv)
+    protected TextView likeCount;//点赞
+    @Bind(R.id.commot_tv)
+    protected TextView commentCount;//评论
+
+    private ProduceGvAdapter mAdapter;
+    @Bind(R.id.title_tv)
+    protected TextView title;
+    @Bind(R.id.listview)
+    protected ListView mListView;
+    private List<Comments.DataListBean> mDatas;
+    private CommentListAdapter mCommentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_detail);
         ButterKnife.bind(this);
-        userId = getIntent().getIntExtra("userId", 0);
-        goodId = getIntent().getIntExtra("goodId", 0);
+
+        data = (DataListBean) getIntent().getSerializableExtra("listBean");
 
         initView();
+        initData();
+        initEvent();
     }
 
-    private String getUrl(int userId, int goodId) {
-        return "http://plantbox.meidp.com/Mobi/Product/Detail?UserId=" + userId + "&id=" + goodId;
+    private void initEvent() {
+        notice.setOnClickListener(this);
+        commentCount.setOnClickListener(this);
+        likeCount.setOnClickListener(this);
+    }
+
+    private void initData() {
+        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "4");
+        HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, new HttpRequestCallBack<ResultInfo>() {
+            @Override
+            public void onSuccess(ResultInfo resultInfo, int requestCode) {
+                Comments comments = JsonParse.parseToObject(resultInfo, Comments.class);
+                if (comments != null) {
+                    mDatas.addAll(comments.getDataList());
+                    mCommentAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
     }
 
     private void initView() {
-        Log.e(">>>>>>", getUrl(userId, goodId));
-        WebSettings webSettings = webview.getSettings();
-        //设置WebView属性，能够执行Javascript脚本
-        webSettings.setJavaScriptEnabled(true);
-        //设置可以访问文件
-        webSettings.setAllowFileAccess(true);
-        //设置支持缩放
-        webSettings.setBuiltInZoomControls(true);
-        //加载需要显示的网页
-        webview.loadUrl(getUrl(userId, goodId));
-        //设置Web视图
-        webview.setWebViewClient(new webViewClient());
+        title.setText("详情");
+        List<String> imageUrls = data.getProduct().getPictures();
+        cnName.setText(data.getUser().getCnName());
+        notice.setText("        " + data.getProduct().getNotice());
+        likeCount.setText(data.getProduct().getHits() + "赞");
+        mAdapter = new ProduceGvAdapter(imageUrls, this);
+        mGridView.setAdapter(mAdapter);
+        mDatas = new ArrayList<>();
+        mCommentAdapter = new CommentListAdapter(mDatas, this);
+        mListView.setAdapter(mCommentAdapter);
     }
 
     @Override
-    //设置回退
-    //覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
-            webview.goBack(); //goBack()表示返回WebView的上一页面
-            return true;
-        }
-        finish();//结束退出程序
-        return false;
-    }
+    public void onClick(View v) {
+        int oid = data.getId();
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.like_tv://点赞
+                RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
+                HttpRequestUtils.create(this).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
+                    @Override
+                    public void onSuccess(ResultInfo resultInfo, int requestCode) {
+                    }
 
-    //Web视图
-    private class webViewClient extends WebViewClient {
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
+                    @Override
+                    public void onReponse(String result) {
+                        super.onReponse(result);
+                        Log.e("dianzan", result);
+                        try {
+                            JSONObject obj = new JSONObject(result);
+                            int enumcode = obj.getInt("enumcode");
+                            if (enumcode == 0) {
+                                ToastUtils.show(ShopDetailActivity.this, "成功点赞");
+                                //刷新数据
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                break;
+            case R.id.commot_tv:
+                intent = new Intent(this, CommentActivity.class);
+                intent.putExtra("oid", oid);
+                startActivity(intent);
+
+                break;
         }
+
     }
 
     @Override

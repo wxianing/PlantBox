@@ -365,7 +365,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         if (mListener != null && aMapLocation != null) {
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
-                Log.e("aMapLocation", aMapLocation.getAddress() + ">>>>" + aMapLocation.getCity());
+                Log.e("aMapLocation", aMapLocation.getAddress());
                 aMapLocation.getCity().replace("市", "");
                 cityName.setText(aMapLocation.getCity());
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点

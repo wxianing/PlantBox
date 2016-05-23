@@ -6,7 +6,43 @@
     android:orientation="vertical"
     tools:context="com.sinoinnovo.plantbox.activity.PlantBaikeActivity">
 
-    <include layout="@layout/titlebar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/head_bg_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/back_arrows"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingRight="@dimen/dp10"
+            android:src="@drawable/back_arrows" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/search_shape"
+            android:hint="搜索植物/用户"
+            android:textColor="@color/white"
+            android:textColorHint="#F1F1F1"
+            android:textSize="@dimen/sp14" />
+
+        <ImageView
+            android:id="@+id/search_img"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
+            android:src="@drawable/search_icon" />
+
+    </LinearLayout>
+
 
     <WebView
         android:id="@+id/webView"

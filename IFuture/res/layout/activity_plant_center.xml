@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp10"
             android:layout_toRightOf="@+id/plant_hardware"
-            android:text="用户分享"
+            android:text="参考用户教程"
             android:textSize="@dimen/sp18" />
 
         <ImageView

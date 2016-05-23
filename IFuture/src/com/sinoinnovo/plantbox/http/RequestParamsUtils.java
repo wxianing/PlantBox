@@ -1,6 +1,5 @@
 package com.sinoinnovo.plantbox.http;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
@@ -26,13 +25,14 @@ public class RequestParamsUtils {
         params.addHeader("_appId", Constant.APPID);
         params.addHeader("_code", Constant.CODE);
         params.addBodyParameter("content-type", "application/json");
-//        Log.e("code",Constant.CODE);
+//        Log.e("code", Constant.CODE);
         return params;
     }
 
     //植物百科
-    public static RequestParams getPlantBaikeParams(int channelId, int pageIndex, int pageSize) {
+    public static RequestParams getPlantBaikeParams(String keyWord, int channelId, int pageIndex, int pageSize) {
         RequestParams params = createRequestParams();
+        params.addBodyParameter("Keyword", keyWord);
         params.addBodyParameter("ChannelId", "" + channelId);
         params.addBodyParameter("PageIndex", "" + pageIndex);
         params.addBodyParameter("PageSize", "" + pageSize);
@@ -51,9 +51,9 @@ public class RequestParamsUtils {
 
     public static RequestParams getCommentList(String sType, String PageIndex, String PageSize) {
         RequestParams params = createRequestParams();
-        params.addBodyParameter("sType", sType);
-        params.addBodyParameter("PageIndex", PageIndex);
-        params.addBodyParameter("PageSize", PageSize);
+        params.addBodyParameter("sType", "1");
+        params.addBodyParameter("PageIndex", "1");
+        params.addBodyParameter("PageSize", "10");
         return params;
     }
 
@@ -186,13 +186,15 @@ public class RequestParamsUtils {
     public static HashMap getProducetParams(int sType, int PageIndex, int PageSize) {
         HashMap params = new HashMap();
         params.put("sType", sType);
-        params.put("sType", PageIndex);
-        params.put("sType", PageSize);
+        params.put("PageIndex", PageIndex);
+        params.put("PageSize", PageSize);
         return params;
     }
 
-    public static RequestParams getShopListData(String sType, String PageIndex, String PageSize, Context context) {
+    public static RequestParams getShopListData(String keyWord, String sType, String PageIndex, String PageSize) {
         RequestParams params = RequestParamsUtils.createRequestParams();
+        params.addBodyParameter("Keyword", keyWord);
+        params.addBodyParameter("sType", sType);
         params.addBodyParameter("PageIndex", PageIndex);
         params.addBodyParameter("PageSize", PageSize);
         return params;

@@ -84,13 +84,11 @@ public class CommFragment extends Fragment implements LikeCallBack {
     }
 
     int pageIndex = 1;
-    int pageSize = 4;
+    int pageSize = 10;
 
     private void initData() {
-
         RequestParams params = RequestParamsUtils.getProductList("",mParam1, "" + pageIndex, "" + pageSize);
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
-
     }
 
     private void initView() {
@@ -98,9 +96,9 @@ public class CommFragment extends Fragment implements LikeCallBack {
         dataLists = new ArrayList<>();
         mAdapter = new ProduceAdapter(dataLists, getActivity(), this);
         mListView.setAdapter(mAdapter);
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.more_layout, null);
-        mListView.addFooterView(view);
-        TextView moretv = (TextView) view.findViewById(R.id.add_nore);
+        View footerView = LayoutInflater.from(getActivity()).inflate(R.layout.more_layout, null);
+//        mListView.addFooterView(view);
+        TextView moretv = (TextView) footerView.findViewById(R.id.add_nore);
         moretv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

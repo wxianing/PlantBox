@@ -104,7 +104,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                     mDatas.addAll(produce.getPictures());
                     mAdapter.notifyDataSetChanged();
                     if (mDatas != null && !mDatas.isEmpty())
-                        MainApplication.imageLoader.displayImage(mDatas.get(0), bannerImg);
+                        MainApplication.imageLoader.displayImage(mDatas.get(0), bannerImg, MainApplication.options);
                     setDataToView(produce);
                 }
             }
@@ -118,6 +118,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     private void initView() {
         gson = new Gson();
         title.setText("商品详情");
+//        backImg.setImageResource(R.drawable.ic_launcher);
         oid = getIntent().getIntExtra("oid", 0);
         mDatas = new ArrayList<>();
         mAdapter = new DetailsListAdapter(mDatas, this);

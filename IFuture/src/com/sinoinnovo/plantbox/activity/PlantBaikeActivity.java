@@ -2,12 +2,9 @@ package com.sinoinnovo.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,15 +28,17 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PlantBaikeActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-    @Bind(R.id.webView)
-    protected WebView webview;
 
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
-    @Bind(R.id.title_tv)
-    protected TextView title;
+
     @Bind(R.id.listview)
     protected ListView mListView;
+
+    @Bind(R.id.editText)
+    protected EditText editText;
+    @Bind(R.id.search_img)
+    protected ImageView searchImg;
 
     private List<PlantBaiKe.DataListBean> mDatas;
     private PlantBaikeListAdapter mAdapter;
@@ -51,12 +50,12 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
         ButterKnife.bind(this);
 
         initView();
-        initData();
+        initData("");
         initEvent();
     }
 
-    private void initData() {
-        RequestParams params = RequestParamsUtils.getPlantBaikeParams(1001, 1, 8);
+    private void initData(String keyWord) {
+        RequestParams params = RequestParamsUtils.getPlantBaikeParams(keyWord, 1001, 1, 8);
         HttpRequestUtils.create(this).send(URL.PLANT_BAIKE_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -71,44 +70,27 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
 
     private void initEvent() {
         backImg.setOnClickListener(this);
+        searchImg.setOnClickListener(this);
     }
 
     private void initView() {
-        title.setText("植物百科");
+
         mDatas = new ArrayList<>();
         mAdapter = new PlantBaikeListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
 
-//        WebSettings webSettings = webview.getSettings();
-//        //设置WebView属性，能够执行Javascript脚本
-//        webSettings.setJavaScriptEnabled(true);
-//        //设置可以访问文件
-//        webSettings.setAllowFileAccess(true);
-//        //设置支持缩放
-//        webSettings.setBuiltInZoomControls(true);
-//        //加载需要显示的网页
-//        webview.loadUrl(URL.PLANT_BAIKE_URL);
-//        //设置Web视图
-//        webview.setWebViewClient(new webViewClient());
     }
 
-
-    @Override
-    //设置回退
-    //覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
-            webview.goBack(); //goBack()表示返回WebView的上一页面
-            return true;
-        }
-        finish();//结束退出程序
-        return false;
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.search_img:
+                String keyWord = editText.getText().toString().trim();
+                mDatas.clear();
+                initData(keyWord);
+                break;
             case R.id.back_arrows:
                 finish();
                 break;
@@ -123,13 +105,6 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
         startActivity(intent);
     }
 
-    //Web视图
-    private class webViewClient extends WebViewClient {
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
-    }
 
     @Override
     protected void onDestroy() {

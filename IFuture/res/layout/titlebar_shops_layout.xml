@@ -12,23 +12,32 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/dp10"
-        android:paddingRight="@dimen/dp15"
+        android:paddingRight="@dimen/dp10"
         android:src="@drawable/back_arrows" />
 
     <EditText
+        android:id="@+id/editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp5"
         android:layout_weight="1"
         android:background="@drawable/search_shape"
-        android:gravity="center"
         android:hint="搜索植物/用户"
         android:textColor="@color/white"
         android:textColorHint="#F1F1F1"
         android:textSize="@dimen/sp14" />
 
     <ImageView
+        android:id="@+id/search_icon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:src="@drawable/search_icon" />
+
+    <ImageView
+        android:id="@+id/dimension_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/dp5"
         android:src="@drawable/two_dimension_code_icon" />
 </LinearLayout>

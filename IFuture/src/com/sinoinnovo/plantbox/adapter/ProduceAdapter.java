@@ -2,14 +2,17 @@ package com.sinoinnovo.plantbox.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.CommentActivity;
+import com.sinoinnovo.plantbox.activity.MyBaseAreaActivity;
 import com.sinoinnovo.plantbox.activity.ShopDetailActivity;
 import com.sinoinnovo.plantbox.bean.produce.DataListBean;
 import com.sinoinnovo.plantbox.constant.URL;
@@ -48,7 +51,6 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
     public ProduceAdapter(List<DataListBean> data, Context context, LikeCallBack callBack) {
         super(data, context);
         this.callBack = callBack;
-
     }
 
     @Override
@@ -67,17 +69,14 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
             vh.cnName.setText(bean.getUser().getCnName());
             vh.notice.setText("        " + bean.getProduct().getNotice());
             vh.likeCount.setText(bean.getProduct().getHits() + "赞");
-
             mAdapter = new ProduceGvAdapter(imageUrls, context);
             vh.mGridView.setAdapter(mAdapter);
-
             count = position;
-
             vh.notice.setOnClickListener(this);
-
             vh.commentCount.setOnClickListener(this);
             vh.likeCount.setOnClickListener(this);
-
+            vh.headerImg.setOnClickListener(this);
+            vh.cnName.setOnClickListener(this);
         }
         return convertView;
     }
@@ -86,11 +85,11 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
     public void onClick(View v) {
         Intent intent;
         oid = data.get(count).getProduct().getId();
+        DataListBean listBean = data.get(count);
         switch (v.getId()) {
             case R.id.like_tv://点赞
-                Log.e("oid", ">>>>>>>>" + oid);
-                RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
 
+                RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
                 HttpRequestUtils.create(context).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
                     @Override
                     public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -114,12 +113,16 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 });
                 break;
             case R.id.notice_tv:
+
                 userId = data.get(count).getUser().getUserId();
                 goodId = data.get(count).getProduct().getId();
                 Log.e("ProduceAdapter", "userId:" + userId + "goodId:" + goodId);
                 intent = new Intent(context, ShopDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listBean", listBean);
                 intent.putExtra("userId", userId);
                 intent.putExtra("goodId", goodId);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
                 break;
             case R.id.commot_tv:
@@ -127,6 +130,16 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 intent.putExtra("oid", oid);
                 context.startActivity(intent);
 //                commentClick.myOnClik(v, oid);
+                break;
+            case R.id.home_header_img:
+                intent = new Intent(context, MyBaseAreaActivity.class);
+                intent.putExtra("cnName",data.get(count).getUser().getCnName());
+                context.startActivity(intent);
+                break;
+            case R.id.cnname:
+                intent = new Intent(context, MyBaseAreaActivity.class);
+                intent.putExtra("cnName",data.get(count).getUser().getCnName());
+                context.startActivity(intent);
                 break;
         }
     }
@@ -146,6 +159,9 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         protected TextView likeCount;//点赞
         @Bind(R.id.commot_tv)
         protected TextView commentCount;//评论
+        @Bind(R.id.home_header_img)
+        protected ImageView headerImg;
+
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

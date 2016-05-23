@@ -6,6 +6,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -40,6 +41,10 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
 
     private List<SHopDataList> mDatas;
     private ShopListAdapter mAdapter;
+    @Bind(R.id.search_icon)
+    protected ImageView searchImg;
+    @Bind(R.id.editText)
+    protected EditText editText;
 
 
     @Override
@@ -48,18 +53,19 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_plant_shop);
         ButterKnife.bind(this);
         initView();
-        initData();
+        initData("");
         initEvent();
     }
 
-    private void initData() {
-        RequestParams params = RequestParamsUtils.getShopListData("1", "1", "10", this);
+    private void initData(String keyWord) {
+        RequestParams params = RequestParamsUtils.getShopListData(keyWord, "1", "1", "10");
         HttpRequestUtils.create(this).send(URL.PLANT_SHOPS_LIST_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
                 if (resultInfo != null) {
                     ShopListBean bean = JsonParse.parseToObject(resultInfo, ShopListBean.class);
                     if (bean != null) {
+
                         mDatas.addAll(bean.getDataList());
                         mAdapter.notifyDataSetChanged();
                     }
@@ -71,6 +77,7 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
 
     private void initEvent() {
         backImg.setOnClickListener(this);
+        searchImg.setOnClickListener(this);
     }
 
     private void initView() {
@@ -107,6 +114,11 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.search_icon:
+                String keyWord = editText.getText().toString().trim();
+                mDatas.clear();
+                initData(keyWord);
+                break;
             case R.id.back_arrows:
                 finish();
                 break;
