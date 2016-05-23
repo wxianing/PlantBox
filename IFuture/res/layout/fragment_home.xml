@@ -1,5 +1,4 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -28,7 +27,7 @@
             <!--viewpager选择-->
             <include layout="@layout/home_select_view_layout" />
 
-            <com.meten.plantbox.view.MyViewPager
+            <com.sinoinnovo.plantbox.view.MyViewPager
                 android:id="@+id/home_select_viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

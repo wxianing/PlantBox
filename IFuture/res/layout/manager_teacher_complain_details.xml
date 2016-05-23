@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <com.meten.plantbox.view.CircularImage
+    <com.sinoinnovo.plantbox.view.CircularImage
         android:id="@+id/head_img"
         android:layout_width="50dp"
         android:layout_height="50dp"

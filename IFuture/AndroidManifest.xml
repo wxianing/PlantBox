@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.meten.plantbox"
+    package="com.sinoinnovo.plantbox"
     android:versionCode="1"
     android:versionName="0.1.0">
 
@@ -17,7 +17,7 @@
         android:xlargeScreens="true" />
 
     <permission
-        android:name="com.meten.plantbox.permission.JPUSH_MESSAGE"
+        android:name="com.sinoinnovo.plantbox.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
     <!-- Required  一些系统要求的权限，如访问网络等 -->
@@ -51,17 +51,17 @@
 
     <!-- 获取logcat日志 -->
     <application
-        android:name=".MainApplication"
+        android:name="com.sinoinnovo.plantbox.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="ef51043dc432ed559b6cbe29c0d94267" />
+            android:value="32b0a58f70c1b3883aff0ae94319c19a" />
 
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name="com.sinoinnovo.plantbox.activity.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -71,71 +71,71 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.SettingActivity"
+            android:name="com.sinoinnovo.plantbox.activity.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.StudentMianActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.StudentMianActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.teacher.TeacherMianActivity"
+            android:name="com.sinoinnovo.plantbox.activity.teacher.TeacherMianActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.UserInfoActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.UserInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.ModifUserInfoActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.ModifUserInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.MyTeacherActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.MyTeacherActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.MyChooseSchoolActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.MyChooseSchoolActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.DatumWritActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.DatumWritActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.WebActivity"
+            android:name="com.sinoinnovo.plantbox.activity.WebActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.BindActivity"
+            android:name="com.sinoinnovo.plantbox.activity.BindActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.teacher.MyStudentActivity"
+            android:name="com.sinoinnovo.plantbox.activity.teacher.MyStudentActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.MyComplainActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.MyComplainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.ChooseComplainObjectActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.ChooseComplainObjectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.student.ComplainDetailsActivity"
+            android:name="com.sinoinnovo.plantbox.activity.student.ComplainDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.SystemMessageActivity"
+            android:name="com.sinoinnovo.plantbox.activity.SystemMessageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.manager.ManagerMainActivity"
+            android:name="com.sinoinnovo.plantbox.activity.manager.ManagerMainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.manager.PraiseActivity"
+            android:name="com.sinoinnovo.plantbox.activity.manager.PraiseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.manager.ComplainActivity"
+            android:name="com.sinoinnovo.plantbox.activity.manager.ComplainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.manager.TeacherComplainActivity"
+            android:name="com.sinoinnovo.plantbox.activity.manager.TeacherComplainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.teacher.StudentInfoActivity"
+            android:name="com.sinoinnovo.plantbox.activity.teacher.StudentInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@style/StudentinfoTheme" />
         <activity
-            android:name=".activity.manager.PraiseDetailsActivity"
+            android:name="com.sinoinnovo.plantbox.activity.manager.PraiseDetailsActivity"
             android:screenOrientation="portrait" />
 
         <!-- sharesdk start -->
@@ -156,7 +156,7 @@
 
         <!-- 微信分享回调 -->
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.sinoinnovo.plantbox.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
@@ -221,7 +221,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器 -->
         <receiver
-            android:name=".push.PushReceiver"
+            android:name="com.sinoinnovo.plantbox.push.PushReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
@@ -250,110 +250,110 @@
             android:value="e7bbe40ed037dd604bb3722f" />
         <!-- </>值来自开发者平台取得的AppKey -->
         <activity
-            android:name=".activity.SystemFeedbackActivity"
+            android:name="com.sinoinnovo.plantbox.activity.SystemFeedbackActivity"
             android:label="@string/title_activity_system_feedback"
-            android:parentActivityName=".activity.base.BaseHeadActivity">
+            android:parentActivityName="com.sinoinnovo.plantbox.activity.base.BaseHeadActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.meten.plantbox.activity.base.BaseHeadActivity" />
+                android:value="com.sinoinnovo.plantbox.activity.base.BaseHeadActivity" />
         </activity>
 
         <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name=".activity.PlantShopActivity"
+            android:name="com.sinoinnovo.plantbox.activity.PlantShopActivity"
             android:label="@string/title_activity_plant_shop" />
         <activity
-            android:name=".activity.PlantCenterActivity"
+            android:name="com.sinoinnovo.plantbox.activity.PlantCenterActivity"
             android:label="@string/title_activity_plant_center" />
         <activity
-            android:name=".activity.GrowTreeActivity"
+            android:name="com.sinoinnovo.plantbox.activity.GrowTreeActivity"
             android:label="@string/title_activity_grow_tree" />
         <activity
-            android:name=".activity.ActiveActivity"
+            android:name="com.sinoinnovo.plantbox.activity.ActiveActivity"
             android:label="@string/title_activity_active" />
         <activity
-            android:name=".activity.MyGrowupActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MyGrowupActivity"
             android:label="@string/title_activity_my_growup" />
         <activity
-            android:name=".activity.MyBaseAreaActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MyBaseAreaActivity"
             android:label="@string/title_activity_my_base_area" />
         <activity
-            android:name=".activity.ShopDetailActivity"
+            android:name="com.sinoinnovo.plantbox.activity.ShopDetailActivity"
             android:label="@string/title_activity_shop_detail" />
         <activity
-            android:name=".activity.PlantBaikeActivity"
+            android:name="com.sinoinnovo.plantbox.activity.PlantBaikeActivity"
             android:label="@string/title_activity_plant_baike" />
         <activity
-            android:name=".activity.BannerDetailActivity"
+            android:name="com.sinoinnovo.plantbox.activity.BannerDetailActivity"
             android:label="@string/title_activity_banner_detail" />
         <activity
-            android:name=".activity.PublishActivity"
+            android:name="com.sinoinnovo.plantbox.activity.PublishActivity"
             android:label="@string/title_activity_publish" />
         <activity
-            android:name=".activity.MyShareActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MyShareActivity"
             android:label="@string/title_activity_my_share" />
         <activity
-            android:name=".activity.ProductDetailsActivity"
+            android:name="com.sinoinnovo.plantbox.activity.ProductDetailsActivity"
             android:label="@string/title_activity_product_details" />
         <activity
-            android:name=".activity.AddAddressActivity"
+            android:name="com.sinoinnovo.plantbox.activity.AddAddressActivity"
             android:label="@string/title_activity_add_goods" />
         <activity
-            android:name=".activity.OrderActivity"
+            android:name="com.sinoinnovo.plantbox.activity.OrderActivity"
             android:label="@string/title_activity_order" />
         <activity
-            android:name=".activity.AddNewAddressActivity"
+            android:name="com.sinoinnovo.plantbox.activity.AddNewAddressActivity"
             android:label="@string/title_activity_add_new_address" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name="com.sinoinnovo.plantbox.activity.RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity
-            android:name=".activity.ResetPwdActivity"
+            android:name="com.sinoinnovo.plantbox.activity.ResetPwdActivity"
             android:label="@string/title_activity_reset_pwd" />
         <activity
-            android:name=".activity.MyCollectActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MyCollectActivity"
             android:label="@string/title_activity_my_collect" />
         <activity
-            android:name=".activity.MyOrderActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MyOrderActivity"
             android:label="@string/title_activity_my_order" />
         <activity
-            android:name=".activity.DimensionCodeActivity"
+            android:name="com.sinoinnovo.plantbox.activity.DimensionCodeActivity"
             android:label="@string/title_activity_dimension_code" />
-        <activity android:name=".activity.MipcaCaptureActivity" />
+        <activity android:name="com.sinoinnovo.plantbox.activity.MipcaCaptureActivity" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name="com.sinoinnovo.plantbox.activity.LoginActivity"
             android:label="@string/title_activity_welcome" />
         <activity
-            android:name=".activity.GuideActivity"
+            android:name="com.sinoinnovo.plantbox.activity.GuideActivity"
             android:label="@string/title_activity_guide" />
         <activity
-            android:name=".activity.AddFriendActivity"
+            android:name="com.sinoinnovo.plantbox.activity.AddFriendActivity"
             android:label="@string/title_activity_add_friend" />
         <activity
-            android:name=".activity.MyLikeActivity"
+            android:name="com.sinoinnovo.plantbox.activity.MyLikeActivity"
             android:label="@string/title_activity_my_like" />
-        <activity android:name=".activity.CityListActivity" />
+        <activity android:name="com.sinoinnovo.plantbox.activity.CityListActivity" />
         <activity
-            android:name=".activity.AquareActivity"
+            android:name="com.sinoinnovo.plantbox.activity.AquareActivity"
             android:label="@string/title_activity_aquare" />
         <activity
-            android:name=".activity.CommentActivity"
+            android:name="com.sinoinnovo.plantbox.activity.CommentActivity"
             android:label="@string/title_activity_comment" />
         <activity
-            android:name=".activity.VersionInformationActivity"
+            android:name="com.sinoinnovo.plantbox.activity.VersionInformationActivity"
             android:label="@string/title_activity_version_information" />
         <activity
-            android:name=".activity.AboutActivity"
+            android:name="com.sinoinnovo.plantbox.activity.AboutActivity"
             android:label="@string/title_activity_about" />
         <activity
-            android:name=".activity.PrivacyActivity"
+            android:name="com.sinoinnovo.plantbox.activity.PrivacyActivity"
             android:label="@string/title_activity_privacy" />
         <activity
-            android:name=".activity.NoticeActivity"
+            android:name="com.sinoinnovo.plantbox.activity.NoticeActivity"
             android:label="@string/title_activity_notice" />
         <activity
-            android:name=".activity.ForgetPwdActivity"
+            android:name="com.sinoinnovo.plantbox.activity.ForgetPwdActivity"
             android:label="@string/title_activity_forget_pwd"></activity>
     </application>
 

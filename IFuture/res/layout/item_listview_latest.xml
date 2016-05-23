@@ -100,7 +100,7 @@
             android:src="@drawable/p3" />
     </LinearLayout>
 
-    <com.meten.plantbox.widget.HListView
+    <com.sinoinnovo.plantbox.widget.HListView
         android:id="@+id/hlistView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

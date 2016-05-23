@@ -175,7 +175,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.meten.plantbox.view.CircularImage
+    <com.sinoinnovo.plantbox.view.CircularImage
         android:id="@+id/head_img"
         android:layout_width="@dimen/headImgSize"
         android:layout_height="@dimen/headImgSize"

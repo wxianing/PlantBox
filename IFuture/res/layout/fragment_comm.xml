@@ -4,9 +4,9 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.meten.plantbox.fragment.CommFragment">
+    tools:context="com.sinoinnovo.plantbox.fragment.CommFragment">
 
-    <com.meten.plantbox.view.MyListView
+    <com.sinoinnovo.plantbox.view.MyListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

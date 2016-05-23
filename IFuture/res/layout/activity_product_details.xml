@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meten.plantbox.activity.ProductDetailsActivity">
+    tools:context="com.sinoinnovo.plantbox.activity.ProductDetailsActivity">
 
     <include
         android:id="@+id/titlebar"
@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.meten.plantbox.widget.AutoAdjustHeightImageView
+                <com.sinoinnovo.plantbox.widget.AutoAdjustHeightImageView
                     android:id="@+id/banner_img"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <com.meten.plantbox.view.MyListView
+            <com.sinoinnovo.plantbox.view.MyListView
                 android:id="@+id/details_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

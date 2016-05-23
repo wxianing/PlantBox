@@ -42,7 +42,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/searchBarContainer">
 
-        <com.meten.plantbox.widget.ContactListViewImpl
+        <com.sinoinnovo.plantbox.widget.ContactListViewImpl
             android:id="@+id/listview"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

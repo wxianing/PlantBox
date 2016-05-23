@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.meten.plantbox.view.CircularImage
+    <com.sinoinnovo.plantbox.view.CircularImage
         android:id="@+id/head_img"
         android:layout_width="40dp"
         android:layout_height="40dp"

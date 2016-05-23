@@ -40,14 +40,14 @@
             android:textColor="@color/white"/>
     </LinearLayout>
 
-    <com.meten.plantbox.view.wave.WaveView
+    <com.sinoinnovo.plantbox.view.wave.WaveView
         android:id="@+id/wave"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp10"
         android:layout_marginRight="@dimen/dp10">
 
-    </com.meten.plantbox.view.wave.WaveView>
+    </com.sinoinnovo.plantbox.view.wave.WaveView>
 
     <ImageView
         android:id="@+id/delete_iv"

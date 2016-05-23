@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.meten.plantbox.fragment.AchievementFragment">
+    tools:context="com.sinoinnovo.plantbox.fragment.AchievementFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

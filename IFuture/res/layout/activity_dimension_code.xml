@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#ffe1e0de"
     android:orientation="vertical"
-    tools:context="com.meten.plantbox.activity.DimensionCodeActivity">
+    tools:context="com.sinoinnovo.plantbox.activity.DimensionCodeActivity">
 
     <include layout="@layout/titlebar" />
 

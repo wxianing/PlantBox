@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.meten.plantbox.activity.AddNewAddressActivity">
+    tools:context="com.sinoinnovo.plantbox.activity.AddNewAddressActivity">
 
     <include layout="@layout/titlebar" />
 

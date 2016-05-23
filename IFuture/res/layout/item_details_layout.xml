@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.meten.plantbox.widget.AutoAdjustHeightImageView
+    <com.sinoinnovo.plantbox.widget.AutoAdjustHeightImageView
         android:id="@+id/pro_gv_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

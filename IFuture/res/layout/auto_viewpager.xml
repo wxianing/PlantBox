@@ -4,7 +4,7 @@
     android:layout_height="@dimen/home_viewpager_height"
     tools:context=".MainActivity">
 
-    <com.meten.plantbox.widget.AutoScrollViewPager
+    <com.sinoinnovo.plantbox.widget.AutoScrollViewPager
         android:id="@+id/home_banner_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
