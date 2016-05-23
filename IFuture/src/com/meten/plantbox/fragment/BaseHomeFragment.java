@@ -79,7 +79,7 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
 
     private void initData() {
         callBack = new CallBack();
-        RequestParams params = RequestParamsUtils.getProductList("3", "1", "3");
+        RequestParams params = RequestParamsUtils.getProductList("","3", "1", "3");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
     }
 

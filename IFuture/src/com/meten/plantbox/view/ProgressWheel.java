@@ -697,8 +697,8 @@ public class ProgressWheel extends View {
         }
 
         //required field that makes Parcelables from a Parcel
-        public static final Parcelable.Creator<WheelSavedState> CREATOR =
-                new Parcelable.Creator<WheelSavedState>() {
+        public static final Creator<WheelSavedState> CREATOR =
+                new Creator<WheelSavedState>() {
                     public WheelSavedState createFromParcel(Parcel in) {
                         return new WheelSavedState(in);
                     }

@@ -80,7 +80,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 String register = pwdEv.getText().toString().trim();
                 if (!TextUtils.isEmpty(phone) && phone.length() == 11) {
                     if (!TextUtils.isEmpty(register) && register.length() >= 6) {
-                        RequestParams params = RequestParamsUtils.getRegisterParams(phone, register, this);
+                        RequestParams params = RequestParamsUtils.getRegisterParams(phone, register);
                         HttpRequestUtils.create(this).send(URL.REGISTER_URL, params, new HttpRequestCallBack<ResultInfo>() {
                             @Override
                             public void onSuccess(ResultInfo resultInfo, int requestCode) {

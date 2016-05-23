@@ -20,11 +20,13 @@
         android:textSize="@dimen/sp14" />
 
     <EditText
+        android:id="@+id/search_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp5"
         android:layout_weight="1"
         android:background="@drawable/search_shape"
+        android:editable="false"
         android:gravity="center"
         android:hint="搜索植物/用户"
         android:textColor="@color/white"

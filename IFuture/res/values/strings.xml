@@ -122,5 +122,7 @@
     <string name="title_activity_privacy">PrivacyActivity</string>
     <string name="title_activity_notice">NoticeActivity</string>
     <string name="title_activity_forget_pwd">ForgetPwdActivity</string>
+    <string name="title_activity_serach">SerachActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

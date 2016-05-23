@@ -94,7 +94,7 @@ public class CommFragment extends Fragment implements LikeCallBack {
 
     private void initData() {
 
-        RequestParams params = RequestParamsUtils.getProductList(mParam1, "" + pageIndex, "" + pageSize);
+        RequestParams params = RequestParamsUtils.getProductList("",mParam1, "" + pageIndex, "" + pageSize);
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
 
     }

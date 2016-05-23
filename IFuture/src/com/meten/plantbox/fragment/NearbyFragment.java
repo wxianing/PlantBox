@@ -62,7 +62,7 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     //地图
     private MapView mMapView = null;
     private AMap aMap;
-    private LocationSource.OnLocationChangedListener mListener;
+    private OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
 
@@ -80,8 +80,6 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     private NearByListAdapter mAdapter;
     @Bind(R.id.title_right_img)
     protected ImageView rightImg;
-
-    private ArrayList<LatLng> latlngList = new ArrayList();
 
     public NearbyFragment() {
     }
@@ -237,6 +235,8 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
                             @Override
                             public void onClick(int which) {
                                 Intent intent = new Intent(getActivity(), AquareActivity.class);
+
+                                intent.putExtra("mDatas", (Serializable) mDatas);
                                 intent.putStringArrayListExtra("lats", lats);
                                 intent.putStringArrayListExtra("longs", longs);
                                 startActivity(intent);

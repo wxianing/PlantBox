@@ -71,7 +71,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.right_tv:
                 String comment = editText.getText().toString().trim();
-                RequestParams params = RequestParamsUtils.getLikeParams(oid, comment, this);
+                RequestParams params = RequestParamsUtils.getLikeParams(oid, comment);
 
                 HttpRequestUtils.create(this).send(URL.COMMENT_URL, params, new HttpRequestCallBack<ResultInfo>() {
                     @Override

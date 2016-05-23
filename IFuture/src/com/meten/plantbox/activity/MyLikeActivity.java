@@ -58,7 +58,7 @@ public class MyLikeActivity extends BaseActivity implements View.OnClickListener
     private void initView() {
         mDatas = new ArrayList<>();
         mAdapter = new ProduceAdapter(mDatas, this, this);
-//        mListView.setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
         int tag = getIntent().getIntExtra("Tag", 0);
         switch (tag) {
             case 1:
@@ -76,10 +76,10 @@ public class MyLikeActivity extends BaseActivity implements View.OnClickListener
 
     private void initData() {
         callBack = new CallBack();
-//        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "3",this);
-//        HttpRequestUtils.create(this).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
-        RequestParams params = RequestParamsUtils.getProductList("3", "1", "3");
-        HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, callBack);
+        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "10");
+        HttpRequestUtils.create(this).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
+//        RequestParams params = RequestParamsUtils.getProductList("","1", "1", "3");
+//        HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, callBack);
     }
 
     @Override

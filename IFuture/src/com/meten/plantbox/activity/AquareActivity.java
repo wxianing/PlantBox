@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -20,17 +21,20 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.meten.plantbox.R;
 import com.meten.plantbox.activity.base.BaseFragmentActivity;
+import com.meten.plantbox.bean.nearby.NearByDataList;
+import com.meten.plantbox.utils.ToastUtils;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AquareActivity extends BaseFragmentActivity implements View.OnClickListener, LocationSource, AMapLocationListener {
+public class AquareActivity extends BaseFragmentActivity implements View.OnClickListener, LocationSource, AMapLocationListener, AMap.OnMarkerClickListener {
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
     @Bind(R.id.title_tv)
@@ -39,12 +43,13 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
     //地图
     private MapView mMapView = null;
     private AMap aMap;
-    private LocationSource.OnLocationChangedListener mListener;
+    private OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
     private UiSettings mUiSettings;
 
     private ArrayList<LatLng> latlngList = new ArrayList();
+    private ArrayList<NearByDataList> mDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +57,9 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
         setContentView(R.layout.activity_aquare);
         ButterKnife.bind(this);
         mMapView = (MapView) findViewById(R.id.map);
-
         mMapView.onCreate(savedInstanceState);
+        //接受附近传过来的List<NearByDataList> 集合
+        mDatas = (ArrayList<NearByDataList>) getIntent().getSerializableExtra("mDatas");
         initView();
         init();
         initEvent();
@@ -67,9 +73,10 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
             aMap = mMapView.getMap();
             mUiSettings = aMap.getUiSettings();
             mUiSettings.setZoomControlsEnabled(false);
-            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);
+            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);//放大地图
             aMap.moveCamera(localCameraUpdate);
             setUpMap();
+            aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
         }
     }
 
@@ -91,11 +98,19 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
         aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         // aMap.setMyLocationType()
-        for (int i = 0; i < latlngList.size(); i++) {
-            aMap.addMarker(new MarkerOptions().position((LatLng) this.latlngList.get(i)).icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.poi_marker_pressed))));
+
+        //添加Marker标记
+        for (int i = 0; i < mDatas.size(); i++) {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),
+                    R.drawable.poi_marker_pressed)));
+            markerOptions.title(mDatas.get(i).getCnName());//标题
+            markerOptions.snippet("距离:" + (int) mDatas.get(i).getDistincts() + "km");//Maiker上面的小窗口
+
+            markerOptions.position(new LatLng(mDatas.get(i).getLat(), mDatas.get(i).getLon()));//添加LatLng经纬度
+            aMap.addMarker(markerOptions);
         }
     }
-
 
     private void initEvent() {
         backImg.setOnClickListener(this);
@@ -103,13 +118,6 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
 
     private void initView() {
         title.setText("广场");
-        ArrayList<String> lats = getIntent().getStringArrayListExtra("lats");
-        ArrayList<String> longs = getIntent().getStringArrayListExtra("longs");
-        Log.e("latlngList", ">>>>>>>>>" + lats.get(0));
-        for (int i = 0; i < lats.size(); i++) {
-            latlngList.add(new LatLng(Double.parseDouble(lats.get(i)), Double.parseDouble(longs.get(i))));
-        }
-
     }
 
     @Override
@@ -133,15 +141,6 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-
-           /*     aMapLocation.setLongitude(113.90770116666667);
-                aMapLocation.setLatitude(22.7356935);
-                mListener.onLocationChanged(aMapLocation);
-
-                aMapLocation.setLongitude(113.90116666667);
-                aMapLocation.setLatitude(22.73935);
-                mListener.onLocationChanged(aMapLocation);*/
-
 
                 deactivate();
             } else {
@@ -181,4 +180,10 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
         mlocationClient = null;
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        //Markar点击事件处理
+
+        return false;
+    }
 }

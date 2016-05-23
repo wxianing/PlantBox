@@ -36,7 +36,11 @@
 
     <!-- 自定义仿IOS的ActionSheet底部Dialog的样式 ，有模糊效果 -->
     <style name="DActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
-        <item name="android:background" >@color/ashen_while</item>
+        <item name="android:background">@color/ashen_while</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="loading">
@@ -79,5 +83,12 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/main_rg_color</item>
         <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="customDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>

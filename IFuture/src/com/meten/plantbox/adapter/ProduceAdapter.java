@@ -89,7 +89,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         switch (v.getId()) {
             case R.id.like_tv://点赞
                 Log.e("oid", ">>>>>>>>" + oid);
-                RequestParams params = RequestParamsUtils.getLikeParams(oid, "", context);
+                RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
 
                 HttpRequestUtils.create(context).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
                     @Override

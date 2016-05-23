@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import com.meten.plantbox.AppManager;
+import com.meten.plantbox.MainApplication;
 import com.meten.plantbox.model.User;
 import com.meten.plantbox.utils.SharedPreferencesUtils;
 
@@ -56,6 +57,7 @@ public class Constant {
 
     public static final int REFRESH = 0x00;
     public static final int LOADMORE = 0x01;
+    public static final String CODE = SharedPreferencesUtils.getStringData(MainApplication.getmInstance(), "code", null);
 
 
     /**

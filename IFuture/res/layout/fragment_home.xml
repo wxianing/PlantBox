@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.hzwl.plantbox.fragments.HomeFragment">
+    android:orientation="vertical">
 
     <!--头部搜索-->
     <include layout="@layout/titlebar_fragment_home" />

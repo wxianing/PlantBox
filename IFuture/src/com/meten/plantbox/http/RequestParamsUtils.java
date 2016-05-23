@@ -27,17 +27,14 @@ public class RequestParamsUtils {
     public static RequestParams createRequestParams() {
         RequestParams params = new RequestParams();
         params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", Constant.getRequestCode());
+        params.addHeader("_code", Constant.CODE);
         params.addBodyParameter("content-type", "application/json");
-        Log.e("code", Constant.getRequestCode());
+        Log.e("code",Constant.CODE);
         return params;
     }
 
-    public static RequestParams getRegisterParams(String userName, String password, Context context) {
-        String code = SharedPreferencesUtils.getStringData(context, "code", null);
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", code);
+    public static RequestParams getRegisterParams(String userName, String password) {
+        RequestParams params =createRequestParams();
         params.addBodyParameter("UserName", userName);
         params.addBodyParameter("Pwd", password);
         params.addBodyParameter("Code", password);
@@ -45,11 +42,8 @@ public class RequestParamsUtils {
     }
 
 
-    public static RequestParams getCommentList(String sType, String PageIndex, String PageSize, Context context) {
-        String code = SharedPreferencesUtils.getStringData(context, "code", null);
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", code);
+    public static RequestParams getCommentList(String sType, String PageIndex, String PageSize) {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("sType", sType);
         params.addBodyParameter("PageIndex", PageIndex);
         params.addBodyParameter("PageSize", PageSize);
@@ -58,11 +52,8 @@ public class RequestParamsUtils {
 
 
     //点赞
-    public static RequestParams getLikeParams(int oid, String content, Context context) {
-        String code = SharedPreferencesUtils.getStringData(context, "code", null);
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", code);
+    public static RequestParams getLikeParams(int oid, String content) {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("FKId", "" + oid);
         params.addBodyParameter("FKType", "" + 1);
         params.addBodyParameter("Content", content);
@@ -70,11 +61,8 @@ public class RequestParamsUtils {
     }
 
     //IsCollect 1：收藏；0：取消收藏
-    public static RequestParams collectParams(int id, int FKType, int IsCollect, Context context) {
-        String code = SharedPreferencesUtils.getStringData(context, "code", null);
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", code);
+    public static RequestParams collectParams(int id, int FKType, int IsCollect) {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("FKId", "" + id);
         params.addBodyParameter("FKType", "" + 1);
         params.addBodyParameter("IsCollect", "" + IsCollect);
@@ -83,20 +71,15 @@ public class RequestParamsUtils {
 
     //收藏列表
     public static RequestParams getCollectParams(int sType, int PageIndex, int PageSize) {
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", "101");
-        params.addHeader("_code", Constant.getRequestCode());
+        RequestParams params = createRequestParams();
         params.addBodyParameter("sType", "" + sType);
         params.addBodyParameter("PageIndex", "" + PageIndex);
         params.addBodyParameter("PageSize", "" + PageSize);
         return params;
     }
 
-    public static RequestParams getProduceDetails(int oid, Context context) {
-        String code = SharedPreferencesUtils.getStringData(context, "code", null);
-        RequestParams params = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", code);
+    public static RequestParams getProduceDetails(int oid) {
+        RequestParams params = createRequestParams();
         params.addBodyParameter("Id", oid + "");
         return params;
     }
@@ -183,8 +166,9 @@ public class RequestParamsUtils {
      * @param PageSize
      * @return
      */
-    public static RequestParams getProductList(String sType, String PageIndex, String PageSize) {
+    public static RequestParams getProductList(String keyWorld, String sType, String PageIndex, String PageSize) {
         RequestParams params = createRequestParams();
+        params.addBodyParameter("Keyword", keyWorld);
         params.addBodyParameter("sType", sType);
         params.addBodyParameter("PageIndex", PageIndex);
         params.addBodyParameter("PageSize", PageSize);

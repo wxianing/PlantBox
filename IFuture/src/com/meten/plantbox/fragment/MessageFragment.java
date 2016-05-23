@@ -1,6 +1,7 @@
 package com.meten.plantbox.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -15,10 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meten.plantbox.R;
+import com.meten.plantbox.activity.DimensionCodeActivity;
+import com.meten.plantbox.activity.MainActivity;
 import com.meten.plantbox.adapter.ExpandableAdapter;
 import com.meten.plantbox.bean.message.Child;
 import com.meten.plantbox.bean.message.Group;
 import com.meten.plantbox.utils.ToastUtils;
+import com.meten.plantbox.view.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +51,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener, E
     protected ExpandableListView expListView;
 
     private List<Group> list = new ArrayList<Group>();
+    private CustomDialog customDialog;
 
 
     public MessageFragment() {
@@ -111,50 +118,32 @@ public class MessageFragment extends Fragment implements View.OnClickListener, E
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_right_img:
-//                getPopupWindow();
-//                // 这里是位置显示方式,在屏幕的左侧
-//                popupWindow.showAtLocation(v, Gravity.RIGHT, 10, 10);
-
+                selectDialog();
+                break;
+            case R.id.scan_layout:
+                startActivity(new Intent(getActivity(), DimensionCodeActivity.class));
+                customDialog.dismiss();
+                break;
+            case R.id.search_layout:
+                customDialog.dismiss();
                 break;
         }
     }
 
-    /***
-     * 获取PopupWindow实例
-     */
-    private void getPopupWindow() {
-        if (null != popupWindow) {
-            popupWindow.dismiss();
-            return;
-        } else {
-            initPopuptWindow();
-        }
-    }
-
-    /**
-     * 创建PopupWindow
-     */
-    protected void initPopuptWindow() {
-        // TODO Auto-generated method stub
-        // 获取自定义布局文件activity_popupwindow_left.xml的视图
-        View popupWindow_view = LayoutInflater.from(getActivity()).inflate(R.layout.popupwindow_layout, null,
-                false);
-        // 创建PopupWindow实例,200,LayoutParams.MATCH_PARENT分别是宽度和高度
-        popupWindow = new PopupWindow(popupWindow_view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-        // 设置动画效果
-//        popupWindow.setAnimationStyle(R.style.AnimationFade);
-        // 点击其他地方消失
-        popupWindow_view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                if (popupWindow != null && popupWindow.isShowing()) {
-                    popupWindow.dismiss();
-                    popupWindow = null;
-                }
-                return false;
-            }
-        });
+    private void selectDialog() {
+        View view = LayoutInflater.from(getActivity()).inflate(
+                R.layout.customdialog, null);
+        customDialog = new CustomDialog(getActivity(), view);
+        view.findViewById(R.id.scan_layout).setOnClickListener(this);
+        view.findViewById(R.id.search_layout).setOnClickListener(this);
+        Window localWindow = customDialog.getWindow();
+        WindowManager.LayoutParams localLayoutParams = new WindowManager.LayoutParams();
+        localLayoutParams.gravity = 53;
+        localLayoutParams.y = 80;
+        localLayoutParams.x = 0;
+        localWindow.setAttributes(localLayoutParams);
+        customDialog.setCanceledOnTouchOutside(true);
+        customDialog.show();
     }
 
     @Override

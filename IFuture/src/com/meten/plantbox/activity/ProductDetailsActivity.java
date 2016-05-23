@@ -93,7 +93,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     private void initData() {
         Log.e("oid", ">>>>" + oid);
 
-        RequestParams params = RequestParamsUtils.getProduceDetails(oid, this);
+        RequestParams params = RequestParamsUtils.getProduceDetails(oid);
         HttpRequestUtils.create(this).send(URL.PRODUCE_DETAILS_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -150,7 +150,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 } else {
                     isCollect = 0;
                 }
-                RequestParams params = RequestParamsUtils.collectParams(oid, 1, isCollect, this);
+                RequestParams params = RequestParamsUtils.collectParams(oid, 1, isCollect);
                 HttpRequestUtils.create(this).send(URL.COLLENT_URL, params, new HttpRequestCallBack<ResultInfo>() {
                     @Override
                     public void onSuccess(ResultInfo resultInfo, int requestCode) {

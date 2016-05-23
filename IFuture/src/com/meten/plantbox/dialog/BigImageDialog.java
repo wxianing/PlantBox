@@ -87,7 +87,7 @@ public class BigImageDialog extends Dialog {
 
                 new AlertDialog.Builder(getContext()).setTitle("提示")
                         .setMessage("确认删除？")
-                        .setPositiveButton("确认", new AlertDialog.OnClickListener() {
+                        .setPositiveButton("确认", new OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -113,7 +113,7 @@ public class BigImageDialog extends Dialog {
             }
         });
 
-        image.setOnClickListener(new android.view.View.OnClickListener() {
+        image.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

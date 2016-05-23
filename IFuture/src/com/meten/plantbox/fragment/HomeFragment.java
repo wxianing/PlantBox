@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import com.meten.plantbox.activity.DimensionCodeActivity;
 import com.meten.plantbox.activity.GrowTreeActivity;
 import com.meten.plantbox.activity.PlantCenterActivity;
 import com.meten.plantbox.activity.PlantShopActivity;
+import com.meten.plantbox.activity.SearchActivity;
 import com.meten.plantbox.adapter.ImagePagerAdapter;
 import com.meten.plantbox.bean.banner.Banner;
 import com.meten.plantbox.bean.banner.BannerBean;
@@ -105,7 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     //地图
     private MapView mMapView = null;
     private AMap aMap;
-    private LocationSource.OnLocationChangedListener mListener;
+    private OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
 
@@ -122,6 +124,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     private UiSettings mUiSettings;
     @Bind(R.id.home_right_img)
     protected ImageView rightImg;
+    @Bind(R.id.search_edittext)
+    protected EditText search;//搜索
 
     public HomeFragment() {
     }
@@ -253,6 +257,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         activePrefecture.setOnClickListener(this);
         rightImg.setOnClickListener(this);
         cityName.setOnClickListener(this);
+        search.setOnClickListener(this);
     }
 
     @Override
@@ -377,6 +382,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
         Intent intent;
         switch (v.getId()) {
+            case R.id.search_edittext:
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+                break;
             case R.id.city_name:
                 intent = new Intent(getActivity(), CityListActivity.class);
                 startActivityForResult(intent, Constant.RESULT_OK);

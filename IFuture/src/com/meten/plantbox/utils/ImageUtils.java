@@ -170,7 +170,7 @@ public class ImageUtils {
                 myCaptureFile = new File(fileDir,fileName+System.currentTimeMillis()+".jpg");
             }
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bm.compress(CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
           return true;
@@ -286,11 +286,11 @@ public class ImageUtils {
 	public static Bitmap compressImage(Bitmap image) {
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+		image.compress(CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
 		int options = 100;
 		while (baos.toByteArray().length / 1024 > 512) { // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
 			baos.reset();// 重置baos即清空baos
-			image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+			image.compress(CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
 			options -= 10;// 每次都减少10
 		}
 		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
@@ -301,11 +301,11 @@ public class ImageUtils {
     public static InputStream compressImageToInputStream(Bitmap image) {
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+		image.compress(CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
 		int options = 100;
 		while (baos.toByteArray().length / 1024 > 512) { // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
 			baos.reset();// 重置baos即清空baos
-			image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+			image.compress(CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
 			options -= 10;// 每次都减少10
 		}
 		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
