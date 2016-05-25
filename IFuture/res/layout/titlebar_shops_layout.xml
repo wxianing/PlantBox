@@ -28,16 +28,10 @@
 
     <ImageView
         android:id="@+id/search_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="@dimen/dp10"
         android:layout_marginRight="@dimen/dp10"
         android:src="@drawable/search_icon" />
 
-    <ImageView
-        android:id="@+id/dimension_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginRight="@dimen/dp5"
-        android:src="@drawable/two_dimension_code_icon" />
 </LinearLayout>

@@ -43,13 +43,11 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
     private List<DataListBean> mDatas;
     private CallBack callBack;
 
-    @Bind(R.id.more_information)
+
     protected TextView moreInformation;//更多资料
-    @Bind(R.id.nickname_linear)
+
     protected LinearLayout nickNameLinear;//昵称
-    @Bind(R.id.sex_linear)
     protected LinearLayout sexLinear;//性别
-    @Bind(R.id.introduction_linear)
     protected LinearLayout introduction;//简介
 
     public BaseHomeFragment() {
@@ -73,14 +71,21 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void initView() {
+        View headerView = LayoutInflater.from(getActivity()).inflate(R.layout.myarea_home_list_header, null);
+        moreInformation = (TextView) headerView.findViewById(R.id.more_information);
+        nickNameLinear = (LinearLayout) headerView.findViewById(R.id.nickname_linear);
+        sexLinear = (LinearLayout) headerView.findViewById(R.id.sex_linear);
+        introduction = (LinearLayout) headerView.findViewById(R.id.introduction_linear);
+
         mDatas = new ArrayList<>();
         mAdapter = new ProduceAdapter(mDatas, getActivity(), this);
         mListView.setAdapter(mAdapter);
+        mListView.addHeaderView(headerView);
     }
 
     private void initData() {
         callBack = new CallBack();
-        RequestParams params = RequestParamsUtils.getProductList("","3", "1", "3");
+        RequestParams params = RequestParamsUtils.getProductList("", "1", "1", "10");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
     }
 

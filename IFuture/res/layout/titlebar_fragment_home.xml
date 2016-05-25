@@ -34,6 +34,7 @@
         android:textSize="@dimen/sp14" />
 
     <ImageView
+        android:padding="@dimen/dp5"
         android:id="@+id/home_right_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

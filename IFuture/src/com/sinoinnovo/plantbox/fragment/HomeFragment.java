@@ -49,6 +49,7 @@ import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.view.MyViewPager;
 import com.sinoinnovo.plantbox.widget.AutoScrollViewPager;
 
@@ -367,6 +368,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
                     && aMapLocation.getErrorCode() == 0) {
                 Log.e("aMapLocation", aMapLocation.getAddress());
                 aMapLocation.getCity().replace("市", "");
+
+                SharedPreferencesUtils.saveDoubleData(getActivity(), "Longitude", aMapLocation.getLongitude());
+                SharedPreferencesUtils.saveDoubleData(getActivity(), "Latitude", aMapLocation.getLatitude());
+                
                 cityName.setText(aMapLocation.getCity());
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 deactivate();

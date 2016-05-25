@@ -5,35 +5,12 @@
     android:orientation="vertical"
     tools:context="com.sinoinnovo.plantbox.fragment.BaseHomeFragment">
 
-    <include layout="@layout/personal_message_layout" />
 
-    <TextView
-        android:id="@+id/more_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:paddingBottom="@dimen/dp5"
-        android:paddingTop="@dimen/dp5"
-        android:text="更多资料>>"
-        android:textColor="@color/gray_textcolor"
-        android:textSize="@dimen/sp16" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp5"
-        android:layout_marginTop="@dimen/dp5"
-        android:background="@color/white"
-        android:paddingBottom="@dimen/dp5"
-        android:paddingLeft="@dimen/dp15"
-        android:paddingTop="@dimen/dp5"
-        android:text="我的成果展示"
-        android:textColor="@color/gray_textcolor" />
-
-    <ListView
+    <com.sinoinnovo.plantbox.view.MyListView
         android:id="@+id/show_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:scrollbars="none" />
 
 </LinearLayout>

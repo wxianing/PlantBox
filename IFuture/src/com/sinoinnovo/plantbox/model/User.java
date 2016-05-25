@@ -26,6 +26,20 @@ public class User extends BaseUser implements Serializable {
 	@SerializedName("SchoolName")
 	private String centerName;
 
+	private String QRCodeUrl;
+
+	public String getQRCodeUrl() {
+		return QRCodeUrl;
+	}
+
+	public void setQRCodeUrl(String QRCodeUrl) {
+		this.QRCodeUrl = QRCodeUrl;
+	}
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
 	public String getAreaName() {
 		return AreaName;
 	}

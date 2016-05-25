@@ -76,37 +76,47 @@
         android:layout_marginRight="@dimen/dp10"
         android:ellipsize="end"
         android:maxLines="3"
-        android:text="        绿色植物是指含有叶绿素的非单细胞植物。一般性地可以理解为显绿色的植物。绿色植物的叶、茎中叶绿素能进行光合作用，其实质是将二氧化碳和水转成糖类时释放出氧气及能量。" />
+        android:text="内容" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp10">
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:visibility="gone">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
+            android:scaleType="fitXY"
             android:src="@drawable/p1" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/dp3"
             android:layout_weight="1"
+            android:scaleType="fitXY"
             android:src="@drawable/p2" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@dimen/dp3"
             android:layout_weight="1"
+            android:scaleType="fitXY"
             android:src="@drawable/p3" />
     </LinearLayout>
 
-    <com.sinoinnovo.plantbox.widget.HListView
+    <GridView
         android:id="@+id/hlistView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:layout_marginLeft="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp15"
+        android:numColumns="3" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -131,7 +141,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp10"
                 android:gravity="center"
-                android:text="32" />
+                android:text="分享" />
         </LinearLayout>
 
         <LinearLayout

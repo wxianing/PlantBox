@@ -8,74 +8,74 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CustomBaseAdapter<T> extends BaseAdapter {
-	
-	protected Context context;
-	protected List<T> listData;
-	protected LayoutInflater listContainer;
 
-	/**
-	 * CustomBaseAdapter
-	 */
-	public CustomBaseAdapter(Context context) {
-		this.context = context;
-		this.listContainer = LayoutInflater.from(context); 
-	}
+    protected Context context;
+    protected List<T> listData;
+    protected LayoutInflater listContainer;
 
-	public void setListData(List<T> listData) {
-		this.listData = listData;
-		notifyDataSetChanged();
-	}
+    /**
+     * CustomBaseAdapter
+     */
+    public CustomBaseAdapter(Context context) {
+        this.context = context;
+        this.listContainer = LayoutInflater.from(context);
+    }
 
-	public void addData(List<T> data) {
-		if (data == null) {
-			return;
-		}
-		this.listData.addAll(data);
-		notifyDataSetChanged();
-	}
+    public void setListData(List<T> listData) {
+        this.listData = listData;
+        notifyDataSetChanged();
+    }
 
-	public void addData(T t) {
-		if(t == null){
-			return;
-		}
-		if (listData == null) {
-			listData = new ArrayList<T>();
-		}
-		this.listData.add(t);
-		notifyDataSetChanged();
-	}
+    public void addData(List<T> data) {
+        if (data == null) {
+            return;
+        }
+        this.listData.addAll(data);
+        notifyDataSetChanged();
+    }
 
-	public boolean hasData() {
-		if (listData == null || listData.size() == 0) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+    public void addData(T t) {
+        if (t == null) {
+            return;
+        }
+        if (listData == null) {
+            listData = new ArrayList<T>();
+        }
+        this.listData.add(t);
+        notifyDataSetChanged();
+    }
 
-	public List<T> getListData() {
-		if (listData == null) {
-			listData = new ArrayList<T>();
-		}
-		return listData;
-	}
+    public boolean hasData() {
+        if (listData == null || listData.size() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	@Override
-	public int getCount() {
-		if (listData != null) {
-			return listData.size();
-		}
-		return 0;
-	}
+    public List<T> getListData() {
+        if (listData == null) {
+            listData = new ArrayList<T>();
+        }
+        return listData;
+    }
 
-	@Override
-	public T getItem(int position) {
-		return listData.get(position);
-	}
+    @Override
+    public int getCount() {
+        if (listData != null) {
+            return listData.size();
+        }
+        return 0;
+    }
 
-	@Override
-	public long getItemId(int arg0) {
-		return 0;
-	}
+    @Override
+    public T getItem(int position) {
+        return listData.get(position);
+    }
+
+    @Override
+    public long getItemId(int arg0) {
+        return 0;
+    }
 
 }

@@ -62,13 +62,14 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
 
     /**
      * 更新数据 替换上传时本地的资源信息
-     * @param res 上传成功返回的资源信息
+     *
+     * @param res  上传成功返回的资源信息
      * @param code 本地资源id
      */
-    public void updateRes(Resource res, int code){
-        for(ResourceType t : getListData()){
-            for(Resource r : t.getItems()){
-                if(r.getId() == code){
+    public void updateRes(Resource res, int code) {
+        for (ResourceType t : getListData()) {
+            for (Resource r : t.getItems()) {
+                if (r.getId() == code) {
                     r.copy(res);
                     notifyDataSetChanged();
                     return;
@@ -79,12 +80,13 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
 
     /**
      * 上传失败时移除本地的资源信息
+     *
      * @param id 资源id
      */
-    public void removeResWithId(int id){
-        for(ResourceType t : getListData()){
-            for(Resource r : t.getItems()){
-                if(r.getId() == id){
+    public void removeResWithId(int id) {
+        for (ResourceType t : getListData()) {
+            for (Resource r : t.getItems()) {
+                if (r.getId() == id) {
                     t.getItems().remove(r);
                     notifyDataSetChanged();
                     return;
@@ -93,20 +95,20 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
         }
     }
 
-    public void addResource(){
+    public void addResource() {
 
     }
 
 
-    public boolean isDelete(){
+    public boolean isDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(boolean isDelete){
+    public void setIsDelete(boolean isDelete) {
         this.isDelete = isDelete;
     }
 
-    public void setPastStudent(boolean isPastStudent){
+    public void setPastStudent(boolean isPastStudent) {
         this.isPastStudent = isPastStudent;
     }
 
@@ -191,7 +193,7 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
             holder.indicator = (ImageView) convertView
                     .findViewById(R.id.indicator);
             holder.ivAdd.setOnClickListener(addClickListener);
-            if(isPastStudent){
+            if (isPastStudent) {
                 holder.ivAdd.setVisibility(View.INVISIBLE);
             }
             convertView.setTag(holder);
@@ -237,29 +239,29 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
             if (childPosition * 3 + i < data.get(groupPosition).getItems().size()) {
                 Resource item = data.get(groupPosition).getItems().get(childPosition * 3 + i);
 
-                if(ImageUtils.isImage(item.getResourceExtention())){
+                if (ImageUtils.isImage(item.getResourceExtention())) {
                     displayImage(holder, item);
                     holder.llFile.setVisibility(View.GONE);
-                }else{
+                } else {
                     holder.llFile.setVisibility(View.VISIBLE);
                     holder.tvFileName.setText(item.getName());
-                    holder.tvFileFormat.setText("."+item.getResourceExtention());
+                    holder.tvFileFormat.setText("." + item.getResourceExtention());
                 }
 
                 holder.ivDelete.setTag(item.getId());
                 holder.img.setTag(item);
 
-                if(isDelete){
+                if (isDelete) {
                     holder.ivDelete.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     holder.ivDelete.setVisibility(View.GONE);
                 }
 
-                LogUtils.e("id:"+item.getId()+"  progress:"+item.getProgress());
-                if(item.getId() < 0){
+                LogUtils.e("id:" + item.getId() + "  progress:" + item.getProgress());
+                if (item.getId() < 0) {
                     holder.wave.setVisibility(View.VISIBLE);
                     holder.wave.setProgress(item.getProgress());
-                }else{
+                } else {
                     holder.wave.setVisibility(View.GONE);
                 }
                 holder.img.setVisibility(View.VISIBLE);
@@ -280,9 +282,9 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
     private void displayImage(ChildHolder holder, Resource item) {
         BitmapUtils bitmapUtils = new BitmapUtils(context);
         bitmapUtils.configDefaultLoadingImage(R.drawable.ads_default);
-        bitmapUtils.configDefaultBitmapMaxSize(200,200);
+        bitmapUtils.configDefaultBitmapMaxSize(200, 200);
         bitmapUtils.configDefaultLoadFailedImage(R.drawable.ads_default);
-        bitmapUtils.display(holder.img,item.getThumbnailUrl());
+        bitmapUtils.display(holder.img, item.getThumbnailUrl());
     }
 
     @Override
@@ -292,21 +294,19 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
     }
 
 
-
-
-    OnClickListener addClickListener = new OnClickListener(){
+    OnClickListener addClickListener = new OnClickListener() {
 
         @Override
         public void onClick(View v) {
 
-            addPosition = (int)v.getTag();
+            addPosition = (int) v.getTag();
             resType = getListData().get(addPosition);
             //选择图片
 //            if (type == Constant.DATUM) {
 //                ImageUtils.openLocalImage(AppManager.getAppManager()
 //                        .currentActivity());
             SelectPicPopupWindow popup = new SelectPicPopupWindow(
-                    (Activity)context);
+                    (Activity) context);
             popup.setTitle("选择图片");
             popup.show();
 //            } else if (type == Constant.WRIT) {//选择文件
@@ -326,7 +326,7 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
     };
 
 
-     OnClickListener onItemListener = new OnClickListener(){
+    OnClickListener onItemListener = new OnClickListener() {
 
         @Override
         public void onClick(final View v) {
@@ -339,7 +339,7 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
 
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    int id = (int)v.getTag();
+                                    int id = (int) v.getTag();
                                     RequestParams params = RequestParamsUtils.deleteResource(id);
                                     params = RequestParamsUtils.addStudentParams(params, ((Activity) context).getIntent());
                                     HttpRequestUtils.create(context).send(URL.DELETE_RESOURCE,
@@ -354,7 +354,7 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
                     String url = res.getUrl();
                     String format = res.getResourceExtention();
                     if (ImageUtils.isImage(format)) {
-                        BigImageDialog dialog = new BigImageDialog(context, res,isPastStudent);
+                        BigImageDialog dialog = new BigImageDialog(context, res, isPastStudent);
                         dialog.setHttpCallBack(callback);
                         dialog.show();
                     } else {
@@ -374,9 +374,9 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
 
         @Override
         public void onSuccess(ResultInfo info, int requestCode) {
-            for(ResourceType t : getListData()){
-                for(Resource r : t.getItems()){
-                    if(r.getId() == requestCode){
+            for (ResourceType t : getListData()) {
+                for (Resource r : t.getItems()) {
+                    if (r.getId() == requestCode) {
                         t.getItems().remove(r);
                         notifyDataSetChanged();
                         isDelete = false;
@@ -407,7 +407,7 @@ public class DatumWritExpandableAdapter extends BaseExpandableListAdapter {
         holder.tvFileFormat = (TextView) view.findViewById(R.id.file_format_tv);
         holder.ivDelete.setOnClickListener(onItemListener);
         holder.img.setOnClickListener(onItemListener);
-        if(!isPastStudent){
+        if (!isPastStudent) {
             holder.img.setOnLongClickListener(longClickListener);
         }
         view.setTag(holder);

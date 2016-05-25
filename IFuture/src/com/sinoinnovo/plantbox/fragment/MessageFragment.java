@@ -92,12 +92,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener, E
 
         g1.setChildList(childList1);
 
-        list.add(g);
         list.add(g1);
+        list.add(g);
 
         expListView.setOnChildClickListener(this);
 
         expListView.setAdapter(new ExpandableAdapter(list, getActivity()));
+        expListView.expandGroup(0);
     }
 
     private void initEvent() {

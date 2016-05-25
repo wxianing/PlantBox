@@ -64,7 +64,7 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
             holder = (ViewHolder) view.getTag();
         }
 
-        MainApplication.imageLoader.displayImage(imageUrls.get(getPosition(position)).getPhoto(), holder.imageView,MainApplication.options);
+        MainApplication.imageLoader.displayImage(imageUrls.get(getPosition(position)).getPhoto(), holder.imageView, MainApplication.options);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

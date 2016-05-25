@@ -14,6 +14,8 @@ import com.google.gson.JsonArray;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.bean.bean.DetailList;
+import com.sinoinnovo.plantbox.bean.produce.ProduceDetails;
+import com.sinoinnovo.plantbox.bean.produce.ProductEntitysBean;
 import com.sinoinnovo.plantbox.constant.URL;
 import com.sinoinnovo.plantbox.http.HttpRequestListener;
 import com.sinoinnovo.plantbox.http.HttpRequestUtils;
@@ -22,6 +24,7 @@ import com.sinoinnovo.plantbox.model.User;
 import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -58,6 +61,10 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     @Bind(R.id.total_count)
     protected TextView count;
     private Gson gson;
+    protected ProduceDetails produce;
+    @Bind(R.id.total_menoy)
+    protected TextView totalMenoy;
+    private int money;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +92,18 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
         totalCount = getIntent().getStringExtra("totalCount");
         count.setText("数量：" + totalCount);
         DetailList bean = new DetailList();
+        produce = (ProduceDetails) getIntent().getSerializableExtra("produce");
 
-        bean.setQty(1);
-        bean.setProductId(1);
-        bean.setPrice(99);
-        bean.setQty(1);
-
-        mDatas.add(bean);
+        List<ProductEntitysBean> entitysBeanLists = produce.getProductEntitys();
+        for (int i = 0; i < entitysBeanLists.size(); i++) {
+            bean.setQty(Integer.valueOf(totalCount));
+            bean.setProductId(entitysBeanLists.get(i).getProductId());
+            bean.setPrice(entitysBeanLists.get(i).getSalePrice());
+            bean.setProductEntityId(entitysBeanLists.get(i).getId());
+            mDatas.add(bean);
+            money += entitysBeanLists.get(i).getSalePrice();
+        }
+        totalMenoy.setText("合计：￥" + money);
     }
 
     @Override
@@ -102,18 +114,22 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.submit_btn:
-                ToastUtils.show(this, "正在提交");
-                Object[] obj = mDatas.toArray();
-                String detaillist = gson.toJson(mDatas);
-                Log.e("str", obj.toString());
-                User user = SharedPreferencesUtils.getInstance(this).getUser();
-                HashMap params = RequestParamsUtils.saveOrderData(obj, address, customName);
-
+            case R.id.submit_btn://提交订单
+                HashMap params = RequestParamsUtils.saveOrderData(mDatas, address, customName);
                 HttpRequestUtils.getmInstance().send(URL.SAVE_ORDER_URL, params, new HttpRequestListener() {
                     @Override
                     public void onSuccess(JSONObject jsonObject) {
-                        Log.e("json>>>保存成功：", jsonObject.toString());
+                        try {
+                            JSONObject obj = new JSONObject(jsonObject.toString());
+                            int enumcode = obj.getInt("enumcode");
+                            if (enumcode == 0) {
+                                ToastUtils.show(OrderActivity.this, "提交成功");
+                            } else {
+                                ToastUtils.show(OrderActivity.this, "提交失败");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 break;

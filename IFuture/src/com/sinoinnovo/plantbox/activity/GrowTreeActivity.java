@@ -20,6 +20,8 @@ public class GrowTreeActivity extends BaseActivity implements View.OnClickListen
     protected TextView title;
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
+    @Bind(R.id.share_qrcode)
+    protected TextView share_qr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class GrowTreeActivity extends BaseActivity implements View.OnClickListen
     private void initEvent() {
         myGrowUp.setOnClickListener(this);
         backImg.setOnClickListener(this);
+        share_qr.setOnClickListener(this);
     }
 
     @Override
@@ -49,6 +52,9 @@ public class GrowTreeActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.share_qrcode:
+                startActivity(new Intent(this, MyQrCodeActivity.class));
+                break;
             case R.id.mygrow_tv:
                 startActivity(new Intent(GrowTreeActivity.this, MyGrowupActivity.class));
                 break;

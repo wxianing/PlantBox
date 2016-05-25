@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -22,7 +23,6 @@ import com.sinoinnovo.plantbox.activity.MyShareActivity;
 import com.sinoinnovo.plantbox.activity.PersonCenterAdapter;
 import com.sinoinnovo.plantbox.activity.SettingActivity;
 import com.sinoinnovo.plantbox.bean.PersonCenter;
-import com.sinoinnovo.plantbox.model.User;
 import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.view.DActionSheetDialog;
 
@@ -36,13 +36,16 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 
-public class MyFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MyFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     @Bind(R.id.gridView)
     protected GridView mGridView;
     private List<PersonCenter> mDatas;
     private PersonCenterAdapter mAdapter;
     @Bind(R.id.user_name)
     protected TextView userName;
+    private String userNames;
+    @Bind(R.id.header_img)
+    protected ImageView headerImg;
 
 
     public MyFragment() {
@@ -54,7 +57,12 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
         ButterKnife.bind(this, view);
         initData();
         initView(view);
+        initEvent();
         return view;
+    }
+
+    private void initEvent() {
+        headerImg.setOnClickListener(this);
     }
 
     private void initView(View view) {
@@ -62,10 +70,8 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
         mAdapter = new PersonCenterAdapter(mDatas, getActivity());
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);
-        User user = SharedPreferencesUtils.getInstance(getActivity()).getUser();
-        if (user != null) {
-            userName.setText(user.getCnName());
-        }
+        userNames = SharedPreferencesUtils.getStringData(getActivity(), "userName", null);
+        userName.setText(userNames);
     }
 
     private void initData() {
@@ -143,4 +149,19 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
         intent.setData(Uri.parse("tel:" + phone));
         startActivity(intent);
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.header_img:
+                photoSelectIcon();
+                break;
+        }
+    }
+
+    private void photoSelectIcon() {
+
+
+    }
+
 }

@@ -23,7 +23,11 @@ import com.sinoinnovo.plantbox.http.LikeCallBack;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.ToastUtils;
 import com.sinoinnovo.plantbox.view.MyListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +91,7 @@ public class CommFragment extends Fragment implements LikeCallBack {
     int pageSize = 10;
 
     private void initData() {
-        RequestParams params = RequestParamsUtils.getProductList("",mParam1, "" + pageIndex, "" + pageSize);
+        RequestParams params = RequestParamsUtils.getProductList("", mParam1, "" + pageIndex, "" + pageSize);
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
     }
 
@@ -111,10 +115,31 @@ public class CommFragment extends Fragment implements LikeCallBack {
     }
 
     @Override
-    public void likeClick(int enumcode) {
-        if (enumcode == 0) {
-            initData();
-        }
+    public void likeClick(int position) {
+
+        int oid = dataLists.get(position).getProduct().getId();
+        Log.e("oid", ">>>>>>>>>>>>" + oid);
+        RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
+        HttpRequestUtils.create(getActivity()).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
+            @Override
+            public void onSuccess(ResultInfo resultInfo, int requestCode) {
+            }
+
+            @Override
+            public void onReponse(String result) {
+                super.onReponse(result);
+                Log.e("dianzan", result);
+                try {
+                    JSONObject obj = new JSONObject(result);
+                    int enumcode = obj.getInt("enumcode");
+                    if (enumcode == 0) {
+                        initData();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {

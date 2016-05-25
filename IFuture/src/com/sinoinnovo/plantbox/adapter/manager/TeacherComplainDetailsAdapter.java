@@ -22,7 +22,8 @@ import java.util.Map;
  */
 public class TeacherComplainDetailsAdapter extends CustomBaseAdapter<Complain> {
     private int type;
-    private Map<Integer,Boolean> statusMap = new HashMap<Integer,Boolean>();
+    private Map<Integer, Boolean> statusMap = new HashMap<Integer, Boolean>();
+
     /**
      * CustomBaseAdapter
      *
@@ -35,50 +36,50 @@ public class TeacherComplainDetailsAdapter extends CustomBaseAdapter<Complain> {
     @Override
     public void setListData(List<Complain> listData) {
         super.setListData(listData);
-        if(listData != null ){
-            for(int i=0;i<listData.size();i++){
-                statusMap.put(i,false);
+        if (listData != null) {
+            for (int i = 0; i < listData.size(); i++) {
+                statusMap.put(i, false);
             }
         }
     }
 
     @Override
     public void addData(List<Complain> data) {
-        int oldsize = listData == null ? 0:listData.size();
+        int oldsize = listData == null ? 0 : listData.size();
         super.addData(data);
-        if(data != null ){
-            for(int i=oldsize;i<oldsize+data.size();i++){
-                statusMap.put(i,false);
+        if (data != null) {
+            for (int i = oldsize; i < oldsize + data.size(); i++) {
+                statusMap.put(i, false);
             }
         }
     }
 
     @Override
     public void addData(Complain complain) {
-        int oldsize = listData == null ? 0:listData.size();
-        if(complain == null){
+        int oldsize = listData == null ? 0 : listData.size();
+        if (complain == null) {
             return;
         }
         if (listData == null) {
             listData = new ArrayList<Complain>();
         }
-        this.listData.add(0,complain);
+        this.listData.add(0, complain);
 
-        if(oldsize > 0 && complain != null){
-            statusMap.put(oldsize,false);
+        if (oldsize > 0 && complain != null) {
+            statusMap.put(oldsize, false);
         }
         notifyDataSetChanged();
     }
 
-    public void setType(int type){
+    public void setType(int type) {
         this.type = type;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        if(convertView == null){
-            convertView = listContainer.inflate(R.layout.manager_teacher_complain_details,parent,false);
+        if (convertView == null) {
+            convertView = listContainer.inflate(R.layout.manager_teacher_complain_details, parent, false);
             holder = new Holder();
             holder.convertView = convertView;
             holder.tvName = (TextView) convertView.findViewById(R.id.name_tv);
@@ -92,7 +93,7 @@ public class TeacherComplainDetailsAdapter extends CustomBaseAdapter<Complain> {
             holder.headImg.setHasBorder(true);
             convertView.setOnClickListener(listener);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (Holder) convertView.getTag();
         }
 
@@ -104,9 +105,9 @@ public class TeacherComplainDetailsAdapter extends CustomBaseAdapter<Complain> {
         holder.tvComplainObject.setText(complain.getToCnName());
         holder.tvRole.setText(complain.getToRoleName());
         holder.tvStatus.setText(complain.getStatusText());
-        if(complain.getStatus() == Constant.HANDLED){
-           holder.tvStatus.setTextColor(context.getResources().getColor(R.color.head_bg_color));
-        }else{
+        if (complain.getStatus() == Constant.HANDLED) {
+            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.head_bg_color));
+        } else {
             holder.tvStatus.setTextColor(context.getResources().getColor(R.color.unhandled));
         }
 
@@ -116,10 +117,10 @@ public class TeacherComplainDetailsAdapter extends CustomBaseAdapter<Complain> {
     }
 
     private void setHandButtonIsShow(int position, Holder holder) {
-        if(statusMap.get(position)){
+        if (statusMap.get(position)) {
             holder.llContent.setVisibility(View.VISIBLE);
             holder.convertView.setBackgroundColor(context.getResources().getColor(R.color.complain_details_expanding));
-        }else{
+        } else {
             holder.llContent.setVisibility(View.GONE);
             holder.convertView.setBackgroundColor(context.getResources().getColor(R.color.white));
         }
@@ -128,15 +129,15 @@ public class TeacherComplainDetailsAdapter extends CustomBaseAdapter<Complain> {
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-                Holder holder = (Holder) v.getTag();
-                int position = (int) holder.tvName.getTag();
-                statusMap.put(position, !statusMap.get(position));
-                setHandButtonIsShow(position, holder);
-            }
+            Holder holder = (Holder) v.getTag();
+            int position = (int) holder.tvName.getTag();
+            statusMap.put(position, !statusMap.get(position));
+            setHandButtonIsShow(position, holder);
+        }
 
     };
 
-    private class Holder{
+    private class Holder {
         View convertView;
         CircularImage headImg;
         TextView tvName;

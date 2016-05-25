@@ -357,8 +357,23 @@
             android:label="@string/title_activity_forget_pwd" />
         <activity
             android:name=".activity.ArticleActivity"
-            android:label="@string/title_activity_article"/>
+            android:label="@string/title_activity_article" />
         <activity android:name=".activity.SearchActivity" />
+        <activity
+            android:name=".activity.MonitoringActivity"
+            android:label="@string/title_activity_monitoring" />
+        <activity
+            android:name=".activity.ReferToUserTutorialActivity"
+            android:label="@string/title_activity_refer_to_user_tutorial" />
+        <activity
+            android:name=".activity.PublishTutorialActivity"
+            android:label="@string/title_activity_publish_tutorial" />
+        <activity
+            android:name=".activity.PublishTutorialListsActivity"
+            android:label="@string/title_activity_publish_tutorial_lists" />
+        <activity
+            android:name=".activity.MyQrCodeActivity"
+            android:label="@string/title_activity_my_qr_code"></activity>
     </application>
 
 </manifest>

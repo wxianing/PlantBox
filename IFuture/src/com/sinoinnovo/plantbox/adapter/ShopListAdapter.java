@@ -37,7 +37,7 @@ public class ShopListAdapter extends BasicAdapter<SHopDataList> {
             vh = (ViewHolder) convertView.getTag();
         }
 
-        MainApplication.imageLoader.displayImage(URL.BASE_URL+list.getThumbImg(),vh.imageView);
+        MainApplication.imageLoader.displayImage(URL.BASE_URL + list.getThumbImg(), vh.imageView);
         vh.notice.setText(list.getNotice());
 //        vh.price.setText(list.getMinSalePrice());
 

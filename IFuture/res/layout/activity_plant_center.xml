@@ -51,7 +51,6 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-
         android:paddingBottom="@dimen/dp10"
         android:paddingTop="@dimen/dp10">
 
@@ -85,7 +84,7 @@
     <include layout="@layout/horizontal_line" />
 
     <RelativeLayout
-        android:id="@+id/hardware_layout"
+        android:id="@+id/user_tutorial_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"

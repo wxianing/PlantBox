@@ -9,6 +9,7 @@
     <include layout="@layout/titlebar" />
 
     <TextView
+        android:id="@+id/share_qrcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -16,7 +17,7 @@
         android:paddingBottom="@dimen/dp10"
         android:paddingLeft="@dimen/dp15"
         android:paddingTop="@dimen/dp10"
-        android:text=" 分享赢植币"
+        android:text=" 分享二维码"
         android:textSize="@dimen/sp18" />
 
     <TextView

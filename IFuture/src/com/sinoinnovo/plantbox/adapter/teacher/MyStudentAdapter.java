@@ -20,7 +20,7 @@ import com.sinoinnovo.plantbox.view.CircularImage;
 /**
  * Created by Administrator on 2015/3/3.
  */
-public class MyStudentAdapter extends CustomBaseAdapter<Student>{
+public class MyStudentAdapter extends CustomBaseAdapter<Student> {
     /**
      * CustomBaseAdapter
      *
@@ -34,8 +34,8 @@ public class MyStudentAdapter extends CustomBaseAdapter<Student>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        if(convertView == null){
-            convertView = listContainer.inflate(R.layout.my_student_item,null);
+        if (convertView == null) {
+            convertView = listContainer.inflate(R.layout.my_student_item, null);
             holder = new Holder();
             holder.headImg = (CircularImage) convertView.findViewById(R.id.head_img);
             holder.tvName = (TextView) convertView.findViewById(R.id.name_tv);
@@ -49,13 +49,13 @@ public class MyStudentAdapter extends CustomBaseAdapter<Student>{
             holder.llEmail = (LinearLayout) convertView.findViewById(R.id.email_ll);
             holder.llQQ = (LinearLayout) convertView.findViewById(R.id.qq_ll);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (Holder) convertView.getTag();
         }
         Student stu = listData.get(position);
         holder.headImg.setImageUrl(stu.getPhoto());
         holder.tvName.setText(stu.getName());
-        holder.tvMobile.setText("电话:"+stu.getMobile());
+        holder.tvMobile.setText("电话:" + stu.getMobile());
         holder.tvContract.setText(stu.getContractType());
         holder.tvQQ.setText(stu.getQQ());
         holder.tvEmail.setText(stu.getEmail());
@@ -74,13 +74,14 @@ public class MyStudentAdapter extends CustomBaseAdapter<Student>{
 
     class ClickListener implements View.OnClickListener {
         private User stu;
+
         public ClickListener(User stu) {
             this.stu = stu;
         }
 
         @Override
         public void onClick(View v) {
-            switch(v.getId()){
+            switch (v.getId()) {
                 case R.id.mobile_ll:
                     AppManager.launchPhoneActivity(stu.getMobile());
                     break;
@@ -97,9 +98,9 @@ public class MyStudentAdapter extends CustomBaseAdapter<Student>{
                     Intent intent = new Intent(context, StudentInfoActivity.class);
 //                    intent.putExtra("stuId",stu.getUserId());
 //                    intent.putExtra("cnName",stu.getCnName());
-                    intent.putExtra(Constant.STUDENT_KEY,stu);
+                    intent.putExtra(Constant.STUDENT_KEY, stu);
                     context.startActivity(intent);
-                    ((Activity)context).overridePendingTransition(R.anim.push_bottom_in,0);
+                    ((Activity) context).overridePendingTransition(R.anim.push_bottom_in, 0);
                     break;
             }
 
@@ -107,7 +108,7 @@ public class MyStudentAdapter extends CustomBaseAdapter<Student>{
 
     }
 
-    private class Holder{
+    private class Holder {
         CircularImage headImg;
         TextView tvName;
         TextView tvMobile;

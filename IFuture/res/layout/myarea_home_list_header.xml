@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/personal_message_layout" />
+
+    <TextView
+        android:id="@+id/more_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp5"
+        android:paddingTop="@dimen/dp5"
+        android:text="更多资料>>"
+        android:textColor="@color/gray_textcolor"
+        android:textSize="@dimen/sp16" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp5"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/dp5"
+        android:paddingLeft="@dimen/dp15"
+        android:paddingTop="@dimen/dp5"
+        android:text="我的成果展示"
+        android:textColor="@color/gray_textcolor" />
+</LinearLayout>

@@ -1,19 +1,20 @@
 package com.sinoinnovo.plantbox.http;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
-
 import com.sinoinnovo.plantbox.MainApplication;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.constant.Constant;
@@ -35,6 +36,7 @@ public class HttpRequestUtils {
     private boolean isShowLoadingDilag = true;
     private Context context;
     private int count;
+    private Gson gson = new Gson();
     private ProgressType progressType = ProgressType.DEFAULT;
 
     private HttpRequestUtils(Context context) {
@@ -232,7 +234,7 @@ public class HttpRequestUtils {
 
     public void send(String url, HashMap params, final HttpRequestListener listener) {
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, gson.toJson(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
                 listener.onSuccess(jsonObject);

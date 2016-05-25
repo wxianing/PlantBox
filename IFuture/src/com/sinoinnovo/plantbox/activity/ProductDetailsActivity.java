@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
-import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.MainApplication;
+import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.adapter.DetailsListAdapter;
 import com.sinoinnovo.plantbox.bean.collect.Collect;
@@ -41,43 +41,38 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     protected TextView title;//标题
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
-    @Bind(R.id.produce_introduce)//返回
-    protected TextView introduce;
-    @Bind(R.id.produce_name)
-    protected TextView produceName;//产品名称
-    @Bind(R.id.reduce_img)
-    protected ImageView reduceImg;//减少图标
-    @Bind(R.id.add_img)
-    protected ImageView addImg;//添加
 
     @Bind(R.id.details_listview)
     protected MyListView mListView;
     private List<String> mDatas;
     protected DetailsListAdapter mAdapter;
 
-    @Bind(R.id.total_count)
-    protected TextView total;
 
     private int count = 0;
     @Bind(R.id.buy_now_buttons)
     protected Button buyNow;//立即购买
     private int oid;
-    @Bind(R.id.banner_img)
     protected AutoAdjustHeightImageView bannerImg;
     @Bind(R.id.share_img)
     protected TextView shareImg;
+    @Bind(R.id.customer_service)
+    protected TextView customerService;//客服
+
+    protected TextView produceName;//产品名称
+    protected ImageView reduceImg;//减少图标
+    protected ImageView addImg;//添加
     @Bind(R.id.collect)
     protected TextView collectTv;
     @Bind(R.id.collect_img)
     protected ImageView collectImg;
+    protected TextView total;
 
     private Gson gson;
     private int isCollect;
-    @Bind(R.id.customer_service)
-    protected TextView customerService;//客服
+
     protected ProduceDetails produce;
-    @Bind(R.id.price_tv)
     protected TextView price;
+    private TextView introduce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +86,6 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void initData() {
-        Log.e("oid", ">>>>" + oid);
-
         RequestParams params = RequestParamsUtils.getProduceDetails(oid);
         HttpRequestUtils.create(this).send(URL.PRODUCE_DETAILS_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
@@ -116,9 +109,18 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     }
 
     private void initView() {
+        View headerView = LayoutInflater.from(this).inflate(R.layout.produce_details_header, null);
+        mListView.addHeaderView(headerView);
+        produceName = (TextView) headerView.findViewById(R.id.produce_name);
+        reduceImg = (ImageView) headerView.findViewById(R.id.reduce_img);
+        addImg = (ImageView) headerView.findViewById(R.id.add_img);
+        bannerImg = (AutoAdjustHeightImageView) headerView.findViewById(R.id.banner_img);
+        total = (TextView) headerView.findViewById(R.id.total_count);
+        introduce = (TextView) headerView.findViewById(R.id.produce_introduce);
+        price = (TextView) headerView.findViewById(R.id.price_tv);
+
         gson = new Gson();
         title.setText("商品详情");
-//        backImg.setImageResource(R.drawable.ic_launcher);
         oid = getIntent().getIntExtra("oid", 0);
         mDatas = new ArrayList<>();
         mAdapter = new DetailsListAdapter(mDatas, this);
@@ -179,6 +181,9 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
             case R.id.buy_now_buttons://立即购买
                 String totalCount = total.getText().toString().trim();
                 Intent intent = new Intent(this, OrderActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("produce", produce);
+                intent.putExtras(bundle);
                 intent.putExtra("oid", oid);
                 intent.putExtra("price", produce);
                 intent.putExtra("totalCount", totalCount);

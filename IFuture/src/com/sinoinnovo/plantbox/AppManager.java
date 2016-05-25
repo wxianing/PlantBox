@@ -319,6 +319,8 @@ public class AppManager {
             SharedPreferencesUtils.getInstance(context)
                     .saveUser(user);
         }
+        SharedPreferencesUtils.saveStringData(context, "QRCodeUrl", user.getQRCodeUrl());
+        SharedPreferencesUtils.saveStringData(context, "userName", user.getCnName());
         SharedPreferencesUtils.saveStringData(context, "code", user.getCode());
         SharedPreferencesUtils.saveIntData(context, "UserId", user.getUserId());
         Intent intent = new Intent(context, MainActivity.class);

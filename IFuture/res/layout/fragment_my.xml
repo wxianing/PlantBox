@@ -1,9 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.hzwl.plantbox.fragments.MyFragment">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,8 +35,9 @@
         </RelativeLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/header_img"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp30"
             android:src="@drawable/person_center_header" />

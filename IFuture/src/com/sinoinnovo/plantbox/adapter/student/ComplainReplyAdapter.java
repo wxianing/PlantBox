@@ -25,14 +25,14 @@ public class ComplainReplyAdapter extends CustomBaseAdapter<ComplainReply> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        if(convertView == null){
-            convertView = listContainer.inflate(R.layout.complain_details_reply_item,parent,false);
+        if (convertView == null) {
+            convertView = listContainer.inflate(R.layout.complain_details_reply_item, parent, false);
             holder = new Holder();
             holder.tvReplyUserNmae = (TextView) convertView.findViewById(R.id.reply_user_name_tv);
             holder.tvReplyDate = (TextView) convertView.findViewById(R.id.complain_date_tv);
             holder.tvReplyContent = (TextView) convertView.findViewById(R.id.complain_content_tv);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (Holder) convertView.getTag();
         }
         ComplainReply reply = listData.get(position);
@@ -42,7 +42,7 @@ public class ComplainReplyAdapter extends CustomBaseAdapter<ComplainReply> {
         return convertView;
     }
 
-    private class Holder{
+    private class Holder {
         TextView tvReplyUserNmae;
         TextView tvReplyDate;
         TextView tvReplyContent;

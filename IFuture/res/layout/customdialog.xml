@@ -23,13 +23,15 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/two_dimension_code_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:src="@drawable/message_two_dimension_code_icon" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="扫一扫"
@@ -51,12 +53,15 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
+
             <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/search_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:src="@drawable/message_search_icon" />
+
             <TextView
+                android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="搜索好友"

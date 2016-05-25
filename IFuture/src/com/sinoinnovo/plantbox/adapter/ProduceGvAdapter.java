@@ -1,6 +1,7 @@
 package com.sinoinnovo.plantbox.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -32,13 +33,8 @@ public class ProduceGvAdapter extends BasicAdapter<String> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        MainApplication.imageLoader.displayImage(data.get(position), vh.imageView);
-        vh.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.show(context,"点击图片");
-            }
-        });
+        MainApplication.imageLoader.displayImage(data.get(position), vh.imageView, MainApplication.options);
+
         return convertView;
     }
 

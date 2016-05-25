@@ -125,5 +125,10 @@
     <string name="title_activity_serach">SerachActivity</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_article">ArticleActivity</string>
+    <string name="title_activity_monitoring">MonitoringActivity</string>
+    <string name="title_activity_refer_to_user_tutorial">ReferToUserTutorialActivity</string>
+    <string name="title_activity_publish_tutorial">PublishTutorialActivity</string>
+    <string name="title_activity_publish_tutorial_lists">PublishTutorialListsActivity</string>
+    <string name="title_activity_my_qr_code">MyQrCodeActivity</string>
 
 </resources>

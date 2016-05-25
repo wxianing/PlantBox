@@ -1,2 +1,2 @@
-include ':xutils', ':PullToRefreshView', ':OneKeyShare'
+include ':xutils', ':PullToRefreshView', ':OneKeyShare',':volley'
 include ':IFuture'

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.LikeCallBack;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
+import com.sinoinnovo.plantbox.utils.ShareUtils;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
 import com.sinoinnovo.plantbox.widget.HListView;
 
@@ -36,17 +38,13 @@ import butterknife.ButterKnife;
  * Created by Administrator on 2016/5/12 0012.
  */
 public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.OnClickListener {
+
     private ProduceGvAdapter mAdapter;
     private int userId;
     private int goodId;
     private int count;
     private int oid;
     private LikeCallBack callBack;
-    private CommentClick commentClick;
-
-    public interface CommentClick {
-        public void myOnClik(View view, int oid);
-    }
 
     public ProduceAdapter(List<DataListBean> data, Context context, LikeCallBack callBack) {
         super(data, context);
@@ -65,19 +63,29 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        if (bean != null) {
-            vh.cnName.setText(bean.getUser().getCnName());
-            vh.notice.setText("        " + bean.getProduct().getNotice());
-            vh.likeCount.setText(bean.getProduct().getHits() + "赞");
-            mAdapter = new ProduceGvAdapter(imageUrls, context);
-            vh.mGridView.setAdapter(mAdapter);
-            count = position;
-            vh.notice.setOnClickListener(this);
-            vh.commentCount.setOnClickListener(this);
-            vh.likeCount.setOnClickListener(this);
-            vh.headerImg.setOnClickListener(this);
-            vh.cnName.setOnClickListener(this);
-        }
+        vh.cnName.setText(bean.getUser().getCnName());
+        vh.notice.setText("        " + bean.getProduct().getNotice());
+        vh.likeCount.setText(bean.getProduct().getHits() + "赞");
+        for (int i = 3; i < imageUrls.size(); i++)
+            if (imageUrls.size() > 2) {
+                imageUrls.remove(i);
+            }
+        mAdapter = new ProduceGvAdapter(imageUrls, context);
+        vh.mGridView.setAdapter(mAdapter);
+
+        count = position;
+        vh.notice.setOnClickListener(this);
+        vh.commentCount.setOnClickListener(this);
+        vh.likeCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callBack.likeClick(count);
+            }
+        });
+        vh.headerImg.setOnClickListener(this);
+        vh.cnName.setOnClickListener(this);
+        vh.transpondCount.setOnClickListener(this);
+
         return convertView;
     }
 
@@ -87,33 +95,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         oid = data.get(count).getProduct().getId();
         DataListBean listBean = data.get(count);
         switch (v.getId()) {
-            case R.id.like_tv://点赞
-
-                RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
-                HttpRequestUtils.create(context).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
-                    @Override
-                    public void onSuccess(ResultInfo resultInfo, int requestCode) {
-                    }
-
-                    @Override
-                    public void onReponse(String result) {
-                        super.onReponse(result);
-                        Log.e("dianzan", result);
-                        try {
-                            JSONObject obj = new JSONObject(result);
-                            int enumcode = obj.getInt("enumcode");
-                            if (enumcode == 0) {
-                                callBack.likeClick(enumcode);
-                                ToastUtils.show(context, "成功点赞");
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                break;
             case R.id.notice_tv:
-
                 userId = data.get(count).getUser().getUserId();
                 goodId = data.get(count).getProduct().getId();
                 Log.e("ProduceAdapter", "userId:" + userId + "goodId:" + goodId);
@@ -133,13 +115,16 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 break;
             case R.id.home_header_img:
                 intent = new Intent(context, MyBaseAreaActivity.class);
-                intent.putExtra("cnName",data.get(count).getUser().getCnName());
+                intent.putExtra("cnName", data.get(count).getUser().getCnName());
                 context.startActivity(intent);
                 break;
             case R.id.cnname:
                 intent = new Intent(context, MyBaseAreaActivity.class);
-                intent.putExtra("cnName",data.get(count).getUser().getCnName());
+                intent.putExtra("cnName", data.get(count).getUser().getCnName());
                 context.startActivity(intent);
+                break;
+            case R.id.transpond_tv:
+                ShareUtils.showShare(context);
                 break;
         }
     }
@@ -149,12 +134,11 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         @Bind(R.id.cnname)
         protected TextView cnName;
         @Bind(R.id.hlistView)
-        protected HListView mGridView;
+        protected GridView mGridView;
         @Bind(R.id.notice_tv)
         protected TextView notice;
-
-        //        @Bind(R.id.transpond_tv)
-//        protected TextView transpondCount;//转发
+        @Bind(R.id.transpond_tv)
+        protected TextView transpondCount;//转发
         @Bind(R.id.like_tv)
         protected TextView likeCount;//点赞
         @Bind(R.id.commot_tv)

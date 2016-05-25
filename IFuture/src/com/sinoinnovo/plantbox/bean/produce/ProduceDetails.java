@@ -18,6 +18,14 @@ public class ProduceDetails implements Serializable {
     protected String Notice;
     protected String Mobile;
 
+    public List<ProductEntitysBean> getProductEntitys() {
+        return ProductEntitys;
+    }
+
+    public void setProductEntitys(List<ProductEntitysBean> productEntitys) {
+        ProductEntitys = productEntitys;
+    }
+
     public String getMobile() {
         return Mobile;
     }

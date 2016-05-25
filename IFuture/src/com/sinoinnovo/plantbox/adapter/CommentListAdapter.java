@@ -28,7 +28,7 @@ public class CommentListAdapter extends BasicAdapter<Comments.DataListBean> {
             convertView = inflater.inflate(R.layout.item_comment_list_layout, parent, false);
             vh = new ViewHolder(convertView);
             convertView.setTag(vh);
-        }else {
+        } else {
             vh = (ViewHolder) convertView.getTag();
         }
         vh.comments.setText(data.get(position).getContent());

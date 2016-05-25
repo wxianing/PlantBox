@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
+import com.sinoinnovo.plantbox.view.MyListView;
 import com.sinoinnovo.plantbox.widget.HListView;
 
 import org.json.JSONException;
@@ -51,8 +53,10 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
     private ProduceGvAdapter mAdapter;
     @Bind(R.id.title_tv)
     protected TextView title;
+    @Bind(R.id.back_arrows)
+    protected ImageView backImg;
     @Bind(R.id.listview)
-    protected ListView mListView;
+    protected MyListView mListView;
     private List<Comments.DataListBean> mDatas;
     private CommentListAdapter mCommentAdapter;
 
@@ -73,10 +77,11 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
         notice.setOnClickListener(this);
         commentCount.setOnClickListener(this);
         likeCount.setOnClickListener(this);
+        backImg.setOnClickListener(this);
     }
 
     private void initData() {
-        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "4");
+        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "10");
         HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -137,6 +142,9 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("oid", oid);
                 startActivity(intent);
 
+                break;
+            case R.id.back_arrows:
+                finish();
                 break;
         }
 

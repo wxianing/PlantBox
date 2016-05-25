@@ -16,6 +16,7 @@ import com.sinoinnovo.plantbox.view.CircularImage;
  */
 public class ChooseComplainObjectAdapter extends CustomBaseAdapter<MyTeacher> {
     private int selectUserId = -1;
+
     /**
      * CustomBaseAdapter
      *
@@ -25,22 +26,22 @@ public class ChooseComplainObjectAdapter extends CustomBaseAdapter<MyTeacher> {
         super(context);
     }
 
-    public void setSelectUserId(int userId){
+    public void setSelectUserId(int userId) {
         selectUserId = userId;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        if(convertView == null){
-            convertView = listContainer.inflate(R.layout.choose_complain_object_item,null);
+        if (convertView == null) {
+            convertView = listContainer.inflate(R.layout.choose_complain_object_item, null);
             holder = new Holder();
             holder.tvName = (TextView) convertView.findViewById(R.id.name_tv);
             holder.tvRole = (TextView) convertView.findViewById(R.id.role_tv);
             holder.headImg = (CircularImage) convertView.findViewById(R.id.head_img);
             holder.ivSelect = (ImageView) convertView.findViewById(R.id.select_iv);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (Holder) convertView.getTag();
         }
         MyTeacher tea = listData.get(position);
@@ -48,9 +49,9 @@ public class ChooseComplainObjectAdapter extends CustomBaseAdapter<MyTeacher> {
         holder.tvName.setText(tea.getName());
         holder.tvRole.setText(tea.getRoleName());
 
-        if(selectUserId == tea.getUserId()){
+        if (selectUserId == tea.getUserId()) {
             holder.ivSelect.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.ivSelect.setVisibility(View.GONE);
         }
 

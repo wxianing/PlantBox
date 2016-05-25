@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.sinoinnovo.plantbox.bean.bean.DetailList;
 import com.sinoinnovo.plantbox.constant.Constant;
 import com.sinoinnovo.plantbox.utils.ImageUtils;
 import com.sinoinnovo.plantbox.utils.LogUtils;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RequestParamsUtils {
@@ -48,12 +50,12 @@ public class RequestParamsUtils {
         return params;
     }
 
-
+    //获取评论列表
     public static RequestParams getCommentList(String sType, String PageIndex, String PageSize) {
         RequestParams params = createRequestParams();
-        params.addBodyParameter("sType", "1");
-        params.addBodyParameter("PageIndex", "1");
-        params.addBodyParameter("PageSize", "10");
+        params.addBodyParameter("sType", sType);
+        params.addBodyParameter("PageIndex", PageIndex);
+        params.addBodyParameter("PageSize", PageSize);
         return params;
     }
 
@@ -92,7 +94,7 @@ public class RequestParamsUtils {
         return params;
     }
 
-    public static HashMap saveOrderData(Object[] detaillist, String address, String customName) {
+    public static HashMap saveOrderData(List<DetailList> detaillist, String address, String customName) {
         HashMap params = new HashMap();
 
         params.put("detaillist", detaillist);
@@ -401,10 +403,13 @@ public class RequestParamsUtils {
      * @param accountType 第三方账号类型
      * @return
      */
-    public static RequestParams loginByThird(String accountId, int accountType) {
+    public static RequestParams loginByThird(String accountId, int accountType, String userName, String headericon) {
         RequestParams params = createRequestParams();
         params.addBodyParameter("AccountId", accountId);
         params.addBodyParameter("AccountType", accountType + "");
+        params.addBodyParameter("NickName", userName);
+        params.addBodyParameter("HeadPhoto", headericon);
+
         return params;
     }
 

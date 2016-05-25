@@ -27,21 +27,21 @@ public class PraiseDetailsAdapter extends CustomBaseAdapter<Complain> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        if(convertView == null){
-            convertView = listContainer.inflate(R.layout.manager_praise_details,null);
+        if (convertView == null) {
+            convertView = listContainer.inflate(R.layout.manager_praise_details, null);
             holder = new Holder();
             holder.headImg = (CircularImage) convertView.findViewById(R.id.head_img);
             holder.tvName = (TextView) convertView.findViewById(R.id.name_tv);
             holder.tvDate = (TextView) convertView.findViewById(R.id.date_tv);
             holder.headImg.setHasBorder(true);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (Holder) convertView.getTag();
         }
         Complain c = listData.get(position);
         holder.tvName.setText(c.getFromCnName());
         holder.headImg.setImageUrl(c.getFromUserPhoto());
-        holder.tvDate.setText(DateUtils.getDateToString(c.getCreateTime(),"yyyy.MM.dd"));
+        holder.tvDate.setText(DateUtils.getDateToString(c.getCreateTime(), "yyyy.MM.dd"));
         return convertView;
     }
 

@@ -229,7 +229,6 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
                             @Override
                             public void onClick(int which) {
                                 Intent intent = new Intent(getActivity(), AquareActivity.class);
-
                                 intent.putExtra("mDatas", (Serializable) mDatas);
                                 intent.putStringArrayListExtra("lats", lats);
                                 intent.putStringArrayListExtra("longs", longs);
@@ -241,6 +240,11 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
                         new DActionSheetDialog.OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
+                                Intent intent = new Intent(getActivity(), AquareActivity.class);
+                                intent.putExtra("mDatas", (Serializable) mDatas);
+                                intent.putStringArrayListExtra("lats", lats);
+                                intent.putStringArrayListExtra("longs", longs);
+                                startActivity(intent);
                             }
                         }).show();
 

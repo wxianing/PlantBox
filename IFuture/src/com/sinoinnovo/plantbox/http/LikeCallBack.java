@@ -1,5 +1,7 @@
 package com.sinoinnovo.plantbox.http;
 
+import android.view.View;
+
 /**
  * Created by Administrator on 2016/5/20 0020.
  */

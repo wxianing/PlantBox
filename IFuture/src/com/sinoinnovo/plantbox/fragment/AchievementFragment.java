@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.AddFriendActivity;
 import com.sinoinnovo.plantbox.activity.MyLikeActivity;
+import com.sinoinnovo.plantbox.activity.PlantShopActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,8 +23,7 @@ import butterknife.ButterKnife;
  * 成果
  */
 public class AchievementFragment extends Fragment implements View.OnClickListener {
-    @Bind(R.id.add_friends)
-    protected TextView addFrinds;
+
     @Bind(R.id.my_like)
     protected TextView myLike;
 
@@ -31,6 +31,8 @@ public class AchievementFragment extends Fragment implements View.OnClickListene
     protected TextView myComment;
     @Bind(R.id.my_share)
     protected TextView myShare;
+    @Bind(R.id.immediately_plant)
+    protected TextView immediatelyPlant;
 
     public AchievementFragment() {
     }
@@ -52,10 +54,10 @@ public class AchievementFragment extends Fragment implements View.OnClickListene
     }
 
     private void initEvent() {
-        addFrinds.setOnClickListener(this);
         myLike.setOnClickListener(this);
         myComment.setOnClickListener(this);
         myShare.setOnClickListener(this);
+        immediatelyPlant.setOnClickListener(this);
     }
 
     @Override
@@ -68,9 +70,7 @@ public class AchievementFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.add_friends:
-                startActivity(new Intent(getActivity(), AddFriendActivity.class));
-                break;
+
             case R.id.my_like:
                 intent = new Intent(getActivity(), MyLikeActivity.class);
                 intent.putExtra("Tag", 1);
@@ -84,6 +84,10 @@ public class AchievementFragment extends Fragment implements View.OnClickListene
             case R.id.my_share:
                 intent = new Intent(getActivity(), MyLikeActivity.class);
                 intent.putExtra("Tag", 3);
+                startActivity(intent);
+                break;
+            case R.id.immediately_plant:
+                intent = new Intent(getActivity(), PlantShopActivity.class);
                 startActivity(intent);
                 break;
 

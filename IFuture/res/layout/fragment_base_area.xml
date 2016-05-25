@@ -7,6 +7,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/area_plant_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp5"
@@ -16,6 +17,12 @@
         android:paddingTop="@dimen/dp5"
         android:text="基地植物"
         android:textSize="@dimen/sp16" />
+
+    <ListView
+        android:id="@+id/plant_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <TextView
         android:layout_width="match_parent"
@@ -27,5 +34,10 @@
         android:paddingTop="@dimen/dp5"
         android:text="基地人物星人图"
         android:textSize="@dimen/sp16" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

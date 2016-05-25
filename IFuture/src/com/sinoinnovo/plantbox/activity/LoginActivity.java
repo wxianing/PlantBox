@@ -66,6 +66,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     protected TextView registerTv;//注册
     @Bind(R.id.forget_pwd_tv)
     protected TextView forgetPwd;
+    private String userName;
+    private String passWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void initView() {
 
         callback = new CallBack();
+        userName = SharedPreferencesUtils.getInstance(this).getUserName();
+        passWord = SharedPreferencesUtils.getInstance(this).getPassword();
+        if (userName != null && !userName.equals("") && passWord != null && !passWord.equals("")) {
+            usernameEt.setText(userName);
+            passworkEt.setText(passWord);
+        }
     }
 
     private int checked = 0;
@@ -141,11 +149,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 if (checked == 0) {
                     checkBox.setImageResource(R.drawable.pwd_checked_icon);
                     SharedPreferencesUtils.saveIntData(this, "checked", 1);
-//                    usernameEt.setText(SharedPreferencesUtils.getInstance(this).getUserName());
-//                    passworkEt.setText(SharedPreferencesUtils.getInstance(this).getPassword());
+
+                    if (userName != null && !userName.equals("") && passWord != null && !passWord.equals("")) {
+                        usernameEt.setText(userName);
+                        passworkEt.setText(passWord);
+                    }
                 } else {
                     checkBox.setImageResource(R.drawable.pwd_unchecked_icon);
                     SharedPreferencesUtils.saveIntData(this, "checked", 0);
+                    usernameEt.setText("");
+                    passworkEt.setText("");
                 }
                 break;
             case R.id.login_btn:
@@ -185,7 +198,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             public void run() {
 //                ToastUtils.show(LoginActivity.this, "授权成功");
                 LogUtils.e("userId:" + pla.getDb().getUserId());
-                RequestParams params = RequestParamsUtils.loginByThird(SharedPreferencesUtils.getStringData(LoginActivity.this, "UserId", null), thirdType);
+                String userName = pla.getDb().getUserName();
+                String headerIcon = pla.getDb().getUserIcon();
+                RequestParams params = RequestParamsUtils.loginByThird(pla.getDb().getUserId(), thirdType, userName, headerIcon);
                 HttpRequestUtils.create(LoginActivity.this).send(URL.LOGIN_BY_THIRD, params, thirdType, callback);
                 dismissLoadingDialog();
             }

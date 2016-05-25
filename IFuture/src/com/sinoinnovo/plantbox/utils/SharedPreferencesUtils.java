@@ -200,6 +200,25 @@ public class SharedPreferencesUtils {
         sharedPreferences.edit().putString(key, data).commit();
     }
 
+    public static void saveDoubleData(Context context, String key, double data) {
+
+        if (sharedPreferences == null) {
+            sharedPreferences = context.getSharedPreferences(CONFIG,
+                    Context.MODE_PRIVATE);
+        }
+        // 存储数据
+        sharedPreferences.edit().putString(key, String.valueOf(data)).commit();
+    }
+
+    public static double getDoubleData(Context context, String key,
+                                       double defValue) {
+        if (sharedPreferences == null) {
+            sharedPreferences = context.getSharedPreferences(CONFIG,
+                    Context.MODE_PRIVATE);
+        }
+        return Double.valueOf(sharedPreferences.getString(key, String.valueOf(defValue)));
+    }
+
     public static void saveIntData(Context context, String key, int data) {
         if (sharedPreferences == null) {
             sharedPreferences = context.getSharedPreferences(CONFIG,
