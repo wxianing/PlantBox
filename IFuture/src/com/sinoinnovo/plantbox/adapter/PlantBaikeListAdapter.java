@@ -36,7 +36,7 @@ public class PlantBaikeListAdapter extends BasicAdapter<PlantBaiKe.DataListBean>
         }
         vh.imageView.setImageResource(R.drawable.ic_launcher);
 
-        MainApplication.imageLoader.displayImage(bean.getImgPath(), vh.imageView, MainApplication.options);
+        MainApplication.imageLoader.displayImage(bean.getImgPath(), vh.imageView, MainApplication.optionsRounds);
         vh.titleName.setText(bean.getTitle());
         vh.content.setText(bean.getSummary());
 

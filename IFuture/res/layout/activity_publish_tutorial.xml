@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.sinoinnovo.plantbox.activity.PublishTutorialActivity">
 
-    <include layout="@layout/titlebar" />
+    <include layout="@layout/titlebar_layout" />
 
     <EditText
         android:id="@+id/title_text"
@@ -45,11 +45,16 @@
             android:gravity="top"
             android:hint="请添加内容" />
 
-        <ImageView
+        <GridView
             android:id="@+id/add_photo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher" />
+            android:layout_height="350dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:horizontalSpacing="3dp"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp"></GridView>
     </LinearLayout>
 
 </LinearLayout>

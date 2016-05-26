@@ -33,7 +33,7 @@ public class ProduceGvAdapter extends BasicAdapter<String> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        MainApplication.imageLoader.displayImage(data.get(position), vh.imageView, MainApplication.options);
+        MainApplication.imageLoader.displayImage(data.get(position), vh.imageView, MainApplication.optionsRounds);
 
         return convertView;
     }

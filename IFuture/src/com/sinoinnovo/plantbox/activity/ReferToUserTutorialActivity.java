@@ -69,7 +69,7 @@ public class ReferToUserTutorialActivity extends BaseActivity implements View.On
     private void initView() {
         mDatas = new ArrayList<>();
         mAdapter = new ReferToUserTutorialAdapter(mDatas, this);
-//        mListView.setAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
     }
 
     private void initEvent() {

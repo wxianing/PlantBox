@@ -8,10 +8,11 @@ import java.util.List;
  */
 public class ReferUserTutorial implements Serializable {
 
+
     /**
      * PageIndex : 1
-     * RecordCount : 1
-     * DataList : [{"Pictures":[],"user":{"Code":null,"QRCodeUrl":null,"UserId":186,"AreaId":15,"AreaName":"深圳","UserType":2,"RoleName":null,"UserName":"ljc","PasswordSalt":"64e58958df9f4dbb8d623b4e9f5f45f3","UserPassword":"24a483792f1bfe629640e657dde82c49","QRCode":"b6ba3e8a-21cd-4683-9e95-366a53517c2f","CnName":"梁健聪","EnName":null,"Gender":null,"Mobile":"13798270747","Photo":null,"QQ":null,"Email":"11112222@qq.com","Address":"深圳宝安","Remark":"","Status":1,"CreateUserId":null,"CreateTime":"2016-05-05 17:02:55","UpdateUserId":186,"UpdateTime":"2016-05-21 09:55:03","BindShopId":null,"Sex":null,"FansCount":null,"PraiseCount":null},"Product":null,"Id":0,"UserGoodsId":1,"ProductId":1,"ProductEntityId":1,"MadeDate":"2016-05-24 16:06:42","CreateTime":"2016-05-24 16:06:43","Context":"sample string 3","UserId":186,"Status":1,"ImgList":"","sType":2,"CnName":"梁健聪","Address":"深圳","Lat":22.7360635,"Lon":113.99764166666667,"PraiseCount":10,"ProductName":"发财树","SortId":1,"ThumbImg":"/upload/201605/f410a8b6926840b8b7828f7d2093e41f.jpg"}]
+     * RecordCount : 25
+     * DataList : [{"Records":[{"Images":[],"Id":31,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 11:10:05","CreateTime":"2016-05-26 11:10:05","Context":"好吧(∩_∩)","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":29},{"Images":[],"Id":33,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 14:17:00","CreateTime":"2016-05-26 14:17:01","Context":"测试","UserId":205,"Status":1,"ImgList":"/Files/Train/160526141700267150.jpg;/Files/Train/160526141700747493.jpg;/Files/Train/160526141700119823.jpg;","sType":2,"RecordHeadId":29}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526141700267150.jpg","Id":29,"UserGoodsId":0,"HeadTitle":"铁观音","sType":2,"TotalCount":2,"LastTime":"2016-05-26 14:17:01","CreateTime":"2016-05-26 11:10:05","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":28,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:49","CreateTime":"2016-05-26 10:07:49","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":28}],"HeadImage":null,"Id":28,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:49","CreateTime":"2016-05-26 10:07:49","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":27,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:49","CreateTime":"2016-05-26 10:07:49","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":27},{"Images":[],"Id":32,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 13:09:44","CreateTime":"2016-05-26 13:09:44","Context":"测试","UserId":205,"Status":1,"ImgList":"/Files/Train/160526130944017088.jpg;","sType":2,"RecordHeadId":27}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526130944017088.jpg","Id":27,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":2,"LastTime":"2016-05-26 13:09:44","CreateTime":"2016-05-26 10:07:49","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":26,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":26}],"HeadImage":null,"Id":26,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":25,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":25}],"HeadImage":null,"Id":25,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":24,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":24}],"HeadImage":null,"Id":24,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":23,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":23}],"HeadImage":null,"Id":23,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":22,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":22}],"HeadImage":null,"Id":22,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":21,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":21}],"HeadImage":null,"Id":21,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":20,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":20}],"HeadImage":null,"Id":20,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null}]
      * TotalModel :
      */
 
@@ -19,28 +20,28 @@ public class ReferUserTutorial implements Serializable {
     private int RecordCount;
     private String TotalModel;
     /**
-     * Pictures : []
-     * user : {"Code":null,"QRCodeUrl":null,"UserId":186,"AreaId":15,"AreaName":"深圳","UserType":2,"RoleName":null,"UserName":"ljc","PasswordSalt":"64e58958df9f4dbb8d623b4e9f5f45f3","UserPassword":"24a483792f1bfe629640e657dde82c49","QRCode":"b6ba3e8a-21cd-4683-9e95-366a53517c2f","CnName":"梁健聪","EnName":null,"Gender":null,"Mobile":"13798270747","Photo":null,"QQ":null,"Email":"11112222@qq.com","Address":"深圳宝安","Remark":"","Status":1,"CreateUserId":null,"CreateTime":"2016-05-05 17:02:55","UpdateUserId":186,"UpdateTime":"2016-05-21 09:55:03","BindShopId":null,"Sex":null,"FansCount":null,"PraiseCount":null}
-     * Product : null
-     * Id : 0
-     * UserGoodsId : 1
-     * ProductId : 1
-     * ProductEntityId : 1
-     * MadeDate : 2016-05-24 16:06:42
-     * CreateTime : 2016-05-24 16:06:43
-     * Context : sample string 3
-     * UserId : 186
-     * Status : 1
-     * ImgList :
+     * Records : [{"Images":[],"Id":31,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 11:10:05","CreateTime":"2016-05-26 11:10:05","Context":"好吧(∩_∩)","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":29},{"Images":[],"Id":33,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 14:17:00","CreateTime":"2016-05-26 14:17:01","Context":"测试","UserId":205,"Status":1,"ImgList":"/Files/Train/160526141700267150.jpg;/Files/Train/160526141700747493.jpg;/Files/Train/160526141700119823.jpg;","sType":2,"RecordHeadId":29}]
+     * HeadImage : http://plantbox.meidp.com/Files/Train/160526141700267150.jpg
+     * Id : 29
+     * UserGoodsId : 0
+     * HeadTitle : 铁观音
      * sType : 2
-     * CnName : 梁健聪
+     * TotalCount : 2
+     * LastTime : 2016-05-26 14:17:01
+     * CreateTime : 2016-05-26 11:10:05
+     * CreateUserId : 187
+     * praiseCount : 0
+     * CnName : 王显宁
      * Address : 深圳
-     * Lat : 22.7360635
-     * Lon : 113.99764166666667
-     * PraiseCount : 10
-     * ProductName : 发财树
-     * SortId : 1
-     * ThumbImg : /upload/201605/f410a8b6926840b8b7828f7d2093e41f.jpg
+     * UserName : wxn
+     * Mobile :
+     * Lat : null
+     * Lon : null
+     * ProductName : null
+     * SortId : null
+     * ThumbImg : null
+     * UserId : 187
+     * Photo : null
      */
 
     private List<DataListBean> DataList;
@@ -77,76 +78,52 @@ public class ReferUserTutorial implements Serializable {
         this.DataList = DataList;
     }
 
-    public static class DataListBean {
-        /**
-         * Code : null
-         * QRCodeUrl : null
-         * UserId : 186
-         * AreaId : 15
-         * AreaName : 深圳
-         * UserType : 2
-         * RoleName : null
-         * UserName : ljc
-         * PasswordSalt : 64e58958df9f4dbb8d623b4e9f5f45f3
-         * UserPassword : 24a483792f1bfe629640e657dde82c49
-         * QRCode : b6ba3e8a-21cd-4683-9e95-366a53517c2f
-         * CnName : 梁健聪
-         * EnName : null
-         * Gender : null
-         * Mobile : 13798270747
-         * Photo : null
-         * QQ : null
-         * Email : 11112222@qq.com
-         * Address : 深圳宝安
-         * Remark :
-         * Status : 1
-         * CreateUserId : null
-         * CreateTime : 2016-05-05 17:02:55
-         * UpdateUserId : 186
-         * UpdateTime : 2016-05-21 09:55:03
-         * BindShopId : null
-         * Sex : null
-         * FansCount : null
-         * PraiseCount : null
-         */
-
-        private UserBean user;
-        private Object Product;
+    public static class DataListBean implements Serializable{
+        private String HeadImage;
         private int Id;
         private int UserGoodsId;
-        private int ProductId;
-        private int ProductEntityId;
-        private String MadeDate;
-        private String CreateTime;
-        private String Context;
-        private int UserId;
-        private int Status;
-        private String ImgList;
+        private String HeadTitle;
         private int sType;
+        private int TotalCount;
+        private String LastTime;
+        private String CreateTime;
+        private int CreateUserId;
+        private int praiseCount;
         private String CnName;
         private String Address;
-        private double Lat;
-        private double Lon;
-        private int PraiseCount;
-        private String ProductName;
-        private int SortId;
-        private String ThumbImg;
-        private List<String> Pictures;
+        private String UserName;
+        private String Mobile;
+        private Object Lat;
+        private Object Lon;
+        private Object ProductName;
+        private Object SortId;
+        private Object ThumbImg;
+        private int UserId;
+        private Object Photo;
+        /**
+         * Images : []
+         * Id : 31
+         * UserGoodsId : 0
+         * ProductId : 0
+         * ProductEntityId : 0
+         * MadeDate : 2016-05-26 11:10:05
+         * CreateTime : 2016-05-26 11:10:05
+         * Context : 好吧(∩_∩)
+         * UserId : 187
+         * Status : 1
+         * ImgList :
+         * sType : 2
+         * RecordHeadId : 29
+         */
 
-        public UserBean getUser() {
-            return user;
+        private List<RecordsBean> Records;
+
+        public String getHeadImage() {
+            return HeadImage;
         }
 
-        public void setUser(UserBean user) {
-            this.user = user;
-        }
-
-        public Object getProduct() {
-            return Product;
-        }
-
-        public void setProduct(Object Product) {
-            this.Product = Product;
+        public void setHeadImage(String HeadImage) {
+            this.HeadImage = HeadImage;
         }
 
         public int getId() {
@@ -165,28 +142,36 @@ public class ReferUserTutorial implements Serializable {
             this.UserGoodsId = UserGoodsId;
         }
 
-        public int getProductId() {
-            return ProductId;
+        public String getHeadTitle() {
+            return HeadTitle;
         }
 
-        public void setProductId(int ProductId) {
-            this.ProductId = ProductId;
+        public void setHeadTitle(String HeadTitle) {
+            this.HeadTitle = HeadTitle;
         }
 
-        public int getProductEntityId() {
-            return ProductEntityId;
+        public int getSType() {
+            return sType;
         }
 
-        public void setProductEntityId(int ProductEntityId) {
-            this.ProductEntityId = ProductEntityId;
+        public void setSType(int sType) {
+            this.sType = sType;
         }
 
-        public String getMadeDate() {
-            return MadeDate;
+        public int getTotalCount() {
+            return TotalCount;
         }
 
-        public void setMadeDate(String MadeDate) {
-            this.MadeDate = MadeDate;
+        public void setTotalCount(int TotalCount) {
+            this.TotalCount = TotalCount;
+        }
+
+        public String getLastTime() {
+            return LastTime;
+        }
+
+        public void setLastTime(String LastTime) {
+            this.LastTime = LastTime;
         }
 
         public String getCreateTime() {
@@ -197,44 +182,20 @@ public class ReferUserTutorial implements Serializable {
             this.CreateTime = CreateTime;
         }
 
-        public String getContext() {
-            return Context;
+        public int getCreateUserId() {
+            return CreateUserId;
         }
 
-        public void setContext(String Context) {
-            this.Context = Context;
+        public void setCreateUserId(int CreateUserId) {
+            this.CreateUserId = CreateUserId;
         }
 
-        public int getUserId() {
-            return UserId;
+        public int getPraiseCount() {
+            return praiseCount;
         }
 
-        public void setUserId(int UserId) {
-            this.UserId = UserId;
-        }
-
-        public int getStatus() {
-            return Status;
-        }
-
-        public void setStatus(int Status) {
-            this.Status = Status;
-        }
-
-        public String getImgList() {
-            return ImgList;
-        }
-
-        public void setImgList(String ImgList) {
-            this.ImgList = ImgList;
-        }
-
-        public int getSType() {
-            return sType;
-        }
-
-        public void setSType(int sType) {
-            this.sType = sType;
+        public void setPraiseCount(int praiseCount) {
+            this.praiseCount = praiseCount;
         }
 
         public String getCnName() {
@@ -253,267 +214,139 @@ public class ReferUserTutorial implements Serializable {
             this.Address = Address;
         }
 
-        public double getLat() {
+        public String getUserName() {
+            return UserName;
+        }
+
+        public void setUserName(String UserName) {
+            this.UserName = UserName;
+        }
+
+        public String getMobile() {
+            return Mobile;
+        }
+
+        public void setMobile(String Mobile) {
+            this.Mobile = Mobile;
+        }
+
+        public Object getLat() {
             return Lat;
         }
 
-        public void setLat(double Lat) {
+        public void setLat(Object Lat) {
             this.Lat = Lat;
         }
 
-        public double getLon() {
+        public Object getLon() {
             return Lon;
         }
 
-        public void setLon(double Lon) {
+        public void setLon(Object Lon) {
             this.Lon = Lon;
         }
 
-        public int getPraiseCount() {
-            return PraiseCount;
-        }
-
-        public void setPraiseCount(int PraiseCount) {
-            this.PraiseCount = PraiseCount;
-        }
-
-        public String getProductName() {
+        public Object getProductName() {
             return ProductName;
         }
 
-        public void setProductName(String ProductName) {
+        public void setProductName(Object ProductName) {
             this.ProductName = ProductName;
         }
 
-        public int getSortId() {
+        public Object getSortId() {
             return SortId;
         }
 
-        public void setSortId(int SortId) {
+        public void setSortId(Object SortId) {
             this.SortId = SortId;
         }
 
-        public String getThumbImg() {
+        public Object getThumbImg() {
             return ThumbImg;
         }
 
-        public void setThumbImg(String ThumbImg) {
+        public void setThumbImg(Object ThumbImg) {
             this.ThumbImg = ThumbImg;
         }
 
-        public List<String> getPictures() {
-            return Pictures;
+        public int getUserId() {
+            return UserId;
         }
 
-        public void setPictures(List<String> Pictures) {
-            this.Pictures = Pictures;
+        public void setUserId(int UserId) {
+            this.UserId = UserId;
         }
 
-        public static class UserBean {
-            private Object Code;
-            private Object QRCodeUrl;
-            private int UserId;
-            private int AreaId;
-            private String AreaName;
-            private int UserType;
-            private Object RoleName;
-            private String UserName;
-            private String PasswordSalt;
-            private String UserPassword;
-            private String QRCode;
-            private String CnName;
-            private Object EnName;
-            private Object Gender;
-            private String Mobile;
-            private Object Photo;
-            private Object QQ;
-            private String Email;
-            private String Address;
-            private String Remark;
-            private int Status;
-            private Object CreateUserId;
+        public Object getPhoto() {
+            return Photo;
+        }
+
+        public void setPhoto(Object Photo) {
+            this.Photo = Photo;
+        }
+
+        public List<RecordsBean> getRecords() {
+            return Records;
+        }
+
+        public void setRecords(List<RecordsBean> Records) {
+            this.Records = Records;
+        }
+
+        public static class RecordsBean implements Serializable{
+            private int Id;
+            private int UserGoodsId;
+            private int ProductId;
+            private int ProductEntityId;
+            private String MadeDate;
             private String CreateTime;
-            private int UpdateUserId;
-            private String UpdateTime;
-            private Object BindShopId;
-            private Object Sex;
-            private Object FansCount;
-            private Object PraiseCount;
+            private String Context;
+            private int UserId;
+            private int Status;
+            private String ImgList;
+            private int sType;
+            private int RecordHeadId;
+            private List<?> Images;
 
-            public Object getCode() {
-                return Code;
+            public int getId() {
+                return Id;
             }
 
-            public void setCode(Object Code) {
-                this.Code = Code;
+            public void setId(int Id) {
+                this.Id = Id;
             }
 
-            public Object getQRCodeUrl() {
-                return QRCodeUrl;
+            public int getUserGoodsId() {
+                return UserGoodsId;
             }
 
-            public void setQRCodeUrl(Object QRCodeUrl) {
-                this.QRCodeUrl = QRCodeUrl;
+            public void setUserGoodsId(int UserGoodsId) {
+                this.UserGoodsId = UserGoodsId;
             }
 
-            public int getUserId() {
-                return UserId;
+            public int getProductId() {
+                return ProductId;
             }
 
-            public void setUserId(int UserId) {
-                this.UserId = UserId;
+            public void setProductId(int ProductId) {
+                this.ProductId = ProductId;
             }
 
-            public int getAreaId() {
-                return AreaId;
+            public int getProductEntityId() {
+                return ProductEntityId;
             }
 
-            public void setAreaId(int AreaId) {
-                this.AreaId = AreaId;
+            public void setProductEntityId(int ProductEntityId) {
+                this.ProductEntityId = ProductEntityId;
             }
 
-            public String getAreaName() {
-                return AreaName;
+            public String getMadeDate() {
+                return MadeDate;
             }
 
-            public void setAreaName(String AreaName) {
-                this.AreaName = AreaName;
-            }
-
-            public int getUserType() {
-                return UserType;
-            }
-
-            public void setUserType(int UserType) {
-                this.UserType = UserType;
-            }
-
-            public Object getRoleName() {
-                return RoleName;
-            }
-
-            public void setRoleName(Object RoleName) {
-                this.RoleName = RoleName;
-            }
-
-            public String getUserName() {
-                return UserName;
-            }
-
-            public void setUserName(String UserName) {
-                this.UserName = UserName;
-            }
-
-            public String getPasswordSalt() {
-                return PasswordSalt;
-            }
-
-            public void setPasswordSalt(String PasswordSalt) {
-                this.PasswordSalt = PasswordSalt;
-            }
-
-            public String getUserPassword() {
-                return UserPassword;
-            }
-
-            public void setUserPassword(String UserPassword) {
-                this.UserPassword = UserPassword;
-            }
-
-            public String getQRCode() {
-                return QRCode;
-            }
-
-            public void setQRCode(String QRCode) {
-                this.QRCode = QRCode;
-            }
-
-            public String getCnName() {
-                return CnName;
-            }
-
-            public void setCnName(String CnName) {
-                this.CnName = CnName;
-            }
-
-            public Object getEnName() {
-                return EnName;
-            }
-
-            public void setEnName(Object EnName) {
-                this.EnName = EnName;
-            }
-
-            public Object getGender() {
-                return Gender;
-            }
-
-            public void setGender(Object Gender) {
-                this.Gender = Gender;
-            }
-
-            public String getMobile() {
-                return Mobile;
-            }
-
-            public void setMobile(String Mobile) {
-                this.Mobile = Mobile;
-            }
-
-            public Object getPhoto() {
-                return Photo;
-            }
-
-            public void setPhoto(Object Photo) {
-                this.Photo = Photo;
-            }
-
-            public Object getQQ() {
-                return QQ;
-            }
-
-            public void setQQ(Object QQ) {
-                this.QQ = QQ;
-            }
-
-            public String getEmail() {
-                return Email;
-            }
-
-            public void setEmail(String Email) {
-                this.Email = Email;
-            }
-
-            public String getAddress() {
-                return Address;
-            }
-
-            public void setAddress(String Address) {
-                this.Address = Address;
-            }
-
-            public String getRemark() {
-                return Remark;
-            }
-
-            public void setRemark(String Remark) {
-                this.Remark = Remark;
-            }
-
-            public int getStatus() {
-                return Status;
-            }
-
-            public void setStatus(int Status) {
-                this.Status = Status;
-            }
-
-            public Object getCreateUserId() {
-                return CreateUserId;
-            }
-
-            public void setCreateUserId(Object CreateUserId) {
-                this.CreateUserId = CreateUserId;
+            public void setMadeDate(String MadeDate) {
+                this.MadeDate = MadeDate;
             }
 
             public String getCreateTime() {
@@ -524,52 +357,60 @@ public class ReferUserTutorial implements Serializable {
                 this.CreateTime = CreateTime;
             }
 
-            public int getUpdateUserId() {
-                return UpdateUserId;
+            public String getContext() {
+                return Context;
             }
 
-            public void setUpdateUserId(int UpdateUserId) {
-                this.UpdateUserId = UpdateUserId;
+            public void setContext(String Context) {
+                this.Context = Context;
             }
 
-            public String getUpdateTime() {
-                return UpdateTime;
+            public int getUserId() {
+                return UserId;
             }
 
-            public void setUpdateTime(String UpdateTime) {
-                this.UpdateTime = UpdateTime;
+            public void setUserId(int UserId) {
+                this.UserId = UserId;
             }
 
-            public Object getBindShopId() {
-                return BindShopId;
+            public int getStatus() {
+                return Status;
             }
 
-            public void setBindShopId(Object BindShopId) {
-                this.BindShopId = BindShopId;
+            public void setStatus(int Status) {
+                this.Status = Status;
             }
 
-            public Object getSex() {
-                return Sex;
+            public String getImgList() {
+                return ImgList;
             }
 
-            public void setSex(Object Sex) {
-                this.Sex = Sex;
+            public void setImgList(String ImgList) {
+                this.ImgList = ImgList;
             }
 
-            public Object getFansCount() {
-                return FansCount;
+            public int getSType() {
+                return sType;
             }
 
-            public void setFansCount(Object FansCount) {
-                this.FansCount = FansCount;
+            public void setSType(int sType) {
+                this.sType = sType;
             }
 
-            public Object getPraiseCount() {
-                return PraiseCount;
+            public int getRecordHeadId() {
+                return RecordHeadId;
             }
 
-            public void setPraiseCount(Object PraiseCount) {
-                this.PraiseCount = PraiseCount;
+            public void setRecordHeadId(int RecordHeadId) {
+                this.RecordHeadId = RecordHeadId;
+            }
+
+            public List<?> getImages() {
+                return Images;
+            }
+
+            public void setImages(List<?> Images) {
+                this.Images = Images;
             }
         }
     }

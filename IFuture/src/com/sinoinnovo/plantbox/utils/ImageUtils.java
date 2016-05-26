@@ -1,5 +1,6 @@
 package com.sinoinnovo.plantbox.utils;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -10,7 +11,12 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -37,157 +43,160 @@ import java.util.Locale;
 
 public class ImageUtils {
 
-	public static final int GET_IMAGE_BY_CAMERA = 5001;
+    	public static final int GET_IMAGE_BY_CAMERA = 5001;
 	public static final int GET_IMAGE_FROM_PHONE = 5002;
-	public static final int CROP_IMAGE = 5003;
-	public static Uri imageUriFromCamera;
-	public static Uri cropImageUri;
+//    public static final int GET_IMAGE_BY_CAMERA = 3;
+//    public static final int GET_IMAGE_FROM_PHONE = 1;
+    public static final int CROP_IMAGE = 5003;
+    public static Uri imageUriFromCamera;
+    public static Uri cropImageUri;
 
-	public static void openCameraImage(final Activity activity) {
-		ImageUtils.imageUriFromCamera = ImageUtils.createImagePathUri(activity);
+    public static void openCameraImage(final Activity activity) {
+        ImageUtils.imageUriFromCamera = ImageUtils.createImagePathUri(activity);
 
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		// MediaStore.EXTRA_OUTPUT参数不设置时,系统会自动生成一个uri,但是只会返回一个缩略图
-		// 返回图片在onActivityResult中通过以下代码获取
-		// Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, ImageUtils.imageUriFromCamera);
-		activity.startActivityForResult(intent, ImageUtils.GET_IMAGE_BY_CAMERA);
-	}
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // MediaStore.EXTRA_OUTPUT参数不设置时,系统会自动生成一个uri,但是只会返回一个缩略图
+        // 返回图片在onActivityResult中通过以下代码获取
+        // Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, ImageUtils.imageUriFromCamera);
+        activity.startActivityForResult(intent, ImageUtils.GET_IMAGE_BY_CAMERA);
+    }
 
-	public static void openLocalImage(final Activity activity) {
-		Intent intent = new Intent();
-		intent.setType("image/*");
-		intent.setAction(Intent.ACTION_GET_CONTENT);
-		activity.startActivityForResult(intent, ImageUtils.GET_IMAGE_FROM_PHONE);
-	}
+    public static void openLocalImage(final Activity activity) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        activity.startActivityForResult(intent, ImageUtils.GET_IMAGE_FROM_PHONE);
+    }
 
-	public static void cropImage(Activity activity, Uri srcUri, Intent data) {
-		ImageUtils.cropImageUri = ImageUtils.createImagePathUri(activity);
-		if (srcUri == null && data != null) {
-			Bundle extras = data.getExtras();
-			String mPhoto = extras.getParcelable("data");
-			if (mPhoto == null) {
-				String filePath = extras.getString("filePath");
-				if (!TextUtils.isEmpty(filePath)) {
-					srcUri = Uri.fromFile(new File(filePath));
-				}
-			}
-		}
-		Intent intent = new Intent("com.android.camera.action.CROP");
-		intent.setDataAndType(srcUri, "image/*");
-		intent.putExtra("crop", "true");
+    public static void cropImage(Activity activity, Uri srcUri, Intent data) {
+        ImageUtils.cropImageUri = ImageUtils.createImagePathUri(activity);
+        if (srcUri == null && data != null) {
+            Bundle extras = data.getExtras();
+            String mPhoto = extras.getParcelable("data");
+            if (mPhoto == null) {
+                String filePath = extras.getString("filePath");
+                if (!TextUtils.isEmpty(filePath)) {
+                    srcUri = Uri.fromFile(new File(filePath));
+                }
+            }
+        }
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(srcUri, "image/*");
+        intent.putExtra("crop", "true");
 
-		// //////////////////////////////////////////////////////////////
-		// 1.宽高和比例都不设置时,裁剪框可以自行调整(比例和大小都可以随意调整)
-		// //////////////////////////////////////////////////////////////
-		// 2.只设置裁剪框宽高比(aspect)后,裁剪框比例固定不可调整,只能调整大小
-		// //////////////////////////////////////////////////////////////
-		// 3.裁剪后生成图片宽高(output)的设置和裁剪框无关,只决定最终生成图片大小
-		// //////////////////////////////////////////////////////////////
-		// 4.裁剪框宽高比例(aspect)可以和裁剪后生成图片比例(output)不同,此时,
-		// 会以裁剪框的宽为准,按照裁剪宽高比例生成一个图片,该图和框选部分可能不同,
-		// 不同的情况可能是截取框选的一部分,也可能超出框选部分,向下延伸补足
-		// //////////////////////////////////////////////////////////////
+        // //////////////////////////////////////////////////////////////
+        // 1.宽高和比例都不设置时,裁剪框可以自行调整(比例和大小都可以随意调整)
+        // //////////////////////////////////////////////////////////////
+        // 2.只设置裁剪框宽高比(aspect)后,裁剪框比例固定不可调整,只能调整大小
+        // //////////////////////////////////////////////////////////////
+        // 3.裁剪后生成图片宽高(output)的设置和裁剪框无关,只决定最终生成图片大小
+        // //////////////////////////////////////////////////////////////
+        // 4.裁剪框宽高比例(aspect)可以和裁剪后生成图片比例(output)不同,此时,
+        // 会以裁剪框的宽为准,按照裁剪宽高比例生成一个图片,该图和框选部分可能不同,
+        // 不同的情况可能是截取框选的一部分,也可能超出框选部分,向下延伸补足
+        // //////////////////////////////////////////////////////////////
 
-		// aspectX aspectY 是裁剪框宽高的比例
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
-		// outputX outputY 是裁剪后生成图片的宽高
-		// intent.putExtra("outputX", 300);
-		// intent.putExtra("outputY", 100);
+        // aspectX aspectY 是裁剪框宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪后生成图片的宽高
+        // intent.putExtra("outputX", 300);
+        // intent.putExtra("outputY", 100);
 
-		// return-data为true时,会直接返回bitmap数据,但是大图裁剪时会出现问题,推荐下面为false时的方式
-		// return-data为false时,不会返回bitmap,但需要指定一个MediaStore.EXTRA_OUTPUT保存图片uri
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, ImageUtils.cropImageUri);
-		intent.putExtra("return-data", false);
+        // return-data为true时,会直接返回bitmap数据,但是大图裁剪时会出现问题,推荐下面为false时的方式
+        // return-data为false时,不会返回bitmap,但需要指定一个MediaStore.EXTRA_OUTPUT保存图片uri
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, ImageUtils.cropImageUri);
+        intent.putExtra("return-data", false);
 
-		activity.startActivityForResult(intent, CROP_IMAGE);
-	}
+        activity.startActivityForResult(intent, CROP_IMAGE);
+    }
 
-	/**
-	 * 创建一条图片地址uri,用于保存拍照后的照片
-	 * 
-	 * @param context
-	 * @return 图片的uri
-	 */
-	private static Uri createImagePathUri(Context context) {
-		Uri imageFilePath = null;
-		String status = Environment.getExternalStorageState();
-		SimpleDateFormat timeFormatter = new SimpleDateFormat(
-				"yyyyMMdd_HHmmss", Locale.CHINA);
-		long time = System.currentTimeMillis();
-		String imageName = timeFormatter.format(new Date(time));
-		// ContentValues是我们希望这条记录被创建时包含的数据信息
-		ContentValues values = new ContentValues(3);
-		values.put(MediaStore.Images.Media.DISPLAY_NAME, imageName);
-		values.put(MediaStore.Images.Media.DATE_TAKEN, time);
-		values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-		if (status.equals(Environment.MEDIA_MOUNTED)) {// 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
-			imageFilePath = context.getContentResolver().insert(
-					MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-		} else {
-			imageFilePath = context.getContentResolver().insert(
-					MediaStore.Images.Media.INTERNAL_CONTENT_URI, values);
-		}
-		Log.i("", "生成的照片输出路径：" + imageFilePath.toString());
-		return imageFilePath;
-	}
+    /**
+     * 创建一条图片地址uri,用于保存拍照后的照片
+     *
+     * @param context
+     * @return 图片的uri
+     */
+    private static Uri createImagePathUri(Context context) {
+        Uri imageFilePath = null;
+        String status = Environment.getExternalStorageState();
+        SimpleDateFormat timeFormatter = new SimpleDateFormat(
+                "yyyyMMdd_HHmmss", Locale.CHINA);
+        long time = System.currentTimeMillis();
+        String imageName = timeFormatter.format(new Date(time));
+        // ContentValues是我们希望这条记录被创建时包含的数据信息
+        ContentValues values = new ContentValues(3);
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, imageName);
+        values.put(MediaStore.Images.Media.DATE_TAKEN, time);
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        if (status.equals(Environment.MEDIA_MOUNTED)) {// 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
+            imageFilePath = context.getContentResolver().insert(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        } else {
+            imageFilePath = context.getContentResolver().insert(
+                    MediaStore.Images.Media.INTERNAL_CONTENT_URI, values);
+        }
+        Log.i("", "生成的照片输出路径：" + imageFilePath.toString());
+        return imageFilePath;
+    }
 
-	/**
-	 * 将Drawable转化为Bitmap
-	 * 
-	 * @param drawable
-	 * @return
-	 */
-	public static Bitmap drawableToBitmap(Drawable drawable) {
-		int width = drawable.getIntrinsicWidth();
-		int height = drawable.getIntrinsicHeight();
-		Bitmap bitmap = Bitmap.createBitmap(width, height, drawable
-				.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
-				: Bitmap.Config.RGB_565);
-		Canvas canvas = new Canvas(bitmap);
-		drawable.setBounds(0, 0, width, height);
-		drawable.draw(canvas);
-		return bitmap;
+    /**
+     * 将Drawable转化为Bitmap
+     *
+     * @param drawable
+     * @return
+     */
+    public static Bitmap drawableToBitmap(Drawable drawable) {
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        Bitmap bitmap = Bitmap.createBitmap(width, height, drawable
+                .getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                : Bitmap.Config.RGB_565);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+        return bitmap;
 
-	}
+    }
 
 
     /**
      * 保存文件
+     *
      * @param bm
      * @param fileName
      * @throws IOException
      */
-    public static boolean saveFile(Bitmap bm, String fileDir,String fileName) {
-      try{
-           File dirFile = new File(fileDir);
-            if(!dirFile.exists()){
+    public static boolean saveFile(Bitmap bm, String fileDir, String fileName) {
+        try {
+            File dirFile = new File(fileDir);
+            if (!dirFile.exists()) {
                 dirFile.mkdirs();
             }
-            File myCaptureFile = new File(fileDir,fileName+".jpg");
-            if(myCaptureFile.exists()){
-                myCaptureFile = new File(fileDir,fileName+System.currentTimeMillis()+".jpg");
+            File myCaptureFile = new File(fileDir, fileName + ".jpg");
+            if (myCaptureFile.exists()) {
+                myCaptureFile = new File(fileDir, fileName + System.currentTimeMillis() + ".jpg");
             }
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
             bm.compress(CompressFormat.JPEG, 100, bos);
             bos.flush();
             bos.close();
-          return true;
-      }catch (Exception e){
-          e.printStackTrace();
-      }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     /**
-	 * 通过uri获取文件的绝对路径
-	 * 
-	 * @param uri
-	 * @return
-	 */
-	@SuppressWarnings("deprecation")
-	public static String getAbsoluteImagePath(Activity context, Uri uri) {
+     * 通过uri获取文件的绝对路径
+     *
+     * @param uri
+     * @return
+     */
+    @SuppressWarnings("deprecation")
+    public static String getAbsoluteImagePath(Activity context, Uri uri) {
 //		String imagePath = "";
 //		String[] proj = { MediaStore.Images.Media.DATA };
 //		Cursor cursor = context.managedQuery(uri, proj, // Which columns to
@@ -206,213 +215,213 @@ public class ImageUtils {
 //			imagePath = uri.getPath();
 //		}
 
-		return getPath(context,uri);
-	}
+        return getPath(context, uri);
+    }
 
-	/**
-	 * 获取bitmap
-	 * 
-	 * @param filePath
-	 * @return
-	 */
-	public static Bitmap getBitmapByPath(String filePath) {
-		return getBitmapByPath(filePath, null);
-	}
+    /**
+     * 获取bitmap
+     *
+     * @param filePath
+     * @return
+     */
+    public static Bitmap getBitmapByPath(String filePath) {
+        return getBitmapByPath(filePath, null);
+    }
 
-	public static Bitmap getBitmapByPath(String filePath,
-			BitmapFactory.Options opts) {
-		FileInputStream fis = null;
-		Bitmap bitmap = null;
-		try {
-			File file = new File(filePath);
-			fis = new FileInputStream(file);
-			bitmap = BitmapFactory.decodeStream(fis, null, opts);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (OutOfMemoryError e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				fis.close();
-			} catch (Exception e) {
-			}
-		}
-		return bitmap;
-	}
+    public static Bitmap getBitmapByPath(String filePath,
+                                         BitmapFactory.Options opts) {
+        FileInputStream fis = null;
+        Bitmap bitmap = null;
+        try {
+            File file = new File(filePath);
+            fis = new FileInputStream(file);
+            bitmap = BitmapFactory.decodeStream(fis, null, opts);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+            } catch (Exception e) {
+            }
+        }
+        return bitmap;
+    }
 
-	/**
-	 * 获取bitmap
-	 * 
-	 * @param file
-	 * @return
-	 */
-	public static Bitmap getBitmapByFile(File file) {
-		FileInputStream fis = null;
-		Bitmap bitmap = null;
-		try {
-			fis = new FileInputStream(file);
-			bitmap = BitmapFactory.decodeStream(fis);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (OutOfMemoryError e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				fis.close();
-			} catch (Exception e) {
-			}
-		}
-		return bitmap;
-	}
+    /**
+     * 获取bitmap
+     *
+     * @param file
+     * @return
+     */
+    public static Bitmap getBitmapByFile(File file) {
+        FileInputStream fis = null;
+        Bitmap bitmap = null;
+        try {
+            fis = new FileInputStream(file);
+            bitmap = BitmapFactory.decodeStream(fis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (OutOfMemoryError e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+            } catch (Exception e) {
+            }
+        }
+        return bitmap;
+    }
 
-	public static String bitmaptoString(Bitmap bitmap) {
+    public static String bitmaptoString(Bitmap bitmap) {
 
-		// 将Bitmap转换成字符串
+        // 将Bitmap转换成字符串
 
-		String string = null;
+        String string = null;
 
-		ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
 
-		bitmap.compress(CompressFormat.JPEG, 40, bStream);
+        bitmap.compress(CompressFormat.JPEG, 40, bStream);
 
-		byte[] bytes = bStream.toByteArray();
-		LogUtils.e("size:" + bytes.length);
-		string = Base64.encodeToString(bytes, Base64.DEFAULT);
+        byte[] bytes = bStream.toByteArray();
+        LogUtils.e("size:" + bytes.length);
+        string = Base64.encodeToString(bytes, Base64.DEFAULT);
 
-		return string;
+        return string;
 
-	}
+    }
 
-	public static Bitmap compressImage(Bitmap image) {
+    public static Bitmap compressImage(Bitmap image) {
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		image.compress(CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-		int options = 100;
-		while (baos.toByteArray().length / 1024 > 512) { // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
-			baos.reset();// 重置baos即清空baos
-			image.compress(CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
-			options -= 10;// 每次都减少10
-		}
-		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
-		Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
-		return bitmap;
-	}
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 512) { // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
+            baos.reset();// 重置baos即清空baos
+            image.compress(CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+            options -= 10;// 每次都减少10
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);// 把ByteArrayInputStream数据生成图片
+        return bitmap;
+    }
 
     public static InputStream compressImageToInputStream(Bitmap image) {
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		image.compress(CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-		int options = 100;
-		while (baos.toByteArray().length / 1024 > 512) { // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
-			baos.reset();// 重置baos即清空baos
-			image.compress(CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
-			options -= 10;// 每次都减少10
-		}
-		ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
-		return isBm;
-	}
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 512) { // 循环判断如果压缩后图片是否大于512kb,大于继续压缩
+            baos.reset();// 重置baos即清空baos
+            image.compress(CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+            options -= 10;// 每次都减少10
+        }
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());// 把压缩后的数据baos存放到ByteArrayInputStream中
+        return isBm;
+    }
 
-	public static Bitmap stringtoBitmap(String string) {
+    public static Bitmap stringtoBitmap(String string) {
 
-		// 将字符串转换成Bitmap类型
+        // 将字符串转换成Bitmap类型
 
-		Bitmap bitmap = null;
+        Bitmap bitmap = null;
 
-		try {
+        try {
 
-			byte[] bitmapArray;
+            byte[] bitmapArray;
 
-			bitmapArray = Base64.decode(string, Base64.DEFAULT);
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
 
-			bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,
 
-			bitmapArray.length);
+                    bitmapArray.length);
 
-		} catch (Exception e) {
+        } catch (Exception e) {
 
-			e.printStackTrace();
+            e.printStackTrace();
 
-		}
+        }
 
-		return bitmap;
+        return bitmap;
 
-	}
+    }
 
-	// 计算图片的缩放值
-	public static int calculateInSampleSize(BitmapFactory.Options options,
-			int reqWidth, int reqHeight) {
-		final int height = options.outHeight;
-		final int width = options.outWidth;
-		int inSampleSize = 1;
+    // 计算图片的缩放值
+    public static int calculateInSampleSize(BitmapFactory.Options options,
+                                            int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
 
-		if (height > reqHeight || width > reqWidth) {
-			final int heightRatio = Math.round((float) height
-					/ (float) reqHeight);
-			final int widthRatio = Math.round((float) width / (float) reqWidth);
-			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-		}
-		return inSampleSize;
-	}
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height
+                    / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
+    }
 
-	// 根据路径获得图片并压缩，返回bitmap用于显示
-	public static Bitmap getSmallBitmap(String filePath) {
-		final BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeFile(filePath, options);
+    // 根据路径获得图片并压缩，返回bitmap用于显示
+    public static Bitmap getSmallBitmap(String filePath) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
 
-		// Calculate inSampleSize
-		options.inSampleSize = calculateInSampleSize(options, 200, 200);
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, 200, 200);
 
-		// Decode bitmap with inSampleSize set
-		options.inJustDecodeBounds = false;
-		return BitmapFactory.decodeFile(filePath, options);
-	}
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(filePath, options);
+    }
 
-	public static InputStream getInputStream(Bitmap bitmap) {
-		ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+    public static InputStream getInputStream(Bitmap bitmap) {
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
 
-		bitmap.compress(CompressFormat.JPEG, 100, bStream);
+        bitmap.compress(CompressFormat.JPEG, 100, bStream);
 
-		return new ByteArrayInputStream(bStream.toByteArray());
-	}
+        return new ByteArrayInputStream(bStream.toByteArray());
+    }
 
-	// 把bitmap转换成String
-	public static String bitmapToString(String filePath) {
-		Bitmap bm = getSmallBitmap(filePath);
-		return bitmaptoString(bm);
-	}
+    // 把bitmap转换成String
+    public static String bitmapToString(String filePath) {
+        Bitmap bm = getSmallBitmap(filePath);
+        return bitmaptoString(bm);
+    }
 
-	/**
-	 * 根据后缀名判断是否是图片文件
-	 * 
-	 * @param type
-	 * @return 是否是图片结果true or false
-	 */
-	public static boolean isImage(String type) {
-		if(TextUtils.isEmpty(type)){
-			return false;
-		}
-		type = type.toLowerCase();
-		if ((type.equals("jpg") || type.equals("gif")
-						|| type.equals("png") || type.equals("jpeg")
-						|| type.equals("bmp") || type.equals("wbmp")
-						|| type.equals("ico") || type.equals("jpe"))) {
-			return true;
-		}
-		return false;
-	}
-
-
-    public static boolean isLocaImange(String url){
-        if(url.startsWith("http://") || url.startsWith("https://")){
+    /**
+     * 根据后缀名判断是否是图片文件
+     *
+     * @param type
+     * @return 是否是图片结果true or false
+     */
+    public static boolean isImage(String type) {
+        if (TextUtils.isEmpty(type)) {
             return false;
-        }else{
-           return true;
+        }
+        type = type.toLowerCase();
+        if ((type.equals("jpg") || type.equals("gif")
+                || type.equals("png") || type.equals("jpeg")
+                || type.equals("bmp") || type.equals("wbmp")
+                || type.equals("ico") || type.equals("jpe"))) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static boolean isLocaImange(String url) {
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            return false;
+        } else {
+            return true;
         }
     }
 
 
-
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     public static String getPath(final Context context, final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -456,7 +465,7 @@ public class ImageUtils {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
@@ -484,9 +493,9 @@ public class ImageUtils {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param context The context.
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param context       The context.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
@@ -544,6 +553,32 @@ public class ImageUtils {
      */
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+
+    /**
+     * 获取圆角位图的方法
+     *
+     * @param bitmap 需要转化成圆角的位图
+     * @param pixels 圆角的度数，数值越大，圆角越大
+     * @return 处理后的圆角位图
+     */
+    public static Bitmap toRoundCorner(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+        return output;
     }
 
 }

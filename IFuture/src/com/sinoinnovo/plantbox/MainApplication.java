@@ -3,6 +3,7 @@ package com.sinoinnovo.plantbox;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -14,7 +15,9 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.sinoinnovo.plantbox.http.OkHttpStack;
+import com.sinoinnovo.plantbox.utils.Displayer;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ public class MainApplication extends Application {
     private List<Activity> activityTask = new ArrayList<Activity>();
     public static ImageLoader imageLoader = ImageLoader.getInstance();
     public static DisplayImageOptions options;
+    public static DisplayImageOptions optionsRounds;
 
     public static final String TAG = "VolleyPatterns";
     private RequestQueue mRequestQueue;
@@ -47,9 +51,18 @@ public class MainApplication extends Application {
                 .showImageForEmptyUri(R.drawable.ic_launcher)//加载数据为空时显示的图片
                 .showImageOnFail(R.drawable.ic_launcher)//加载失败时显示的图片
                 .cacheInMemory()
-                .cacheOnDisc() /**.displayer(new RoundedBitmapDisplayer(20))**/
+                .cacheOnDisc()
                 .build();
 
+        optionsRounds = new DisplayImageOptions.Builder()
+                .showStubImage(R.drawable.ic_launcher)
+                .showImageForEmptyUri(R.drawable.ic_launcher)
+                .showImageOnFail(R.drawable.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)   //设置图片的解码类型
+                .displayer(new RoundedBitmapDisplayer(5))
+                .build();
     }
 
     public static synchronized MainApplication getmInstance() {

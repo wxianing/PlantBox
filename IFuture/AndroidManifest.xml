@@ -374,6 +374,8 @@
         <activity
             android:name=".activity.MyQrCodeActivity"
             android:label="@string/title_activity_my_qr_code"></activity>
+        <activity android:name=".activity.SelectPhotoActivity" />
+        <activity android:name=".widget.ProcessActivity" />
     </application>
 
 </manifest>

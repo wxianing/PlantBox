@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:background="@drawable/imageview_shape"
         android:id="@+id/pro_gv_img"
         android:layout_width="100dp"
         android:layout_height="100dp"

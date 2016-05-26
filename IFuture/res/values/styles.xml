@@ -18,6 +18,12 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <!-- 定义popupwindows动画效果 -->
+    <style name="AnimationPreview">
+        <item name="android:windowEnterAnimation">@anim/anim_entry</item>
+        <item name="android:windowExitAnimation">@anim/anim_exit</item>
+    </style>
+
     <style name="AnimationFade">
 
         <!-- PopupWindow左右弹出的效果 -->

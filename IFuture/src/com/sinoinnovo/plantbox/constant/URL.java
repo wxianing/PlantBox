@@ -3,7 +3,7 @@ package com.sinoinnovo.plantbox.constant;
 public class URL {
 
     public static final String BASE_URL = "http://plantboxapi.meidp.com/";
-    public static final String BASE_IAMGE="http://plantbox.meidp.com/";
+    public static final String BASE_IAMGE = "http://plantbox.meidp.com/";
     //登录
     public static final String LOGIN_URL = BASE_URL + "common/user/login";
     //首页最新、热门、综合
@@ -46,14 +46,15 @@ public class URL {
     //植物百科详情
     public static final String PLANT_BAIKE_DETAILS_URL = "http://plantbox.meidp.com/Mobi/Home/NoticeDetail/";
     //我的基地植物
-    public static final String MYAREA_PLANT_URL =BASE_URL + "common/user/getusergoodpagelistmine";
+    public static final String MYAREA_PLANT_URL = BASE_URL + "common/user/getusergoodpagelistmine";
     //添加好友
     public static final String ADD_FRIENDS_URL = BASE_URL + "common/user/contactadd";
     //参考用户教程
-    public static final String REFER_USER_TUTORIAL_URL = BASE_URL+"common/user/getusergoodsrecordpagelist";
-
-
-
+    public static final String REFER_USER_TUTORIAL_URL = BASE_URL + "common/user/getusercoursepagelist";
+    //发布教程
+    public static final String PUBLISH_TUTORIAL_URL = BASE_URL + "product/home/sendgoodrecord";
+    //我的發佈教程列表
+    public static final String MY_PUBLISH_TUTORIAL_URL = BASE_URL + "common/user/getusercoursepagelistmine";
 
 
     public static final int DEV = 0x00;

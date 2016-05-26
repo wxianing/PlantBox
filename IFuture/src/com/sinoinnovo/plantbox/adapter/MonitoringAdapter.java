@@ -34,7 +34,7 @@ public class MonitoringAdapter extends BasicAdapter<PlantBaiKe.DataListBean> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        MainApplication.imageLoader.displayImage(bean.getImgPath(), vh.imageView, MainApplication.options);
+        MainApplication.imageLoader.displayImage(bean.getImgPath(), vh.imageView, MainApplication.optionsRounds);
 
         vh.content.setText(bean.getSummary());
         vh.nameTv.setText(bean.getTitle());

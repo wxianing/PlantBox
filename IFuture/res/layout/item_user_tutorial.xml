@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:padding="@dimen/dp15">
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/img"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:padding="@dimen/dp2"
         android:src="@drawable/ic_launcher" />
 
     <RelativeLayout
@@ -17,18 +17,11 @@
         android:layout_marginLeft="@dimen/dp10"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp5"
-            android:text="用户名" />
 
         <TextView
             android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/user_name"
             android:layout_marginTop="@dimen/dp5"
             android:layout_weight="1"
             android:ellipsize="end"
@@ -39,8 +32,8 @@
             android:id="@+id/time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_below="@+id/title_name"
+            android:layout_marginTop="@dimen/dp3"
             android:text="2016.02.25" />
     </RelativeLayout>
 

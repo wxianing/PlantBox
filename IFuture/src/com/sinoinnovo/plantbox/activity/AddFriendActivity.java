@@ -13,6 +13,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class AddFriendActivity extends BaseActivity implements View.OnClickListener {
+
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)

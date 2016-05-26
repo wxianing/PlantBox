@@ -31,22 +31,18 @@ public class ReferToUserTutorialAdapter extends BasicAdapter<ReferUserTutorial.D
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.userName.setText(data.get(position).getCnName());
-        vh.titleName.setText(data.get(position).getProductName());
-        vh.timeTv.setText(data.get(position).getMadeDate());
-
+        vh.titleName.setText(data.get(position).getHeadTitle());
+        vh.timeTv.setText(data.get(position).getCreateTime());
 
         return convertView;
     }
 
     protected class ViewHolder {
-        @Bind(R.id.user_name)
-        protected TextView userName;
+
         @Bind(R.id.title_name)
         protected TextView titleName;
         @Bind(R.id.time_tv)
         protected TextView timeTv;
-
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }

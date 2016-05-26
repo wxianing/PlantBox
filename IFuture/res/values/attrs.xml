@@ -48,7 +48,19 @@
         <attr name="matProg_linearProgress" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="GFFloatingActionButton">
+        <attr name="fabColorPressed" format="color"/>
+        <attr name="fabColorNormal" format="color"/>
+        <attr name="fabIcon" format="reference"/>
+        <attr name="fabTitle" format="string"/>
+    </declare-styleable>
 
+    <declare-styleable name="HorizontalListView">
+        <attr name="dividerWidth" format="dimension" />
+        <attr name="android:divider" />
+        <attr name="android:requiresFadingEdge" />
+        <attr name="android:fadingEdgeLength" />
+    </declare-styleable>
     <declare-styleable name="WaveView">
         <attr name="above_wave_color" format="color"/>
         <attr name="blow_wave_color" format="color"/>

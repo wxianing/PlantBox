@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lidroid.xutils.BitmapUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.MainApplication;
 import com.sinoinnovo.plantbox.bean.shoplist.SHopDataList;
@@ -37,9 +39,11 @@ public class ShopListAdapter extends BasicAdapter<SHopDataList> {
             vh = (ViewHolder) convertView.getTag();
         }
 
-        MainApplication.imageLoader.displayImage(URL.BASE_URL + list.getThumbImg(), vh.imageView);
+        ImageLoader.getInstance().displayImage(URL.BASE_IAMGE + list.getThumbImg(), vh.imageView, MainApplication.optionsRounds);
         vh.notice.setText(list.getNotice());
 //        vh.price.setText(list.getMinSalePrice());
+//        BitmapUtils bitmapUtils = new BitmapUtils(context);
+//        bitmapUtils.display(vh.imageView,URL.BASE_URL + list.getThumbImg());
 
         return convertView;
     }
