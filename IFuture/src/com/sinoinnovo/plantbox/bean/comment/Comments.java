@@ -71,9 +71,19 @@ public class Comments implements Serializable {
         private int UserId;
         private String CreateTime;
         private String Content;
+        private String Context;
+
         private String Title;
         private String ThumbImg;
         private int TotalCollect;
+
+        public String getContext() {
+            return Context;
+        }
+
+        public void setContext(String context) {
+            Context = context;
+        }
 
         public int getId() {
             return Id;

@@ -39,16 +39,17 @@ public class ShopListAdapter extends BasicAdapter<SHopDataList> {
             vh = (ViewHolder) convertView.getTag();
         }
 
-        ImageLoader.getInstance().displayImage(URL.BASE_IAMGE + list.getThumbImg(), vh.imageView, MainApplication.optionsRounds);
+        ImageLoader.getInstance().displayImage(list.getThumbImg(), vh.imageView, MainApplication.optionsRounds);
         vh.notice.setText(list.getNotice());
-//        vh.price.setText(list.getMinSalePrice());
-//        BitmapUtils bitmapUtils = new BitmapUtils(context);
-//        bitmapUtils.display(vh.imageView,URL.BASE_URL + list.getThumbImg());
-
+        vh.price.setText("售价￥：" + list.getMinSalePrice());
+        vh.alreadyBuy.setText(list.getBuyCount() + "人已购买");
+        vh.produceName.setText(list.getProductName());
         return convertView;
     }
 
     protected class ViewHolder {
+        @Bind(R.id.produce_name)
+        protected TextView produceName;
         @Bind(R.id.notice_introduce)
         protected TextView notice;
         @Bind(R.id.imageView)

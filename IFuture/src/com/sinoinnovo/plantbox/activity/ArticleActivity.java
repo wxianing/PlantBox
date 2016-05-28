@@ -1,6 +1,7 @@
 package com.sinoinnovo.plantbox.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -44,6 +45,7 @@ public class ArticleActivity extends BaseActivity implements View.OnClickListene
     private void initView() {
         title.setText("详情");
         articleId = getIntent().getIntExtra("articleID", 0);
+        Log.e("植物百科详情", ">>>" + articleId);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置可以访问文件

@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshBase;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshListView;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.adapter.ShopListAdapter;
@@ -30,14 +32,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PlantShopActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class PlantShopActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener2<ListView> {
 
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
     @Bind(R.id.webView)
     protected WebView webview;
     @Bind(R.id.shop_listview)
-    protected ListView mListView;
+    protected PullToRefreshListView mListView;
 
     private List<SHopDataList> mDatas;
     private ShopListAdapter mAdapter;
@@ -45,7 +47,8 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     protected ImageView searchImg;
     @Bind(R.id.editText)
     protected EditText editText;
-
+    String keyWord = "";
+    int PageIndex = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +56,25 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_plant_shop);
         ButterKnife.bind(this);
         initView();
-        initData("");
+        initData(keyWord, PageIndex);
         initEvent();
     }
 
-    private void initData(String keyWord) {
-        RequestParams params = RequestParamsUtils.getShopListData(keyWord, "1", "1", "10");
+    private void initData(String keyWord, int PageIndex) {
+        RequestParams params = RequestParamsUtils.getShopListData(keyWord, "1", "" + PageIndex, "8");
         HttpRequestUtils.create(this).send(URL.PLANT_SHOPS_LIST_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
                 if (resultInfo != null) {
                     ShopListBean bean = JsonParse.parseToObject(resultInfo, ShopListBean.class);
                     if (bean != null) {
-
                         mDatas.addAll(bean.getDataList());
                         mAdapter.notifyDataSetChanged();
+                        mListView.onRefreshComplete();
                     }
                 }
             }
         });
-
     }
 
     private void initEvent() {
@@ -83,26 +85,36 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     private void initView() {
         int userId = SharedPreferencesUtils.getIntData(this, "UserId", 0);
         mDatas = new ArrayList<>();
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mAdapter = new ShopListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
+        mListView.setOnRefreshListener(this);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int oid = mDatas.get(position).getId();
+        int oid = mDatas.get(position - 1).getId();
+        double price = mDatas.get(position-1).getMinSalePrice();
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("oid", oid);
+        intent.putExtra("price",price);
         startActivity(intent);
     }
 
-    //Web视图
-    private class webViewClient extends WebViewClient {
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
+    //下拉
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        PageIndex = 1;
+        mDatas.clear();
+        initData(keyWord, PageIndex);
+    }
+
+    //上拉
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        PageIndex++;
+        initData(keyWord, PageIndex);
     }
 
     @Override
@@ -115,9 +127,10 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_icon:
-                String keyWord = editText.getText().toString().trim();
+                keyWord = editText.getText().toString().trim();
                 mDatas.clear();
-                initData(keyWord);
+                initData(keyWord, 1);
+                keyWord = "";
                 break;
             case R.id.back_arrows:
                 finish();

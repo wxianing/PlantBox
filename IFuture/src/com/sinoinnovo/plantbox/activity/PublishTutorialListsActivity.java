@@ -104,11 +104,10 @@ public class PublishTutorialListsActivity extends BaseActivity implements View.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ReferUserTutorial.DataListBean bean = mDatas.get(position);
+        int oid = bean.getId();
+        Intent intent = new Intent(this, MyCourseDetailsActivity.class);
+        intent.putExtra("oid", oid);
 
-        Intent intent = new Intent(this, PublishTutorialActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("bean", (Serializable) bean);
-        intent.putExtras(bundle);
         startActivity(intent);
     }
 }

@@ -300,6 +300,8 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), MyBaseAreaActivity.class);
+        String cnName = mDatas.get(position).getCnName();
+        intent.putExtra("cnName", cnName);
         startActivity(intent);
     }
 }

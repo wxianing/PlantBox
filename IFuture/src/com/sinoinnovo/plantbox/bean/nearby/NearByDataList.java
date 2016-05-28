@@ -40,6 +40,15 @@ public class NearByDataList implements Serializable {
     private double Distincts;
     private String Remark;
     private double Lon;
+    private String HeadPhoto;
+
+    public String getHeadPhoto() {
+        return HeadPhoto;
+    }
+
+    public void setHeadPhoto(String headPhoto) {
+        HeadPhoto = headPhoto;
+    }
 
     public String getProductCode() {
         return ProductCode;

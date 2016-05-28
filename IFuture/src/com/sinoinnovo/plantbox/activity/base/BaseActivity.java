@@ -10,6 +10,8 @@ import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.AppManager;
 import com.sinoinnovo.plantbox.view.SystemBarTintManager;
 
+import butterknife.ButterKnife;
+
 public class BaseActivity extends Activity {
 
     @Override
@@ -22,8 +24,7 @@ public class BaseActivity extends Activity {
             tintManager.setStatusBarTintEnabled(true);
             tintManager.setStatusBarTintResource(R.color.head_bg_color);//通知栏所需颜色
         }
-//        AppManager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);   //导致屏幕第一次点击无效
-//        AppManager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);   //导致屏幕第一次点击无效
+//        ButterKnife.bind(this);
     }
 
     private void setTranslucentStatus(boolean on) {
@@ -41,6 +42,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        ButterKnife.unbind(this);
         AppManager.getAppManager().removeActivity(this);
     }
 

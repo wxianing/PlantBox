@@ -11,8 +11,8 @@ public class ReferUserTutorial implements Serializable {
 
     /**
      * PageIndex : 1
-     * RecordCount : 25
-     * DataList : [{"Records":[{"Images":[],"Id":31,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 11:10:05","CreateTime":"2016-05-26 11:10:05","Context":"好吧(∩_∩)","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":29},{"Images":[],"Id":33,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 14:17:00","CreateTime":"2016-05-26 14:17:01","Context":"测试","UserId":205,"Status":1,"ImgList":"/Files/Train/160526141700267150.jpg;/Files/Train/160526141700747493.jpg;/Files/Train/160526141700119823.jpg;","sType":2,"RecordHeadId":29}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526141700267150.jpg","Id":29,"UserGoodsId":0,"HeadTitle":"铁观音","sType":2,"TotalCount":2,"LastTime":"2016-05-26 14:17:01","CreateTime":"2016-05-26 11:10:05","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":28,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:49","CreateTime":"2016-05-26 10:07:49","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":28}],"HeadImage":null,"Id":28,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:49","CreateTime":"2016-05-26 10:07:49","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":27,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:49","CreateTime":"2016-05-26 10:07:49","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":27},{"Images":[],"Id":32,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 13:09:44","CreateTime":"2016-05-26 13:09:44","Context":"测试","UserId":205,"Status":1,"ImgList":"/Files/Train/160526130944017088.jpg;","sType":2,"RecordHeadId":27}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526130944017088.jpg","Id":27,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":2,"LastTime":"2016-05-26 13:09:44","CreateTime":"2016-05-26 10:07:49","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":26,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":26}],"HeadImage":null,"Id":26,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":25,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":25}],"HeadImage":null,"Id":25,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":24,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":24}],"HeadImage":null,"Id":24,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":23,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":23}],"HeadImage":null,"Id":23,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:48","CreateTime":"2016-05-26 10:07:48","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":22,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":22}],"HeadImage":null,"Id":22,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":21,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":21}],"HeadImage":null,"Id":21,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null},{"Records":[{"Images":[],"Id":20,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","Context":"jdhdvdh","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":20}],"HeadImage":null,"Id":20,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 10:07:47","CreateTime":"2016-05-26 10:07:47","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":null}]
+     * RecordCount : 27
+     * DataList : [{"Records":[{"Images":[],"Id":54,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-27 15:36:59","CreateTime":"2016-05-27 15:36:59","Context":"呼噜声了","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":50,"PraiseCount":0,"TotalCollect":0,"TotalComment":0}],"HeadImage":null,"Id":50,"UserGoodsId":0,"HeadTitle":"啊啊啊","sType":2,"TotalCount":1,"LastTime":"2016-05-27 15:36:59","CreateTime":"2016-05-27 15:36:59","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":"http://q.qlogo.cn/qqapp/1105399638/F0724F5568BB79A23677179D520D6BF2/100","TotalCollect":0,"TotalComment":0},{"Records":[{"Images":[],"Id":52,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 19:45:29","CreateTime":"2016-05-26 19:45:29","Context":"jshdb","UserId":187,"Status":1,"ImgList":"/Files/Train/160526194529184541.jpg;","sType":2,"RecordHeadId":48,"PraiseCount":0,"TotalCollect":0,"TotalComment":0}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526194529184541.jpg","Id":48,"UserGoodsId":0,"HeadTitle":"啊啊啊","sType":2,"TotalCount":1,"LastTime":"2016-05-26 19:45:29","CreateTime":"2016-05-26 19:45:29","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":"http://q.qlogo.cn/qqapp/1105399638/F0724F5568BB79A23677179D520D6BF2/100","TotalCollect":0,"TotalComment":0},{"Records":[{"Images":[],"Id":51,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 19:00:45","CreateTime":"2016-05-26 19:00:45","Context":"扣扣啊啊啊","UserId":187,"Status":1,"ImgList":"/Files/Train/160526190045519231.jpg;","sType":2,"RecordHeadId":47,"PraiseCount":0,"TotalCollect":0,"TotalComment":0},{"Images":[],"Id":60,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-27 16:34:41","CreateTime":"2016-05-27 16:34:41","Context":"chugel","UserId":207,"Status":1,"ImgList":"/Files/Train/160527163441774643.jpg;","sType":2,"RecordHeadId":47,"PraiseCount":0,"TotalCollect":0,"TotalComment":0}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526190045519231.jpg","Id":47,"UserGoodsId":0,"HeadTitle":"啊啊啊","sType":2,"TotalCount":2,"LastTime":"2016-05-27 16:34:41","CreateTime":"2016-05-26 19:00:45","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":"http://q.qlogo.cn/qqapp/1105399638/F0724F5568BB79A23677179D520D6BF2/100","TotalCollect":0,"TotalComment":0},{"Records":[{"Images":[],"Id":50,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 18:44:38","CreateTime":"2016-05-26 18:44:38","Context":"丫丫","UserId":187,"Status":1,"ImgList":"/Files/Train/160526184438697574.jpg;","sType":2,"RecordHeadId":46,"PraiseCount":0,"TotalCollect":0,"TotalComment":0}],"HeadImage":"http://plantbox.meidp.com/Files/Train/160526184438697574.jpg","Id":46,"UserGoodsId":0,"HeadTitle":"hahaha","sType":2,"TotalCount":1,"LastTime":"2016-05-26 18:44:38","CreateTime":"2016-05-26 18:44:38","CreateUserId":187,"praiseCount":0,"CnName":"王显宁","Address":"深圳","UserName":"wxn","Mobile":"","Lat":null,"Lon":null,"ProductName":null,"SortId":null,"ThumbImg":null,"UserId":187,"Photo":"http://q.qlogo.cn/qqapp/1105399638/F0724F5568BB79A23677179D520D6BF2/100","TotalCollect":0,"TotalComment":0}]
      * TotalModel :
      */
 
@@ -20,15 +20,15 @@ public class ReferUserTutorial implements Serializable {
     private int RecordCount;
     private String TotalModel;
     /**
-     * Records : [{"Images":[],"Id":31,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 11:10:05","CreateTime":"2016-05-26 11:10:05","Context":"好吧(∩_∩)","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":29},{"Images":[],"Id":33,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-26 14:17:00","CreateTime":"2016-05-26 14:17:01","Context":"测试","UserId":205,"Status":1,"ImgList":"/Files/Train/160526141700267150.jpg;/Files/Train/160526141700747493.jpg;/Files/Train/160526141700119823.jpg;","sType":2,"RecordHeadId":29}]
-     * HeadImage : http://plantbox.meidp.com/Files/Train/160526141700267150.jpg
-     * Id : 29
+     * Records : [{"Images":[],"Id":54,"UserGoodsId":0,"ProductId":0,"ProductEntityId":0,"MadeDate":"2016-05-27 15:36:59","CreateTime":"2016-05-27 15:36:59","Context":"呼噜声了","UserId":187,"Status":1,"ImgList":"","sType":2,"RecordHeadId":50,"PraiseCount":0,"TotalCollect":0,"TotalComment":0}]
+     * HeadImage : null
+     * Id : 50
      * UserGoodsId : 0
-     * HeadTitle : 铁观音
+     * HeadTitle : 啊啊啊
      * sType : 2
-     * TotalCount : 2
-     * LastTime : 2016-05-26 14:17:01
-     * CreateTime : 2016-05-26 11:10:05
+     * TotalCount : 1
+     * LastTime : 2016-05-27 15:36:59
+     * CreateTime : 2016-05-27 15:36:59
      * CreateUserId : 187
      * praiseCount : 0
      * CnName : 王显宁
@@ -41,7 +41,9 @@ public class ReferUserTutorial implements Serializable {
      * SortId : null
      * ThumbImg : null
      * UserId : 187
-     * Photo : null
+     * Photo : http://q.qlogo.cn/qqapp/1105399638/F0724F5568BB79A23677179D520D6BF2/100
+     * TotalCollect : 0
+     * TotalComment : 0
      */
 
     private List<DataListBean> DataList;
@@ -78,8 +80,8 @@ public class ReferUserTutorial implements Serializable {
         this.DataList = DataList;
     }
 
-    public static class DataListBean implements Serializable{
-        private String HeadImage;
+    public static class DataListBean implements Serializable {
+        private Object HeadImage;
         private int Id;
         private int UserGoodsId;
         private String HeadTitle;
@@ -99,30 +101,35 @@ public class ReferUserTutorial implements Serializable {
         private Object SortId;
         private Object ThumbImg;
         private int UserId;
-        private Object Photo;
+        private String Photo;
+        private int TotalCollect;
+        private int TotalComment;
         /**
          * Images : []
-         * Id : 31
+         * Id : 54
          * UserGoodsId : 0
          * ProductId : 0
          * ProductEntityId : 0
-         * MadeDate : 2016-05-26 11:10:05
-         * CreateTime : 2016-05-26 11:10:05
-         * Context : 好吧(∩_∩)
+         * MadeDate : 2016-05-27 15:36:59
+         * CreateTime : 2016-05-27 15:36:59
+         * Context : 呼噜声了
          * UserId : 187
          * Status : 1
          * ImgList :
          * sType : 2
-         * RecordHeadId : 29
+         * RecordHeadId : 50
+         * PraiseCount : 0
+         * TotalCollect : 0
+         * TotalComment : 0
          */
 
         private List<RecordsBean> Records;
 
-        public String getHeadImage() {
+        public Object getHeadImage() {
             return HeadImage;
         }
 
-        public void setHeadImage(String HeadImage) {
+        public void setHeadImage(Object HeadImage) {
             this.HeadImage = HeadImage;
         }
 
@@ -278,12 +285,28 @@ public class ReferUserTutorial implements Serializable {
             this.UserId = UserId;
         }
 
-        public Object getPhoto() {
+        public String getPhoto() {
             return Photo;
         }
 
-        public void setPhoto(Object Photo) {
+        public void setPhoto(String Photo) {
             this.Photo = Photo;
+        }
+
+        public int getTotalCollect() {
+            return TotalCollect;
+        }
+
+        public void setTotalCollect(int TotalCollect) {
+            this.TotalCollect = TotalCollect;
+        }
+
+        public int getTotalComment() {
+            return TotalComment;
+        }
+
+        public void setTotalComment(int TotalComment) {
+            this.TotalComment = TotalComment;
         }
 
         public List<RecordsBean> getRecords() {
@@ -294,7 +317,7 @@ public class ReferUserTutorial implements Serializable {
             this.Records = Records;
         }
 
-        public static class RecordsBean implements Serializable{
+        public static class RecordsBean implements Serializable {
             private int Id;
             private int UserGoodsId;
             private int ProductId;
@@ -307,7 +330,10 @@ public class ReferUserTutorial implements Serializable {
             private String ImgList;
             private int sType;
             private int RecordHeadId;
-            private List<?> Images;
+            private int PraiseCount;
+            private int TotalCollect;
+            private int TotalComment;
+            private List<String> Images;
 
             public int getId() {
                 return Id;
@@ -405,11 +431,35 @@ public class ReferUserTutorial implements Serializable {
                 this.RecordHeadId = RecordHeadId;
             }
 
-            public List<?> getImages() {
+            public int getPraiseCount() {
+                return PraiseCount;
+            }
+
+            public void setPraiseCount(int PraiseCount) {
+                this.PraiseCount = PraiseCount;
+            }
+
+            public int getTotalCollect() {
+                return TotalCollect;
+            }
+
+            public void setTotalCollect(int TotalCollect) {
+                this.TotalCollect = TotalCollect;
+            }
+
+            public int getTotalComment() {
+                return TotalComment;
+            }
+
+            public void setTotalComment(int TotalComment) {
+                this.TotalComment = TotalComment;
+            }
+
+            public List<String> getImages() {
                 return Images;
             }
 
-            public void setImages(List<?> Images) {
+            public void setImages(List<String> Images) {
                 this.Images = Images;
             }
         }

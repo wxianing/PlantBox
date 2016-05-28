@@ -25,6 +25,7 @@ import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
 import com.sinoinnovo.plantbox.utils.ShareUtils;
+import com.sinoinnovo.plantbox.utils.ToastUtils;
 import com.sinoinnovo.plantbox.view.DActionSheetDialog;
 import com.sinoinnovo.plantbox.view.MyListView;
 import com.sinoinnovo.plantbox.widget.AutoAdjustHeightImageView;
@@ -73,6 +74,9 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
     protected ProduceDetails produce;
     protected TextView price;
     private TextView introduce;
+    private double producePrice;
+    private TextView lookBaike;
+    private int classId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 if (produce != null) {
                     introduce.setText(produce.getNotice());
                     produceName.setText(produce.getProductName());
+                    classId = produce.getClassId();
                     mDatas.addAll(produce.getPictures());
                     mAdapter.notifyDataSetChanged();
                     if (mDatas != null && !mDatas.isEmpty())
@@ -104,8 +109,17 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         });
     }
 
+
     private void setDataToView(ProduceDetails produce) {
         price.setText("优惠价:￥" + produce.getMinSalePrice());
+        int isCollect = produce.getIsCollect();
+        if (isCollect == 1) {
+            collectImg.setImageResource(R.drawable.cellect_checked);
+            collectTv.setText("已收藏");
+        } else {
+            collectImg.setImageResource(R.drawable.collect_img);
+            collectTv.setText("收藏");
+        }
     }
 
     private void initView() {
@@ -118,10 +132,12 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         total = (TextView) headerView.findViewById(R.id.total_count);
         introduce = (TextView) headerView.findViewById(R.id.produce_introduce);
         price = (TextView) headerView.findViewById(R.id.price_tv);
-
+        lookBaike = (TextView) headerView.findViewById(R.id.look_baike);
         gson = new Gson();
         title.setText("商品详情");
         oid = getIntent().getIntExtra("oid", 0);
+        producePrice = getIntent().getDoubleExtra("price", 0);
+        price.setText("优惠价:￥" + producePrice);
         mDatas = new ArrayList<>();
         mAdapter = new DetailsListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
@@ -135,6 +151,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         shareImg.setOnClickListener(this);
         collectTv.setOnClickListener(this);
         customerService.setOnClickListener(this);
+        lookBaike.setOnClickListener(this);
     }
 
     @Override
@@ -145,7 +162,13 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
+            case R.id.look_baike:
+                intent = new Intent(this, PlantBaikeActivity.class);
+                intent.putExtra("ClassId", classId);
+                startActivity(intent);
+                break;
             case R.id.collect:
                 String flag = collectTv.getText().toString().trim();
                 if (flag.equals("收藏")) {
@@ -180,7 +203,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.buy_now_buttons://立即购买
                 String totalCount = total.getText().toString().trim();
-                Intent intent = new Intent(this, OrderActivity.class);
+                intent = new Intent(this, OrderActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("produce", produce);
                 intent.putExtras(bundle);
@@ -188,6 +211,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("price", produce);
                 intent.putExtra("totalCount", totalCount);
                 startActivity(intent);
+
                 break;
             case R.id.back_arrows://返回箭头
                 finish();
@@ -221,7 +245,6 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                                 setCellPhone(produce.getMobile());
                             }
                         }).show();
-
     }
 
     public void setCellPhone(String phone) {

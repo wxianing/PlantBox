@@ -36,6 +36,7 @@ public class MainApplication extends Application {
     private RequestQueue mRequestQueue;
 
     private static MainApplication mInstance;
+    public static DisplayImageOptions optionsCircle;
 
     @Override
     public void onCreate() {
@@ -62,6 +63,15 @@ public class MainApplication extends Application {
                 .cacheOnDisc(true)
                 .bitmapConfig(Bitmap.Config.ARGB_8888)   //设置图片的解码类型
                 .displayer(new RoundedBitmapDisplayer(5))
+                .build();
+        optionsCircle = new DisplayImageOptions.Builder()
+                .showStubImage(R.drawable.ic_launcher)
+                .showImageForEmptyUri(R.drawable.ic_launcher)
+                .showImageOnFail(R.drawable.ic_launcher)
+                .cacheInMemory(true)
+                .cacheOnDisc(true)
+                .bitmapConfig(Bitmap.Config.ARGB_8888)   //设置图片的解码类型
+                .displayer(new Displayer(0))//圆形图片
                 .build();
     }
 

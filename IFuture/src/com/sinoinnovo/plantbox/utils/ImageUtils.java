@@ -28,6 +28,8 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 
+import com.sinoinnovo.plantbox.constant.Constant;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -43,9 +45,10 @@ import java.util.Locale;
 
 public class ImageUtils {
 
-    	public static final int GET_IMAGE_BY_CAMERA = 5001;
-	public static final int GET_IMAGE_FROM_PHONE = 5002;
-//    public static final int GET_IMAGE_BY_CAMERA = 3;
+    public static final int GET_IMAGE_BY_CAMERA = 5001;
+    public static final int GET_IMAGE_FROM_PHONE = 5002;
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    //    public static final int GET_IMAGE_BY_CAMERA = 3;
 //    public static final int GET_IMAGE_FROM_PHONE = 1;
     public static final int CROP_IMAGE = 5003;
     public static Uri imageUriFromCamera;
@@ -110,6 +113,66 @@ public class ImageUtils {
         intent.putExtra("return-data", false);
 
         activity.startActivityForResult(intent, CROP_IMAGE);
+    }
+
+    /**
+     * 检查SD卡
+     *
+     * @return
+     */
+    public static boolean hasSdcard() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * 从相机获取
+     *
+     * @param activity
+     */
+    public static void camera(final Activity activity) {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        // 判断存储卡是否可以用，可用进行存储
+        if (hasSdcard()) {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    Uri.fromFile(new File(Environment
+                            .getExternalStorageDirectory(), Constant.PHOTO_FILE_NAME)));
+        }
+        activity.startActivityForResult(intent, Constant.PHOTO_REQUEST_CAMERA);
+    }
+
+    public static void crop(Uri uri, final Activity activity) {
+        // 裁剪图片意图
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        // 裁剪框的比例，1：1
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // 裁剪后输出图片的尺寸大小
+        intent.putExtra("outputX", 250);
+        intent.putExtra("outputY", 250);
+        // 图片格式
+        intent.putExtra("outputFormat", "JPEG");
+        intent.putExtra("noFaceDetection", true);// 取消人脸识别
+        intent.putExtra("return-data", true);// true:不返回uri，false：返回uri
+        activity.startActivityForResult(intent, Constant.PHOTO_REQUEST_CUT);
+    }
+
+
+    /*
+* 从相册获取
+*/
+    public static void gallery(final Activity activity) {
+        // 激活系统图库，选择一张图片
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        activity.startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
 
     /**

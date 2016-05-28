@@ -7,7 +7,8 @@ public class URL {
     //登录
     public static final String LOGIN_URL = BASE_URL + "common/user/login";
     //首页最新、热门、综合
-    public static final String HOME_PRODUCTLIST_URL = BASE_URL + "order/getlist";
+//    public static final String HOME_PRODUCTLIST_URL = BASE_URL + "order/getlist";
+    public static final String HOME_PRODUCTLIST_URL = BASE_URL + "apphome/getuserresultpagelist";
 
     //轮播图
     public static final String HOME_BANNER_URL = BASE_URL + "common/advertise/getlist";
@@ -55,6 +56,10 @@ public class URL {
     public static final String PUBLISH_TUTORIAL_URL = BASE_URL + "product/home/sendgoodrecord";
     //我的發佈教程列表
     public static final String MY_PUBLISH_TUTORIAL_URL = BASE_URL + "common/user/getusercoursepagelistmine";
+    //我的订单列表
+    public static final String MY_ODRER_LIST_URL = BASE_URL + "order/getorderlist";
+    //教程详情
+    public static final String USER_COUSER_DETAILS_URL = BASE_URL + "common/user/getusercourse";
 
 
     public static final int DEV = 0x00;

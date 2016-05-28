@@ -32,12 +32,14 @@ public class RequestParamsUtils {
     }
 
     //植物百科
-    public static RequestParams getPlantBaikeParams(String keyWord, int channelId, int pageIndex, int pageSize) {
+    public static RequestParams getPlantBaikeParams(String keyWord, int channelId, int pageIndex, int pageSize, int classId) {
         RequestParams params = createRequestParams();
         params.addBodyParameter("Keyword", keyWord);
         params.addBodyParameter("ChannelId", "" + channelId);
         params.addBodyParameter("PageIndex", "" + pageIndex);
         params.addBodyParameter("PageSize", "" + pageSize);
+        if (classId != 0)
+            params.addBodyParameter("ClassId", "" + classId);
         return params;
     }
 
@@ -65,7 +67,7 @@ public class RequestParamsUtils {
         RequestParams params = createRequestParams();
         params.addBodyParameter("FKId", "" + oid);
         params.addBodyParameter("FKType", "" + 1);
-        params.addBodyParameter("Content", content);
+        params.addBodyParameter("Context", content);
         return params;
     }
 

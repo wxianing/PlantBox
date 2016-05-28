@@ -1,200 +1,172 @@
 package com.sinoinnovo.plantbox.bean.produce;
 
 import java.io.Serializable;
+import java.util.List;
 
-/**
- * Created by Administrator on 2016/5/12 0012.
- * "MinAdvancePrice": 0,
- * "MinSalePrice": 0,
- * "Id": 1,
- * "SortId": 1,
- * "ProductName": "发财树",
- * "ProductCode": "10013",
- * "Introduce": "",
- * "CycleDays": 30,
- * "CreateUserId": 1,
- * "CreateUserName": null,
- * "CreateTime": "2015-12-31 00:00:00",
- * "Status": 1,
- * "ThumbImg": "/upload/201605/f410a8b6926840b8b7828f7d2093e41f.jpg",
- * "IsDeleted": 0,
- * "TotalRead": 33,
- * "TotalCollect": 7,
- * "Hits": null,
- * "ReleaseTime": "2016-01-19 14:10:41",
- * "NeedBatchs": 0,
- * "AdvertImg": "/upload/201605/a388e3eec4eb45d29f95e1de07662906.jpg",
- * "BuyMode": "在线购买",
- * "Mobile": "400-0000-8888",
- * "Notice": ""
- */
+
 public class DataListBean implements Serializable {
 
-    private int MinAdvancePrice;
-    private int MinSalePrice;
     private int Id;
-    private int SortId;
+    private int UserGoodsId;
+    private int ProductEntityId;
     private String ProductName;
-    private String ProductCode;
-    private String Introduce;
-    private int CycleDays;
-    private int CreateUserId;
-    private String CreateTime;
-    private int Status;
-    private String ThumbImg;
-    private int IsDeleted;
+    private String MadeDate;
+    private String Context;
+    private int PraiseCount;
+    private String TimeStr;
+    private String City;
+    private int Distinct;
+    private int Lat;
+    private int Lon;
+    private String CnName;
+    private int UserId;
+    private String HeadPhoto;
+    private int TotalComment;
     private int TotalCollect;
-    private String ReleaseTime;
-    private int NeedBatchs;
-
-
-    private UserBean user;
-    private ProductBean Product;
-
-
-
-    public ProductBean getProduct() {
-        return Product;
-    }
-
-    public void setProduct(ProductBean product) {
-        Product = product;
-    }
-
-    public UserBean getUser() {
-        return user;
-    }
-
-    public void setUser(UserBean user) {
-        this.user = user;
-    }
-
-    public int getMinAdvancePrice() {
-        return MinAdvancePrice;
-    }
-
-    public void setMinAdvancePrice(int minAdvancePrice) {
-        MinAdvancePrice = minAdvancePrice;
-    }
-
-    public int getMinSalePrice() {
-        return MinSalePrice;
-    }
-
-    public void setMinSalePrice(int minSalePrice) {
-        MinSalePrice = minSalePrice;
-    }
+    private List<String> Pictures;
 
     public int getId() {
         return Id;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
-    public int getSortId() {
-        return SortId;
+    public int getUserGoodsId() {
+        return UserGoodsId;
     }
 
-    public void setSortId(int sortId) {
-        SortId = sortId;
+    public void setUserGoodsId(int UserGoodsId) {
+        this.UserGoodsId = UserGoodsId;
+    }
+
+    public int getProductEntityId() {
+        return ProductEntityId;
+    }
+
+    public void setProductEntityId(int ProductEntityId) {
+        this.ProductEntityId = ProductEntityId;
     }
 
     public String getProductName() {
         return ProductName;
     }
 
-    public void setProductName(String productName) {
-        ProductName = productName;
+    public void setProductName(String ProductName) {
+        this.ProductName = ProductName;
     }
 
-    public String getProductCode() {
-        return ProductCode;
+    public String getMadeDate() {
+        return MadeDate;
     }
 
-    public void setProductCode(String productCode) {
-        ProductCode = productCode;
+    public void setMadeDate(String MadeDate) {
+        this.MadeDate = MadeDate;
     }
 
-    public String getIntroduce() {
-        return Introduce;
+    public String getContext() {
+        return Context;
     }
 
-    public void setIntroduce(String introduce) {
-        Introduce = introduce;
+    public void setContext(String Context) {
+        this.Context = Context;
     }
 
-    public int getCycleDays() {
-        return CycleDays;
+    public int getPraiseCount() {
+        return PraiseCount;
     }
 
-    public void setCycleDays(int cycleDays) {
-        CycleDays = cycleDays;
+    public void setPraiseCount(int PraiseCount) {
+        this.PraiseCount = PraiseCount;
     }
 
-    public int getCreateUserId() {
-        return CreateUserId;
+    public String getTimeStr() {
+        return TimeStr;
     }
 
-    public void setCreateUserId(int createUserId) {
-        CreateUserId = createUserId;
+    public void setTimeStr(String TimeStr) {
+        this.TimeStr = TimeStr;
     }
 
-    public String getCreateTime() {
-        return CreateTime;
+    public String getCity() {
+        return City;
     }
 
-    public void setCreateTime(String createTime) {
-        CreateTime = createTime;
+    public void setCity(String City) {
+        this.City = City;
     }
 
-    public int getStatus() {
-        return Status;
+    public int getDistinct() {
+        return Distinct;
     }
 
-    public void setStatus(int status) {
-        Status = status;
+    public void setDistinct(int Distinct) {
+        this.Distinct = Distinct;
     }
 
-    public String getThumbImg() {
-        return ThumbImg;
+    public int getLat() {
+        return Lat;
     }
 
-    public void setThumbImg(String thumbImg) {
-        ThumbImg = thumbImg;
+    public void setLat(int Lat) {
+        this.Lat = Lat;
     }
 
-    public int getIsDeleted() {
-        return IsDeleted;
+    public int getLon() {
+        return Lon;
     }
 
-    public void setIsDeleted(int isDeleted) {
-        IsDeleted = isDeleted;
+    public void setLon(int Lon) {
+        this.Lon = Lon;
+    }
+
+    public String getCnName() {
+        return CnName;
+    }
+
+    public void setCnName(String CnName) {
+        this.CnName = CnName;
+    }
+
+    public int getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(int UserId) {
+        this.UserId = UserId;
+    }
+
+    public String getHeadPhoto() {
+        return HeadPhoto;
+    }
+
+    public void setHeadPhoto(String HeadPhoto) {
+        this.HeadPhoto = HeadPhoto;
+    }
+
+    public int getTotalComment() {
+        return TotalComment;
+    }
+
+    public void setTotalComment(int TotalComment) {
+        this.TotalComment = TotalComment;
     }
 
     public int getTotalCollect() {
         return TotalCollect;
     }
 
-    public void setTotalCollect(int totalCollect) {
-        TotalCollect = totalCollect;
+    public void setTotalCollect(int TotalCollect) {
+        this.TotalCollect = TotalCollect;
     }
 
-    public String getReleaseTime() {
-        return ReleaseTime;
+    public List<String> getPictures() {
+        return Pictures;
     }
 
-    public void setReleaseTime(String releaseTime) {
-        ReleaseTime = releaseTime;
-    }
-
-    public int getNeedBatchs() {
-        return NeedBatchs;
-    }
-
-    public void setNeedBatchs(int needBatchs) {
-        NeedBatchs = needBatchs;
+    public void setPictures(List<String> Pictures) {
+        this.Pictures = Pictures;
     }
 
 }

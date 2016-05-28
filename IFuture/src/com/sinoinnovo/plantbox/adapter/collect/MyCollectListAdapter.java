@@ -38,7 +38,7 @@ public class MyCollectListAdapter extends BasicAdapter<CollectBean.DataBean.Data
             vh = (ViewHolder) convertView.getTag();
         }
         Log.e("bean", bean.getThumbImg());
-        MainApplication.imageLoader.displayImage(URL.BASE_URL + bean.getThumbImg(), vh.imageView);
+        MainApplication.imageLoader.displayImage(bean.getThumbImg(), vh.imageView,MainApplication.optionsRounds);
         vh.title.setText(bean.getTitle());
         vh.createTime.setText(bean.getCreateTime());
         return convertView;

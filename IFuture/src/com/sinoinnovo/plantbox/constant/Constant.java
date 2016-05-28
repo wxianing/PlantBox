@@ -59,7 +59,13 @@ public class Constant {
     public static final int LOADMORE = 0x01;
     public static final String CODE = SharedPreferencesUtils.getStringData(MainApplication.getmInstance(), "code", null);
 
+    public static final int PHOTO_REQUEST_CAMERA = 1;// 拍照
+    public static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    public static final int PHOTO_REQUEST_CUT = 3;// 结果
+    public static final String PHOTO_FILE_NAME = "temp_photo.jpg";
 
+    public static final int LOGIN_RESULT = 100;
+    public static final int USER_SET = 101;
     /**
      * 我的选校：同意
      */

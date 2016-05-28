@@ -1,5 +1,6 @@
 package com.sinoinnovo.plantbox.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -47,7 +48,6 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
     @Bind(R.id.qrcode_bitmap)
     protected ImageView mImageView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +63,6 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
     }
 
     private void initView() {
-
         title.setText("二维码扫描");
         backImg.setOnClickListener(this);
     }
@@ -108,7 +107,14 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
                         @Override
                         public void onReponse(String result) {
                             super.onReponse(result);
-                            Log.e("Scann>>resultInfo", result);
+                            try {
+                                JSONObject obj = new JSONObject(result);
+                                if (obj.get("enumcode") != 0) {
+                                    ToastUtils.show(DimensionCodeActivity.this, "你扫描的二维码非网址，无法正常打开");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
 
@@ -147,6 +153,7 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
                     int enumcode = obj.getInt("enumcode");
                     if (enumcode == 0) {
                         ToastUtils.show(DimensionCodeActivity.this, "添加好友发送请求成功");
+                        finish();
                     } else {
                         ToastUtils.show(DimensionCodeActivity.this, "添加好友发送请求失败");
                     }
@@ -164,7 +171,7 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
         double lat = SharedPreferencesUtils.getDoubleData(this, "Latitude", 0);
         double lng = SharedPreferencesUtils.getDoubleData(this, "Longitude", 0);
         RequestParams params = RequestParamsUtils.createRequestParams();
-        params.addBodyParameter("ProductEntityId", "" + productEntityId);
+        params.addBodyParameter("ProductEntityId", "" + productEntityId);//对应返回  FKId
         params.addBodyParameter("Lat", "" + lat);
         params.addBodyParameter("Lon", "" + lng);
 
@@ -183,6 +190,7 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
                     int enumcode = obj.getInt("enumcode");
                     if (enumcode == 0) {
                         ToastUtils.show(DimensionCodeActivity.this, "绑定成功");
+                        finish();
                     } else {
                         ToastUtils.show(DimensionCodeActivity.this, "绑定失败");
                     }

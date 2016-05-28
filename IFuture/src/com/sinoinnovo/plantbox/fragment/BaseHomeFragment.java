@@ -4,6 +4,7 @@ package com.sinoinnovo.plantbox.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.sinoinnovo.plantbox.http.LikeCallBack;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +52,39 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
     protected LinearLayout sexLinear;//性别
     protected LinearLayout introduction;//简介
 
+    protected TextView locationTtv;//所在地
+    protected TextView nickname;//昵称
+    protected TextView sexTv;//性别
+    protected TextView introductionTv;//简介
+
+    private String keyWord = "王显宁";
+
+    private static final String ARG_PARAM1 = "cnName";
+    private String mParam;
+
     public BaseHomeFragment() {
     }
 
+    public static BaseHomeFragment newInstance(String param) {
+        BaseHomeFragment fragment = new BaseHomeFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam = getArguments().getString(ARG_PARAM1);
+            Log.e("mParam", mParam);
+            if (mParam != null && !"".equals(mParam)) {
+                keyWord = mParam;
+            }
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,6 +100,10 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
 
     private void initEvent() {
         moreInformation.setOnClickListener(this);
+        locationTtv.setOnClickListener(this);
+        nickname.setOnClickListener(this);
+        sexTv.setOnClickListener(this);
+//        introductionTv.setOnClickListener(this);
     }
 
     private void initView() {
@@ -76,16 +112,20 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
         nickNameLinear = (LinearLayout) headerView.findViewById(R.id.nickname_linear);
         sexLinear = (LinearLayout) headerView.findViewById(R.id.sex_linear);
         introduction = (LinearLayout) headerView.findViewById(R.id.introduction_linear);
+        locationTtv = (TextView) headerView.findViewById(R.id.location_tv);
+        nickname = (TextView) headerView.findViewById(R.id.nickname);
+        sexTv = (TextView) headerView.findViewById(R.id.sex_tv);
+        introductionTv = (TextView) headerView.findViewById(R.id.introduction_tv);
 
         mDatas = new ArrayList<>();
+        mListView.addHeaderView(headerView);
         mAdapter = new ProduceAdapter(mDatas, getActivity(), this);
         mListView.setAdapter(mAdapter);
-        mListView.addHeaderView(headerView);
     }
 
     private void initData() {
         callBack = new CallBack();
-        RequestParams params = RequestParamsUtils.getProductList("", "1", "1", "10");
+        RequestParams params = RequestParamsUtils.getProductList(keyWord, "1", "1", "10");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
     }
 
@@ -105,6 +145,14 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.location_tv://所在地
+                break;
+            case R.id.nickname:
+                break;
+            case R.id.sex_tv:
+                break;
+            case R.id.introduction_tv:
+                break;
             case R.id.more_information:
                 String flag = moreInformation.getText().toString().trim();
                 if (flag.equals("更多资料>>")) {

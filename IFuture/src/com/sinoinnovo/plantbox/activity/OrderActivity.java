@@ -65,6 +65,8 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     @Bind(R.id.total_menoy)
     protected TextView totalMenoy;
     private int money;
+    @Bind(R.id.introduction_tv)
+    protected TextView introduction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +95,19 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
         count.setText("数量：" + totalCount);
         DetailList bean = new DetailList();
         produce = (ProduceDetails) getIntent().getSerializableExtra("produce");
-
-        List<ProductEntitysBean> entitysBeanLists = produce.getProductEntitys();
-        for (int i = 0; i < entitysBeanLists.size(); i++) {
-            bean.setQty(Integer.valueOf(totalCount));
-            bean.setProductId(entitysBeanLists.get(i).getProductId());
-            bean.setPrice(entitysBeanLists.get(i).getSalePrice());
-            bean.setProductEntityId(entitysBeanLists.get(i).getId());
-            mDatas.add(bean);
-            money += entitysBeanLists.get(i).getSalePrice();
+        if (produce != null) {
+            introduction.setText(produce.getNotice());
+            List<ProductEntitysBean> entitysBeanLists = produce.getProductEntitys();
+            for (int i = 0; i < entitysBeanLists.size(); i++) {
+                bean.setQty(Integer.valueOf(totalCount));
+                bean.setProductId(entitysBeanLists.get(i).getProductId());
+                bean.setPrice(entitysBeanLists.get(i).getSalePrice());
+                bean.setProductEntityId(entitysBeanLists.get(i).getId());
+                mDatas.add(bean);
+                money += entitysBeanLists.get(i).getSalePrice();
+            }
+            totalMenoy.setText("合计：￥" + money);
         }
-        totalMenoy.setText("合计：￥" + money);
     }
 
     @Override

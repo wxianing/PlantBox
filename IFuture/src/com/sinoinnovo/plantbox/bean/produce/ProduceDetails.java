@@ -17,6 +17,24 @@ public class ProduceDetails implements Serializable {
     private List<String> Pictures;
     protected String Notice;
     protected String Mobile;
+    protected int ClassId;
+    private int IsCollect;
+
+    public int getIsCollect() {
+        return IsCollect;
+    }
+
+    public void setIsCollect(int isCollect) {
+        IsCollect = isCollect;
+    }
+
+    public int getClassId() {
+        return ClassId;
+    }
+
+    public void setClassId(int classId) {
+        ClassId = classId;
+    }
 
     public List<ProductEntitysBean> getProductEntitys() {
         return ProductEntitys;

@@ -59,6 +59,7 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
 
     @Bind(R.id.add_img)
     protected ImageView addImg;
+    private String cnName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
 
         setContentView(R.layout.activity_my_base_area);
         ButterKnife.bind(this);
-
+        cnName = getIntent().getStringExtra("cnName");
         initView();
 
         initEvent();
@@ -83,7 +84,11 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
     private void initView() {
         setSelect(0);
         mFragments = new ArrayList<>();
-        mFragments.add(new BaseHomeFragment());
+        if (cnName != null && !"".equals(cnName)) {
+            mFragments.add(BaseHomeFragment.newInstance(cnName));
+        } else {
+            mFragments.add(new BaseHomeFragment());
+        }
         mFragments.add(new BaseAreaFragment());
         mFragments.add(new AchievementFragment());
 
@@ -119,13 +124,11 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
         });
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -133,7 +136,7 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
         switch (v.getId()) {
 
             case R.id.add_img:
-                Intent intent = new Intent(this, PublishActivity.class);
+                Intent intent = new Intent(this, MyAchieveActivity.class);
                 startActivity(intent);
                 break;
             case R.id.home_linear:

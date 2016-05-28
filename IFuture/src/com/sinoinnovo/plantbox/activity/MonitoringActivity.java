@@ -2,15 +2,15 @@ package com.sinoinnovo.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshBase;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshListView;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.adapter.MonitoringAdapter;
@@ -28,7 +28,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MonitoringActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MonitoringActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener2<ListView> {
 
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
@@ -39,7 +39,9 @@ public class MonitoringActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.search_img)
     protected ImageView searchImg;
     @Bind(R.id.listview)
-    protected ListView mListView;
+    protected PullToRefreshListView mListView;
+    private String keyWord = "";
+    private int pageIndex = 1;
 
 
     @Override
@@ -48,11 +50,12 @@ public class MonitoringActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_monitoring);
         ButterKnife.bind(this);
         initView();
-        initData("");
+        initData(keyWord, pageIndex);
         initEvent();
     }
 
     private void initView() {
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mDatas = new ArrayList<>();
         mAdapter = new MonitoringAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
@@ -62,10 +65,11 @@ public class MonitoringActivity extends BaseActivity implements View.OnClickList
     private void initEvent() {
         backImg.setOnClickListener(this);
         searchImg.setOnClickListener(this);
+        mListView.setOnRefreshListener(this);
     }
 
-    private void initData(String keyWord) {
-        RequestParams params = RequestParamsUtils.getPlantBaikeParams(keyWord, 1002, 1, 8);
+    private void initData(String keyWord, int pageIndex) {
+        RequestParams params = RequestParamsUtils.getPlantBaikeParams(keyWord, 1002, pageIndex, 8, 0);
         HttpRequestUtils.create(this).send(URL.PLANT_BAIKE_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -84,7 +88,7 @@ public class MonitoringActivity extends BaseActivity implements View.OnClickList
             case R.id.search_img:
                 String keyWord = editText.getText().toString().trim();
                 mDatas.clear();
-                initData(keyWord);
+                initData(keyWord, pageIndex);
                 break;
             case R.id.back_arrows:
                 finish();
@@ -100,9 +104,22 @@ public class MonitoringActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int articleID = mDatas.get(position).getArticleID();
+        int articleID = mDatas.get(position - 1).getArticleID();
         Intent intent = new Intent(this, ArticleActivity.class);
         intent.putExtra("articleID", articleID);
         startActivity(intent);
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        pageIndex = 1;
+        mDatas.clear();
+        initData(keyWord, pageIndex);
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        pageIndex++;
+        initData(keyWord, pageIndex);
     }
 }

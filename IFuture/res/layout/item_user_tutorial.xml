@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:padding="@dimen/dp10">
 
     <ImageView
-        android:id="@+id/img"
+        android:id="@+id/header_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="@dimen/dp2"

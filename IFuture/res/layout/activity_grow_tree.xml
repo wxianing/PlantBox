@@ -30,7 +30,8 @@
         android:paddingLeft="@dimen/dp15"
         android:paddingTop="@dimen/dp10"
         android:text=" 口令赢植币"
-        android:textSize="@dimen/sp18" />
+        android:textSize="@dimen/sp18"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/mygrow_tv"
@@ -43,7 +44,8 @@
         android:paddingLeft="@dimen/dp15"
         android:paddingTop="@dimen/dp10"
         android:text=" 我的下线"
-        android:textSize="@dimen/sp18" />
+        android:textSize="@dimen/sp18"
+        android:visibility="gone" />
 
     <TextView
         android:layout_width="match_parent"
@@ -55,6 +57,7 @@
         android:paddingLeft="@dimen/dp15"
         android:paddingTop="@dimen/dp10"
         android:text=" 我的收入"
-        android:textSize="@dimen/sp18" />
+        android:textSize="@dimen/sp18"
+        android:visibility="gone" />
 
 </LinearLayout>

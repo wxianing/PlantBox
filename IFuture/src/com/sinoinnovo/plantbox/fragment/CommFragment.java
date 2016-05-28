@@ -54,6 +54,9 @@ public class CommFragment extends Fragment implements LikeCallBack {
     private ProduceAdapter mAdapter;
     @Bind(R.id.listview)
     protected MyListView mListView;
+    @Bind(R.id.add_nore)
+    protected TextView addMore;
+    int pageIndex = 1;
 
     public CommFragment() {
     }
@@ -83,15 +86,24 @@ public class CommFragment extends Fragment implements LikeCallBack {
         View view = inflater.inflate(R.layout.fragment_comm, container, false);
         ButterKnife.bind(this, view);
         initView();
-        initData();
+        initData(pageIndex);
+        initEvent();
         return view;
     }
 
-    int pageIndex = 1;
-    int pageSize = 10;
+    private void initEvent() {
+        addMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pageIndex++;
+                initData(pageIndex);
+            }
+        });
+    }
 
-    private void initData() {
-        RequestParams params = RequestParamsUtils.getProductList("", mParam1, "" + pageIndex, "" + pageSize);
+
+    private void initData(int pageIndex) {
+        RequestParams params = RequestParamsUtils.getProductList("", mParam1, "" + pageIndex, "8");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callback);
     }
 
@@ -100,25 +112,13 @@ public class CommFragment extends Fragment implements LikeCallBack {
         dataLists = new ArrayList<>();
         mAdapter = new ProduceAdapter(dataLists, getActivity(), this);
         mListView.setAdapter(mAdapter);
-        View footerView = LayoutInflater.from(getActivity()).inflate(R.layout.more_layout, null);
-//        mListView.addFooterView(view);
-        TextView moretv = (TextView) footerView.findViewById(R.id.add_nore);
-        moretv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                pageIndex++;
-//                pageSize += 4;
-                initData();
-            }
-        });
-
     }
 
     @Override
     public void likeClick(int position) {
 
-        int oid = dataLists.get(position).getProduct().getId();
-        Log.e("oid", ">>>>>>>>>>>>" + oid);
+        int oid = dataLists.get(position).getId();
+
         RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
         HttpRequestUtils.create(getActivity()).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
@@ -133,7 +133,7 @@ public class CommFragment extends Fragment implements LikeCallBack {
                     JSONObject obj = new JSONObject(result);
                     int enumcode = obj.getInt("enumcode");
                     if (enumcode == 0) {
-                        initData();
+                        initData(pageIndex);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -149,7 +149,6 @@ public class CommFragment extends Fragment implements LikeCallBack {
 
             Produce produce = JsonParse.parseToObject(info, Produce.class);
             if (produce != null) {
-                dataLists.clear();
                 dataLists.addAll(produce.getDataList());
                 mAdapter.notifyDataSetChanged();
             }

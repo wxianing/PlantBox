@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.sinoinnovo.plantbox.MainApplication;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.CommentActivity;
 import com.sinoinnovo.plantbox.activity.MyBaseAreaActivity;
@@ -24,6 +26,7 @@ import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.ShareUtils;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
+import com.sinoinnovo.plantbox.view.CircularImage;
 import com.sinoinnovo.plantbox.widget.HListView;
 
 import org.json.JSONException;
@@ -54,7 +57,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
     @Override
     public View createView(int position, View convertView, ViewGroup parent) {
         DataListBean bean = data.get(position);
-        List<String> imageUrls = bean.getProduct().getPictures();
+        List<String> imageUrls = bean.getPictures();
         ViewHolder vh = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_listview_latest, parent, false);
@@ -63,13 +66,19 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.cnName.setText(bean.getUser().getCnName());
-        vh.notice.setText("        " + bean.getProduct().getNotice());
-        vh.likeCount.setText(bean.getProduct().getHits() + "赞");
-        for (int i = 3; i < imageUrls.size(); i++)
+        vh.cnName.setText(bean.getCnName());
+        vh.notice.setText("        " + bean.getContext());
+        vh.likeCount.setText(bean.getPraiseCount() + "赞");
+        vh.commentCount.setText(bean.getTotalComment() + "评论");
+        vh.timeTv.setText(bean.getTimeStr());
+
+        ImageLoader.getInstance().displayImage(bean.getHeadPhoto(), vh.headerImg, MainApplication.optionsCircle);
+
+        for (int i = 3; i < imageUrls.size(); i++) {
             if (imageUrls.size() > 2) {
                 imageUrls.remove(i);
             }
+        }
         mAdapter = new ProduceGvAdapter(imageUrls, context);
         vh.mGridView.setAdapter(mAdapter);
 
@@ -92,12 +101,12 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
     @Override
     public void onClick(View v) {
         Intent intent;
-        oid = data.get(count).getProduct().getId();
+        oid = data.get(count).getId();
         DataListBean listBean = data.get(count);
         switch (v.getId()) {
             case R.id.notice_tv:
-                userId = data.get(count).getUser().getUserId();
-                goodId = data.get(count).getProduct().getId();
+                userId = data.get(count).getUserId();
+                goodId = data.get(count).getId();
                 Log.e("ProduceAdapter", "userId:" + userId + "goodId:" + goodId);
                 intent = new Intent(context, ShopDetailActivity.class);
                 Bundle bundle = new Bundle();
@@ -115,12 +124,12 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 break;
             case R.id.home_header_img:
                 intent = new Intent(context, MyBaseAreaActivity.class);
-                intent.putExtra("cnName", data.get(count).getUser().getCnName());
+                intent.putExtra("cnName", data.get(count).getCnName());
                 context.startActivity(intent);
                 break;
             case R.id.cnname:
                 intent = new Intent(context, MyBaseAreaActivity.class);
-                intent.putExtra("cnName", data.get(count).getUser().getCnName());
+                intent.putExtra("cnName", data.get(count).getCnName());
                 context.startActivity(intent);
                 break;
             case R.id.transpond_tv:
@@ -144,8 +153,9 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         @Bind(R.id.commot_tv)
         protected TextView commentCount;//评论
         @Bind(R.id.home_header_img)
-        protected ImageView headerImg;
-
+        protected CircularImage headerImg;
+        @Bind(R.id.time_tv)
+        protected TextView timeTv;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

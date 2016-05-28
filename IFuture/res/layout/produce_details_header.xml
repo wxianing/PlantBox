@@ -11,10 +11,10 @@
 
         <com.sinoinnovo.plantbox.widget.AutoAdjustHeightImageView
             android:id="@+id/banner_img"
-            android:src="@drawable/ic_launcher"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                     android:layout_marginRight="@dimen/dp10"
                     android:background="@drawable/textview_shape"
                     android:gravity="center"
-                    android:text="0" />
+                    android:text="1" />
 
                 <ImageView
                     android:id="@+id/add_img"

@@ -373,9 +373,18 @@
             android:label="@string/title_activity_publish_tutorial_lists" />
         <activity
             android:name=".activity.MyQrCodeActivity"
-            android:label="@string/title_activity_my_qr_code"></activity>
+            android:label="@string/title_activity_my_qr_code" />
         <activity android:name=".activity.SelectPhotoActivity" />
         <activity android:name=".widget.ProcessActivity" />
+        <activity
+            android:name=".activity.UserTutorialDetailsActivity"
+            android:label="@string/title_activity_user_tutorial_details" />
+        <activity
+            android:name=".activity.MyCourseDetailsActivity"
+            android:label="@string/title_activity_my_course_details" />
+        <activity
+            android:name=".activity.MyAchieveActivity"
+            android:label="@string/title_activity_my_achieve"></activity>
     </application>
 
 </manifest>

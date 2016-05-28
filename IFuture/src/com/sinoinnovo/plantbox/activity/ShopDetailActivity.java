@@ -97,10 +97,10 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
 
     private void initView() {
         title.setText("详情");
-        List<String> imageUrls = data.getProduct().getPictures();
-        cnName.setText(data.getUser().getCnName());
-        notice.setText("        " + data.getProduct().getNotice());
-        likeCount.setText(data.getProduct().getHits() + "赞");
+        List<String> imageUrls = data.getPictures();
+        cnName.setText(data.getCnName());
+        notice.setText("        " + data.getContext());
+        likeCount.setText(data.getPraiseCount() + "赞");
         mAdapter = new ProduceGvAdapter(imageUrls, this);
         mGridView.setAdapter(mAdapter);
         mDatas = new ArrayList<>();

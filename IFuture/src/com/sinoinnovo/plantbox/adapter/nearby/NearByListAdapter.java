@@ -3,15 +3,13 @@ package com.sinoinnovo.plantbox.adapter.nearby;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.sinoinnovo.plantbox.MainApplication;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.adapter.BasicAdapter;
 import com.sinoinnovo.plantbox.bean.nearby.NearByDataList;
-import com.sinoinnovo.plantbox.constant.URL;
+import com.sinoinnovo.plantbox.view.CircularImage;
 
 import java.util.List;
 
@@ -38,18 +36,16 @@ public class NearByListAdapter extends BasicAdapter<NearByDataList> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        MainApplication.imageLoader.displayImage(URL.BASE_URL + bean.getThumbImg(), vh.img);
+        MainApplication.imageLoader.displayImage(bean.getHeadPhoto(), vh.img, MainApplication.optionsCircle);
         vh.cnname.setText(bean.getCnName());
         vh.distincts.setText("距离" + ((int) bean.getDistincts()) + "km");
-
         vh.likeCount.setText("粉丝数：" + bean.getPraiseCount());
-
         return convertView;
     }
 
     protected class ViewHolder {
         @Bind(R.id.header_img)
-        protected ImageView img;
+        protected CircularImage img;
         @Bind(R.id.user_name)
         protected TextView cnname;
         @Bind(R.id.distance)

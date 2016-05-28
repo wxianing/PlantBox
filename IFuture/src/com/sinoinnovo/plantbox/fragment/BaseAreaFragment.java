@@ -84,14 +84,15 @@ public class BaseAreaFragment extends Fragment implements View.OnClickListener, 
             }
         });
 
-        RequestParams params2 = new RequestParams();
-        params.addHeader("_appId", Constant.APPID);
-        params.addHeader("_code", Constant.CODE);
-        params.addBodyParameter("content-type", "application/json");
+        sendMsg();
+    }
+
+    private void sendMsg( ) {
+        RequestParams params = RequestParamsUtils.createRequestParams();
         params.addBodyParameter("sType", "2");
         params.addBodyParameter("PageIndex", "1");
         params.addBodyParameter("PageSize", "10");
-        HttpRequestUtils.create(getActivity()).send(URL.MYAREA_PLANT_URL, params2, new HttpRequestCallBack<ResultInfo>() {
+        HttpRequestUtils.create(getActivity()).send(URL.MYAREA_PLANT_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
                 MyAreaBean bean = JsonParse.parseToObject(resultInfo, MyAreaBean.class);

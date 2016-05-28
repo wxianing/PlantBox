@@ -8,8 +8,9 @@
 
     <include layout="@layout/titlebar_shops_layout" />
 
-    <ListView
+    <com.meten.imanager.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/shop_listview"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -17,7 +18,6 @@
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
-
+        android:visibility="gone" />
 
 </LinearLayout>

@@ -5,13 +5,13 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <ImageView
+    <com.sinoinnovo.plantbox.view.CircularImage
         android:id="@+id/header_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="@dimen/dp3"
-        android:layout_marginLeft="@dimen/dp15"
-        android:layout_marginTop="3dp"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp3"
         android:src="@drawable/header_boy_icon" />
 
     <TextView

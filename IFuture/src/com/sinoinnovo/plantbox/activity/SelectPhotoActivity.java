@@ -36,17 +36,6 @@ import android.widget.Toast;
 
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.widget.ProcessActivity;
-
-//******************************************************************************
-// 参考资料
-// http://blog.csdn.net/xiaanming/article/details/18730223
-// http://www.cnblogs.com/linjiqin/archive/2011/02/23/1962535.html 九宫格
-// http://www.linuxidc.com/Linux/2011-08/41819.htm
-// Android应用开发揭秘
-// http://bbs.csdn.net/topics/390660734
-// http://blog.csdn.net/lujianfeiccie2009/article/details/7827771
-//******************************************************************************
-
 public class SelectPhotoActivity extends Activity {
 
 	private GridView gridView1;                 //网格显示缩略图

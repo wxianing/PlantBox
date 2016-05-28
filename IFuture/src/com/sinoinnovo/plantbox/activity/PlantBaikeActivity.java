@@ -2,14 +2,16 @@ package com.sinoinnovo.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshBase;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshListView;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.adapter.PlantBaikeListAdapter;
@@ -20,20 +22,25 @@ import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PlantBaikeActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class PlantBaikeActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener2<ListView> {
 
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
 
     @Bind(R.id.listview)
-    protected ListView mListView;
+    protected PullToRefreshListView mListView;
 
     @Bind(R.id.editText)
     protected EditText editText;
@@ -42,20 +49,23 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
 
     private List<PlantBaiKe.DataListBean> mDatas;
     private PlantBaikeListAdapter mAdapter;
+    private int pageIndex = 1;
+    private String keyWord = "";
+    private int classId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_baike);
         ButterKnife.bind(this);
-
+        classId = getIntent().getIntExtra("ClassId", 0);
         initView();
-        initData("");
+        initData(keyWord, pageIndex, classId);
         initEvent();
     }
 
-    private void initData(String keyWord) {
-        RequestParams params = RequestParamsUtils.getPlantBaikeParams(keyWord, 1001, 1, 8);
+    private void initData(String keyWord, int pageIndex, int classId) {
+        RequestParams params = RequestParamsUtils.getPlantBaikeParams(keyWord, 1001, pageIndex, 8, classId);
         HttpRequestUtils.create(this).send(URL.PLANT_BAIKE_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -63,6 +73,7 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
                 if (bean != null) {
                     mDatas.addAll(bean.getDataList());
                     mAdapter.notifyDataSetChanged();
+                    mListView.onRefreshComplete();
                 }
             }
         });
@@ -71,10 +82,13 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
     private void initEvent() {
         backImg.setOnClickListener(this);
         searchImg.setOnClickListener(this);
+        mListView.setOnRefreshListener(this);
     }
 
     private void initView() {
 
+
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mDatas = new ArrayList<>();
         mAdapter = new PlantBaikeListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
@@ -87,9 +101,10 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.search_img:
-                String keyWord = editText.getText().toString().trim();
+                keyWord = editText.getText().toString().trim();
                 mDatas.clear();
-                initData(keyWord);
+                initData(keyWord, pageIndex, 0);
+                keyWord = "";
                 break;
             case R.id.back_arrows:
                 finish();
@@ -99,7 +114,8 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int articleID = mDatas.get(position).getArticleID();
+        Log.e("position", ">>>>>" + position);
+        int articleID = mDatas.get(position - 1).getArticleID();
         Intent intent = new Intent(this, ArticleActivity.class);
         intent.putExtra("articleID", articleID);
         startActivity(intent);
@@ -110,5 +126,18 @@ public class PlantBaikeActivity extends BaseActivity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        pageIndex = 1;
+        mDatas.clear();
+        initData(keyWord, pageIndex, classId);
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        pageIndex++;
+        initData(keyWord, pageIndex, classId);
     }
 }

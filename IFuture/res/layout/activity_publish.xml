@@ -9,37 +9,50 @@
     <include layout="@layout/titlebar_layout" />
 
     <EditText
+        android:id="@+id/title_text"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp15"
         android:background="@drawable/edittext_shape"
-        android:gravity="top"
-        android:hint="分享新鲜事..."
+        android:hint="请输入标题"
         android:textSize="@dimen/sp14" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="5dp"
         android:background="@color/white"
-        android:gravity="center_vertical">
+        android:orientation="vertical">
 
-        <ImageView
+
+        <EditText
+            android:id="@+id/content_tv"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/edittext_shape"
+            android:gravity="top"
+            android:hint="分享新鲜事..."
+            android:textSize="@dimen/sp14" />
+
+        <GridView
+            android:id="@+id/add_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp15"
-            android:src="@drawable/home_activity_icon" />
-
-        <TextView
-            android:layout_marginLeft="@dimen/dp15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加照片"
-            android:textColor="@color/gray_textcolor" />
-
+            android:horizontalSpacing="3dp"
+            android:numColumns="4"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
         android:layout_marginTop="@dimen/dp10"
         android:background="@color/white"
         android:gravity="center_vertical"
