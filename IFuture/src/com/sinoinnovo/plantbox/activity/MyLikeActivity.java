@@ -75,10 +75,10 @@ public class MyLikeActivity extends BaseActivity implements View.OnClickListener
 
     private void initData() {
         callBack = new CallBack();
-        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "10");
-        HttpRequestUtils.create(this).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
-//        RequestParams params = RequestParamsUtils.getProductList("","1", "1", "3");
-//        HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, callBack);
+//        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "10");
+//        HttpRequestUtils.create(this).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
+        RequestParams params = RequestParamsUtils.getProductList("","1", "1", "3");
+        HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, callBack);
     }
 
     @Override

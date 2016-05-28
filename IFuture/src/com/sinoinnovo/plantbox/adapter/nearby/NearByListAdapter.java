@@ -39,7 +39,7 @@ public class NearByListAdapter extends BasicAdapter<NearByDataList> {
         MainApplication.imageLoader.displayImage(bean.getHeadPhoto(), vh.img, MainApplication.optionsCircle);
         vh.cnname.setText(bean.getCnName());
         vh.distincts.setText("距离" + ((int) bean.getDistincts()) + "km");
-        vh.likeCount.setText("粉丝数：" + bean.getPraiseCount());
+        vh.likeCount.setText(bean.getAddress());
         return convertView;
     }
 

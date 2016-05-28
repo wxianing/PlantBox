@@ -174,7 +174,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     private void initView() {
         callBack = new CallBack();
         imageUrls = new ArrayList<>();
-        setSelect(1);
+        setSelect(0);
 
         mFragments = new ArrayList<Fragment>();
 

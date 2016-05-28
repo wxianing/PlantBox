@@ -59,6 +59,7 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
     protected MyListView mListView;
     private List<Comments.DataListBean> mDatas;
     private CommentListAdapter mCommentAdapter;
+    private int oid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
         ButterKnife.bind(this);
 
         data = (DataListBean) getIntent().getSerializableExtra("listBean");
-
+        oid = data.getId();
         initView();
         initData();
         initEvent();
@@ -81,7 +82,8 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        RequestParams params = RequestParamsUtils.getCommentList("1", "1", "10");
+        Log.e("oid", oid + "");
+        RequestParams params = RequestParamsUtils.getCommentList(String.valueOf(oid), "3", "1", "10");
         HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -92,7 +94,6 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
                 }
             }
         });
-
     }
 
     private void initView() {
@@ -110,11 +111,11 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        int oid = data.getId();
+
         Intent intent;
         switch (v.getId()) {
             case R.id.like_tv://点赞
-                RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
+                RequestParams params = RequestParamsUtils.getLikeParams(oid, 1, "");
                 HttpRequestUtils.create(this).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
                     @Override
                     public void onSuccess(ResultInfo resultInfo, int requestCode) {

@@ -43,6 +43,7 @@
         android:layout_alignBaseline="@+id/distance"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dp15"
-        android:text="粉丝数：35" />
+        android:text="粉丝数：35"
+        android:textColor="@color/gray_textcolor" />
 
 </RelativeLayout>

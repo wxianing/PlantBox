@@ -119,7 +119,7 @@ public class CommFragment extends Fragment implements LikeCallBack {
 
         int oid = dataLists.get(position).getId();
 
-        RequestParams params = RequestParamsUtils.getLikeParams(oid, "");
+        RequestParams params = RequestParamsUtils.getLikeParams(oid, 1,"");
         HttpRequestUtils.create(getActivity()).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {

@@ -27,7 +27,7 @@ public class RequestParamsUtils {
         params.addHeader("_appId", Constant.APPID);
         params.addHeader("_code", Constant.CODE);
         params.addBodyParameter("content-type", "application/json");
-//        Log.e("code", Constant.CODE);
+        Log.e("code", Constant.CODE);
         return params;
     }
 
@@ -53,8 +53,9 @@ public class RequestParamsUtils {
     }
 
     //获取评论列表
-    public static RequestParams getCommentList(String sType, String PageIndex, String PageSize) {
+    public static RequestParams getCommentList(String fkId, String sType, String PageIndex, String PageSize) {
         RequestParams params = createRequestParams();
+        params.addBodyParameter("FKId", fkId);
         params.addBodyParameter("sType", sType);
         params.addBodyParameter("PageIndex", PageIndex);
         params.addBodyParameter("PageSize", PageSize);
@@ -63,10 +64,20 @@ public class RequestParamsUtils {
 
 
     //点赞
-    public static RequestParams getLikeParams(int oid, String content) {
+    public static RequestParams getLikeParams(int oid, int isSubscribe, String content) {
         RequestParams params = createRequestParams();
         params.addBodyParameter("FKId", "" + oid);
         params.addBodyParameter("FKType", "" + 1);
+        params.addBodyParameter("Context", content);
+        params.addBodyParameter("IsSubscribe", "" + isSubscribe);
+        return params;
+    }
+
+    //评论
+    public static RequestParams getCommentParams(int oid, int fkType, String content) {
+        RequestParams params = createRequestParams();
+        params.addBodyParameter("FKId", "" + oid);
+        params.addBodyParameter("FKType", "" + fkType);
         params.addBodyParameter("Context", content);
         return params;
     }
