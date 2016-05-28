@@ -2,6 +2,7 @@ package com.sinoinnovo.plantbox.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.ListView;
 
 import org.apache.http.HttpEntity;
@@ -40,34 +41,15 @@ public class MyListView extends ListView {
         super.onMeasure(widthMeasureSpec, height);
     }
 
-    public String androidPost() {
-        String rs = null;
-        String path = "url/Android_JDBC_SH/AndroidLoginAction";
-        HttpPost hp = new HttpPost(path);
-        //获取客户端，用来向服务器发出请求
-        DefaultHttpClient hc = new DefaultHttpClient();
-        try { //Default Constructor taking a name and a value
-            BasicNameValuePair nm = new BasicNameValuePair("name", "name");
-            BasicNameValuePair pa = new BasicNameValuePair("password", "password");
-            List list = new ArrayList();
-            list.add(nm);
-            list.add(pa);
-            //构建向服务器发送的实体
-            HttpEntity entity = new UrlEncodedFormEntity(list);
-            hp.setEntity(entity);
-            //提交请求，获取服务器的响应
-            HttpResponse response = hc.execute(hp);
-            if (
-                    response.getStatusLine().getStatusCode() == 200) {
-                //获取响应实体
-                entity = response.getEntity();
-                rs = EntityUtils.toString(entity);
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return rs;
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return true;
+    }
+
+    public boolean onTouchEvent(MotionEvent ev) {
+        return super.onTouchEvent(ev);
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent e) {
+        return super.dispatchTouchEvent(e);
     }
 }

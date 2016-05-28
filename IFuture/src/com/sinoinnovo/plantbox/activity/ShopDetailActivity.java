@@ -82,7 +82,7 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        Log.e("oid", oid + "");
+        Log.e("oid", ">>>>>" + oid);
         RequestParams params = RequestParamsUtils.getCommentList(String.valueOf(oid), "3", "1", "10");
         HttpRequestUtils.create(this).send(URL.COMMENT_LIST_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override

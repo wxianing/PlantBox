@@ -83,17 +83,17 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         vh.mGridView.setAdapter(mAdapter);
 
         count = position;
-        vh.notice.setOnClickListener(this);
-        vh.commentCount.setOnClickListener(this);
-        vh.likeCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callBack.likeClick(count);
-            }
-        });
-        vh.headerImg.setOnClickListener(this);
-        vh.cnName.setOnClickListener(this);
-        vh.transpondCount.setOnClickListener(this);
+//        vh.notice.setOnClickListener(this);
+//        vh.commentCount.setOnClickListener(this);
+//        vh.likeCount.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                callBack.likeClick(count);
+//            }
+//        });
+//        vh.headerImg.setOnClickListener(this);
+//        vh.cnName.setOnClickListener(this);
+//        vh.transpondCount.setOnClickListener(this);
 
         return convertView;
     }
@@ -107,7 +107,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
             case R.id.notice_tv:
                 userId = data.get(count).getUserId();
                 goodId = data.get(count).getId();
-                Log.e("ProduceAdapter", "userId:" + userId + "goodId:" + goodId);
+                Log.e("ProduceAdapter", "oid" + oid);
                 intent = new Intent(context, ShopDetailActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("listBean", listBean);

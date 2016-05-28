@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
@@ -40,7 +41,7 @@ import butterknife.ButterKnife;
  * Use the {@link CommFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CommFragment extends Fragment implements LikeCallBack {
+public class CommFragment extends Fragment implements LikeCallBack, AdapterView.OnItemClickListener {
 
     private static final String ARG_PARAM1 = "sType";
     private static final String ARG_PARAM2 = "sType";
@@ -99,6 +100,7 @@ public class CommFragment extends Fragment implements LikeCallBack {
                 initData(pageIndex);
             }
         });
+        mListView.setOnItemClickListener(this);
     }
 
 
@@ -119,7 +121,7 @@ public class CommFragment extends Fragment implements LikeCallBack {
 
         int oid = dataLists.get(position).getId();
 
-        RequestParams params = RequestParamsUtils.getLikeParams(oid, 1,"");
+        RequestParams params = RequestParamsUtils.getLikeParams(oid, 1, "");
         HttpRequestUtils.create(getActivity()).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -140,6 +142,11 @@ public class CommFragment extends Fragment implements LikeCallBack {
                 }
             }
         });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.e("CommFragment", ">>>>>>>>>>>" + position);
     }
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {
