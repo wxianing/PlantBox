@@ -69,7 +69,7 @@ public class ImagePagerAdapter extends RecyclingPagerAdapter implements ViewPage
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, BannerDetailActivity.class);
-                intent.putExtra("link", imageUrls.get(getPosition(count)).getPhoto());
+                intent.putExtra("link", imageUrls.get(getPosition(count)).getLink());
                 context.startActivity(intent);
             }
         });

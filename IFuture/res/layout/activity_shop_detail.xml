@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include layout="@layout/titlebar" />
+    <include
+        android:id="@+id/title"
+        layout="@layout/titlebar" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/title"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -43,6 +46,7 @@
                     android:layout_toRightOf="@+id/home_header_img">
 
                     <TextView
+                        android:id="@+id/time_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="  2分钟前  "
@@ -52,9 +56,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="  来自iphone6  "
-                        android:textColor="@color/gray_textcolor" />
+                        android:textColor="@color/gray_textcolor"
+                        android:visibility="gone" />
 
                     <TextView
+                        android:layout_marginLeft="@dimen/dp30"
+                        android:id="@+id/address_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="  杭州  "
@@ -64,7 +71,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="  距离5K"
-                        android:textColor="@color/gray_textcolor" />
+                        android:textColor="@color/gray_textcolor"
+                        android:visibility="gone" />
                 </LinearLayout>
 
 
@@ -139,7 +147,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/dp10"
                         android:gravity="center"
-                        android:text="32" />
+                        android:text="分享" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -192,4 +200,41 @@
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:padding="@dimen/dp2"
+        android:id="@+id/controll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/dp5"
+        android:background="#ffffee"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_weight="1"
+            android:background="@drawable/textview_shape"
+            android:hint="在这里输入文字"
+            android:padding="@dimen/dp10"
+            android:textSize="@dimen/sp14" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp5"
+            android:background="@drawable/button_style"
+            android:paddingBottom="@dimen/dp10"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingTop="@dimen/dp10"
+            android:text="发  送"
+            android:textSize="@dimen/sp14" />
+    </LinearLayout>
+</RelativeLayout>

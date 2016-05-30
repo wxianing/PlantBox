@@ -133,6 +133,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 Platform sina = ShareSDK.getPlatform(SinaWeibo.NAME);
                 thirdType = Constant.WEIBO;
                 authorize(sina);
+
                 loadingDialog = new ProgressDialog(this);
                 loadingDialog.show();
                 break;

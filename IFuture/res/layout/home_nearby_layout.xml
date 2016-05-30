@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/dp15"
-    android:paddingRight="@dimen/dp15">
+    android:orientation="vertical">
 
     <TextView
+        android:layout_marginLeft="@dimen/dp15"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:drawableLeft="@drawable/home_nearby_icon"
@@ -18,6 +17,6 @@
     <com.amap.api.maps.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="180dp" />
+        android:layout_height="210dp" />
 
 </LinearLayout>

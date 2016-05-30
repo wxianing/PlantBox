@@ -41,15 +41,9 @@ public class MyListView extends ListView {
         super.onMeasure(widthMeasureSpec, height);
     }
 
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return true;
-    }
-
-    public boolean onTouchEvent(MotionEvent ev) {
-        return super.onTouchEvent(ev);
-    }
-
-    public boolean dispatchTouchEvent(MotionEvent e) {
-        return super.dispatchTouchEvent(e);
+    @Override
+    protected boolean dispatchGenericFocusedEvent(MotionEvent event) {
+        getParent().requestDisallowInterceptTouchEvent(true);
+        return super.dispatchGenericFocusedEvent(event);
     }
 }

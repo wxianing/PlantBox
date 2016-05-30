@@ -27,6 +27,7 @@ import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.ShareSDK;
 
 public class MainApplication extends Application {
+
     private List<Activity> activityTask = new ArrayList<Activity>();
     public static ImageLoader imageLoader = ImageLoader.getInstance();
     public static DisplayImageOptions options;
@@ -62,7 +63,7 @@ public class MainApplication extends Application {
                 .cacheInMemory(true)
                 .cacheOnDisc(true)
                 .bitmapConfig(Bitmap.Config.ARGB_8888)   //设置图片的解码类型
-                .displayer(new RoundedBitmapDisplayer(5))
+                .displayer(new RoundedBitmapDisplayer(2))
                 .build();
         optionsCircle = new DisplayImageOptions.Builder()
                 .showStubImage(R.drawable.ic_launcher)

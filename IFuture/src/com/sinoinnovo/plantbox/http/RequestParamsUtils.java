@@ -107,13 +107,13 @@ public class RequestParamsUtils {
         return params;
     }
 
-    public static HashMap saveOrderData(List<DetailList> detaillist, String address, String customName) {
+    public static HashMap saveOrderData(List<DetailList> detaillist, String address, String customName, String Mobile) {
         HashMap params = new HashMap();
 
         params.put("detaillist", detaillist);
         params.put("Address", address);
         params.put("CustomName", customName);
-
+        params.put("Mobile", Mobile);
         params.put("UserId", 0);
         params.put("PayState", 0);
         params.put("TotalMoney", 0);

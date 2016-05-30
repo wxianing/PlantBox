@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -129,6 +131,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     @Bind(R.id.search_edittext)
     protected EditText search;//搜索
 
+
     public HomeFragment() {
     }
 
@@ -153,7 +156,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         HttpRequestUtils.create(getActivity()).send(URL.HOME_BANNER_URL, params, callBack);
     }
 
-
     class CallBack extends HttpRequestCallBack<ResultInfo> {
 
         @Override
@@ -172,6 +174,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
 
     private void initView() {
+
+
         callBack = new CallBack();
         imageUrls = new ArrayList<>();
         setSelect(0);
@@ -367,11 +371,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
             if (aMapLocation != null
                     && aMapLocation.getErrorCode() == 0) {
                 Log.e("aMapLocation", aMapLocation.getAddress());
-                aMapLocation.getCity().replace("市", "");
 
+                SharedPreferencesUtils.saveStringData(getActivity(),"Address",aMapLocation.getAddress());
                 SharedPreferencesUtils.saveDoubleData(getActivity(), "Longitude", aMapLocation.getLongitude());
                 SharedPreferencesUtils.saveDoubleData(getActivity(), "Latitude", aMapLocation.getLatitude());
-                
+
                 cityName.setText(aMapLocation.getCity());
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 deactivate();
@@ -382,6 +386,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
             }
         }
     }
+
 
     @Override
     public void onClick(View v) {

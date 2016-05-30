@@ -37,6 +37,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.sharesdk.framework.ShareSDK;
 
+/**
+ * 商品详情
+ */
 public class ProductDetailsActivity extends BaseActivity implements View.OnClickListener {
     @Bind(R.id.title_tv)
     protected TextView title;//标题
@@ -111,7 +114,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
 
 
     private void setDataToView(ProduceDetails produce) {
-        price.setText("优惠价:￥" + produce.getMinSalePrice());
+//        price.setText("优惠价:￥" + produce.getMinSalePrice());
         int isCollect = produce.getIsCollect();
         if (isCollect == 1) {
             collectImg.setImageResource(R.drawable.cellect_checked);
@@ -208,7 +211,7 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 bundle.putSerializable("produce", produce);
                 intent.putExtras(bundle);
                 intent.putExtra("oid", oid);
-                intent.putExtra("price", produce);
+                intent.putExtra("price", producePrice);
                 intent.putExtra("totalCount", totalCount);
                 startActivity(intent);
 

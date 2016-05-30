@@ -45,7 +45,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
     private ProduceGvAdapter mAdapter;
     private int userId;
     private int goodId;
-    private int count;
+
     private int oid;
     private LikeCallBack callBack;
 
@@ -56,7 +56,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
 
     @Override
     public View createView(int position, View convertView, ViewGroup parent) {
-        DataListBean bean = data.get(position);
+        final DataListBean bean = data.get(position);
         List<String> imageUrls = bean.getPictures();
         ViewHolder vh = null;
         if (convertView == null) {
@@ -71,7 +71,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         vh.likeCount.setText(bean.getPraiseCount() + "赞");
         vh.commentCount.setText(bean.getTotalComment() + "评论");
         vh.timeTv.setText(bean.getTimeStr());
-
+        vh.cityName.setText(bean.getCity());
         ImageLoader.getInstance().displayImage(bean.getHeadPhoto(), vh.headerImg, MainApplication.optionsCircle);
 
         for (int i = 3; i < imageUrls.size(); i++) {
@@ -81,55 +81,73 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         }
         mAdapter = new ProduceGvAdapter(imageUrls, context);
         vh.mGridView.setAdapter(mAdapter);
-
-        count = position;
-//        vh.notice.setOnClickListener(this);
-//        vh.commentCount.setOnClickListener(this);
-//        vh.likeCount.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                callBack.likeClick(count);
-//            }
-//        });
-//        vh.headerImg.setOnClickListener(this);
-//        vh.cnName.setOnClickListener(this);
-//        vh.transpondCount.setOnClickListener(this);
-
-        return convertView;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        oid = data.get(count).getId();
-        DataListBean listBean = data.get(count);
-        switch (v.getId()) {
-            case R.id.notice_tv:
+        oid = data.get(position).getId();
+        final int count = position;
+        this.position = position;
+        vh.notice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 userId = data.get(count).getUserId();
                 goodId = data.get(count).getId();
-                Log.e("ProduceAdapter", "oid" + oid);
-                intent = new Intent(context, ShopDetailActivity.class);
+                Intent intent = new Intent(context, ShopDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("listBean", listBean);
+                bundle.putSerializable("listBean", bean);
                 intent.putExtra("userId", userId);
                 intent.putExtra("goodId", goodId);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
-                break;
-            case R.id.commot_tv:
-                intent = new Intent(context, CommentActivity.class);
-                intent.putExtra("oid", oid);
+            }
+        });
+        vh.commentCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userId = data.get(count).getUserId();
+                goodId = data.get(count).getId();
+                Intent intent = new Intent(context, ShopDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listBean", bean);
+                intent.putExtra("userId", userId);
+                intent.putExtra("goodId", goodId);
+                intent.putExtras(bundle);
                 context.startActivity(intent);
-//                commentClick.myOnClik(v, oid);
-                break;
+            }
+        });
+        vh.likeCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                callBack.likeClick(count);
+                userId = data.get(count).getUserId();
+                goodId = data.get(count).getId();
+                Intent intent = new Intent(context, ShopDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listBean", bean);
+                intent.putExtra("userId", userId);
+                intent.putExtra("goodId", goodId);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+        vh.headerImg.setOnClickListener(this);
+        vh.cnName.setOnClickListener(this);
+        vh.transpondCount.setOnClickListener(this);
+
+        return convertView;
+    }
+
+    int position = 1;
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
             case R.id.home_header_img:
                 intent = new Intent(context, MyBaseAreaActivity.class);
-                intent.putExtra("cnName", data.get(count).getCnName());
+                intent.putExtra("cnName", data.get(position).getCnName());
                 context.startActivity(intent);
                 break;
             case R.id.cnname:
                 intent = new Intent(context, MyBaseAreaActivity.class);
-                intent.putExtra("cnName", data.get(count).getCnName());
+                intent.putExtra("cnName", data.get(position).getCnName());
                 context.startActivity(intent);
                 break;
             case R.id.transpond_tv:
@@ -137,7 +155,6 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 break;
         }
     }
-
 
     protected class ViewHolder {
         @Bind(R.id.cnname)
@@ -156,6 +173,8 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         protected CircularImage headerImg;
         @Bind(R.id.time_tv)
         protected TextView timeTv;
+        @Bind(R.id.city_name)
+        protected TextView cityName;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

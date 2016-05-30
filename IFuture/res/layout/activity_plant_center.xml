@@ -363,7 +363,8 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/dp10"
-        android:paddingTop="@dimen/dp10">
+        android:paddingTop="@dimen/dp10"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/operating_equipment_hardware"

@@ -41,7 +41,7 @@ import butterknife.ButterKnife;
  * Use the {@link CommFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CommFragment extends Fragment implements LikeCallBack, AdapterView.OnItemClickListener {
+public class CommFragment extends Fragment implements LikeCallBack {
 
     private static final String ARG_PARAM1 = "sType";
     private static final String ARG_PARAM2 = "sType";
@@ -100,7 +100,12 @@ public class CommFragment extends Fragment implements LikeCallBack, AdapterView.
                 initData(pageIndex);
             }
         });
-        mListView.setOnItemClickListener(this);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ToastUtils.show(getActivity(), "d" + position);
+            }
+        });
     }
 
 
@@ -118,9 +123,7 @@ public class CommFragment extends Fragment implements LikeCallBack, AdapterView.
 
     @Override
     public void likeClick(int position) {
-
         int oid = dataLists.get(position).getId();
-
         RequestParams params = RequestParamsUtils.getLikeParams(oid, 1, "");
         HttpRequestUtils.create(getActivity()).send(URL.DIAN_ZAN_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
@@ -142,11 +145,6 @@ public class CommFragment extends Fragment implements LikeCallBack, AdapterView.
                 }
             }
         });
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("CommFragment", ">>>>>>>>>>>" + position);
     }
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {

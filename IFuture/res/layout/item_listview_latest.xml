@@ -52,6 +52,8 @@
                 android:visibility="gone" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dp30"
+                android:id="@+id/city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="  杭州  "

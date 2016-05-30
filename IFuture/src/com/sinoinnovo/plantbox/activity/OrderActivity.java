@@ -1,16 +1,14 @@
 package com.sinoinnovo.plantbox.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.bean.bean.DetailList;
@@ -20,7 +18,6 @@ import com.sinoinnovo.plantbox.constant.URL;
 import com.sinoinnovo.plantbox.http.HttpRequestListener;
 import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
-import com.sinoinnovo.plantbox.model.User;
 import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
 
@@ -29,9 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,18 +38,14 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     protected ImageView backImg;
     @Bind(R.id.submit_btn)
     protected Button submit;//提价订单
-    @Bind(R.id.address)
-    protected LinearLayout linear;//收货地址
-    @Bind(R.id.name_tv)
-    protected TextView nameTv;
-    @Bind(R.id.address_tv)
-    protected TextView addressTv;
-    @Bind(R.id.phone_tv)
-    protected TextView phoneTv;
+
+
     private String customName;
     private String address;
     private String phone;
     private int oid;
+    @Bind(R.id.phone_et)
+    protected EditText phoneEt;
 
     private List<DetailList> mDatas;
     private String totalCount;
@@ -67,6 +58,11 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     private int money;
     @Bind(R.id.introduction_tv)
     protected TextView introduction;
+    @Bind(R.id.name_et)
+    protected EditText nameEt;
+    @Bind(R.id.address_et)
+    protected EditText addressEt;
+    private double producePrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,17 +76,18 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     private void initEvent() {
         submit.setOnClickListener(this);
         backImg.setOnClickListener(this);
-        linear.setOnClickListener(this);
+
     }
 
     private void initView() {
+        producePrice = getIntent().getDoubleExtra("price", 0);
         gson = new Gson();
         title.setText("确认订单");
         oid = getIntent().getIntExtra("oid", 0);
+        nameEt.setText(SharedPreferencesUtils.getStringData(this, "userName", null));
+        addressEt.setText(SharedPreferencesUtils.getStringData(this, "Address", null));
+
         mDatas = new ArrayList<>();
-        customName = nameTv.getText().toString().trim();
-        address = addressTv.getText().toString().trim();
-        phone = phoneTv.getText().toString().trim();
         totalCount = getIntent().getStringExtra("totalCount");
         count.setText("数量：" + totalCount);
         DetailList bean = new DetailList();
@@ -104,9 +101,9 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
                 bean.setPrice(entitysBeanLists.get(i).getSalePrice());
                 bean.setProductEntityId(entitysBeanLists.get(i).getId());
                 mDatas.add(bean);
-                money += entitysBeanLists.get(i).getSalePrice();
             }
-            totalMenoy.setText("合计：￥" + money);
+            double price = producePrice * Integer.valueOf(totalCount);//计算总价
+            totalMenoy.setText("合计：￥" + price);
         }
     }
 
@@ -119,12 +116,18 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submit_btn://提交订单
-                HashMap params = RequestParamsUtils.saveOrderData(mDatas, address, customName);
+                phone = phoneEt.getText().toString().trim();
+                customName = nameEt.getText().toString().trim();
+                address = addressEt.getText().toString().trim();
+
+                HashMap params = RequestParamsUtils.saveOrderData(mDatas, address, customName, phone);
                 HttpRequestUtils.getmInstance().send(URL.SAVE_ORDER_URL, params, new HttpRequestListener() {
                     @Override
                     public void onSuccess(JSONObject jsonObject) {
+                        Log.e("订单编号：", jsonObject.toString());
                         try {
                             JSONObject obj = new JSONObject(jsonObject.toString());
+
                             int enumcode = obj.getInt("enumcode");
                             if (enumcode == 0) {
                                 ToastUtils.show(OrderActivity.this, "提交成功");
@@ -140,10 +143,7 @@ public class OrderActivity extends BaseActivity implements View.OnClickListener 
             case R.id.back_arrows:
                 finish();
                 break;
-            case R.id.address:
-                Intent intent = new Intent(this, AddAddressActivity.class);
-                startActivity(intent);
-                break;
+
         }
     }
 }

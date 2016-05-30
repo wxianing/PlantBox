@@ -51,7 +51,7 @@ public class CommentActivity extends BaseActivity implements View.OnClickListene
 
     private void initView() {
         oid = getIntent().getIntExtra("oid", 0);
-        Log.e("oid", "" + oid);
+        Log.e("评论oid", "" + oid);
         title.setText("发表评论");
         rightTv.setText("发表");
     }

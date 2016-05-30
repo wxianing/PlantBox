@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshBase;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshExpandableListView;
+import com.meten.imanager.pulltorefresh.library.PullToRefreshListView;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.adapter.ReferToUserTutorialAdapter;
@@ -20,6 +24,7 @@ import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +33,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PublishTutorialListsActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class PublishTutorialListsActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener2<ListView> {
 
     @Bind(R.id.title_tv)
     protected TextView title;
@@ -36,10 +41,12 @@ public class PublishTutorialListsActivity extends BaseActivity implements View.O
     protected ImageView backImg;
     @Bind(R.id.right_tv)
     protected TextView titleRight;
+    private String userName;
+    private int pageIndex;
 
     private List<ReferUserTutorial.DataListBean> mDatas;
     @Bind(R.id.listView)
-    protected ListView mListView;
+    protected PullToRefreshListView mListView;
     private ReferToUserTutorialAdapter mAdapter;
 
     @Override
@@ -49,13 +56,14 @@ public class PublishTutorialListsActivity extends BaseActivity implements View.O
         ButterKnife.bind(this);
         initView();
         initEvent();
-        initData();
+        initData(pageIndex);
     }
 
-    private void initData() {
+    private void initData(int pageIndex) {
         RequestParams params = RequestParamsUtils.createRequestParams();
+        params.addBodyParameter("Keyword", userName);
         params.addBodyParameter("sType", "2");
-        params.addBodyParameter("PageIndex", "1");
+        params.addBodyParameter("PageIndex", "" + pageIndex);
         params.addBodyParameter("PageSize", "10");
         HttpRequestUtils.create(this).send(URL.MY_PUBLISH_TUTORIAL_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
@@ -64,6 +72,7 @@ public class PublishTutorialListsActivity extends BaseActivity implements View.O
                 if (tutorial != null) {
                     mDatas.addAll(tutorial.getDataList());
                     mAdapter.notifyDataSetChanged();
+                    mListView.onRefreshComplete();
                 }
             }
         });
@@ -72,15 +81,19 @@ public class PublishTutorialListsActivity extends BaseActivity implements View.O
     private void initEvent() {
         backImg.setOnClickListener(this);
         titleRight.setOnClickListener(this);
+        mListView.setOnRefreshListener(this);
     }
 
     private void initView() {
+
         title.setText("我的教程");
         titleRight.setText("添加");
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mDatas = new ArrayList<>();
         mAdapter = new ReferToUserTutorialAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
+        userName = SharedPreferencesUtils.getStringData(this, "userName", null);
     }
 
     @Override
@@ -109,5 +122,18 @@ public class PublishTutorialListsActivity extends BaseActivity implements View.O
         intent.putExtra("oid", oid);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        pageIndex = 1;
+        mDatas.clear();
+        initData(pageIndex);
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+        pageIndex++;
+        initData(pageIndex);
     }
 }
