@@ -20,6 +20,19 @@
         android:name="com.sinoinnovo.plantbox.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+     
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- Required  一些系统要求的权限，如访问网络等 -->
     <uses-permission android:name="com.meten.ifuture.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
@@ -384,7 +397,10 @@
             android:label="@string/title_activity_my_course_details" />
         <activity
             android:name=".activity.MyAchieveActivity"
-            android:label="@string/title_activity_my_achieve"></activity>
+            android:label="@string/title_activity_my_achieve" />
+        <activity
+            android:name=".activity.FunctionActivity"
+            android:label="@string/title_activity_function"></activity>
     </application>
 
 </manifest>

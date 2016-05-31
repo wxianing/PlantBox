@@ -60,10 +60,10 @@
                         android:visibility="gone" />
 
                     <TextView
-                        android:layout_marginLeft="@dimen/dp30"
                         android:id="@+id/address_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp30"
                         android:text="  杭州  "
                         android:textColor="@color/gray_textcolor" />
 
@@ -97,7 +97,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp10">
+                android:layout_marginTop="@dimen/dp10"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -118,11 +119,13 @@
                     android:src="@drawable/p3" />
             </LinearLayout>
 
-            <com.sinoinnovo.plantbox.widget.HListView
+            <GridView
                 android:id="@+id/hlistView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:layout_marginLeft="@dimen/dp15"
+                android:layout_marginRight="@dimen/dp15"
+                android:numColumns="3" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -201,7 +204,6 @@
     </ScrollView>
 
     <LinearLayout
-        android:padding="@dimen/dp2"
         android:id="@+id/controll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -210,6 +212,7 @@
         android:layout_marginBottom="@dimen/dp5"
         android:background="#ffffee"
         android:orientation="horizontal"
+        android:padding="@dimen/dp2"
         android:visibility="gone">
 
         <EditText

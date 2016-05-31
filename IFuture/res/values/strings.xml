@@ -156,5 +156,6 @@
     <string name="title_activity_user_tutorial_details">UserTutorialDetailsActivity</string>
     <string name="title_activity_my_course_details">MyCourseDetailsActivity</string>
     <string name="title_activity_my_achieve">MyAchieveActivity</string>
+    <string name="title_activity_function">FunctionActivity</string>
 
 </resources>

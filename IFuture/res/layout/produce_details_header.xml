@@ -69,14 +69,14 @@
 
                 <ImageView
                     android:id="@+id/reduce_img"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:scaleType="fitXY"
                     android:src="@drawable/subtract_produce_icon" />
 
                 <TextView
                     android:id="@+id/total_count"
-                    android:layout_width="30dp"
+                    android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:layout_marginLeft="@dimen/dp10"
                     android:layout_marginRight="@dimen/dp10"
@@ -86,8 +86,8 @@
 
                 <ImageView
                     android:id="@+id/add_img"
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:src="@drawable/add_produce" />
             </LinearLayout>
 
@@ -98,12 +98,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp5"
             android:background="@color/white"
-            android:orientation="vertical"
-            android:paddingLeft="@dimen/dp10">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp10"
                 android:text="商品介绍"
                 android:textSize="@dimen/sp16" />
 
@@ -111,6 +112,8 @@
                 android:id="@+id/produce_introduce"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp10"
                 android:layout_marginTop="@dimen/dp10"
                 android:text="       看到就发给的复古款付了个客户可李开复的老顾客一块辅导功课" />
         </LinearLayout>

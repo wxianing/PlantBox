@@ -5,6 +5,7 @@
     <color name="blue">#FF375BF1</color>
     <color name="yellow">#FFF7D23E</color>
     <color name="green">#FF34A350</color>
+    <color name="default_bg_color">#EEF2F3</color>
 
     <!-- base color -->
     <color name="transparent">#00000000</color>
@@ -91,8 +92,8 @@
 
     <color name="stick_color_bg">#e2e2e2</color>
 
-    <color name="grey"> #ebebeb</color>
-    <color name="darkgrey"> #C0C0C0</color>
+    <color name="grey">#ebebeb</color>
+    <color name="darkgrey">#C0C0C0</color>
 
     <color name="f850_default_blue">#0079ff</color>
 

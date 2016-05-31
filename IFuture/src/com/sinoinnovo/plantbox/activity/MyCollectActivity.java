@@ -2,6 +2,7 @@ package com.sinoinnovo.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ public class MyCollectActivity extends BaseActivity implements View.OnClickListe
     private Gson gson;
     private List<CollectBean.DataBean.DataListBean> mDatas;
     private MyCollectListAdapter mAdapter;
+    private CollectBean bean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class MyCollectActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onReponse(String result) {
                 super.onReponse(result);
-                CollectBean bean = gson.fromJson(result, CollectBean.class);
+                bean = gson.fromJson(result, CollectBean.class);
                 if (bean != null) {
                     mDatas.addAll(bean.getData().getDataList());
                     mAdapter.notifyDataSetChanged();
@@ -109,6 +111,8 @@ public class MyCollectActivity extends BaseActivity implements View.OnClickListe
         int oid = mDatas.get(position).getFKId();
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("oid", oid);
+        intent.putExtra("price", bean.getData().getMinSalePrice());
+        Log.e("bean", ">>>>>>>>" + bean.getData().getMinSalePrice());
         startActivity(intent);
     }
 }

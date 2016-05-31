@@ -6,27 +6,63 @@
 
     <include layout="@layout/personal_message_layout" />
 
-    <TextView
-        android:id="@+id/more_information"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:paddingBottom="@dimen/dp5"
-        android:paddingTop="@dimen/dp5"
-        android:text="更多资料>>"
-        android:textColor="@color/gray_textcolor"
-        android:textSize="@dimen/sp16" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp5"
-        android:layout_marginTop="@dimen/dp5"
-        android:background="@color/white"
-        android:paddingBottom="@dimen/dp5"
-        android:paddingLeft="@dimen/dp15"
-        android:paddingTop="@dimen/dp5"
-        android:text="我的成果展示"
-        android:textColor="@color/gray_textcolor" />
+        <TextView
+            android:id="@+id/more_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp5"
+            android:paddingTop="@dimen/dp5"
+            android:text="展开"
+            android:textColor="@color/gray_textcolor"
+            android:textSize="@dimen/sp14" />
+
+
+        <LinearLayout
+            android:id="@+id/editText_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/more_information"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_weight="1"
+                android:background="@drawable/edittext_gradbg_shape"
+                android:textSize="@dimen/sp14" />
+
+            <Button
+                android:id="@+id/send_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp5"
+                android:background="@drawable/button_style"
+                android:text="确定" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/achievement_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_linear"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@color/white"
+            android:clickable="false"
+            android:paddingBottom="@dimen/dp5"
+            android:paddingLeft="@dimen/dp15"
+            android:paddingTop="@dimen/dp5"
+            android:text="我的成果展示"
+            android:textColor="@color/gray_textcolor" />
+
+    </RelativeLayout>
 </LinearLayout>

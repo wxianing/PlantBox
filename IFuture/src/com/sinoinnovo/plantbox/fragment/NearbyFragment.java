@@ -39,6 +39,7 @@ import com.sinoinnovo.plantbox.http.HttpRequestCallBack;
 import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.view.DActionSheetDialog;
 import com.sinoinnovo.plantbox.view.MyListView;
 
@@ -88,7 +89,7 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         init();
         initView();
         initEvent();
-
+        initData();
         return view;
     }
 
@@ -127,7 +128,10 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         mAdapter = new NearByListAdapter(mDatas, getActivity());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
+        longitude = SharedPreferencesUtils.getDoubleData(getActivity(), "Longitude", 0);
+        latitude = SharedPreferencesUtils.getDoubleData(getActivity(), "Latitude", 0);
     }
+
 
     /**
      * 初始化AMap对象
@@ -170,6 +174,7 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     public void onResume() {
         super.onResume();
         mMapView.onResume();
+        initData();
     }
 
     /**
@@ -258,8 +263,7 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
                 mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
                 latitude = aMapLocation.getLatitude();
                 longitude = aMapLocation.getLongitude();
-                initData();
-                deactivate();
+
             } else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);

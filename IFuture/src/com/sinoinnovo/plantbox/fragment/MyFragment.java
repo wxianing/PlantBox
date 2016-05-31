@@ -42,6 +42,7 @@ import butterknife.ButterKnife;
  */
 
 public class MyFragment extends Fragment implements AdapterView.OnItemClickListener, View.OnClickListener {
+
     @Bind(R.id.gridView)
     protected GridView mGridView;
     private List<PersonCenter> mDatas;
@@ -71,7 +72,6 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
     }
 
     private void initView(View view) {
-
         mAdapter = new PersonCenterAdapter(mDatas, getActivity());
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);
@@ -138,7 +138,7 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
                 .setTitle("联系客服")
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
-                .addSheetItem("076982669988",
+                .addSheetItem("0769-82669988",
                         DActionSheetDialog.SheetItemColor.Blue,
                         new DActionSheetDialog.OnSheetItemClickListener() {
                             @Override

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +28,6 @@ import com.sinoinnovo.plantbox.utils.JsonParse;
 import com.sinoinnovo.plantbox.utils.ShareUtils;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
 import com.sinoinnovo.plantbox.view.MyListView;
-import com.sinoinnovo.plantbox.widget.HListView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +47,7 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
     @Bind(R.id.cnname)
     protected TextView cnName;
     @Bind(R.id.hlistView)
-    protected HListView mGridView;
+    protected GridView mGridView;
     @Bind(R.id.notice_tv)
     protected TextView notice;
 
@@ -116,6 +116,7 @@ public class ShopDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
+        controll.setVisibility(View.VISIBLE);
         title.setText("详情");
         List<String> imageUrls = data.getPictures();
         cnName.setText(data.getCnName());

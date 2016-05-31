@@ -50,12 +50,13 @@
 
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/person_center_header" />
 
                 <TextView
+                    android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -84,7 +85,9 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <include layout="@layout/select_view_layout" />
+            <include
+                android:id="@+id/linear_layout"
+                layout="@layout/select_view_layout" />
 
             <com.sinoinnovo.plantbox.view.MyViewPager
                 android:id="@+id/my_viewpager"

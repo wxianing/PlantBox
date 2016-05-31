@@ -31,15 +31,8 @@ public class DetailsListAdapter extends BasicAdapter<String> {
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        vh.imageView.setImageResource(R.drawable.ic_launcher);
-        if (position != 0)
-            MainApplication.imageLoader.displayImage(data.get(position), vh.imageView, MainApplication.options);
-//        vh.imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ToastUtils.show(context,"点击图片");
-//            }
-//        });
+        MainApplication.imageLoader.displayImage(data.get(position), vh.imageView, MainApplication.options);
+
         return convertView;
     }
 

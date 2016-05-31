@@ -2,6 +2,7 @@ package com.sinoinnovo.plantbox.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -83,7 +84,6 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initView() {
-        int userId = SharedPreferencesUtils.getIntData(this, "UserId", 0);
         mDatas = new ArrayList<>();
         mListView.setMode(PullToRefreshBase.Mode.BOTH);
         mAdapter = new ShopListAdapter(mDatas, this);
@@ -95,10 +95,11 @@ public class PlantShopActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         int oid = mDatas.get(position - 1).getId();
-        double price = mDatas.get(position-1).getMinSalePrice();
+        Log.e("id", ">>>" + oid);
+        double price = mDatas.get(position - 1).getMinSalePrice();
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra("oid", oid);
-        intent.putExtra("price",price);
+        intent.putExtra("price", price);
         startActivity(intent);
     }
 

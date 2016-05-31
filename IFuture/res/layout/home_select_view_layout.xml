@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="最新" />
+            android:text="热门" />
 
         <View
             android:id="@+id/latest_view"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="热门" />
+            android:text="最新" />
 
         <View
             android:id="@+id/hot_view"

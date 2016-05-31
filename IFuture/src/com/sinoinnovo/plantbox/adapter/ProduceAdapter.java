@@ -68,8 +68,16 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         }
         vh.cnName.setText(bean.getCnName());
         vh.notice.setText("        " + bean.getContext());
-        vh.likeCount.setText(bean.getPraiseCount() + "赞");
-        vh.commentCount.setText(bean.getTotalComment() + "评论");
+        if (bean.getPraiseCount() != 0) {
+            vh.likeCount.setText(bean.getPraiseCount() + "");
+        } else {
+            vh.likeCount.setText("点赞");
+        }
+        if (bean.getTotalComment() != 0) {
+            vh.commentCount.setText(bean.getTotalComment() + "");
+        } else {
+            vh.commentCount.setText("评论");
+        }
         vh.timeTv.setText(bean.getTimeStr());
         vh.cityName.setText(bean.getCity());
         ImageLoader.getInstance().displayImage(bean.getHeadPhoto(), vh.headerImg, MainApplication.optionsCircle);
@@ -79,6 +87,7 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 imageUrls.remove(i);
             }
         }
+
         mAdapter = new ProduceGvAdapter(imageUrls, context);
         vh.mGridView.setAdapter(mAdapter);
         oid = data.get(position).getId();
@@ -127,6 +136,38 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
                 context.startActivity(intent);
             }
         });
+
+        vh.commentImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userId = data.get(count).getUserId();
+                goodId = data.get(count).getId();
+                Intent intent = new Intent(context, ShopDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listBean", bean);
+                intent.putExtra("userId", userId);
+                intent.putExtra("goodId", goodId);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+
+        vh.likeImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userId = data.get(count).getUserId();
+                goodId = data.get(count).getId();
+                Intent intent = new Intent(context, ShopDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listBean", bean);
+                intent.putExtra("userId", userId);
+                intent.putExtra("goodId", goodId);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+
+
         vh.headerImg.setOnClickListener(this);
         vh.cnName.setOnClickListener(this);
         vh.transpondCount.setOnClickListener(this);
@@ -175,6 +216,10 @@ public class ProduceAdapter extends BasicAdapter<DataListBean> implements View.O
         protected TextView timeTv;
         @Bind(R.id.city_name)
         protected TextView cityName;
+        @Bind(R.id.commot_img)
+        protected ImageView commentImg;
+        @Bind(R.id.like_img)
+        protected ImageView likeImg;
 
         public ViewHolder(View view) {
             ButterKnife.bind(this, view);

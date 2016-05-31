@@ -17,6 +17,7 @@ import com.sinoinnovo.plantbox.activity.base.BaseFragmentActivity;
 import com.sinoinnovo.plantbox.fragment.AchievementFragment;
 import com.sinoinnovo.plantbox.fragment.BaseAreaFragment;
 import com.sinoinnovo.plantbox.fragment.BaseHomeFragment;
+import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.view.MyViewPager;
 
 import java.util.ArrayList;
@@ -60,6 +61,11 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
     @Bind(R.id.add_img)
     protected ImageView addImg;
     private String cnName;
+    @Bind(R.id.user_name)
+    protected TextView userName;
+    private String userNameStr;
+    @Bind(R.id.linear_layout)
+    protected LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,15 +88,23 @@ public class MyBaseAreaActivity extends BaseFragmentActivity implements View.OnC
     }
 
     private void initView() {
+        userNameStr = SharedPreferencesUtils.getStringData(this, "userName", null);
+        userName.setText(userNameStr);
         setSelect(0);
         mFragments = new ArrayList<>();
         if (cnName != null && !"".equals(cnName)) {
             mFragments.add(BaseHomeFragment.newInstance(cnName));
+            linearLayout.setVisibility(View.GONE);
+            userName.setText(cnName);
+            addImg.setVisibility(View.GONE);
         } else {
             mFragments.add(new BaseHomeFragment());
+            linearLayout.setVisibility(View.VISIBLE);
+            userName.setText(userNameStr);
+            mFragments.add(new BaseAreaFragment());
+            mFragments.add(new AchievementFragment());
+            addImg.setVisibility(View.VISIBLE);
         }
-        mFragments.add(new BaseAreaFragment());
-        mFragments.add(new AchievementFragment());
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override

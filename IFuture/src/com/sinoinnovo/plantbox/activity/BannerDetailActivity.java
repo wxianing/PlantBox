@@ -2,9 +2,12 @@ package com.sinoinnovo.plantbox.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
@@ -17,6 +20,10 @@ public class BannerDetailActivity extends BaseActivity {
     @Bind(R.id.webView)
     protected WebView webView;
     private String link;
+    @Bind(R.id.title_tv)
+    protected TextView title;
+    @Bind(R.id.back_arrows)
+    protected ImageView backImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,7 @@ public class BannerDetailActivity extends BaseActivity {
     }
 
     private void initView() {
+        title.setText("植物百科");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         //设置可以访问文件
@@ -38,7 +46,12 @@ public class BannerDetailActivity extends BaseActivity {
         webView.loadUrl(link);
         //设置Web视图
         webView.setWebViewClient(new MyWebViewClient());
-
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

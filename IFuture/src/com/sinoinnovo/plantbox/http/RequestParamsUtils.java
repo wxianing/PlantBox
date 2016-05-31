@@ -1,15 +1,18 @@
 package com.sinoinnovo.plantbox.http;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.lidroid.xutils.http.RequestParams;
+import com.sinoinnovo.plantbox.MainApplication;
 import com.sinoinnovo.plantbox.bean.bean.DetailList;
 import com.sinoinnovo.plantbox.constant.Constant;
 import com.sinoinnovo.plantbox.utils.ImageUtils;
 import com.sinoinnovo.plantbox.utils.LogUtils;
+import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +30,7 @@ public class RequestParamsUtils {
         params.addHeader("_appId", Constant.APPID);
         params.addHeader("_code", Constant.CODE);
         params.addBodyParameter("content-type", "application/json");
-        Log.e("code", Constant.CODE);
+//        Log.e("code", Constant.CODE);
         return params;
     }
 
@@ -101,8 +104,11 @@ public class RequestParamsUtils {
     }
 
 
-    public static RequestParams getProduceDetails(int oid) {
-        RequestParams params = createRequestParams();
+    public static RequestParams getProduceDetails(int oid, Context context) {
+        String code = SharedPreferencesUtils.getStringData(context, "code", null);
+        RequestParams params = new RequestParams();
+        params.addHeader("_appId", Constant.APPID);
+        params.addHeader("_code", code);
         params.addBodyParameter("Id", oid + "");
         return params;
     }

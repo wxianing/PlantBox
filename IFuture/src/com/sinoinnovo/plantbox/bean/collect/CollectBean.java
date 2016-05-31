@@ -61,10 +61,20 @@ public class CollectBean implements Serializable {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable {
         private int PageIndex;
         private int RecordCount;
         private String TotalModel;
+        private double MinSalePrice;
+
+        public double getMinSalePrice() {
+            return MinSalePrice;
+        }
+
+        public void setMinSalePrice(double minSalePrice) {
+            MinSalePrice = minSalePrice;
+        }
+
         /**
          * MinPrice : 0
          * Id : 85
@@ -111,7 +121,7 @@ public class CollectBean implements Serializable {
             this.DataList = DataList;
         }
 
-        public static class DataListBean {
+        public static class DataListBean implements Serializable {
             private int MinPrice;
             private int Id;
             private int FKId;

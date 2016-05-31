@@ -43,7 +43,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:padding="@dimen/dp10">
+        android:padding="@dimen/dp10"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/me_tv"
@@ -67,7 +68,9 @@
             android:textOn="" />
     </RelativeLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include
+        android:visibility="gone"
+        layout="@layout/horizontal_line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -127,14 +130,17 @@
             android:textOn="" />
     </RelativeLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include
+        android:visibility="gone"
+        layout="@layout/horizontal_line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:padding="@dimen/dp10">
+        android:padding="@dimen/dp10"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -187,14 +193,17 @@
             android:textOn="" />
     </RelativeLayout>
 
-    <include layout="@layout/horizontal_line" />
+    <include
+        android:visibility="gone"
+        layout="@layout/horizontal_line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:padding="@dimen/dp10">
+        android:padding="@dimen/dp10"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

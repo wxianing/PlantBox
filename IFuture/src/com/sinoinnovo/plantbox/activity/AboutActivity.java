@@ -34,6 +34,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     private void initEvent() {
         backImg.setOnClickListener(this);
         welcomeTv.setOnClickListener(this);
+        functionTv.setOnClickListener(this);
     }
 
     private void initView() {
@@ -43,6 +44,9 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.function_tv:
+                startActivity(new Intent(this, FunctionActivity.class));
+                break;
             case R.id.welcome_tv:
                 startActivity(new Intent(this, GuideActivity.class));
                 break;

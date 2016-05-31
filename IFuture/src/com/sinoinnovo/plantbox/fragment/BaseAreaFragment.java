@@ -87,7 +87,7 @@ public class BaseAreaFragment extends Fragment implements View.OnClickListener, 
         sendMsg();
     }
 
-    private void sendMsg( ) {
+    private void sendMsg() {
         RequestParams params = RequestParamsUtils.createRequestParams();
         params.addBodyParameter("sType", "2");
         params.addBodyParameter("PageIndex", "1");

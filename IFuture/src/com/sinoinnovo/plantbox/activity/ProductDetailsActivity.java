@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -92,8 +93,35 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         ShareSDK.initSDK(this);
     }
 
+
+    private void initView() {
+        View headerView = LayoutInflater.from(this).inflate(R.layout.produce_details_header, null);
+        mListView.addHeaderView(headerView);
+        produceName = (TextView) headerView.findViewById(R.id.produce_name);
+        reduceImg = (ImageView) headerView.findViewById(R.id.reduce_img);
+        addImg = (ImageView) headerView.findViewById(R.id.add_img);
+        bannerImg = (AutoAdjustHeightImageView) headerView.findViewById(R.id.banner_img);
+        total = (TextView) headerView.findViewById(R.id.total_count);
+        introduce = (TextView) headerView.findViewById(R.id.produce_introduce);
+        price = (TextView) headerView.findViewById(R.id.price_tv);
+        lookBaike = (TextView) headerView.findViewById(R.id.look_baike);
+        gson = new Gson();
+        title.setText("商品详情");
+
+        oid = getIntent().getIntExtra("oid", 0);
+
+        producePrice = getIntent().getDoubleExtra("price", 0);
+        price.setText("优惠价:￥" + producePrice);
+        mDatas = new ArrayList<>();
+        if (mDatas.size() > 0)
+            mDatas.remove(0);
+        mAdapter = new DetailsListAdapter(mDatas, this);
+        mListView.setAdapter(mAdapter);
+    }
+
     private void initData() {
-        RequestParams params = RequestParamsUtils.getProduceDetails(oid);
+        Log.e("oid", "oid>>>>" + oid);
+        RequestParams params = RequestParamsUtils.getProduceDetails(oid, this);
         HttpRequestUtils.create(this).send(URL.PRODUCE_DETAILS_URL, params, new HttpRequestCallBack<ResultInfo>() {
             @Override
             public void onSuccess(ResultInfo resultInfo, int requestCode) {
@@ -125,26 +153,6 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         }
     }
 
-    private void initView() {
-        View headerView = LayoutInflater.from(this).inflate(R.layout.produce_details_header, null);
-        mListView.addHeaderView(headerView);
-        produceName = (TextView) headerView.findViewById(R.id.produce_name);
-        reduceImg = (ImageView) headerView.findViewById(R.id.reduce_img);
-        addImg = (ImageView) headerView.findViewById(R.id.add_img);
-        bannerImg = (AutoAdjustHeightImageView) headerView.findViewById(R.id.banner_img);
-        total = (TextView) headerView.findViewById(R.id.total_count);
-        introduce = (TextView) headerView.findViewById(R.id.produce_introduce);
-        price = (TextView) headerView.findViewById(R.id.price_tv);
-        lookBaike = (TextView) headerView.findViewById(R.id.look_baike);
-        gson = new Gson();
-        title.setText("商品详情");
-        oid = getIntent().getIntExtra("oid", 0);
-        producePrice = getIntent().getDoubleExtra("price", 0);
-        price.setText("优惠价:￥" + producePrice);
-        mDatas = new ArrayList<>();
-        mAdapter = new DetailsListAdapter(mDatas, this);
-        mListView.setAdapter(mAdapter);
-    }
 
     private void initEvent() {
         backImg.setOnClickListener(this);
@@ -240,12 +248,12 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                 .setTitle("联系客服")
                 .setCancelable(false)
                 .setCanceledOnTouchOutside(false)
-                .addSheetItem(produce.getMobile(),
+                .addSheetItem("0769-82669988",
                         DActionSheetDialog.SheetItemColor.Blue,
                         new DActionSheetDialog.OnSheetItemClickListener() {
                             @Override
                             public void onClick(int which) {
-                                setCellPhone(produce.getMobile());
+                                setCellPhone("076982669988");
                             }
                         }).show();
     }

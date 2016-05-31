@@ -182,8 +182,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
         mFragments = new ArrayList<Fragment>();
 
-        mFragments.add(CommFragment.newInstance("sType", "1"));
         mFragments.add(CommFragment.newInstance("sType", "2"));
+        mFragments.add(CommFragment.newInstance("sType", "1"));
         mFragments.add(CommFragment.newInstance("sType", "3"));
 
         mAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
@@ -372,7 +372,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
                     && aMapLocation.getErrorCode() == 0) {
                 Log.e("aMapLocation", aMapLocation.getAddress());
 
-                SharedPreferencesUtils.saveStringData(getActivity(),"Address",aMapLocation.getAddress());
+                SharedPreferencesUtils.saveStringData(getActivity(), "Address", aMapLocation.getAddress());
                 SharedPreferencesUtils.saveDoubleData(getActivity(), "Longitude", aMapLocation.getLongitude());
                 SharedPreferencesUtils.saveDoubleData(getActivity(), "Latitude", aMapLocation.getLatitude());
 

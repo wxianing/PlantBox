@@ -1,12 +1,10 @@
 package com.sinoinnovo.plantbox.activity;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +24,6 @@ import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.LikeCallBack;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
-import com.sinoinnovo.plantbox.utils.ImageUtils;
 import com.sinoinnovo.plantbox.utils.JsonParse;
 
 import java.util.ArrayList;
@@ -157,8 +154,12 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initEvent() {
-        backImg.setOnClickListener(this);
-
+        backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
@@ -173,11 +174,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         } else {//"+"号按钮
             SearchAutoData data = (SearchAutoData) v.getTag();
             mAutoEdit.setText(data.getContent());
-        }
-        switch (v.getId()) {
-            case R.id.back_arrows:
-                finish();
-                break;
         }
     }
 
