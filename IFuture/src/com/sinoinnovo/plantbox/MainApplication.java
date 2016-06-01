@@ -10,6 +10,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
+import com.baidu.mapapi.SDKInitializer;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -43,7 +44,9 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        JPushInterface.init(this);
+        SDKInitializer.initialize(getApplicationContext());
+//        JPushInterface.init(this);
+
         ShareSDK.initSDK(this);
         CrashReport.initCrashReport(this, "900002729", BuildConfig.DEBUG);
         AppManager.application = this;

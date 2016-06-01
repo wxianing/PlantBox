@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
-import com.sinoinnovo.plantbox.dao.ConsigneeDao;
-import com.sinoinnovo.plantbox.dao.model.Consignee;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -73,14 +71,7 @@ public class AddNewAddressActivity extends BaseActivity implements View.OnClickL
                 String consigneeStreet = consigneeStreetEt.getText().toString().trim();
                 String detailAddress = detailsAddressEt.getText().toString().trim();
                 if (consigneeName!=null&&!"".equals(consigneeName)&&consigneeNumber!=null&&!"".equals(consigneeNumber)) {
-                    Consignee con = new Consignee();
-                    con.setConsigneeArea(consigneeArea);
-                    con.setConsigneeName(consigneeName);
-                    con.setConsigneeNumber(consigneeNumber);
-                    con.setConsigneeStreet(consigneeStreet);
-                    con.setDetailsAddress(detailAddress);
-                    (new ConsigneeDao(this)).add(con);
-                    finish();
+
                 }
                 break;
         }

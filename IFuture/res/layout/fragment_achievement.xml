@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/default_bg_color"
+    android:orientation="vertical"
     tools:context="com.sinoinnovo.plantbox.fragment.AchievementFragment">
 
     <LinearLayout
@@ -13,18 +13,19 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-
-        <include layout="@layout/horizontal_line" />
+        <include
+            layout="@layout/horizontal_line"
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/my_like"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp10"
             android:padding="@dimen/dp10"
             android:text="我的点赞"
-            android:textSize="@dimen/sp16" />
+            android:textSize="@dimen/sp16"
+            android:visibility="gone" />
 
         <include layout="@layout/horizontal_line" />
 
@@ -37,17 +38,19 @@
             android:text="我的评论"
             android:textSize="@dimen/sp16" />
 
-        <include layout="@layout/horizontal_line" />
+        <include
+            layout="@layout/horizontal_line"
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/my_share"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp10"
             android:padding="@dimen/dp10"
             android:text="我的分享"
-            android:textSize="@dimen/sp16" />
+            android:textSize="@dimen/sp16"
+            android:visibility="gone" />
 
         <include layout="@layout/horizontal_line" />
 

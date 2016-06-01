@@ -1,28 +1,28 @@
 package com.sinoinnovo.plantbox.activity;
 
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdate;
-import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.MyLocationStyle;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseFragmentActivity;
 import com.sinoinnovo.plantbox.bean.nearby.NearByDataList;
@@ -32,21 +32,21 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class AquareActivity extends BaseFragmentActivity implements View.OnClickListener, LocationSource, AMapLocationListener, AMap.OnMarkerClickListener {
+public class AquareActivity extends BaseFragmentActivity implements View.OnClickListener, BDLocationListener, BaiduMap.OnMarkerClickListener {
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
     @Bind(R.id.title_tv)
     protected TextView title;
-
     //地图
-    private MapView mMapView = null;
-    private AMap aMap;
-    private OnLocationChangedListener mListener;
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption;
-    private UiSettings mUiSettings;
+    private MapView mMapView;
+    private BaiduMap mBaiduMap;
+    private LocationClient mLocalClient;
+    boolean isFirstLoc = true; // 是否首次定位
+    private InfoWindow mInfoWindow;
+    private BitmapDescriptor mCurrentMarker;
+    private MyLocationConfiguration.LocationMode mCurrentMode;
 
-    private ArrayList<LatLng> latlngList = new ArrayList();
+
     private ArrayList<NearByDataList> mDatas;
 
     @Override
@@ -54,61 +54,14 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aquare);
         ButterKnife.bind(this);
-        mMapView = (MapView) findViewById(R.id.map);
-        mMapView.onCreate(savedInstanceState);
+        mMapView = (MapView) findViewById(R.id.bmapView);
         //接受附近传过来的List<NearByDataList> 集合
         mDatas = (ArrayList<NearByDataList>) getIntent().getSerializableExtra("mDatas");
         initView();
-        init();
+
         initEvent();
     }
 
-    /**
-     * 初始化AMap对象
-     */
-    private void init() {
-        if (aMap == null) {
-            aMap = mMapView.getMap();
-            mUiSettings = aMap.getUiSettings();
-            mUiSettings.setZoomControlsEnabled(false);
-            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);//放大地图
-            aMap.moveCamera(localCameraUpdate);
-            setUpMap();
-            aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
-        }
-    }
-
-    /**
-     * 设置一些amap的属性
-     */
-    private void setUpMap() {
-
-        // 自定义系统定位小蓝点
-        MyLocationStyle myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationIcon(BitmapDescriptorFactory
-                .fromResource(R.drawable.poi_marker));// 设置小蓝点的图标
-        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
-        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
-        // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
-        myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
-        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        // aMap.setMyLocationType()
-
-        //添加Marker标记
-        for (int i = 0; i < mDatas.size(); i++) {
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),
-                    R.drawable.poi_marker_pressed)));
-            markerOptions.title(mDatas.get(i).getCnName());//标题
-            markerOptions.snippet("距离:" + (int) mDatas.get(i).getDistincts() + "km");//Maiker上面的小窗口
-
-            markerOptions.position(new LatLng(mDatas.get(i).getLat(), mDatas.get(i).getLon()));//添加LatLng经纬度
-            aMap.addMarker(markerOptions);
-        }
-    }
 
     private void initEvent() {
         backImg.setOnClickListener(this);
@@ -116,12 +69,64 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
 
     private void initView() {
         title.setText("广场");
+        mBaiduMap = mMapView.getMap();
+//        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16f);
+//        mBaiduMap.setMapStatus(msu);
+
+        //定义Maker坐标点
+        for (int i = 0; i < mDatas.size(); i++) {
+            LatLng point = new LatLng(mDatas.get(i).getLat(), mDatas.get(i).getLon());
+            //构建Marker图标
+            BitmapDescriptor bitmap = BitmapDescriptorFactory
+                    .fromResource(R.drawable.poi_marker_pressed);
+            //构建MarkerOption，用于在地图上添加Marker
+            OverlayOptions overlayOptions = new MarkerOptions()
+                    .position(point)
+                    .title(mDatas.get(i).getCnName() + "\n" + "距离:" + (int) mDatas.get(i).getDistincts() + "km")
+                    .icon(bitmap);
+
+            //在地图上添加Marker，并显示
+            mBaiduMap.addOverlay(overlayOptions);
+
+        }
+//        infoWindow=new InfoWindow();
+        mBaiduMap.setOnMarkerClickListener(this);
+
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+        mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.poi_marker);
+        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker));
+        mBaiduMap.setMyLocationEnabled(true);
+        mLocalClient = new LocationClient(this);
+        mLocalClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        option.setScanSpan(1000);
+        mLocalClient.setLocOption(option);
+        mLocalClient.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMapView.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        mMapView.onDestroy();
+        mMapView = null;
+        mLocalClient.stop();
+        // 关闭定位图层
+        mBaiduMap.setMyLocationEnabled(false);
     }
 
     @Override
@@ -134,53 +139,55 @@ public class AquareActivity extends BaseFragmentActivity implements View.OnClick
     }
 
     @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (mListener != null && aMapLocation != null) {
-            if (aMapLocation != null
-                    && aMapLocation.getErrorCode() == 0) {
-                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
+    public void onReceiveLocation(BDLocation bdLocation) {
 
-                deactivate();
-            } else {
-                String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
+        // map view 销毁后不在处理新接收的位置
+        if (bdLocation == null || mMapView == null) {
+            return;
+        }
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(bdLocation.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(0).latitude(bdLocation.getLatitude())
+                .longitude(bdLocation.getLongitude()).build();
+        mBaiduMap.setMyLocationData(locData);
+        if (isFirstLoc) {
+            isFirstLoc = false;
+            LatLng ll = new LatLng(bdLocation.getLatitude(),
+                    bdLocation.getLongitude());
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(ll).zoom(18.0f);
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        }
+
+    }
+
+    /**
+     * Marker点击事件
+     *
+     * @param marker
+     * @return
+     */
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+//        ToastUtils.show(this, marker.getTitle() + "/n" + marker.getExtraInfo());
+        Button button = new Button(getApplicationContext());
+        button.setTextSize(12);
+        InfoWindow.OnInfoWindowClickListener listener = null;
+        button.setText(marker.getTitle());
+        listener = new InfoWindow.OnInfoWindowClickListener() {
+            public void onInfoWindowClick() {
+                LatLng ll = marker.getPosition();
+                LatLng llNew = new LatLng(ll.latitude + 0.005,
+                        ll.longitude + 0.005);
+                marker.setPosition(llNew);
+//                mBaiduMap.hideInfoWindow();
             }
-        }
-    }
-
-    @Override
-    public void activate(OnLocationChangedListener listener) {
-        mListener = listener;
-        if (mlocationClient == null) {
-            mlocationClient = new AMapLocationClient(this.getApplicationContext());
-            mLocationOption = new AMapLocationClientOption();
-            //设置定位监听
-            mlocationClient.setLocationListener(this);
-            //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            //设置定位参数
-            mlocationClient.setLocationOption(mLocationOption);
-            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-            // 在定位结束后，在合适的生命周期调用onDestroy()方法
-            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-            mlocationClient.startLocation();
-        }
-    }
-
-    @Override
-    public void deactivate() {
-        mListener = null;
-        if (mlocationClient != null) {
-            mlocationClient.stopLocation();
-            mlocationClient.onDestroy();
-        }
-        mlocationClient = null;
-    }
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        //Markar点击事件处理
+        };
+        LatLng ll = marker.getPosition();
+        mInfoWindow = new InfoWindow(BitmapDescriptorFactory.fromView(button), ll, -47, listener);
+        mBaiduMap.showInfoWindow(mInfoWindow);
 
         return false;
     }

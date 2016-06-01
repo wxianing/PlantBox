@@ -30,6 +30,7 @@ import com.sinoinnovo.plantbox.http.LikeCallBack;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
+import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.utils.ToastUtils;
 import com.sinoinnovo.plantbox.view.MyListView;
 
@@ -63,7 +64,8 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
     protected TextView sexTv;//性别
     protected TextView introductionTv;//简介
 
-    private String keyWord = "王显宁";
+    private String keyWord;
+    ;
 
     private static final String ARG_PARAM1 = "cnName";
     private String mParam;
@@ -163,6 +165,10 @@ public class BaseHomeFragment extends Fragment implements View.OnClickListener, 
 
     private void initData() {
         callBack = new CallBack();
+        if (keyWord == null || "".equals(keyWord)) {
+            keyWord = SharedPreferencesUtils.getStringData(getActivity(), "userName", null);
+        }
+        Log.e("keyWord", keyWord);
         RequestParams params = RequestParamsUtils.getProductList(keyWord, "1", "1", "10");
         HttpRequestUtils.create(getActivity()).send(URL.HOME_PRODUCTLIST_URL, params, callBack);
     }

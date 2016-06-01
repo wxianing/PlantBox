@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.http.RequestParams;
 
 import com.sinoinnovo.plantbox.R;
+import com.sinoinnovo.plantbox.activity.base.BaseFragment;
 import com.sinoinnovo.plantbox.adapter.ProduceAdapter;
 import com.sinoinnovo.plantbox.bean.produce.DataListBean;
 import com.sinoinnovo.plantbox.bean.produce.Produce;
@@ -41,7 +42,7 @@ import butterknife.ButterKnife;
  * Use the {@link CommFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CommFragment extends Fragment implements LikeCallBack {
+public class CommFragment extends BaseFragment implements LikeCallBack {
 
     private static final String ARG_PARAM1 = "sType";
     private static final String ARG_PARAM2 = "sType";
@@ -87,7 +88,9 @@ public class CommFragment extends Fragment implements LikeCallBack {
         View view = inflater.inflate(R.layout.fragment_comm, container, false);
         ButterKnife.bind(this, view);
         initView();
-        initData(pageIndex);
+        if (mParam1.equals("2")) {
+            initData(pageIndex);
+        }
         initEvent();
         return view;
     }
@@ -147,6 +150,11 @@ public class CommFragment extends Fragment implements LikeCallBack {
         });
     }
 
+    @Override
+    protected void lazyLoad() {
+        initData(pageIndex);
+    }
+
     class CallBack extends HttpRequestCallBack<ResultInfo> {
 
         @Override
@@ -162,7 +170,6 @@ public class CommFragment extends Fragment implements LikeCallBack {
         @Override
         public void onFailure(Context context, ResultInfo info, int requestCode) {
             super.onFailure(context, info, requestCode);
-
         }
     }
 }

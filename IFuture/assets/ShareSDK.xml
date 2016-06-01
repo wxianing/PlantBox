@@ -52,8 +52,10 @@
     <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
 
     <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
-    <SinaWeibo Id="1" SortId="1" AppKey="1488811681" AppSecret="f7e24e4d491979469eeaf36d4e546876"
-        RedirectUrl="http://www.meteni.com" ShareByAppClient="true" Enable="true" />
+<!--    <SinaWeibo Id="1" SortId="1" AppKey="1488811681" AppSecret="f7e24e4d491979469eeaf36d4e546876"
+        RedirectUrl="http://www.meteni.com" ShareByAppClient="true" Enable="true" />  -->
+    <SinaWeibo Id="1" SortId="1" AppKey="4284439021" AppSecret="ab0427f1145330765ebba16bb78cebdc"
+        RedirectUrl="http://oa.meidp.com/" ShareByAppClient="true" Enable="true" />
 
     <TencentWeibo Id="2" SortId="2" AppKey="1104439718" AppSecret="mpD4DVkSB5nDWqBq"
         RedirectUri="http://www.meteni.com" Enable="true" />

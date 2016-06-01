@@ -199,7 +199,6 @@ public class DimensionCodeActivity extends BaseActivity implements View.OnClickL
         });
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

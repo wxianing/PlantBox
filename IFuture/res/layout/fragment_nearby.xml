@@ -14,13 +14,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:orientation="vertical">
 
-            <include
-                layout="@layout/home_nearby_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/bmapView"
+                android:layout_width="fill_parent"
+                android:layout_height="180dp"
+                android:layout_below="@+id/title_bar"
+                android:clickable="true" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -37,8 +38,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white" />
-
-            <!--      <include layout="@layout/item_nearby_list" />-->
 
         </LinearLayout>
     </ScrollView>

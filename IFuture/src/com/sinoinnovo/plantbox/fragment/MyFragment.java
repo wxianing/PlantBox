@@ -21,6 +21,7 @@ import com.sinoinnovo.plantbox.activity.ActiveActivity;
 import com.sinoinnovo.plantbox.activity.MyBaseAreaActivity;
 import com.sinoinnovo.plantbox.activity.MyCollectActivity;
 import com.sinoinnovo.plantbox.activity.MyOrderActivity;
+import com.sinoinnovo.plantbox.activity.MyShareActivity;
 import com.sinoinnovo.plantbox.activity.PersonCenterAdapter;
 import com.sinoinnovo.plantbox.activity.SettingActivity;
 import com.sinoinnovo.plantbox.bean.PersonCenter;
@@ -120,8 +121,8 @@ public class MyFragment extends Fragment implements AdapterView.OnItemClickListe
                 startActivity(intent);
                 break;
             case 4:
-//                startActivity(new Intent(getActivity(), MyShareActivity.class));
-                ShareUtils.showShare(getActivity());
+                startActivity(new Intent(getActivity(), MyShareActivity.class));
+//                ShareUtils.showShare(getActivity());
                 break;
             case 5:
                 selectIcon();

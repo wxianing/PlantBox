@@ -15,6 +15,8 @@ import butterknife.ButterKnife;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
+    private MainActivity activity = MainActivity.mainActivity;
+
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
@@ -78,8 +80,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.logout://推出账户
                 SharedPreferencesUtils.setLoginTag(this, false);
-
                 startActivity(new Intent(this, LoginActivity.class));
+                if (activity != null) {
+                    activity.finish();
+                    activity = null;
+                }
+                finish();
                 break;
             case R.id.back_arrows://返回箭头
                 finish();

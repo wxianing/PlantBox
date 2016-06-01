@@ -29,7 +29,6 @@ import com.sinoinnovo.plantbox.zxing.view.ViewfinderView;
 
 import java.io.IOException;
 import java.util.Vector;
-
 /**
  * Initial the camera
  *
@@ -52,6 +51,7 @@ public class MipcaCaptureActivity extends BaseActivity implements Callback {
     /**
      * Called when the activity is first created.
      */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

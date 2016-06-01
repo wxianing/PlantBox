@@ -30,12 +30,14 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     private List<Fragment> mFragments;
     private BackHandledFragment mBackHandedFragment;
     private FragmentManager manager;
+    public static MainActivity mainActivity;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity = this;
         init();
     }
 

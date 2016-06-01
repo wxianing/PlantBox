@@ -6,17 +6,19 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginLeft="@dimen/dp15"
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:layout_marginLeft="@dimen/dp15"
         android:drawableLeft="@drawable/home_nearby_icon"
         android:gravity="center_vertical"
         android:text="  附近的基地"
         android:textSize="@dimen/sp16" />
 
-    <com.amap.api.maps.MapView
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="210dp" />
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="fill_parent"
+        android:layout_height="180dp"
+        android:layout_below="@+id/title_bar"
+        android:clickable="true" />
 
 </LinearLayout>

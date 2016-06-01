@@ -16,8 +16,9 @@ import android.widget.Toast;
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.base.BaseActivity;
 import com.sinoinnovo.plantbox.adapter.CityAdapter;
+import com.sinoinnovo.plantbox.bean.CityData;
 import com.sinoinnovo.plantbox.constant.Constant;
-import com.sinoinnovo.plantbox.dao.CityData;
+
 import com.sinoinnovo.plantbox.model.CityItem;
 import com.sinoinnovo.plantbox.widget.ContactItemInterface;
 import com.sinoinnovo.plantbox.widget.ContactListViewImpl;

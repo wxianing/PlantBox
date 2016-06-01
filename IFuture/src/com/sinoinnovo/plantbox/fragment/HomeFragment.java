@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,21 +16,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdate;
-import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.MyLocationStyle;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
-
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.ActiveActivity;
 import com.sinoinnovo.plantbox.activity.CityListActivity;
@@ -51,7 +48,6 @@ import com.sinoinnovo.plantbox.http.HttpRequestUtils;
 import com.sinoinnovo.plantbox.http.RequestParamsUtils;
 import com.sinoinnovo.plantbox.model.ResultInfo;
 import com.sinoinnovo.plantbox.utils.JsonParse;
-import com.sinoinnovo.plantbox.utils.SharedPreferencesUtils;
 import com.sinoinnovo.plantbox.view.MyViewPager;
 import com.sinoinnovo.plantbox.widget.AutoScrollViewPager;
 
@@ -66,7 +62,14 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 
-public class HomeFragment extends Fragment implements View.OnClickListener, LocationSource, AMapLocationListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, BDLocationListener {
+
+    private com.baidu.mapapi.map.MapView mMapView;
+    private BaiduMap mBaiduMap;
+    private LocationClient mLocalClient;
+    boolean isFirstLoc = true; // 是否首次定位
+    private BitmapDescriptor mCurrentMarker;
+    private MyLocationConfiguration.LocationMode mCurrentMode;
 
     /**
      * 头部广告
@@ -108,13 +111,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     @Bind(R.id.city_name)
     protected TextView cityName;//当前城市
 
-    //地图
-    private MapView mMapView = null;
-    private AMap aMap;
-    private OnLocationChangedListener mListener;
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption;
-
     //分类
     @Bind(R.id.plant_shop)
     protected TextView plantShops;
@@ -125,7 +121,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     @Bind(R.id.active_prefecture)
     protected TextView activePrefecture;
     private CallBack callBack;
-    private UiSettings mUiSettings;
+
     @Bind(R.id.home_right_img)
     protected ImageView rightImg;
     @Bind(R.id.search_edittext)
@@ -139,13 +135,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        mMapView = (MapView) view.findViewById(R.id.bmapView);
         //初始化控件
         initView();
-        //获取地图控件引用
-        mMapView = (MapView) view.findViewById(R.id.map);
-        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，实现地图生命周期管理
-        mMapView.onCreate(savedInstanceState);
-        init();
+
         initEvent();
         initData();
         return view;
@@ -154,6 +147,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
     private void initData() {
         RequestParams params = RequestParamsUtils.getBannerImage();
         HttpRequestUtils.create(getActivity()).send(URL.HOME_BANNER_URL, params, callBack);
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        // map view 销毁后不在处理新接收的位置
+        if (bdLocation == null || mMapView == null) {
+            return;
+        }
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(bdLocation.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(0).latitude(bdLocation.getLatitude())
+                .longitude(bdLocation.getLongitude()).build();
+//        Log.e("location", ">>>>>" + bdLocation.getLatitude() + ">>>>" + bdLocation.getLongitude());
+        mBaiduMap.setMyLocationData(locData);
+        if (isFirstLoc) {
+            isFirstLoc = false;
+            LatLng ll = new LatLng(bdLocation.getLatitude(),
+                    bdLocation.getLongitude());
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(ll).zoom(18.0f);
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        }
     }
 
     class CallBack extends HttpRequestCallBack<ResultInfo> {
@@ -174,8 +190,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
 
 
     private void initView() {
-
-
         callBack = new CallBack();
         imageUrls = new ArrayList<>();
         setSelect(0);
@@ -217,39 +231,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
             }
         });
 
-    }
+        mBaiduMap = mMapView.getMap();
+//        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16f);
+//        mBaiduMap.setMapStatus(msu);
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+        mCurrentMarker = com.baidu.mapapi.map.BitmapDescriptorFactory.fromResource(R.drawable.poi_marker);
+        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker));
+        mBaiduMap.setMyLocationEnabled(true);
+        mLocalClient = new LocationClient(getActivity());
+        mLocalClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        option.setScanSpan(1000);
+        mLocalClient.setLocOption(option);
+        mLocalClient.start();
 
-    /**
-     * 初始化AMap对象
-     */
-    private void init() {
-        if (aMap == null) {
-            aMap = mMapView.getMap();
-            mUiSettings = aMap.getUiSettings();
-            mUiSettings.setZoomControlsEnabled(false);
-            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);
-            aMap.moveCamera(localCameraUpdate);
-            setUpMap();
-        }
-    }
-
-    /**
-     * 设置一些amap的属性
-     */
-    private void setUpMap() {
-        // 自定义系统定位小蓝点
-        MyLocationStyle myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationIcon(BitmapDescriptorFactory
-                .fromResource(R.drawable.location_marker));// 设置小蓝点的图标
-        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
-        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
-        // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
-        myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
-        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        // aMap.setMyLocationType()
     }
 
 
@@ -271,22 +268,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         super.onResume();
         mViewPager.startAutoScroll();
         //在activity执行onResume时执行mMapView.onResume ()，实现地图生命周期管理
-        mMapView.onResume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         //在activity执行onPause时执行mMapView.onPause ()，实现地图生命周期管理
-        mMapView.onPause();
-        deactivate();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，实现地图生命周期管理
-        mMapView.onSaveInstanceState(outState);
     }
 
     @Override
@@ -294,7 +287,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         super.onDestroy();
         mViewPager.stopAutoScroll();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-        mMapView.onDestroy();
         ButterKnife.unbind(this);
     }
 
@@ -333,58 +325,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Loca
         hotTv.setTextColor(Color.BLACK);
         comprehensiveView.setBackgroundResource(R.color.white);
         comprehensiveTv.setTextColor(Color.BLACK);
-    }
-
-    @Override
-    public void activate(OnLocationChangedListener onLocationChangedListener) {
-        mListener = onLocationChangedListener;
-        if (mlocationClient == null) {
-            mlocationClient = new AMapLocationClient(getActivity().getApplicationContext());
-            mLocationOption = new AMapLocationClientOption();
-            //设置定位监听
-            mlocationClient.setLocationListener(this);
-            //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            //设置定位参数
-            mlocationClient.setLocationOption(mLocationOption);
-            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-            // 在定位结束后，在合适的生命周期调用onDestroy()方法
-            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-            mlocationClient.startLocation();
-        }
-    }
-
-    @Override
-    public void deactivate() {
-        mListener = null;
-        if (mlocationClient != null) {
-            mlocationClient.stopLocation();
-            mlocationClient.onDestroy();
-        }
-        mlocationClient = null;
-    }
-
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (mListener != null && aMapLocation != null) {
-            if (aMapLocation != null
-                    && aMapLocation.getErrorCode() == 0) {
-                Log.e("aMapLocation", aMapLocation.getAddress());
-
-                SharedPreferencesUtils.saveStringData(getActivity(), "Address", aMapLocation.getAddress());
-                SharedPreferencesUtils.saveDoubleData(getActivity(), "Longitude", aMapLocation.getLongitude());
-                SharedPreferencesUtils.saveDoubleData(getActivity(), "Latitude", aMapLocation.getLatitude());
-
-                cityName.setText(aMapLocation.getCity());
-                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                deactivate();
-            } else {
-                deactivate();
-                String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
-            }
-        }
     }
 
 

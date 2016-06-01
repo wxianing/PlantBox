@@ -2,7 +2,6 @@ package com.sinoinnovo.plantbox.fragment;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -13,21 +12,21 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdate;
-import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.MyLocationStyle;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationConfiguration;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
-
 import com.sinoinnovo.plantbox.R;
 import com.sinoinnovo.plantbox.activity.AquareActivity;
 import com.sinoinnovo.plantbox.activity.MyBaseAreaActivity;
@@ -53,19 +52,21 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NearbyFragment extends Fragment implements LocationSource, AMapLocationListener, View.OnClickListener, AdapterView.OnItemClickListener {
-    //地图
-    private MapView mMapView = null;
-    private AMap aMap;
-    private OnLocationChangedListener mListener;
-    private AMapLocationClient mlocationClient;
-    private AMapLocationClientOption mLocationOption;
+public class NearbyFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, BDLocationListener {
+
+    private com.baidu.mapapi.map.MapView mMapView;
+    private BaiduMap mBaiduMap;
+    private LocationClient mLocalClient;
+    boolean isFirstLoc = true; // 是否首次定位
+
+    private BitmapDescriptor mCurrentMarker;
+    private MyLocationConfiguration.LocationMode mCurrentMode;
 
     @Bind(R.id.title_tv)
     protected TextView title;
     @Bind(R.id.back_arrows)
     protected ImageView backImg;
-    private UiSettings mUiSettings;
+
     private double latitude;//纬度
     private double longitude;//经度
     private Gson gson;
@@ -84,9 +85,8 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         View view = inflater.inflate(R.layout.fragment_nearby, container, false);
         ButterKnife.bind(this, view);
 
-        mMapView = (MapView) view.findViewById(R.id.map);
-        mMapView.onCreate(savedInstanceState);
-        init();
+        mMapView = (MapView) view.findViewById(R.id.bmapView);
+
         initView();
         initEvent();
         initData();
@@ -130,42 +130,24 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         mListView.setOnItemClickListener(this);
         longitude = SharedPreferencesUtils.getDoubleData(getActivity(), "Longitude", 0);
         latitude = SharedPreferencesUtils.getDoubleData(getActivity(), "Latitude", 0);
+
+        mBaiduMap = mMapView.getMap();
+//        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(16f);
+//        mBaiduMap.setMapStatus(msu);
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+        mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.poi_marker);
+        mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(mCurrentMode, true, mCurrentMarker));
+        mBaiduMap.setMyLocationEnabled(true);
+        mLocalClient = new LocationClient(getActivity());
+        mLocalClient.registerLocationListener(this);
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        option.setScanSpan(1000);
+        mLocalClient.setLocOption(option);
+        mLocalClient.start();
     }
 
-
-    /**
-     * 初始化AMap对象
-     */
-    private void init() {
-        if (aMap == null) {
-            aMap = mMapView.getMap();
-            mUiSettings = aMap.getUiSettings();
-            mUiSettings.setZoomControlsEnabled(false);
-            setUpMap();
-            CameraUpdate localCameraUpdate = CameraUpdateFactory.zoomTo(14.0F);
-            aMap.moveCamera(localCameraUpdate);
-        }
-    }
-
-    /**
-     * 设置一些amap的属性
-     */
-    private void setUpMap() {
-        // 自定义系统定位小蓝点
-        MyLocationStyle myLocationStyle = new MyLocationStyle();
-        myLocationStyle.myLocationIcon(BitmapDescriptorFactory
-                .fromResource(R.drawable.location_marker));// 设置小蓝点的图标
-        myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
-        myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
-        // myLocationStyle.anchor(int,int)//设置小蓝点的锚点
-        myLocationStyle.strokeWidth(1.0f);// 设置圆形的边框粗细
-        aMap.setMyLocationStyle(myLocationStyle);
-        aMap.setLocationSource(this);// 设置定位监听
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
-        aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        // aMap.setMyLocationType()
-
-    }
 
     /**
      * 方法必须重写
@@ -173,8 +155,8 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Override
     public void onResume() {
         super.onResume();
-        mMapView.onResume();
         initData();
+        mMapView.onResume();
     }
 
     /**
@@ -192,7 +174,6 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mMapView.onSaveInstanceState(outState);
     }
 
     /**
@@ -201,8 +182,12 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMapView.onDestroy();
         ButterKnife.unbind(this);
+        mMapView.onDestroy();
+        mMapView = null;
+        mLocalClient.stop();
+        // 关闭定位图层
+        mBaiduMap.setMyLocationEnabled(false);
     }
 
     @Override
@@ -255,51 +240,6 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
 
     }
 
-    @Override
-    public void onLocationChanged(AMapLocation aMapLocation) {
-        if (mListener != null && aMapLocation != null) {
-            if (aMapLocation != null
-                    && aMapLocation.getErrorCode() == 0) {
-                mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点
-                latitude = aMapLocation.getLatitude();
-                longitude = aMapLocation.getLongitude();
-
-            } else {
-                String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
-                Log.e("AmapErr", errText);
-            }
-        }
-    }
-
-    @Override
-    public void activate(OnLocationChangedListener listener) {
-        mListener = listener;
-        if (mlocationClient == null) {
-            mlocationClient = new AMapLocationClient(getActivity().getApplicationContext());
-            mLocationOption = new AMapLocationClientOption();
-            //设置定位监听
-            mlocationClient.setLocationListener(this);
-            //设置为高精度定位模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
-            //设置定位参数
-            mlocationClient.setLocationOption(mLocationOption);
-            // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
-            // 注意设置合适的定位时间的间隔（最小间隔支持为2000ms），并且在合适时间调用stopLocation()方法来取消定位请求
-            // 在定位结束后，在合适的生命周期调用onDestroy()方法
-            // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
-            mlocationClient.startLocation();
-        }
-    }
-
-    @Override
-    public void deactivate() {
-        mListener = null;
-        if (mlocationClient != null) {
-            mlocationClient.stopLocation();
-            mlocationClient.onDestroy();
-        }
-        mlocationClient = null;
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -307,5 +247,30 @@ public class NearbyFragment extends Fragment implements LocationSource, AMapLoca
         String cnName = mDatas.get(position).getCnName();
         intent.putExtra("cnName", cnName);
         startActivity(intent);
+    }
+
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        // map view 销毁后不在处理新接收的位置
+        if (bdLocation == null || mMapView == null) {
+            return;
+        }
+        MyLocationData locData = new MyLocationData.Builder()
+                .accuracy(bdLocation.getRadius())
+                // 此处设置开发者获取到的方向信息，顺时针0-360
+                .direction(0).latitude(bdLocation.getLatitude())
+                .longitude(bdLocation.getLongitude()).build();
+        Log.e("location", ">>>>>" + bdLocation.getLatitude() + ">>>>" + bdLocation.getLongitude());
+        latitude = bdLocation.getLatitude();
+        longitude = bdLocation.getLongitude();
+        mBaiduMap.setMyLocationData(locData);
+        if (isFirstLoc) {
+            isFirstLoc = false;
+            LatLng ll = new LatLng(bdLocation.getLatitude(),
+                    bdLocation.getLongitude());
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(ll).zoom(18.0f);
+            mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        }
     }
 }

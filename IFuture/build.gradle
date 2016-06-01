@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1"
+    compileSdkVersion 22
+    buildToolsVersion "19.1.0"
     defaultConfig {
         applicationId "com.sinoinnovo.plantbox"
         minSdkVersion 15
@@ -40,6 +40,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'assets/lineDashTexture.png'
+    }
 }
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
@@ -57,6 +60,11 @@ dependencies {
     compile files('libs/okhttp-urlconnection-2.7.5.jar')
     compile files('libs/okio-1.8.0.jar')
     compile files('libs/zxing.jar')
-
+    compile files('libs/baidumapapi_base_v3_7_3.jar')
+    compile files('libs/baidumapapi_cloud_v3_7_3.jar')
+    compile files('libs/baidumapapi_map_v3_7_3.jar')
+    compile files('libs/baidumapapi_radar_v3_7_3.jar')
+    compile files('libs/baidumapapi_search_v3_7_3.jar')
+    compile files('libs/baidumapapi_util_v3_7_3.jar')
 }
 

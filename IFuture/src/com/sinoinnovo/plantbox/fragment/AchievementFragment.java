@@ -49,7 +49,6 @@ public class AchievementFragment extends Fragment implements View.OnClickListene
         return view;
     }
 
-
     private void initView() {
     }
 

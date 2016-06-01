@@ -113,8 +113,6 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
         producePrice = getIntent().getDoubleExtra("price", 0);
         price.setText("优惠价:￥" + producePrice);
         mDatas = new ArrayList<>();
-        if (mDatas.size() > 0)
-            mDatas.remove(0);
         mAdapter = new DetailsListAdapter(mDatas, this);
         mListView.setAdapter(mAdapter);
     }
@@ -131,9 +129,13 @@ public class ProductDetailsActivity extends BaseActivity implements View.OnClick
                     produceName.setText(produce.getProductName());
                     classId = produce.getClassId();
                     mDatas.addAll(produce.getPictures());
-                    mAdapter.notifyDataSetChanged();
-                    if (mDatas != null && !mDatas.isEmpty())
+
+                    if (mDatas != null && !mDatas.isEmpty()) {
                         MainApplication.imageLoader.displayImage(mDatas.get(0), bannerImg, MainApplication.options);
+                        mDatas.remove(0);
+
+                    }
+                    mAdapter.notifyDataSetChanged();
                     setDataToView(produce);
                 }
             }

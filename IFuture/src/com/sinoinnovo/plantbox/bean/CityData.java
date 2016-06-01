@@ -1,4 +1,4 @@
-package com.sinoinnovo.plantbox.dao;
+package com.sinoinnovo.plantbox.bean;
 
 import com.sinoinnovo.plantbox.model.CityItem;
 import com.sinoinnovo.plantbox.widget.ContactItemInterface;
